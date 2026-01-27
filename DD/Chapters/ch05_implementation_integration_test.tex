@@ -1,0 +1,97 @@
+\section{Implementation strategy}
+\label{sec:implementation_strategy}%
+
+This chapter outlines an implementation and integration roadmap aligned with the architecture described in \Cref{ch:architectural_design}. The project will be developed using a \textbf{Bottom-Up approach}: we first implement and validate the foundational building blocks, and only then integrate them into higher-level components. Before each integration step, \textbf{smaller functional subsystems are tested in isolation}, so debugging and error tracking remain straightforward. This approach supports \textbf{parallel development} across teams and components, and reduces the effort required during the integration phase, saving time while keeping the most critical dependencies stable before end-to-end validation.
+
+\subsection{Assumptions and guiding principles}
+\label{subsec:impl_assumptions}%
+
+\begin{itemize}
+    \item \textbf{Bottom-Up implementation:} development proceeds from lower layers to upper layers: data model and persistence first, then services, then the API Gateway, and finally client flows and external integrations.
+    \item \textbf{Incremental integration:} once the lower layers are stable, higher layers are integrated progressively. End-to-end validation is performed only after the main layers exist and are perfectly integrated.
+    \item \textbf{Testability by design:} core business logic is isolated in services and repositories to enable early unit and integration testing at the lower layers, and later end-to-end validation once higher layers are integrated.
+    \item \textbf{Prototype focus with production-aware choices:} Docker-based deployment is used for reproducibility, with the architecture remaining compatible with production orchestration.
+\end{itemize}
+
+\section{Implementation order}
+\label{sec:implementation_order}%
+
+The proposed order follows a Bottom-Up approach and reflects technical dependencies among components, as well as the functional dependencies described in the RASD.
+
+\subsection{Phase 0 --- Project foundations}
+\begin{itemize}
+    \item \textbf{Repository:} project structure, environment configuration.
+    \item \textbf{Domain model \& shared conventions:} core entities and identifiers, error format, pagination, authentication headers, request validation rules.
+    \item \textbf{Database:} initial schema for core entities (users, trips, paths, obstacles, ratings), migrations, seed data, and repository abstractions.
+    \item \textbf{Observability baseline:} structured logging, health-check endpoints, basic metrics hooks.
+\end{itemize}
+
+\subsection{Phase 1 --- Core services}
+\begin{itemize}
+    \item \textbf{User Management Service:} registration, login, profile management, password recovery; validate service logic directly against the DB.
+    \item \textbf{Trip Management Service:} manual trip creation and trip history.
+    \item \textbf{Path Management Service (manual):} manual path insertion, obstacle reporting, publish flow.
+    \item \textbf{Rating Service (basic):} basic operations on ratings (create, read, update, delete) and retrieval per path.
+\end{itemize}
+
+\subsection{Phase 2 --- Gateway integration and API stabilization}
+\begin{itemize}
+    \item \textbf{API Gateway skeleton:} request routing, versioning, request validation, and authorization middleware.
+    \item \textbf{Service exposure behind the Gateway:} integrate services one by one, locking down contracts (schemas, errors, auth rules) and aligning them with \Cref{sec:component_interfaces}.
+    \item \textbf{Email integration:} verification and recovery emails through an SMTP provider.
+\end{itemize}
+
+\subsection{Phase 3 --- Client flows and discovery features}
+\begin{itemize}
+    \item \textbf{Path Search Service:} search between two points, scoring, ranking; implemented after core data production services are stable.
+    \item \textbf{Map integration:} external map provider integration and client visualization using the API Gateway.
+    \item \textbf{Caching:} introduce Redis caching for popular searches and frequently accessed data.
+\end{itemize}
+
+\subsection{Phase 4 --- Automated detection and sensor processing}
+\begin{itemize}
+    \item \textbf{Mobile sensor layer:} Sensor Manager + Trip Detection Engine + Obstacle Detection Module on the client side.
+    \item \textbf{Sensor Data Processing Service:} server-side refinement, GPS outlier removal, obstacle candidate validation.
+    \item \textbf{User confirmation flow:} UI flow to confirm/correct detected paths and obstacles.
+    \item \textbf{Message queue integration:} asynchronous processing for heavy workloads.
+\end{itemize}
+
+\subsection{Phase 5 --- Information merging}
+\begin{itemize}
+    \item \textbf{Information Merging Service:} conflict resolution, freshness and consensus logic.
+    \item \textbf{Integration with Path Management:} trigger merges on publication and on new confirmed detections.
+\end{itemize}
+
+\section{Integration plan}
+\label{sec:integration_plan}%
+
+Integration is performed continuously and follows the Bottom-Up layering:
+\begin{itemize}
+    \item \textbf{Service-to-DB integration (first):} validate repositories and migrations for each service as soon as it is implemented.
+    \item \textbf{Gateway-to-service integration (second):} integrate one service at a time behind the API Gateway, validating routing, authentication, and request validation.
+    \item \textbf{External services integration:} integrate weather/map/email providers using adapters; add fallback behaviors to keep core flows usable when external dependencies fail.
+    \item \textbf{End-to-end use-case validation (last):} once lower and mid layers are stable, prioritize the requirements implementation following the three phases stated in the RASD Requirements priorities and Implementation focus section.
+\end{itemize}
+
+\section{Test plan}
+\label{sec:test_plan}%
+
+The testing strategy follows a pyramid approach and supports the Bottom-Up implementation order:
+\begin{itemize}
+    \item \textbf{Unit tests (first):} business rules inside services (e.g., scoring logic, merging strategy), and repositories via in-memory fakes.
+    \item \textbf{Service integration tests (second):} run services against a real database (and message broker when relevant) using containerized test environments.
+    \item \textbf{API contract tests (third):} validate request/response schemas for each endpoint, including error conditions and authentication rules (especially once exposed through the API Gateway).
+    \item \textbf{End-to-end tests:} validate the full flow for the most representative use cases, again following the order of priority stated in the RASD
+\end{itemize}
+
+Finally, a small set of non-functional checks is executed for the prototype:
+\begin{itemize}
+    \item \textbf{Performance smoke tests:} baseline response times for search and trip retrieval; cache hit-rate validation.
+    \item \textbf{Security checks:} authentication enforcement on protected endpoints, password hashing verification, and basic input sanitization tests.
+    \item \textbf{Resilience checks:} graceful degradation when weather/map APIs are unreachable.
+\end{itemize}
+
+\subsection{User and client acceptance testing}
+\label{subsec:acceptance_tests}%
+
+During the entire implementation period, \textbf{user and client acceptance tests} are conducted to ensure the system meets the needs and requirements of stakeholders and end-users. These checks are performed on incrementally delivered features, and are used as a \textbf{feedback loop} to validate usability, functional correctness from the user perspective, and the alignment with the agreed requirements before final delivery.

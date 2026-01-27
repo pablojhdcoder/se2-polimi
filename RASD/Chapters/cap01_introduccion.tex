@@ -1,0 +1,198 @@
+Exploring new cycling routes represents an exciting experience for bicycle enthusiasts, yet discovering paths that are comfortable, conveniently located, and safe remains challenging. To address this need, we present \textbf{Best Bike Paths (BBP)}, an innovative application that enables users to share, evaluate, and explore cycling routes within a collaborative community.
+
+This document outlines the purpose, functionality, and characteristics of our project, providing comprehensive information for anyone interested in understanding the system and the underlying technologies that power it.
+
+\section{Purpose}
+\label{sec:purpose}%
+This Requirements Analysis and Specification Document (RASD) presents a detailed specification of the \textbf{Best Bike Paths (BBP)} system. The document functions as a technical reference for the development team during implementation and establishes a formal agreement between all parties involved in the project. It delivers a thorough and well-defined description of the system's capabilities and constraints, enabling all interested parties to validate that the solution fulfills their expectations and demands.
+
+The main objective of the BBP system is to revolutionize the way bicycle enthusiasts explore, document, and exchange knowledge regarding cycling routes. The system empowers registered users to document and monitor their bicycle journeys with comprehensive analytics and performance indicators, while creating an extensive database of cycling routes accessible for exploration and querying by every user. Community members can add route information using either manual input or sensor-based automatic data acquisition techniques. Journey records are enhanced with weather-related data obtained from third-party meteorological services whenever possible. Additionally, the system supports route planning by displaying recommended paths connecting start and end locations, prioritizing route conditions and efficiency.
+
+Through delivering an intuitive and valuable user experience, the BBP system strives to become a reliable platform that satisfies the needs of all participants—individual cyclists, cycling organizations, and city planning departments—thus creating a better organized, secure, and pleasant cycling environment.
+
+\subsection{Goals}
+\label{subsec:goals}%
+
+The primary goals of the BBP system are as follows:
+
+\begin{enumerate}
+    \item Enable cyclists to manually store their personal cycling routes.
+    \item Automatically detect when a cyclist is following a route and process the collected information, allowing users to review, confirm, and save the detected path.
+    \item Allow cyclists to publish their stored routes online, making them accessible for other users to view and utilize.
+    \item Provide all users with access to available routes along with their current status and characteristics.
+    \item Maintain comprehensive statistics for each user's cycling trips.
+    \item Integrate meteorological information to complement the stored route data.
+    \item Inform users about available paths between two map points, ranking the suggested routes according to their computed scores.
+\end{enumerate}
+
+\section{Scope}
+\label{sec:scope}%
+The Best Bike Paths (BBP) system enables cyclists to record trips, browse cycling routes, and share information regarding path conditions. Registered users can maintain trip histories, manually input route data, or allow the application to automatically detect routes and obstacles during their journeys. All users—whether registered or not—can explore available paths connecting an origin and a destination.
+
+\subsection{World Phenomena}
+\label{subsec:world_phenomena}%
+\newcounter{wp}
+\setcounter{wp}{1}
+\newcommand{\cwp}{\thewp\stepcounter{wp}}
+\textbf{World Phenomena:} 
+The project addresses fundamental aspects of the cycling domain that exist independently of the system. These include:
+\begin{enumerate}
+    \item \textbf{Cycling Activities:} Cyclists ride along bike paths and routes.
+    \begin{itemize}
+        \item ID: WP1 Cyclists ride along bike paths.
+    \end{itemize}
+
+    \item \textbf{Physical Road Conditions:} Roads and paths have inherent physical characteristics and conditions.
+    \begin{itemize}
+        \item ID: WP2 Roads have physical conditions (status, potholes, obstacles).
+    \end{itemize}
+
+    \item \textbf{Mobile Device Sensors:} Mobile devices generate sensor data during movement.
+    \begin{itemize}
+        \item ID: WP3 Mobile devices generate sensor data (GPS, accelerometer, gyroscope).
+    \end{itemize}
+
+    \item \textbf{Weather Conditions:} Meteorological conditions exist in the environment.
+    \begin{itemize}
+        \item ID: WP4 Weather conditions exist (temperature, wind, rain).
+    \end{itemize}
+
+    \item \textbf{User Navigation Decisions:} Cyclists make decisions about their route choices.
+    \begin{itemize}
+        \item ID: WP5 Cyclists decide to follow specific origins and destinations.
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Shared Phenomena}
+\label{subsec:shared_phenomena}%
+\newcounter{sp}
+\setcounter{sp}{1}
+\newcommand{\csp}{\thesp\stepcounter{sp}}
+\textbf{Shared Phenomena:}
+The system provides shared functionalities that enable interaction and data exchange between users and the BBP platform:
+\begin{enumerate}
+    \item \textbf{Manual Path Information Entry:}
+    \begin{itemize}
+        \item ID: SP1 Cyclist enters path information manually (Controller: Cyclist, Observer: BBP).
+    \end{itemize}
+
+    \item \textbf{Automatic Data Acquisition:}
+    \begin{itemize}
+        \item ID: SP2 BBP acquires GPS and sensor data during a trip (Controller: Device, Observer: BBP).
+    \end{itemize}
+
+    \item \textbf{Path and Obstacle Detection Confirmation:}
+    \begin{itemize}
+        \item ID: SP3 BBP proposes detected paths and indicates detected obstacles; cyclist confirms or corrects them (Controller: Cyclist, Observer: BBP).
+    \end{itemize}
+
+    \item \textbf{Trip Recording:}
+    \begin{itemize}
+        \item ID: SP4 Cyclist saves a recorded trip (Controller: Cyclist, Observer: BBP).
+    \end{itemize}
+
+    \item \textbf{Route Publication:}
+    \begin{itemize}
+        \item ID: SP5 Cyclist publishes a route or path status update (Controller: Cyclist, Observer: BBP).
+    \end{itemize}
+
+    \item \textbf{Path Query Requests:}
+    \begin{itemize}
+        \item ID: SP6 User requests bike paths between two points (Controller: User, Observer: BBP).
+    \end{itemize}
+
+    \item \textbf{Path Display:}
+    \begin{itemize}
+        \item ID: SP7 BBP displays computed path options (Controller: BBP, Observer: User).
+    \end{itemize}
+
+    \item \textbf{User Feedback:}
+    \begin{itemize}
+        \item ID: SP8 User rates or comments on a bike path (Controller: User, Observer: BBP).
+    \end{itemize}
+
+    \item \textbf{Weather Data Retrieval:}
+    \begin{itemize}
+        \item ID: SP9 BBP retrieves weather data from an external service (Controller: External Service, Observer: BBP).
+    \end{itemize}
+\end{enumerate}
+
+\section{Definitions, Acronyms, Abbreviations}
+\label{sec:definition_acronyms_abbreviations}%
+
+\subsection{Definitions}
+\label{subsec:definitions}%
+\begin{itemize}
+    \item \textbf{Bike Path:} A path or marked route specifically designed or suitable for people riding bicycles.
+    \item \textbf{Route:} A specific path or course taken by a cyclist from an origin point to a destination point.
+    \item \textbf{Trip:} A recorded journey made by a cyclist, including start time, end time, duration, distance, and the path followed.
+    \item \textbf{Obstacle:} Any physical impediment or hazard on a bike path, such as potholes, debris, or other obstructions that may affect cycling safety or comfort.
+    \item \textbf{Registered User:} A user who has created an account in the system, enabling access to advanced features such as trip recording, path publishing, and personal statistics.
+    \item \textbf{Non-Registered User:} A user who accesses the system without creating an account, with limited access to browse and search available paths.
+    \item \textbf{Automatic Detection:} The system's capability to automatically identify when a user is cycling and to detect paths and obstacles using sensor data from mobile devices.
+    \item \textbf{Path Status:} A classification indicating the condition of a bike path, typically categorized as optimal, medium, sufficient, or requiring maintenance.
+    \item \textbf{Path Score:} A computed metric that ranks bike paths based on their status, effectiveness, and other relevant factors to help users choose the best route between two points.
+\end{itemize}
+
+\subsection{Acronyms}
+\label{subsec:acronyms}%
+\begin{itemize}
+    \item \textbf{BBP:} Best Bike Paths
+    \item \textbf{RASD:} Requirements Analysis \& Specification Document
+    \item \textbf{GPS:} Global Positioning System
+    \item \textbf{UI:} User Interface
+    \item \textbf{API:} Application Programming Interface
+    \item \textbf{DBMS:} Database Management Systems
+    \item \textbf{GDPR:} General Data Protection Regulation
+\end{itemize}
+
+\subsection{Abbreviations}
+\label{subsec:abbreviations}%
+\begin{itemize}
+    \item \textbf{G:} Goal
+    \item \textbf{WP:} World Phenomena
+    \item \textbf{SP:} Shared Phenomena
+    \item \textbf{UC:} Use Case
+    \item \textbf{F:} Functional Requirement
+\end{itemize}
+
+\section{Revision History}
+\label{sec:revision_history}
+
+The document has undergone several revisions throughout its development:
+
+\begin{itemize}
+    \item \textbf{Version 0.1} (3 December 2025): Initial Release by José Martínez Estévez and Pablo Jesús Herrero Díaz
+    \item \textbf{Version 0.2} (7 December 2025): Class diagrams and state diagrams by José Martínez Estévez and Pablo Jesús Herrero Díaz
+    \item \textbf{Version 0.3} (10 December 2025): Use cases by José Martínez Estévez and Pablo Jesús Herrero Díaz
+    \item \textbf{Version 0.4} (15 December 2025): Sequence diagrams for use cases by José Martínez Estévez and Pablo Jesús Herrero Díaz
+    \item \textbf{Version 0.5} (18 December 2025): Alloy modeling by José Martínez Estévez and Pablo Jesús Herrero Díaz
+    \item \textbf{Version 0.6} (23 December 2025): Final revision by José Martínez Estévez and Pablo Jesús Herrero Díaz
+    \item \textbf{Version 1.0} (23 December 2025): Final version by José Martínez Estévez and Pablo Jesús Herrero Díaz
+\end{itemize}
+
+\section{Reference Documents}
+\label{sec:reference_documents}%
+\begin{itemize}
+    \item Specification for the 2025/2026 Requirement Engineering and Design Project
+    \item Course slides available on the WeBeep page 
+    \item Previous year student project available on the WeBeep page
+    \item IEEE Standard Documentation for RASD
+\end{itemize}
+
+\section{Document Structure}
+\label{sec:document_structure}%
+The document is organized into the following sections, each serving a distinct purpose:
+
+\paragraph{1. Introduction:} This section presents the project's context, goals, scope, and essential information required for understanding the project domain correctly. It includes definitions, acronyms, and abbreviations to facilitate comprehension of the problem domain.
+
+\paragraph{2. Overall Description:} Provides a comprehensive analysis of the problem, product perspective, potential domains, and product features. It also explains limitations, dependencies, and assumptions.
+
+\paragraph{3. Specific Requirements:} Delivers a detailed description of both functional and non-functional requirements, including those related to external interfaces.
+
+\paragraph{4. Formal Analysis Using Alloy:} Presents assertions and checks to validate the model outlined in previous sections.
+
+\paragraph{5. Effort Spent:} Describes the contribution of each team member to the writing of this document.
+
+\paragraph{6. References:} Provides a list of all supplementary materials and references utilized in the production of this document.
+

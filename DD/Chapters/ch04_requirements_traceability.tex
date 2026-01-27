@@ -1,0 +1,177 @@
+This chapter provides traceability between the requirements defined in the Requirements Analysis and Specification Document (RASD) and the design elements introduced in this Design Document (DD). The goal is to demonstrate that each requirement has been addressed by at least one architectural component, interface, or design decision.
+
+\section{Traceability approach}
+\label{sec:traceability_approach}%
+
+Traceability is presented at two levels:
+\begin{itemize}
+    \item \textbf{Functional requirements traceability:} each functional requirement is mapped to the main components and interfaces described in \Cref{fig:component_diagram,sec:component_interfaces} and to the runtime flows in \Cref{sec:runtime_view}.
+    \item \textbf{Non-functional requirements traceability:} key quality attributes and constraints defined in the RASD (reliability, availability, security, maintainability, portability and design constraints) are mapped to cross-cutting design decisions described in \Cref{sec:deployment_view,sec:architectural_styles_patterns,sec:other_design_decisions}.
+\end{itemize}
+
+\section{Functional requirements to design elements}
+\label{sec:fr_to_design}%
+
+\small
+\begin{longtable}{|p{0.10\textwidth}|p{0.44\textwidth}|p{0.40\textwidth}|}
+    \hline
+    \textbf{Req. ID} & \textbf{Requirement (RASD)} & \textbf{Design elements (DD)} \\
+    \hline
+    \endfirsthead
+    \hline
+    \textbf{Req. ID} & \textbf{Requirement (RASD)} & \textbf{Design elements (DD)} \\
+    \hline
+    \endhead
+    \hline
+    \endfoot
+
+    % ------------------ F1 ------------------
+    F1.1 & The system should enable users to create accounts using validated email addresses to access main functionalities. &
+    User Management Service; registration operations (e.g., \texttt{post\_register(token)}); Mail Server integration; persistence in DBMS. \\
+    \hline
+    F1.2 & The system should offer secure login mechanisms protected by passwords. &
+    API Gateway authentication/authorization; JWT-based sessions; User Management Service login operations (e.g., \texttt{post\_login(token)}); password hashing with bcrypt. \\
+    \hline
+    F1.3 & The system should permit users to modify their profile data, including contact information and personal preferences. &
+    User Management Service; DBMS storage; UI profile screen. \\
+    \hline
+    F1.4 & The system should include a password recovery feature that requires email confirmation. &
+    User Management Service password recovery flow; Mail Server integration; security measures (token-based flows). \\
+    \hline
+
+    % ------------------ F2 ------------------
+    F2.1 & The system should allow registered users to manually record their cycling trips. &
+    Trip Management Service; trip recording operations (e.g., \texttt{record\_trip()} and \texttt{store\_trip(Path, Date)}); UI trip screens. \\
+    \hline
+    F2.2 & The system should automatically detect when a user is cycling based on speed analysis. &
+    Mobile App Trip Detection Engine; Sensor Data Processing Service (server-side refinement). \\
+    \hline
+    F2.3 & The system should collect GPS information to reconstruct the followed path during automatic trip recording. &
+    Sensor Manager (client) + Sensor Data Processing Service; persistence in DBMS. \\
+    \hline
+    F2.4 & The system should store trip data including start time, end time, duration, and route information. &
+    Trip Management Service + DBMS; persistence via \texttt{store\_trip(Path, Date)}. \\
+    \hline
+    F2.5 & The system should calculate trip statistics including total distance, average speed, and elevation changes. &
+    Trip Management Service statistics computation; UI statistics presentation. \\
+    \hline
+    F2.6 & The system should retrieve and integrate meteorological information from external services when available. &
+    External Service Integration component; Weather API dependency; error handling. \\
+    \hline
+    F2.7 & The system should allow users to view and manage their recorded trips. &
+    Trip Management Service + User Management Service; retrieval operations (e.g., \texttt{get\_trip\_data(User, Path, Date)} and \texttt{get\_past\_trips()}); UI trip history; cache layer for frequently accessed data. \\
+    \hline
+
+    % ------------------ F3 ------------------
+    F3.1 & The system should allow registered users to manually insert bike path information including street names and path status. &
+    Path Management Service; path insertion operations (e.g., \texttt{post\_path\_info(Path)}); UI path insertion/search. \\
+    \hline
+    F3.2 & The system should allow registered users to specify path status (e.g., optimal, medium, sufficient, requires maintenance). &
+    Path Management Service; update operations (e.g., \texttt{post\_path\_update(Path)}); Path Search Service scoring uses status; Rating Service can incorporate feedback. \\
+    \hline
+    F3.3 & The system should allow registered users to mark obstacles such as potholes on paths. &
+    Path Management Service; client Obstacle Detection Module; server-side validation in Sensor Data Processing Service. \\
+    \hline
+    F3.4 & The system should allow registered users to make path information publishable. &
+    Path Management Service publishing workflow; API Gateway access control; Information Merging consumes publishable info. \\
+    \hline
+    F3.5 & The system should store path information including origin, destination, status, and associated obstacles. &
+    DBMS persistence; Path Management Service repositories; retrieval via \texttt{get\_path\_data(Path)}. \\
+    \hline
+    F3.6 & The system should track the freshness of path information (required for merging functionality). &
+    DBMS timestamps + Information Merging Service algorithm. \\
+    \hline
+
+    % ------------------ F4 ------------------
+    F4.1 & The system should automatically detect when a user is biking based on speed analysis from mobile device sensors. &
+    Trip Detection Engine (client); sensor acquisition (\texttt{read\_sensors()}) and Trip Management detection operation (\texttt{detect\_trip(Speed)}); server-side refinement in Sensor Data Processing Service. \\
+    \hline
+    F4.2 & The system should collect GPS information during automatic trip recording to reconstruct the followed path. &
+    Sensor Manager + Sensor Data Processing Service; path reconstruction (\texttt{reconstruct\_path(
+        List<Location>)}); DBMS persistence. \\
+    \hline
+    F4.3 & The system should acquire data from mobile device accelerometer and gyroscope to detect device movements suggesting potholes or other obstacles. &
+    Obstacle Detection Module (client) + server-side obstacle processing. \\
+    \hline
+    F4.4 & The system should present automatically detected paths and obstacles to the user for confirmation or correction. &
+    UI confirmation flow + user interaction screens. \\
+    \hline
+    F4.5 & The system should allow users to confirm automatically detected information before making it available to the community &
+    Path Management Service publish flow and controlled persistence; API Gateway authorization. \\
+    \hline
+    F4.6 & The system should allow users to correct false positives in automatically detected obstacles. &
+    UI correction + Path Management Service update operations. \\
+    \hline
+    F4.7 & The system should store confirmed path and obstacle information after user validation. &
+    Path Management Service + DBMS; Information Merging triggered for existing paths. \\
+    \hline
+
+    % ------------------ F5 ------------------
+    F5.1 & The system should allow all users (registered and non-registered) to specify an origin and destination. &
+    Mobile UI search flow; Path Search Service; support for unauthenticated access at API Gateway for public functionality. \\
+    \hline
+    F5.2 & The system should find all available bike paths between the specified origin and destination. &
+    Path Search Service queries; DBMS / caches. \\
+    \hline
+    F5.3 & The system should compute a score for each path based on path status and effectiveness in reaching the destination. &
+    Path Search Service scoring strategy; status/obstacle inputs from Path Management. \\
+    \hline
+    F5.4 & The system should visualize paths on a map ranked by their computed scores. &
+    External Service Integration (Map Service); UI map visualization. \\
+    \hline
+
+    % ------------------ F6 ------------------
+    F6.1 & The system should collect publishable information about paths from multiple users. &
+    Path Management Service publication + DBMS; Information Merging Service ingestion. \\
+    \hline
+    F6.2 & The system should merge different pieces of information considering their freshness. &
+    Information Merging Service uses timestamps; DBMS persistence and update logic. \\
+    \hline
+    F6.3 & The system should merge different pieces of information considering the number of confirming data obtained. &
+    Information Merging Service consensus strategy; DBMS. \\
+    \hline
+    F6.4 & The system should resolve conflicts when multiple users provide conflicting path status information. &
+    Information Merging Service conflict-resolution algorithm. \\
+    \hline
+    F6.5 & The system should prioritize information based on recency and consensus. &
+    Information Merging Service prioritization rules. \\
+    \hline
+    \caption{Traceability of functional requirements to design elements.}
+    \label{tab:fr_traceability}
+\end{longtable}
+\normalsize
+
+\section{Non-functional requirements to design decisions}
+\label{sec:nfr_to_design}%
+
+The following table summarizes how the main quality attributes and constraints defined in the RASD are addressed by the design decisions presented in this DD.
+
+\begin{table}[H]
+    \centering
+    \small
+    \begin{tabularx}{\textwidth}{|p{0.20\textwidth}|X|}
+        \hline
+        \textbf{Quality attribute (RASD)} & \textbf{Design elements (DD)} \\
+        \hline
+        Reliability &
+        Input validation at API Gateway, error handling, structured logging and monitoring. \\
+        \hline
+        Availability &
+        Stateless microservices enabling horizontal scaling, redundancy/failover considerations, graceful degradation when external services are unavailable. \\
+        \hline
+        Security &
+        HTTPS, JWT authentication, bcrypt password hashing, authorization centralized at API Gateway, GDPR-oriented handling of personal/location data. \\
+        \hline
+        Maintainability &
+        Layered and microservices architecture, service layer + repository patterns, modular component boundaries and well-defined REST interfaces. \\
+        \hline
+        Portability &
+        Native iOS/Android apps with consistent JSON/HTTPS backend interfaces.\\
+        \hline
+        Performance &
+        Cache layer (Redis), indexing and query optimization, lazy loading of map data, asynchronous processing through message queue. \\
+        \hline
+    \end{tabularx}
+    \caption{Traceability of key non-functional requirements to design decisions.}
+    \label{tab:nfr_traceability}
+\end{table}

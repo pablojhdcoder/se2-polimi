@@ -1,0 +1,44 @@
+{
+  "name": "bbp-backend",
+  "version": "1.0.0",
+  "description": "Best Bike Paths Backend - Microservices Architecture",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "migrate": "node migrations/run.js"
+  },
+  "keywords": [
+    "bike-paths",
+    "microservices",
+    "express"
+  ],
+  "author": "BBP Team",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.22.1",
+    "cors": "^2.8.6",
+    "helmet": "^8.1.0",
+    "morgan": "^1.10.0",
+    "dotenv": "^16.4.7",
+    "jsonwebtoken": "^9.0.3",
+    "bcrypt": "^6.0.0",
+    "pg": "^8.17.2",
+    "redis": "^5.10.0",
+    "amqplib": "^0.10.9",
+    "joi": "^18.0.2",
+    "axios": "^1.13.4"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.2.2",
+    "nodemon": "^3.1.9"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}

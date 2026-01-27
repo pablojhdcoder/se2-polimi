@@ -1,0 +1,135 @@
+\section{Integration Approach}
+\label{sec:integration_approach}%
+
+The integration testing strategy for the Best Bike Paths system follows a \textbf{Bottom-Up approach}, as defined in the Design Document (see \Cref{ch:implementation_integration_test_plan} of the DD). This approach ensures that foundational components are tested and validated before higher-level components are integrated.
+
+The Bottom-Up strategy provides several advantages:
+\begin{itemize}
+    \item Early validation of core data and service layers
+    \item Easier debugging by isolating issues at lower levels first
+    \item Support for parallel development across different components
+    \item Reduced integration effort by ensuring stable dependencies
+\end{itemize}
+
+\section{Integration Levels}
+\label{sec:integration_levels}%
+
+The integration process is organized into the following levels:
+
+\subsection{Level 1: Data Layer Integration}
+\label{subsec:level1_data_layer}%
+Integration of database components, repositories, and data access layers. This includes:
+\begin{itemize}
+    \item DBMS (PostgreSQL) integration
+    \item Repository abstractions
+    \item Cache layer (Redis) integration
+    \item Data migration and seed data validation
+\end{itemize}
+
+\subsection{Level 2: Service Layer Integration}
+\label{subsec:level2_service_layer}%
+Integration of individual microservices with the data layer and with each other. This includes:
+\begin{itemize}
+    \item Core services (User Management, Trip Management, Path Management)
+    \item Advanced services (Sensor Data Processing, Path Search, Rating, Information Merging)
+    \item Service-to-service communication
+    \item Message queue integration (RabbitMQ)
+\end{itemize}
+
+\subsection{Level 3: API Gateway Integration}
+\label{subsec:level3_api_gateway}%
+Integration of the API Gateway with all backend services. This includes:
+\begin{itemize}
+    \item Request routing and versioning
+    \item Authentication and authorization
+    \item Request validation
+    \item Error handling and response formatting
+\end{itemize}
+
+\subsection{Level 4: External Services Integration}
+\label{subsec:level4_external_services}%
+Integration with third-party services. This includes:
+\begin{itemize}
+    \item Weather API integration
+    \item Map Service API integration
+    \item Email Service (SMTP) integration
+    \item Fallback and error handling mechanisms
+\end{itemize}
+
+\subsection{Level 5: Client Integration}
+\label{subsec:level5_client_integration}%
+Integration of the mobile application with backend services. This includes:
+\begin{itemize}
+    \item Mobile application core components
+    \item Sensor Manager integration
+    \item Trip Detection Engine integration
+    \item Obstacle Detection Module integration
+    \item Client-Server communication
+\end{itemize}
+
+\subsection{Level 6: End-to-End Integration}
+\label{subsec:level6_e2e_integration}%
+Complete system integration testing through use case scenarios. This includes:
+\begin{itemize}
+    \item Critical use cases (UC1-UC3, UC6)
+    \item Advanced use cases (UC4-UC5, UC7-UC12)
+    \item Error scenarios and edge cases
+\end{itemize}
+
+\section{Integration Order}
+\label{sec:integration_order}%
+
+The integration order follows the Bottom-Up approach and aligns with the implementation phases defined in the Design Document:
+
+\begin{enumerate}
+    \item \textbf{Phase 0:} Project foundations (repository structure, domain model, database schema)
+    \item \textbf{Phase 1:} Core services integration (User Management, Trip Management, Path Management, Rating Service)
+    \item \textbf{Phase 2:} API Gateway integration and API stabilization
+    \item \textbf{Phase 3:} Client flows and discovery features (Path Search Service, Map integration, Caching)
+    \item \textbf{Phase 4:} Automated detection and sensor processing (Mobile sensor layer, Sensor Data Processing Service)
+    \item \textbf{Phase 5:} Information merging (Information Merging Service integration)
+\end{enumerate}
+
+\section{Testing Strategy}
+\label{sec:testing_strategy}%
+
+The testing strategy follows a pyramid approach, supporting the Bottom-Up integration order:
+
+\subsection{Unit Tests}
+\label{subsec:unit_tests}%
+Unit tests validate individual components in isolation before integration. These tests focus on:
+\begin{itemize}
+    \item Business logic within services
+    \item Repository operations using in-memory fakes
+    \item Component-specific functionality
+\end{itemize}
+
+\subsection{Integration Tests}
+\label{subsec:integration_tests}%
+Integration tests validate component interactions at each integration level:
+\begin{itemize}
+    \item Service-to-DB integration tests
+    \item Service-to-Service integration tests
+    \item Gateway-to-Service integration tests
+    \item External service integration tests
+    \item Client-Server integration tests
+\end{itemize}
+
+\subsection{End-to-End Tests}
+\label{subsec:e2e_tests}%
+End-to-end tests validate complete user flows through the system:
+\begin{itemize}
+    \item Critical use case flows (UC1-UC3, UC6)
+    \item Advanced use case flows (UC4-UC5, UC7-UC12)
+    \item Error handling scenarios
+    \item Offline/online synchronization
+\end{itemize}
+
+\subsection{Non-Functional Tests}
+\label{subsec:non_functional_tests}%
+Non-functional tests validate system quality attributes:
+\begin{itemize}
+    \item Performance smoke tests (response times, cache hit rates)
+    \item Security checks (authentication, authorization, input validation)
+    \item Resilience checks (graceful degradation, error recovery)
+\end{itemize}

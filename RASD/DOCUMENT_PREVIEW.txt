@@ -1,0 +1,87 @@
+================================================================================
+SOFTWARE ENGINEERING 2
+REQUIREMENTS ANALYSIS AND SPECIFICATION DOCUMENT
+================================================================================
+
+Author(s): Pablo José - [Student ID]
+           [Name2] - [Student ID]
+           [Name3] - [Student ID]
+
+Academic Year: 2025-2026
+Version: 1.0
+Release Date: [Release Date]
+
+================================================================================
+TABLE OF CONTENTS
+================================================================================
+
+1. Introduction .......................................................... 1
+   1.1 Purpose ........................................................... 1
+
+2. Overall Description ................................................... [TBD]
+
+3. Specific Requirements ................................................. [TBD]
+
+4. Formal Analysis Using Alloy ............................................ [TBD]
+
+5. Effort Spent .......................................................... [TBD]
+
+6. References ............................................................ [TBD]
+
+================================================================================
+CHAPTER 1: INTRODUCTION
+================================================================================
+
+1.1 Purpose
+
+This Requirements Analysis and Specification Document (RASD) provides a 
+comprehensive overview of the Best Bike Paths (BBP) system. Its primary purpose 
+is to serve as both a guide for developers responsible for implementing the 
+system specifications and as a contractual reference point for clients and 
+contractors. Additionally, it offers a clear, precise, and unambiguous 
+explanation of the platform's features and limitations, empowering stakeholders 
+to confirm that the system meets their needs and requirements.
+
+The BBP system's overarching goal is to transform how cyclists discover, record, 
+and share information about bike paths. To this end, it focuses on:
+
+1. Enabling registered users to record and track their cycling trips with 
+   detailed statistics and performance metrics.
+
+2. Providing a comprehensive inventory of bike paths that can be browsed and 
+   searched by all users.
+
+3. Allowing users to contribute information about bike paths through both 
+   manual and automated data collection methods.
+
+4. Enriching trip data with meteorological information from external services 
+   when available.
+
+5. Facilitating path discovery by visualizing optimal routes between origin 
+   and destination points based on path quality and effectiveness.
+
+6. Merging and consolidating information from multiple users to provide 
+   accurate and up-to-date path status information.
+
+By offering a seamless and impactful experience, the BBP system aims to serve 
+as a trusted solution that addresses the requirements of all stakeholders—
+cyclists, bike associations, and urban planners—thereby ensuring a more 
+efficient, safe, and enjoyable cycling ecosystem.
+
+================================================================================
+[END OF PREVIEW]
+================================================================================
+
+NOTE: This is a text preview of the document. The actual PDF will have:
+- Professional formatting with proper spacing
+- Page numbers
+- Table of contents with page references
+- Proper typography and layout
+- Images and diagrams (when added)
+- Additional chapters as they are completed
+
+To generate the actual PDF, you need to:
+1. Install a LaTeX distribution (e.g., MiKTeX or TeX Live)
+2. Compile the DocumentoRASD.tex file using pdflatex
+3. Run the compilation twice to resolve all references
+

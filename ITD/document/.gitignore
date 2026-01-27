@@ -1,0 +1,21 @@
+# LaTeX build directory
+build/
+
+# LaTeX auxiliary files (in case they end up in root)
+*.aux
+*.log
+*.lof
+*.lot
+*.toc
+*.out
+*.bbl
+*.blg
+*.nav
+*.snm
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+
+# PDF files (keep only in DeliveryFolder)
+*.pdf
+!DeliveryFolder/*.pdf
