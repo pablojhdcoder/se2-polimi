@@ -33,8 +33,9 @@ app.get('/health', (req, res) => {
   });
 });
 
-// API routes will be added here
-// app.use('/api/v1', apiRoutes);
+// API routes
+const apiRoutes = require('./routes');
+app.use('/api/v1', apiRoutes);
 
 // 404 handler
 app.use((req, res) => {
@@ -47,7 +48,7 @@ app.use((req, res) => {
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error('Error:', err);
-  
+
   res.status(err.status || 500).json({
     error: err.message || 'Internal Server Error',
     ...(process.env.NODE_ENV === 'development' && { stack: err.stack })

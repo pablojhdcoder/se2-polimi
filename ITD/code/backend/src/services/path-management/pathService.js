@@ -18,48 +18,6 @@ const addPath = async (pathData) => {
 };
 
 /**
- * Adds a rating to a path and updates path's average rating.
- * @param {Object} ratingData Data for the new rating
- * @returns {Promise<Object>} Created rating
- */
-const addRating = async (ratingData) => {
-    const ratingId = crypto.randomUUID();
-    const rating = {
-        id: ratingId,
-        ...ratingData,
-        reportedStatus: ratingData.reportedStatus || 'optimal'
-    };
-
-    const newRating = await ratingRepository.createRating(rating);
-
-    // Update path information
-    await updatePathStats(ratingData.pathId);
-
-    return newRating;
-};
-
-/**
- * Removes a rating from a path and updates path's average rating.
- * @param {string} ratingId ID of the rating to remove
- * @returns {Promise<Object>} Deleted rating
- */
-const removeRating = async (ratingId) => {
-    // We need the pathId to update stats after deletion
-    // Getting all ratings for a path might be needed or just get the one being deleted first
-    const ratings = await ratingRepository.getRatingsByPathId(); // This is not efficient, we should find by ratingId
-    // Actually, I should add getRatingById to repository, but I can use deleteRating 
-    // which returns the deleted row.
-
-    const deletedRating = await ratingRepository.deleteRating(ratingId);
-
-    if (deletedRating) {
-        await updatePathStats(deletedRating.path_id);
-    }
-
-    return deletedRating;
-};
-
-/**
  * Updates the average rating of a path based on its ratings.
  * @param {string} pathId ID of the path to update
  * @returns {Promise<Object>} Updated path
@@ -72,9 +30,23 @@ const updatePathStats = async (pathId) => {
     return await pathRepository.updatePathRating(pathId, roundedRating);
 };
 
+/**
+ * Get all paths
+ */
+const getAllPaths = async () => {
+    return await pathRepository.getAllPaths();
+};
+
+/**
+ * Get path by ID
+ */
+const getPathById = async (id) => {
+    return await pathRepository.getPathById(id);
+};
+
 module.exports = {
     addPath,
-    addRating,
-    removeRating,
-    updatePathStats
+    updatePathStats,
+    getAllPaths,
+    getPathById
 };

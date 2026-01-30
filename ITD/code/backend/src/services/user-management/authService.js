@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
-const userRepository = require('../../repositories/userrepository');
+const userRepository = require('../../repositories/userRepository');
 const { redisClient, connectRedis } = require('./redisClient');
 
 const SALT_ROUNDS = 10;
