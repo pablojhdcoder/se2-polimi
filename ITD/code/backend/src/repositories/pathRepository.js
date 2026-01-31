@@ -1,22 +1,24 @@
 const { query } = require('../pool');
 
 const createPath = async (path) => {
+  console.log('[PathRepository] Creating path with data:', JSON.stringify(path, null, 2));
   const sql = `
-    INSERT INTO paths (id, path_name, start_x, start_y, end_x, end_y, length, user_rating, status, posted_by_username)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+    INSERT INTO paths (id, path_name, start_x, start_y, end_x, end_y, length, user_rating, status, posted_by_username, route_data)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
     RETURNING *
   `;
   const res = await query(sql, [
     path.id,
-    path.pathName,
+    path.pathName || path.name, // Try both
     path.startX,
     path.startY,
     path.endX,
     path.endY,
     path.length,
-    path.userRating,
-    path.status,
-    path.postedByUsername
+    path.userRating || 0,
+    path.status || 'optimal',
+    path.postedByUsername,
+    path.routeData
   ]);
   return res.rows[0];
 };

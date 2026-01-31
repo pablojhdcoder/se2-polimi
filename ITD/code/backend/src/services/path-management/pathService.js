@@ -9,8 +9,8 @@ const crypto = require('crypto');
  */
 const addPath = async (pathData) => {
     const path = {
-        id: crypto.randomUUID(),
         ...pathData,
+        id: crypto.randomUUID(),
         userRating: pathData.userRating || 0,
         status: pathData.status || 'optimal'
     };
@@ -18,16 +18,28 @@ const addPath = async (pathData) => {
 };
 
 /**
- * Updates the average rating of a path based on its ratings.
+ * Updates the average rating and other statistics of a path.
  * @param {string} pathId ID of the path to update
  * @returns {Promise<Object>} Updated path
  */
 const updatePathStats = async (pathId) => {
+    // 1. Calculate Average Rating
     const avgRating = await ratingRepository.getAverageRatingForPath(pathId);
-    // AVG returns a string or null usually in pg, convert to float/int
     const roundedRating = avgRating ? Math.round(parseFloat(avgRating)) : 0;
 
-    return await pathRepository.updatePathRating(pathId, roundedRating);
+    // 2. Additional Stats: Total Trips (This could be cached or queried)
+    // For now, let's assume we want to store this in the path's dynamic metadata
+    const path = await pathRepository.getPathById(pathId);
+    if (!path) return null;
+
+    // Update the path with new rating
+    const updatedPath = await pathRepository.updatePathRating(pathId, roundedRating);
+
+    // NOTE: Further complex logic like trend analysis or 
+    // "pothole density" could be added here by querying potholeRepository
+
+    console.log(`[PathService] Stats updated for path ${pathId}: Rating=${roundedRating}`);
+    return updatedPath;
 };
 
 /**

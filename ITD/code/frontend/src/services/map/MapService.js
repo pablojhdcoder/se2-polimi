@@ -115,11 +115,63 @@ class MapService {
                 }
             );
 
-            return response.data;
+            return this._transformRoute(response.data);
         } catch (error) {
             console.error('Error getting directions:', error);
             return null;
         }
+    }
+
+    /**
+     * Transforms provider-specific directions into a provider-agnostic format
+     * @private
+     * @param {Object} data Raw data from map provider
+     */
+    _transformRoute(data) {
+        if (!data || !data.routes || data.routes.length === 0) return null;
+
+        const route = data.routes[0];
+
+        // This is our Abstract Route Format
+        return {
+            metadata: {
+                provider: 'mapbox',
+                version: '1.0',
+                generatedAt: new Date().toISOString(),
+            },
+            summary: {
+                distance: route.distance, // in meters
+                duration: route.duration, // in seconds
+                mainRoads: route.summary,
+            },
+            path: route.geometry, // GeoJSON LineString
+            checkpoints: route.legs[0].steps.map(step => ({
+                instruction: step.maneuver.instruction,
+                location: step.maneuver.location, // [lng, lat]
+                distance: step.distance
+            }))
+        };
+    }
+
+    /**
+     * Standardizes a recorded GPS trace into the internal route format
+     * @param {Array<Array<number>>} coordinates Array of [longitude, latitude]
+     * @param {Object} metadata Optional metadata (startTime, device info, etc)
+     * @returns {Object} Internal route format
+     */
+    formatRecordedRoute(coordinates, metadata = {}) {
+        return {
+            metadata: {
+                provider: 'app_gps',
+                version: '1.0',
+                recordedAt: new Date().toISOString(),
+                ...metadata
+            },
+            path: {
+                type: 'LineString',
+                coordinates: coordinates
+            }
+        };
     }
 }
 

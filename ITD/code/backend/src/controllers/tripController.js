@@ -36,7 +36,27 @@ const startAutomaticTrip = async (req, res, next) => {
     }
 };
 
+/**
+ * Update the recorded route data for a trip
+ */
+const updateTrack = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        // Handle both nested { routeData: { ... } } and flat { coordinates: ... } structures
+        const routeData = req.body.routeData || req.body;
+
+        const updatedTrip = await tripService.updateTripTrack(id, routeData);
+        res.status(200).json({
+            message: 'Trip track updated',
+            trip: updatedTrip
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
 module.exports = {
     startManualTrip,
-    startAutomaticTrip
+    startAutomaticTrip,
+    updateTrack
 };

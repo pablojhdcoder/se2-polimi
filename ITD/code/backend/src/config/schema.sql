@@ -1,3 +1,11 @@
+DROP TABLE IF EXISTS potholes CASCADE;
+DROP TABLE IF EXISTS trips CASCADE;
+DROP TABLE IF EXISTS ratings CASCADE;
+DROP TABLE IF EXISTS saved_paths CASCADE;
+DROP TABLE IF EXISTS paths CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
+DROP TYPE IF EXISTS path_status_enum CASCADE;
+
 CREATE TYPE path_status_enum AS ENUM (
     'optimal',
     'under_maintenance',
@@ -20,17 +28,18 @@ CREATE TABLE users (
 
 CREATE TABLE paths (
     id UUID PRIMARY KEY,
-    path_name VARCHAR(100) NOT NULL,
+    path_name VARCHAR(100) UNIQUE NOT NULL,
 
-    start_x INTEGER NOT NULL,
-    start_y INTEGER NOT NULL,
-    end_x INTEGER NOT NULL,
-    end_y INTEGER NOT NULL,
+    start_x DOUBLE PRECISION NOT NULL,
+    start_y DOUBLE PRECISION NOT NULL,
+    end_x DOUBLE PRECISION NOT NULL,
+    end_y DOUBLE PRECISION NOT NULL,
 
-    length INTEGER NOT NULL,
+    length DOUBLE PRECISION NOT NULL,
 
     user_rating INTEGER, -- calculated
-    status path_status_enum NOT NULL
+    status path_status_enum NOT NULL,
+    route_data JSONB, -- Abstracted route data (geometry, checkpoints, etc)
 
     posted_by_username VARCHAR(50) NOT NULL,
 
@@ -101,6 +110,8 @@ CREATE TABLE trips (
     rain FLOAT,
     clouds INTEGER,
 
+    recorded_route JSONB, -- Abstracted recorded GPS trace
+
     CONSTRAINT fk_trip_user
         FOREIGN KEY (user_id) REFERENCES users(id)
         ON DELETE CASCADE,
@@ -114,11 +125,12 @@ CREATE TABLE potholes (
     id UUID PRIMARY KEY,
     path_id UUID NOT NULL,
 
-    location_x INTEGER NOT NULL,
-    location_y INTEGER NOT NULL,
+    location_x DOUBLE PRECISION NOT NULL,
+    location_y DOUBLE PRECISION NOT NULL,
 
     detected_date TIMESTAMP NOT NULL,
     size INTEGER NOT NULL,
+    status VARCHAR(20) DEFAULT 'confirmed',
 
     CONSTRAINT fk_pothole_path
         FOREIGN KEY (path_id) REFERENCES paths(id)

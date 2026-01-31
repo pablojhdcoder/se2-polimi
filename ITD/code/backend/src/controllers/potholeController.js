@@ -39,7 +39,26 @@ const getPotholesByPath = async (req, res, next) => {
     }
 };
 
+const tripService = require('../services/trip-management/tripService');
+
+/**
+ * Confirm potholes from a trip
+ */
+const confirmPotholes = async (req, res, next) => {
+    try {
+        const { tripId, selectedIndices } = req.body;
+        const confirmed = await tripService.confirmPotholes(tripId, selectedIndices);
+        res.status(200).json({
+            message: 'Potholes confirmed and saved',
+            potholes: confirmed
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
 module.exports = {
     reportPothole,
-    getPotholesByPath
+    getPotholesByPath,
+    confirmPotholes
 };

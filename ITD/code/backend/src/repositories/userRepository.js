@@ -26,6 +26,16 @@ const getUserByUsername = async (username) => {
     return res.rows[0];
 };
 
+const getUserById = async (id) => {
+    const sql = `
+    SELECT *
+    FROM users
+    WHERE id = $1
+  `;
+    const res = await query(sql, [id]);
+    return res.rows[0];
+};
+
 const getAllUsers = async () => {
     const sql = `SELECT * FROM users`;
     const res = await query(sql);
@@ -35,5 +45,6 @@ const getAllUsers = async () => {
 module.exports = {
     createUser,
     getUserByUsername,
+    getUserById,
     getAllUsers
 };
