@@ -1,0 +1,42 @@
+% Standalone TikZ sequence diagram: Mobile Application integration (Agent 3).
+% Login, token persistence, and authenticated request.
+% Compile with: pdflatex Seq_Agent3_MobileApp.tex
+% Export to PNG if needed for inclusion in other tools.
+\documentclass[tikz,border=2mm]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\begin{document}
+\begin{tikzpicture}[
+    every node/.style={font=\small},
+    participant/.style={rectangle, draw, minimum width=1.1cm, minimum height=0.45cm},
+    arrow/.style={->, >=stealth}
+]
+    \node[participant] (ui) at (0,0) {UI};
+    \node[participant] (api) at (1.6,0) {Client API};
+    \node[participant] (storage) at (3.2,0) {Local Storage};
+    \node[participant] (gw) at (4.8,0) {API GW};
+
+    \draw[dashed] (0.8, -0.22) -- (0.8, -4.2);
+    \draw[dashed] (2.4, -0.22) -- (2.4, -4.2);
+    \draw[dashed] (4.0, -0.22) -- (4.0, -4.2);
+    \draw[dashed] (5.6, -0.22) -- (5.6, -4.2);
+
+    \draw[arrow] (0.8, -0.55) -- (2.4, -0.55) node[midway, above, font=\scriptsize] {login(cred)};
+    \draw[arrow] (2.4, -0.95) -- (5.6, -0.95) node[midway, above, font=\scriptsize] {POST /auth/login};
+    \draw[arrow] (5.6, -1.35) -- (2.4, -1.35) node[midway, above, font=\scriptsize] {200 + token};
+    \draw[arrow] (2.4, -1.75) -- (0.8, -1.75) node[midway, above, font=\scriptsize] {success};
+    \draw[arrow] (0.8, -2.15) -- (4.0, -2.15) node[midway, above, font=\scriptsize] {setItem(token)};
+    \draw[arrow] (4.0, -2.55) -- (0.8, -2.55) node[midway, above, font=\scriptsize] {OK};
+    \draw[arrow] (0.8, -2.95) -- (2.4, -2.95) node[midway, above, font=\scriptsize] {getPaths()};
+    \draw[arrow] (2.4, -3.35) -- (4.0, -3.35) node[midway, above, font=\scriptsize] {getItem(token)};
+    \draw[arrow] (4.0, -3.75) -- (2.4, -3.75) node[midway, above, font=\scriptsize] {token};
+    \draw[arrow] (2.4, -4.15) -- (5.6, -4.15) node[midway, above, font=\scriptsize] {GET /paths (Auth)};
+
+    \draw[fill=black!10] (0.65, -0.45) rectangle (0.95, -4.0);
+    \draw[fill=black!10] (2.25, -0.45) rectangle (2.55, -4.0);
+    \draw[fill=black!10] (3.85, -2.05) rectangle (4.15, -3.85);
+    \draw[fill=black!10] (5.45, -0.85) rectangle (5.75, -1.45);
+
+    \node[font=\scriptsize] at (2.8, -4.5) {Mobile App: login $\to$ token storage $\to$ authenticated request (Agent 3)};
+\end{tikzpicture}
+\end{document}

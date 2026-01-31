@@ -111,9 +111,9 @@ El ITD debe estar alineado con:
    - Verificar todas las referencias
 
 2. **Compilación**
-   - Compilar documento LaTeX
+   - Compilar documento LaTeX desde la carpeta `document/`: ejecutar `.\compile.ps1` (PowerShell). Requiere `pdflatex` (MiKTeX o TeX Live). El PDF se genera en `document/ITD.pdf`.
    - Verificar formato PDF
-   - Validar todas las referencias cruzadas
+   - Validar todas las referencias cruzadas (ejecutar al menos dos pasadas de \texttt{pdflatex} para resolver referencias).
 
 ---
 

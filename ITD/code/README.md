@@ -48,28 +48,15 @@ Ejecuta el script de setup:
 
 Este script:
 1. Verifica las instalaciones necesarias
-2. Crea archivos `.env` desde `.env.example`
+2. Comprueba que existan los archivos `.env` (backend y frontend ya configurados)
 3. Instala dependencias del backend y frontend
 4. Inicia los servicios Docker
 
 ### Opción 2: Instalación Manual
 
-#### 1. Configurar Variables de Entorno
+#### 1. Variables de Entorno
 
-Copia los archivos `.env.example` y configura las variables:
-
-```powershell
-# En la raíz del proyecto
-Copy-Item .env.example .env
-
-# En backend/
-Copy-Item backend\.env.example backend\.env
-
-# En frontend/
-Copy-Item frontend\.env.example frontend\.env
-```
-
-Edita los archivos `.env` con tus configuraciones.
+Los archivos `.env` del backend y del frontend están ya configurados en el proyecto. Si necesitas modificarlos, edita `backend\.env` y `frontend\.env` con tus configuraciones.
 
 #### 2. Iniciar Servicios Docker
 

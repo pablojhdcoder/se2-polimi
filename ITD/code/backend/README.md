@@ -49,7 +49,6 @@ backend/
 ├── tests/                    # Tests de integración
 ├── migrations/               # Migraciones de base de datos
 ├── docker/                   # Dockerfiles
-├── .env.example              # Variables de entorno de ejemplo
 ├── package.json
 └── README.md
 ```
@@ -72,15 +71,7 @@ backend/
 npm install
 ```
 
-2. **Configurar variables de entorno:**
-
-Copia `.env.example` a `.env` y configura las variables:
-
-```bash
-cp .env.example .env
-```
-
-Edita `.env` con tus configuraciones.
+2. **Variables de entorno:** El archivo `.env` está ya configurado en el proyecto. Si necesitas modificarlo, edita `.env` con tus configuraciones.
 
 3. **Iniciar servicios Docker (si usas Docker):**
 
@@ -138,7 +129,7 @@ Las principales variables de entorno son:
 - `JWT_SECRET`: Secreto para JWT
 - `JWT_EXPIRES_IN`: Tiempo de expiración del token
 
-Ver `.env.example` para todas las variables disponibles.
+Las variables se configuran en el archivo `.env` del backend.
 
 ## API Endpoints
 

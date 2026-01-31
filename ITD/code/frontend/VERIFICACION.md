@@ -1,78 +1,78 @@
-# Guía de Verificación de Paquetes
+# Package Verification Guide
 
-## Verificación Rápida
+## Quick Verification
 
-### 1. Script Automático (Recomendado)
+### 1. Automatic Script (Recommended)
 ```powershell
 .\verify-installation.ps1
 ```
 
-Este script verifica:
-- ✅ Existencia de node_modules
-- ✅ Paquetes principales instalados
-- ✅ Integridad de dependencias
-- ✅ Vulnerabilidades de seguridad
-- ✅ Archivos de configuración
-- ✅ Expo CLI disponible
+This script verifies:
+- ✅ Existence of node_modules
+- ✅ Main packages installed
+- ✅ Dependency integrity
+- ✅ Security vulnerabilities
+- ✅ Configuration files
+- ✅ Expo CLI available
 
-### 2. Comandos Manuales
+### 2. Manual Commands
 
-#### Verificar que los paquetes están instalados
+#### Verify that packages are installed
 ```powershell
 npm list --depth=0
 ```
 
-#### Verificar paquetes específicos
+#### Verify specific packages
 ```powershell
-# Verificar React
+# Verify React
 npm list react
 
-# Verificar Expo
+# Verify Expo
 npm list expo
 
-# Verificar React Native
+# Verify React Native
 npm list react-native
 ```
 
-#### Verificar integridad de dependencias
+#### Verify dependency integrity
 ```powershell
 npm ls
 ```
-Si no hay errores, todas las dependencias están correctamente instaladas.
+If there are no errors, all dependencies are correctly installed.
 
-#### Verificar vulnerabilidades
+#### Verify vulnerabilities
 ```powershell
-# Ver todas las vulnerabilidades
+# View all vulnerabilities
 npm audit
 
-# Ver solo vulnerabilidades críticas y de alta severidad
+# View only critical and high severity vulnerabilities
 npm audit --audit-level=high
 
-# Intentar corregir automáticamente (puede causar breaking changes)
+# Try to fix automatically (may cause breaking changes)
 npm audit fix
 
-# Forzar corrección (puede actualizar versiones mayores)
+# Force fix (may update major versions)
 npm audit fix --force
 ```
 
-#### Verificar paquetes desactualizados
+#### Verify outdated packages
 ```powershell
 npm outdated
 ```
 
-#### Verificar que el proyecto puede iniciarse
+#### Verify that the project can start
 ```powershell
-# Verificar configuración sin iniciar
+# Verify configuration without starting
 npx expo-doctor
 
-# Iniciar en modo verificación
+# Start in verification mode
 npm start -- --check
 ```
 
-### 3. Verificación de Funcionalidad
+### 3. Functionality Verification
 
-#### Probar imports básicos
-Crea un archivo temporal `test-imports.js`:
+#### Test basic imports
+Create a temporary file `test-imports.js`:
 ```javascript
 // test-imports.js
 try {
@@ -85,79 +85,79 @@ try {
   const Maps = require('react-native-maps');
   const Axios = require('axios');
   
-  console.log('✅ Todos los imports funcionan correctamente');
+  console.log('All imports work correctly');
 } catch (error) {
-  console.error('❌ Error al importar:', error.message);
+  console.error('Error importing:', error.message);
 }
 ```
 
-Ejecuta:
+Run:
 ```powershell
 node test-imports.js
 ```
 
-#### Verificar que Expo puede iniciarse
+#### Verify that Expo can start
 ```powershell
 npx expo --version
 ```
 
-### 4. Solución de Problemas Comunes
+### 4. Common Troubleshooting
 
-#### Si faltan paquetes
+#### If packages are missing
 ```powershell
 npm install --legacy-peer-deps
 ```
 
-#### Si hay conflictos de versiones
+#### If there are version conflicts
 ```powershell
-# Limpiar e reinstalar
+# Clean and reinstall
 Remove-Item -Recurse -Force node_modules
 Remove-Item -Force package-lock.json
 npm install --legacy-peer-deps
 ```
 
-#### Si Expo no funciona
+#### If Expo does not work
 ```powershell
-# Instalar Expo CLI globalmente (opcional)
+# Install Expo CLI globally (optional)
 npm install -g @expo/cli
 
-# O usar npx (recomendado)
+# Or use npx (recommended)
 npx expo start
 ```
 
-### 5. Checklist de Verificación
+### 5. Verification Checklist
 
-Antes de comenzar a desarrollar, verifica:
+Before starting development, verify:
 
-- [ ] `node_modules` existe y tiene contenido
-- [ ] Todos los paquetes principales están instalados
-- [ ] `npm list` no muestra errores
-- [ ] `npm audit` no muestra vulnerabilidades críticas
-- [ ] Los archivos de configuración existen (package.json, babel.config.js, etc.)
-- [ ] Expo CLI está disponible
-- [ ] El proyecto puede iniciarse con `npm start`
+- [ ] `node_modules` exists and has content
+- [ ] All main packages are installed
+- [ ] `npm list` shows no errors
+- [ ] `npm audit` shows no critical vulnerabilities
+- [ ] Configuration files exist (package.json, babel.config.js, etc.)
+- [ ] Expo CLI is available
+- [ ] The project can start with `npm start`
 
-### 6. Notas sobre Vulnerabilidades
+### 6. Notes on Vulnerabilities
 
-Las vulnerabilidades reportadas en `npm audit` suelen ser:
-- **Dependencias transitivas**: Vienen de paquetes que usas indirectamente
-- **No críticas para desarrollo**: Afectan principalmente a producción
-- **Pueden requerir actualizaciones mayores**: `npm audit fix --force` puede actualizar versiones principales
+Vulnerabilities reported by `npm audit` are usually:
+- **Transitive dependencies**: Come from packages you use indirectly
+- **Not critical for development**: Mainly affect production
+- **May require major updates**: `npm audit fix --force` may update major versions
 
-**Recomendación**: Para desarrollo, las vulnerabilidades de "high severity" en dependencias transitivas generalmente no son críticas. Puedes continuar desarrollando y corregirlas antes de producción.
+**Recommendation**: For development, "high severity" vulnerabilities in transitive dependencies are generally not critical. You can continue developing and fix them before production.
 
-### 7. Comandos Útiles Adicionales
+### 7. Additional Useful Commands
 
 ```powershell
-# Ver tamaño de node_modules
+# View node_modules size
 Get-ChildItem node_modules -Recurse | Measure-Object -Property Length -Sum
 
-# Verificar estructura del proyecto
+# Verify project structure
 tree /F /A
 
-# Limpiar caché de npm
+# Clear npm cache
 npm cache clean --force
 
-# Ver información del proyecto
+# View project info
 npm info expo
 ```

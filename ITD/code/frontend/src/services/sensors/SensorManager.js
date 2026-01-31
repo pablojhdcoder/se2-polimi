@@ -1,9 +1,22 @@
-import { accelerometer, gyroscope, setUpdateIntervalForType, SensorTypes } from 'react-native-sensors';
 import * as Location from 'expo-location';
 
-// Set update interval (in milliseconds)
-setUpdateIntervalForType(SensorTypes.accelerometer, 100);
-setUpdateIntervalForType(SensorTypes.gyroscope, 100);
+// Lazy load react-native-sensors (not available in Expo Go; only in development builds)
+let _sensorsModule = undefined;
+function getSensorsModule() {
+  if (_sensorsModule === undefined) {
+    try {
+      _sensorsModule = require('react-native-sensors');
+    } catch (e) {
+      console.warn('Sensors not available (e.g. Expo Go). Accelerometer/gyroscope disabled.', e?.message);
+      _sensorsModule = null;
+    }
+  }
+  return _sensorsModule;
+}
+
+function isSensorsAvailable() {
+  return getSensorsModule() !== null;
+}
 
 class SensorManager {
   constructor() {
@@ -11,11 +24,11 @@ class SensorManager {
     this.gyroscopeSubscription = null;
     this.gpsSubscription = null;
     this.isMonitoring = false;
-    
+
     this.accelerometerData = null;
     this.gyroscopeData = null;
     this.gpsData = null;
-    
+
     this.callbacks = {
       accelerometer: [],
       gyroscope: [],
@@ -50,8 +63,11 @@ class SensorManager {
     }
   }
 
-  // Start monitoring accelerometer
+  // Start monitoring accelerometer (no-op if native sensors not available, e.g. Expo Go)
   startAccelerometer(callback) {
+    const sensors = getSensorsModule();
+    if (!sensors) return;
+
     if (this.accelerometerSubscription) {
       this.stopAccelerometer();
     }
@@ -60,14 +76,23 @@ class SensorManager {
       this.callbacks.accelerometer.push(callback);
     }
 
-    this.accelerometerSubscription = accelerometer.subscribe(({ x, y, z, timestamp }) => {
-      this.accelerometerData = { x, y, z, timestamp };
-      this.callbacks.accelerometer.forEach(cb => cb({ x, y, z, timestamp }));
-    });
+    try {
+      const { accelerometer, setUpdateIntervalForType, SensorTypes } = sensors;
+      setUpdateIntervalForType(SensorTypes.accelerometer, 100);
+      this.accelerometerSubscription = accelerometer.subscribe(({ x, y, z, timestamp }) => {
+        this.accelerometerData = { x, y, z, timestamp };
+        this.callbacks.accelerometer.forEach(cb => cb({ x, y, z, timestamp }));
+      });
+    } catch (e) {
+      console.warn('Accelerometer not available:', e?.message);
+    }
   }
 
-  // Start monitoring gyroscope
+  // Start monitoring gyroscope (no-op if native sensors not available)
   startGyroscope(callback) {
+    const sensors = getSensorsModule();
+    if (!sensors) return;
+
     if (this.gyroscopeSubscription) {
       this.stopGyroscope();
     }
@@ -76,10 +101,16 @@ class SensorManager {
       this.callbacks.gyroscope.push(callback);
     }
 
-    this.gyroscopeSubscription = gyroscope.subscribe(({ x, y, z, timestamp }) => {
-      this.gyroscopeData = { x, y, z, timestamp };
-      this.callbacks.gyroscope.forEach(cb => cb({ x, y, z, timestamp }));
-    });
+    try {
+      const { gyroscope, setUpdateIntervalForType, SensorTypes } = sensors;
+      setUpdateIntervalForType(SensorTypes.gyroscope, 100);
+      this.gyroscopeSubscription = gyroscope.subscribe(({ x, y, z, timestamp }) => {
+        this.gyroscopeData = { x, y, z, timestamp };
+        this.callbacks.gyroscope.forEach(cb => cb({ x, y, z, timestamp }));
+      });
+    } catch (e) {
+      console.warn('Gyroscope not available:', e?.message);
+    }
   }
 
   // Start monitoring GPS

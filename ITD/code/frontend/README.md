@@ -1,104 +1,96 @@
 # Best Bike Paths - Frontend (Mobile App)
 
-Aplicación móvil React Native para Best Bike Paths construida con Expo.
+React Native mobile app for Best Bike Paths built with Expo.
 
-## Descripción
+## Description
 
-Esta aplicación móvil permite a los usuarios:
-- Registrarse e iniciar sesión
-- Buscar y visualizar rutas en bicicleta
-- Registrar viajes personales con detección automática
-- Calificar y revisar rutas
-- Detectar obstáculos durante el viaje
-- Ver estadísticas de viajes
+This mobile application allows users to:
+- Register and log in
+- Search and view bike paths
+- Record personal trips with automatic detection
+- Rate and review paths
+- Detect obstacles during the trip
+- View trip statistics
 
-## Tecnologías
+## Technologies
 
-- **React Native**: Framework móvil
-- **Expo**: Herramientas y servicios para React Native
-- **React Navigation**: Navegación
-- **AsyncStorage**: Almacenamiento local
-- **React Native Sensors**: Acceso a sensores (GPS, acelerómetro, giroscopio)
-- **Axios**: Cliente HTTP
-- **React Native Maps**: Mapas (opcional)
+- **React Native**: Mobile framework
+- **Expo**: Tools and services for React Native
+- **React Navigation**: Navigation
+- **AsyncStorage**: Local storage
+- **React Native Sensors**: Sensor access (GPS, accelerometer, gyroscope)
+- **Axios**: HTTP client
+- **React Native Maps**: Maps (optional)
 
-## Estructura de Archivos
+## File Structure
 
 ```
 frontend/
 ├── src/
-│   ├── components/           # Componentes UI reutilizables
-│   ├── screens/              # Pantallas de la aplicación
-│   ├── services/             # Servicios API
-│   │   ├── api.js           # Cliente API configurado
-│   │   └── sensors/         # Gestión de sensores
+│   ├── components/           # Reusable UI components
+│   ├── screens/               # Application screens
+│   ├── services/              # API services
+│   │   ├── api.js             # Configured API client
+│   │   └── sensors/           # Sensor management
 │   │       └── SensorManager.js
-│   ├── utils/               # Utilidades
-│   ├── navigation/          # Configuración de navegación
-│   ├── storage/             # Gestión de almacenamiento local
-│   └── sensors/             # Módulos de sensores
-│       ├── trip-detection/  # Detección de viajes
-│       └── obstacle-detection/ # Detección de obstáculos
-├── __tests__/               # Tests
-├── App.js                   # Componente principal
-├── babel.config.js          # Configuración Babel
-├── metro.config.js          # Configuración Metro bundler
-├── app.json                 # Configuración Expo
+│   ├── utils/                 # Utilities
+│   ├── navigation/            # Navigation configuration
+│   ├── storage/               # Local storage management
+│   └── sensors/               # Sensor modules
+│       ├── trip-detection/   # Trip detection
+│       └── obstacle-detection/ # Obstacle detection
+├── __tests__/                 # Tests
+├── App.js                     # Main component
+├── babel.config.js            # Babel configuration
+├── metro.config.js            # Metro bundler configuration
+├── app.json                   # Expo configuration
 ├── package.json
 └── README.md
 ```
 
-## Instalación
+## Installation
 
-### Requisitos Previos
+### Prerequisites
 
 - Node.js >= 18.0.0
 - npm >= 9.0.0
-- Expo CLI (se instala automáticamente)
-- Para iOS: Xcode (solo macOS)
-- Para Android: Android Studio
+- Expo CLI (installed automatically)
+- For iOS: Xcode (macOS only)
+- For Android: Android Studio
 
-### Pasos
+### Steps
 
-1. **Instalar dependencias:**
+1. **Install dependencies:**
 
 ```bash
 npm install
 ```
 
-2. **Configurar variables de entorno:**
+2. **Environment variables:** The `.env` file is already configured. If needed, edit `.env` to set `EXPO_PUBLIC_API_URL` (default: http://localhost:3000/api/v1).
 
-Copia `.env.example` a `.env`:
-
-```bash
-cp .env.example .env
-```
-
-Edita `.env` con la URL de tu API backend.
-
-3. **Iniciar la aplicación:**
+3. **Start the application:**
 
 ```bash
 npm start
 ```
 
-Esto abrirá Expo DevTools. Puedes:
-- Presionar `a` para abrir en Android emulator
-- Presionar `i` para abrir en iOS simulator (solo macOS)
-- Escanear el QR code con Expo Go app en tu dispositivo físico
+This will open Expo DevTools. You can:
+- Press `a` to open in Android emulator
+- Press `i` to open in iOS simulator (macOS only)
+- Scan the QR code with Expo Go app on your physical device
 
-## Uso
+## Usage
 
-### Desarrollo
+### Development
 
 ```bash
-# Iniciar Expo
+# Start Expo
 npm start
 
 # Android
 npm run android
 
-# iOS (solo macOS)
+# iOS (macOS only)
 npm run ios
 
 # Web
@@ -108,50 +100,60 @@ npm run web
 ### Testing
 
 ```bash
-# Ejecutar tests
+# Run tests
 npm test
 
-# Modo watch
+# Watch mode
 npm run test:watch
 
-# Con cobertura
+# With coverage
 npm run test:coverage
+
+# Client E2E tests only
+npm test -- --testPathPattern="__tests__/e2e"
 ```
 
-## Configuración
+**Client Integration Test Cases** (no real backend):
 
-### Variables de Entorno
+- **`__tests__/e2e/authFlow.test.js`**: Authentication flow (Home → Login/Register, submit, setSession, validation errors).
+- **`__tests__/e2e/pathFlow.test.js`**: Path flow (PathList → PathDetail → PathCreateManual, PublishPath, navigation and mocked APIs).
+- **`__tests__/e2e/recordTripFlow.test.js`**: Trip recording flow (TripRecordingScreen: start/stop, createTrip, sync queue when network fails).
+- **`__tests__/e2e/syncOffline.test.js`**: Sync/offline scenarios (OfflineBanner, PendingSyncBanner, NetworkStatusProvider, mocked sync queue).
 
-Las variables de entorno deben comenzar con `EXPO_PUBLIC_` para ser accesibles en la app:
+Client E2E tests use mocked API, storage and sensors; no server is required.
 
-- `EXPO_PUBLIC_API_URL`: URL del backend API (default: http://localhost:3000/api/v1)
-- `EXPO_PUBLIC_ENV`: Entorno (development, production)
+## Configuration
 
-Ver `.env.example` para más detalles.
+### Environment Variables
+
+Environment variables must start with `EXPO_PUBLIC_` to be accessible in the app:
+
+- `EXPO_PUBLIC_API_URL`: Backend API URL (default: http://localhost:3000/api/v1)
+- `EXPO_PUBLIC_ENV`: Environment (development, production)
 
 ### app.json
 
-El archivo `app.json` contiene la configuración de Expo, incluyendo:
-- Nombre de la app
-- Iconos y splash screen
-- Permisos (ubicación, etc.)
-- Configuración de iOS y Android
+The `app.json` file contains Expo configuration, including:
+- App name
+- Icons and splash screen
+- Permissions (location, etc.)
+- iOS and Android configuration
 
-## Componentes Principales
+## Main Components
 
 ### SensorManager
 
-El `SensorManager` (`src/services/sensors/SensorManager.js`) gestiona el acceso a:
-- **GPS**: Ubicación del dispositivo
-- **Acelerómetro**: Aceleración en 3 ejes
-- **Giroscopio**: Rotación en 3 ejes
+The `SensorManager` (`src/services/sensors/SensorManager.js`) manages access to:
+- **GPS**: Device location
+- **Accelerometer**: Acceleration on 3 axes
+- **Gyroscope**: Rotation on 3 axes
 
-Ejemplo de uso:
+Usage example:
 
 ```javascript
 import SensorManager from './src/services/sensors/SensorManager';
 
-// Iniciar monitoreo
+// Start monitoring
 await SensorManager.startAll({
   gps: (data) => {
     console.log('GPS:', data);
@@ -164,18 +166,18 @@ await SensorManager.startAll({
   }
 });
 
-// Detener monitoreo
+// Stop monitoring
 SensorManager.stopAll();
 ```
 
 ### API Client
 
-El cliente API (`src/services/api.js`) está configurado con:
-- Interceptores para agregar tokens de autenticación
-- Manejo de errores global
-- Manejo de tokens expirados
+The API client (`src/services/api.js`) is configured with:
+- Interceptors to add authentication tokens
+- Global error handling
+- Expired token handling
 
-Ejemplo de uso:
+Usage example:
 
 ```javascript
 import apiClient from './src/services/api';
@@ -190,42 +192,42 @@ const newPath = await apiClient.post('/paths', {
 });
 ```
 
-## Navegación
+## Navigation
 
-La navegación está configurada con React Navigation. Las pantallas se registran en `App.js`.
+Navigation is configured with React Navigation. Screens are registered in `App.js`.
 
-### Agregar una Nueva Pantalla
+### Adding a New Screen
 
-1. Crea el componente de pantalla en `src/screens/`
-2. Regístrala en `App.js`:
+1. Create the screen component in `src/screens/`
+2. Register it in `App.js`:
 
 ```javascript
 import NewScreen from './src/screens/NewScreen';
 
-// En el Stack.Navigator
+// In the Stack.Navigator
 <Stack.Screen name="NewScreen" component={NewScreen} />
 ```
 
-## Permisos
+## Permissions
 
-La aplicación requiere los siguientes permisos:
+The application requires the following permissions:
 
-- **Ubicación**: Para rastrear viajes y encontrar rutas
-- **Ubicación en segundo plano**: Para rastrear viajes mientras la app está en segundo plano
+- **Location**: To track trips and find paths
+- **Background location**: To track trips while the app is in the background
 
-Los permisos se solicitan automáticamente cuando se usan los sensores.
+Permissions are requested automatically when using the sensors.
 
 ## Testing
 
-Los tests usan Jest y React Native Testing Library.
+Tests use Jest and React Native Testing Library.
 
-### Ejecutar Tests
+### Running Tests
 
 ```bash
 npm test
 ```
 
-### Estructura de Tests
+### Test Structure
 
 ```javascript
 // __tests__/components/Example.test.js
@@ -241,15 +243,15 @@ describe('ExampleComponent', () => {
 });
 ```
 
-## Build y Deploy
+## Build and Deploy
 
-### Desarrollo
+### Development
 
-Para desarrollo, usa Expo Go app o un emulador/simulador.
+For development, use Expo Go app or an emulator/simulator.
 
-### Producción
+### Production
 
-Para crear builds de producción:
+To create production builds:
 
 ```bash
 # Android
@@ -259,7 +261,7 @@ expo build:android
 expo build:ios
 ```
 
-O usa EAS Build (recomendado):
+Or use EAS Build (recommended):
 
 ```bash
 npm install -g eas-cli
@@ -269,29 +271,29 @@ eas build --platform ios
 
 ## Troubleshooting
 
-### Error de conexión al backend
+### Backend connection error
 
-- Verifica que el backend esté corriendo
-- Verifica `EXPO_PUBLIC_API_URL` en `.env`
-- Para Android emulator, usa `10.0.2.2` en lugar de `localhost`
-- Para iOS simulator, `localhost` funciona
+- Verify that the backend is running
+- Verify `EXPO_PUBLIC_API_URL` in `.env`
+- For Android emulator, use `10.0.2.2` instead of `localhost`
+- For iOS simulator, `localhost` works
 
-### Error de permisos de ubicación
+### Location permission error
 
-- Verifica que los permisos estén configurados en `app.json`
-- En Android, verifica `AndroidManifest.xml` (generado por Expo)
-- En iOS, verifica `Info.plist` (generado por Expo)
+- Verify that permissions are configured in `app.json`
+- On Android, check `AndroidManifest.xml` (generated by Expo)
+- On iOS, check `Info.plist` (generated by Expo)
 
-### Error de sensores no disponibles
+### Sensors not available error
 
-- Algunos sensores no están disponibles en simuladores/emuladores
-- Prueba en un dispositivo físico
-- Verifica que los permisos estén otorgados
+- Some sensors are not available in simulators/emulators
+- Try on a physical device
+- Verify that permissions have been granted
 
-## Licencia
+## License
 
 ISC
 
-## Autores
+## Authors
 
 BBP Team - Software Engineering 2 Project

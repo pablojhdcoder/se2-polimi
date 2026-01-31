@@ -6,30 +6,177 @@ This section presents sequence diagrams illustrating integration flows for backe
 \subsection{Service-to-DB Integration Sequences}
 \label{subsec:service_to_db_sequences}%
 
-Sequence diagrams for service-to-database integration will be included here.
+Service-to-database integration follows a common pattern: a backend service (e.g., User Management, Trip Management, Path Management) receives a request, invokes the appropriate repository abstraction, and the repository executes SQL or ORM operations against PostgreSQL. Optionally, the service or repository interacts with the Redis cache for reads or invalidations. The sequences below illustrate these flows for the data layer and core services described in \Cref{sec:data_layer_integration} and \Cref{sec:service_layer_integration}.
 
-% Example structure:
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.8\textwidth]{Images/Diagrams/Sequence_Backend_ServiceToDB.png}
-%     \caption{Service-to-Database integration sequence diagram}
-%     \label{fig:sequence_service_to_db}
-% \end{figure}
+\textbf{Generic read flow.} The client or API Gateway calls the service with a query (e.g., get user by ID, list trips by user). The service calls the repository method (e.g., \texttt{findById}, \texttt{findByUserId}). If a cache layer is used, the repository or a dedicated cache component checks Redis first; on a cache hit, the value is returned without querying the database. On a cache miss, the repository queries PostgreSQL, maps the result to a domain entity, optionally caches the result (with TTL), and returns it to the service, which then returns the response to the caller.
+
+\textbf{Generic write flow.} For create, update, or delete operations, the service receives the request, validates input, and calls the repository (e.g., \texttt{save}, \texttt{update}, \texttt{delete}). The repository runs the operation within a transaction against PostgreSQL. On success, the transaction is committed; if a cache exists for the affected entity or query, the cache entry is invalidated or updated. The service returns the appropriate status and body to the caller. On failure (e.g., constraint violation), the transaction is rolled back and an error is returned.
+
+\textbf{User Management example.} For user registration (UC1), the User Management Service receives the registration payload, calls the User repository to persist the user (with hashed password), and the repository performs an \texttt{INSERT} into the users table. For login (UC2), the service calls the repository to find the user by email; the repository queries PostgreSQL (and optionally the cache) and returns the user entity so the service can validate the password and issue a token.
+
+\cref{fig:sequence_service_to_db} shows a generic Service-to-DB integration sequence for a write operation (e.g., create path or register user). A high-resolution version of this diagram can be placed in \texttt{Images/Diagrams/} for reuse (e.g., \texttt{Seq\_Agent1\_ServiceToDB.png}).
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}[
+        every node/.style={font=\small},
+        participant/.style={rectangle, draw, minimum width=1.2cm, minimum height=0.45cm},
+        arrow/.style={->, >=stealth}
+    ]
+        % Participants at fixed x positions: 0, 1.6, 3.2, 4.8
+        \node[participant] (service) at (0,0) {Service};
+        \node[participant] (repo) at (1.6,0) {Repository};
+        \node[participant] (db) at (3.2,0) {PostgreSQL};
+        \node[participant] (cache) at (4.8,0) {Redis};
+
+        % Lifelines (vertical dashed lines)
+        \draw[dashed] (0, -0.22) -- (0, -3.8);
+        \draw[dashed] (1.6, -0.22) -- (1.6, -3.8);
+        \draw[dashed] (3.2, -0.22) -- (3.2, -3.8);
+        \draw[dashed] (4.8, -0.22) -- (4.8, -3.8);
+
+        % Messages
+        \draw[arrow] (0, -0.7) -- (1.6, -0.7) node[midway, above, font=\scriptsize] {save(entity)};
+        \draw[arrow] (1.6, -1.2) -- (3.2, -1.2) node[midway, above, font=\scriptsize] {INSERT/UPDATE};
+        \draw[arrow] (3.2, -1.7) -- (1.6, -1.7) node[midway, above, font=\scriptsize] {OK};
+        \draw[arrow] (1.6, -2.2) -- (4.8, -2.2) node[midway, above, font=\scriptsize] {invalidate(key)};
+        \draw[arrow] (4.8, -2.7) -- (1.6, -2.7) node[midway, above, font=\scriptsize] {ack};
+        \draw[arrow] (1.6, -3.2) -- (0, -3.2) node[midway, above, font=\scriptsize] {entity};
+
+        % Activation bars
+        \draw[fill=black!10] (-0.15, -0.55) rectangle (0.15, -3.35);
+        \draw[fill=black!10] (1.45, -0.55) rectangle (1.75, -3.35);
+        \draw[fill=black!10] (3.05, -1.05) rectangle (3.35, -1.75);
+        \draw[fill=black!10] (4.65, -2.05) rectangle (4.95, -2.75);
+
+        \node[font=\scriptsize] at (2.4, -3.65) {(write flow)};
+    \end{tikzpicture}
+    \caption{Service-to-Database integration sequence: generic write flow (e.g., create or update). The service calls the repository, which persists to PostgreSQL and invalidates the cache; the repository returns the result to the service.}
+    \label{fig:sequence_service_to_db}
+\end{figure}
 
 \subsection{Service-to-Service Integration Sequences}
 \label{subsec:service_to_service_sequences}%
 
-Sequence diagrams for service-to-service communication will be included here.
+Service-to-service integration involves synchronous REST calls between backend microservices. Typical flows include: Path Search calling Path Management to resolve path metadata; Rating Service calling Path Management to validate path IDs; Information Merging reading path/segment data from Path Management and writing merged results back. Integration tests and sequence diagrams must cover the main request/response flows and error handling.
+
+\textbf{Path Search to Path Management.} The Path Search Service receives a search request (e.g. bounding box, filters), builds a query, and calls the Path Management Service (or shared data layer) to obtain path entities. Path Management returns a list of paths that match the criteria. \cref{fig:sequence_service_to_service} shows this flow. A high-resolution export can be placed in \path{Images/Diagrams/Seq_Agent2_ServiceToService.png}.
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}[
+        every node/.style={font=\small},
+        participant/.style={rectangle, draw, minimum width=1.2cm, minimum height=0.45cm},
+        arrow/.style={->, >=stealth}
+    ]
+        \node[participant] (client) at (0,0) {Client};
+        \node[participant] (gw) at (1.8,0) {API GW};
+        \node[participant] (search) at (3.6,0) {Path Search};
+        \node[participant] (pm) at (5.4,0) {Path Mgmt};
+        \node[participant] (db) at (7.2,0) {DB};
+
+        \draw[dashed] (0.9, -0.22) -- (0.9, -3.5);
+        \draw[dashed] (2.7, -0.22) -- (2.7, -3.5);
+        \draw[dashed] (4.5, -0.22) -- (4.5, -3.5);
+        \draw[dashed] (6.3, -0.22) -- (6.3, -3.5);
+        \draw[dashed] (8.1, -0.22) -- (8.1, -3.5);
+
+        \draw[arrow] (0.9, -0.6) -- (2.7, -0.6) node[midway, above, font=\scriptsize] {GET /paths};
+        \draw[arrow] (2.7, -1.0) -- (4.5, -1.0) node[midway, above, font=\scriptsize] {search(query)};
+        \draw[arrow] (4.5, -1.4) -- (6.3, -1.4) node[midway, above, font=\scriptsize] {getPaths(ids)};
+        \draw[arrow] (6.3, -1.8) -- (8.1, -1.8) node[midway, above, font=\scriptsize] {query};
+        \draw[arrow] (8.1, -2.2) -- (6.3, -2.2) node[midway, above, font=\scriptsize] {rows};
+        \draw[arrow] (6.3, -2.6) -- (4.5, -2.6) node[midway, above, font=\scriptsize] {paths};
+        \draw[arrow] (4.5, -3.0) -- (2.7, -3.0) node[midway, above, font=\scriptsize] {results};
+        \draw[arrow] (2.7, -3.4) -- (0.9, -3.4) node[midway, above, font=\scriptsize] {200 + body};
+
+        \draw[fill=black!10] (0.7, -0.5) rectangle (1.1, -3.5);
+        \draw[fill=black!10] (2.5, -0.5) rectangle (2.9, -3.5);
+        \draw[fill=black!10] (4.3, -0.9) rectangle (4.7, -3.1);
+        \draw[fill=black!10] (6.1, -1.3) rectangle (6.5, -2.7);
+        \draw[fill=black!10] (7.9, -1.7) rectangle (8.3, -2.3);
+
+        \node[font=\scriptsize] at (4.5, -3.8) {Service-to-Service (Path Search $\to$ Path Management)};
+    \end{tikzpicture}
+    \caption{Service-to-Service integration sequence: Client requests paths via API Gateway; Path Search calls Path Management to resolve path data; Path Management queries the database and returns results back along the chain.}
+    \label{fig:sequence_service_to_service}
+\end{figure}
 
 \subsection{Message Queue Integration Sequences}
 \label{subsec:message_queue_sequences}%
 
-Sequence diagrams for asynchronous message queue integration will be included here.
+Asynchronous integration via a message queue (RabbitMQ) is used for sensor data and other event-driven flows. The mobile client (or Trip Detection Engine) publishes GPS/sensor payloads to a queue; the Sensor Data Processing Service consumes messages, processes them (e.g. outlier removal), and persists the result to the database. Integration tests must verify connection, consumption, ACK/NACK, and error handling. \cref{fig:sequence_message_queue} shows the flow from client publish to service consume and DB write. A high-resolution export can be placed in \path{Images/Diagrams/Seq_Agent2_MessageQueue.png}.
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}[
+        every node/.style={font=\small},
+        participant/.style={rectangle, draw, minimum width=1.1cm, minimum height=0.45cm},
+        arrow/.style={->, >=stealth}
+    ]
+        \node[participant] (client) at (0,0) {Client};
+        \node[participant] (mq) at (1.75,0) {RabbitMQ};
+        \node[participant] (sensor) at (3.5,0) {Sensor Data};
+        \node[participant] (db) at (5.25,0) {PostgreSQL};
+
+        \draw[dashed] (0.875, -0.22) -- (0.875, -3.2);
+        \draw[dashed] (2.625, -0.22) -- (2.625, -3.2);
+        \draw[dashed] (4.375, -0.22) -- (4.375, -3.2);
+        \draw[dashed] (6.125, -0.22) -- (6.125, -3.2);
+
+        \draw[arrow] (0.875, -0.55) -- (2.625, -0.55) node[midway, above, font=\scriptsize] {publish(payload)};
+        \draw[arrow] (2.625, -0.95) -- (4.375, -0.95) node[midway, above, font=\scriptsize] {deliver};
+        \draw[arrow] (4.375, -1.35) -- (6.125, -1.35) node[midway, above, font=\scriptsize] {save(points)};
+        \draw[arrow] (6.125, -1.75) -- (4.375, -1.75) node[midway, above, font=\scriptsize] {OK};
+        \draw[arrow] (4.375, -2.15) -- (2.625, -2.15) node[midway, above, font=\scriptsize] {ACK};
+
+        \draw[fill=black!10] (0.725, -0.45) rectangle (1.025, -2.6);
+        \draw[fill=black!10] (2.475, -0.45) rectangle (2.775, -2.2);
+        \draw[fill=black!10] (4.225, -0.85) rectangle (4.525, -2.2);
+        \draw[fill=black!10] (5.975, -1.25) rectangle (6.275, -1.85);
+
+        \node[font=\scriptsize] at (3.5, -3.0) {Message Queue (sensor data consume $\to$ DB write)};
+    \end{tikzpicture}
+    \caption{Message Queue integration sequence: Client publishes sensor payload to RabbitMQ; Sensor Data Processing Service consumes the message, persists processed data to PostgreSQL, and sends ACK to the queue.}
+    \label{fig:sequence_message_queue}
+\end{figure}
 
 \subsection{External Service Integration Sequences}
 \label{subsec:external_service_sequences}%
 
-Sequence diagrams for external service integration will be included here.
+External service integration covers REST calls from the backend to third-party providers: Weather API, Map Service API, and Email Service (SMTP or provider API). Integration tests must verify connection, authentication, request/response format, and error/fallback behaviour. \cref{fig:sequence_external_service} shows a generic external API call. A high-resolution export can be placed in \path{Images/Diagrams/Seq_Agent2_ExternalService.png}.
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}[
+        every node/.style={font=\small},
+        participant/.style={rectangle, draw, minimum width=1.1cm, minimum height=0.45cm},
+        arrow/.style={->, >=stealth}
+    ]
+        \node[participant] (svc) at (0,0) {Backend Svc};
+        \node[participant] (ext) at (1.8,0) {External API};
+        \node[participant] (cache) at (3.6,0) {Cache};
+
+        \draw[dashed] (0.9, -0.22) -- (0.9, -2.8);
+        \draw[dashed] (2.7, -0.22) -- (2.7, -2.8);
+        \draw[dashed] (4.5, -0.22) -- (4.5, -2.8);
+
+        \draw[arrow] (0.9, -0.55) -- (2.7, -0.55) node[midway, above, font=\scriptsize] {GET /weather?coords};
+        \draw[arrow] (2.7, -0.95) -- (0.9, -0.95) node[midway, above, font=\scriptsize] {200 + data};
+        \draw[arrow] (0.9, -1.35) -- (4.5, -1.35) node[midway, above, font=\scriptsize] {store};
+        \draw[arrow] (4.5, -1.75) -- (0.9, -1.75) node[midway, above, font=\scriptsize] {OK};
+        \draw[arrow] (0.9, -2.15) -- (2.7, -2.15) node[midway, above, font=\scriptsize] {(timeout: get from cache)};
+        \draw[arrow] (4.5, -2.55) -- (0.9, -2.55) node[midway, above, font=\scriptsize] {cached};
+
+        \draw[fill=black!10] (0.7, -0.45) rectangle (1.1, -2.7);
+        \draw[fill=black!10] (2.5, -0.45) rectangle (2.9, -1.0);
+        \draw[fill=black!10] (4.3, -1.25) rectangle (4.7, -1.85);
+
+        \node[font=\scriptsize] at (2.7, -2.75) {External API (e.g. Weather/Map) + cache fallback};
+    \end{tikzpicture}
+    \caption{External Service integration sequence: Backend service calls external API (e.g. Weather or Map); on success, response is parsed and optionally cached; on timeout or error, cache can be used as fallback.}
+    \label{fig:sequence_external_service}
+\end{figure}
 
 \section{Client Integration Sequences}
 \label{sec:client_integration_sequences}%
@@ -39,32 +186,252 @@ This section presents sequence diagrams illustrating integration flows for clien
 \subsection{Mobile Application Integration Sequences}
 \label{subsec:mobile_application_sequences}%
 
-Sequence diagrams for mobile application component integration will be included here.
+The Mobile Application Core integrates the UI, the Client API layer, and local storage. Typical flows include: (a) login---user enters credentials, UI calls Client API, API returns token, token is stored and attached to subsequent requests; (b) path search---user triggers search, UI calls Client API (e.g.\ \texttt{GET /paths}), API Gateway and backend return results, UI renders the list; (c) navigation---after login, the app navigates to home and route parameters (e.g.\ path ID) are passed to detail screens. Integration tests and sequence diagrams must cover these flows and the interaction between UI, Client API, and local storage.
+
+\textbf{Login and token persistence flow.} The user enters email and password; the UI invokes the Client API \texttt{login} method. The Client API sends \texttt{POST /auth/login} (or equivalent) to the API Gateway; the backend validates credentials and returns a token. The Client API parses the response and returns success to the UI; the UI (or a dedicated auth module) stores the token and user ID in local storage. On subsequent requests, the Client API reads the token from storage and attaches it to the \texttt{Authorization} header. \cref{fig:sequence_mobile_app} shows the login and token persistence flow. A standalone version of this diagram is available in \path{Images/Diagrams/Seq_Agent3_MobileApp.tex}.
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}[
+        every node/.style={font=\small},
+        participant/.style={rectangle, draw, minimum width=1.1cm, minimum height=0.45cm},
+        arrow/.style={->, >=stealth}
+    ]
+        \node[participant] (ui) at (0,0) {UI};
+        \node[participant] (api) at (1.6,0) {Client API};
+        \node[participant] (storage) at (3.2,0) {Local Storage};
+        \node[participant] (gw) at (4.8,0) {API GW};
+
+        \draw[dashed] (0.8, -0.22) -- (0.8, -4.2);
+        \draw[dashed] (2.4, -0.22) -- (2.4, -4.2);
+        \draw[dashed] (4.0, -0.22) -- (4.0, -4.2);
+        \draw[dashed] (5.6, -0.22) -- (5.6, -4.2);
+
+        \draw[arrow] (0.8, -0.55) -- (2.4, -0.55) node[midway, above, font=\scriptsize] {login(cred)};
+        \draw[arrow] (2.4, -0.95) -- (5.6, -0.95) node[midway, above, font=\scriptsize] {POST /auth/login};
+        \draw[arrow] (5.6, -1.35) -- (2.4, -1.35) node[midway, above, font=\scriptsize] {200 + token};
+        \draw[arrow] (2.4, -1.75) -- (0.8, -1.75) node[midway, above, font=\scriptsize] {success};
+        \draw[arrow] (0.8, -2.15) -- (4.0, -2.15) node[midway, above, font=\scriptsize] {setItem(token)};
+        \draw[arrow] (4.0, -2.55) -- (0.8, -2.55) node[midway, above, font=\scriptsize] {OK};
+        \draw[arrow] (0.8, -2.95) -- (2.4, -2.95) node[midway, above, font=\scriptsize] {getPaths()};
+        \draw[arrow] (2.4, -3.35) -- (4.0, -3.35) node[midway, above, font=\scriptsize] {getItem(token)};
+        \draw[arrow] (4.0, -3.75) -- (2.4, -3.75) node[midway, above, font=\scriptsize] {token};
+        \draw[arrow] (2.4, -4.15) -- (5.6, -4.15) node[midway, above, font=\scriptsize] {GET /paths (Auth)};
+
+        \draw[fill=black!10] (0.65, -0.45) rectangle (0.95, -4.0);
+        \draw[fill=black!10] (2.25, -0.45) rectangle (2.55, -4.0);
+        \draw[fill=black!10] (3.85, -2.05) rectangle (4.15, -3.85);
+        \draw[fill=black!10] (5.45, -0.85) rectangle (5.75, -1.45);
+
+        \node[font=\scriptsize] at (2.8, -4.5) {Mobile App: login $\to$ token storage $\to$ authenticated request};
+    \end{tikzpicture}
+    \caption{Mobile Application integration sequence: login, token persistence in local storage, and subsequent authenticated request (e.g.\ get paths).}
+    \label{fig:sequence_mobile_app}
+\end{figure}
 
 \subsection{Sensor Integration Sequences}
 \label{subsec:sensor_integration_sequences}%
 
-Sequence diagrams for sensor data collection and processing will be included here.
+The Sensor Manager is the single point of access for device sensors (GPS, accelerometer, gyroscope). The Trip Detection Engine and the Obstacle Detection Module subscribe to the Sensor Manager to receive location and motion data. Typical flows include: (a) start sensors---caller (e.g.\ Trip Detection) requests the Sensor Manager to start GPS and motion sensors; the manager checks permissions, starts platform-specific subscriptions, and delivers updates to registered listeners; (b) deliver updates---the Sensor Manager receives raw data from the platform and forwards it (with consistent format) to the Trip Detection Engine and Obstacle Detection Module; (c) stop and cleanup---when the caller stops, the manager unsubscribes and releases resources. Integration tests and sequence diagrams must cover these flows.
+
+\textbf{Sensor subscription and data flow.} The Trip Detection Engine (or Obstacle Detection Module) calls the Sensor Manager to start GPS and accelerometer/gyroscope. The Sensor Manager checks runtime permissions; if granted, it starts the platform location and motion APIs and registers listeners. When the platform delivers location or motion events, the Sensor Manager normalises the data (e.g.\ coordinate system, units) and forwards it to all registered callbacks (Trip Detection, Obstacle Detection). When the engine or module stops, it calls the Sensor Manager to stop; the manager unsubscribes from the platform APIs and clears callbacks. \cref{fig:sequence_sensor_integration} shows the sensor subscription and data flow. A standalone version is available in \path{Images/Diagrams/Seq_Agent3_Sensor.tex}.
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}[
+        every node/.style={font=\small},
+        participant/.style={rectangle, draw, minimum width=1.0cm, minimum height=0.45cm},
+        arrow/.style={->, >=stealth}
+    ]
+        \node[participant] (trip) at (0,0) {Trip Detect};
+        \node[participant] (obst) at (1.4,0) {Obstacle};
+        \node[participant] (mgr) at (2.8,0) {Sensor Mgr};
+        \node[participant] (gps) at (4.2,0) {GPS};
+        \node[participant] (acc) at (5.6,0) {Acc/Gyro};
+
+        \draw[dashed] (0.7, -0.22) -- (0.7, -4.0);
+        \draw[dashed] (2.1, -0.22) -- (2.1, -4.0);
+        \draw[dashed] (3.5, -0.22) -- (3.5, -4.0);
+        \draw[dashed] (4.9, -0.22) -- (4.9, -4.0);
+        \draw[dashed] (6.3, -0.22) -- (6.3, -4.0);
+
+        \draw[arrow] (0.7, -0.55) -- (3.5, -0.55) node[midway, above, font=\scriptsize] {startGPS()};
+        \draw[arrow] (2.1, -0.9) -- (3.5, -0.9) node[midway, above, font=\scriptsize] {startMotion()};
+        \draw[arrow] (3.5, -1.25) -- (4.9, -1.25) node[midway, above, font=\scriptsize] {subscribe};
+        \draw[arrow] (3.5, -1.6) -- (6.3, -1.6) node[midway, above, font=\scriptsize] {subscribe};
+        \draw[arrow] (4.9, -1.95) -- (3.5, -1.95) node[midway, above, font=\scriptsize] {location};
+        \draw[arrow] (6.3, -2.3) -- (3.5, -2.3) node[midway, above, font=\scriptsize] {acc/gyro};
+        \draw[arrow] (3.5, -2.65) -- (0.7, -2.65) node[midway, above, font=\scriptsize] {onLocation};
+        \draw[arrow] (3.5, -3.0) -- (2.1, -3.0) node[midway, above, font=\scriptsize] {onMotion};
+        \draw[arrow] (0.7, -3.35) -- (3.5, -3.35) node[midway, above, font=\scriptsize] {stop()};
+        \draw[arrow] (3.5, -3.7) -- (4.9, -3.7) node[midway, above, font=\scriptsize] {unsubscribe};
+
+        \draw[fill=black!10] (0.55, -0.45) rectangle (0.85, -3.5);
+        \draw[fill=black!10] (1.95, -0.45) rectangle (2.25, -3.2);
+        \draw[fill=black!10] (3.35, -0.45) rectangle (3.65, -3.85);
+        \draw[fill=black!10] (4.75, -1.15) rectangle (5.05, -2.05);
+        \draw[fill=black!10] (6.15, -1.45) rectangle (6.45, -2.4);
+
+        \node[font=\scriptsize] at (3.5, -4.3) {Sensor Manager: subscription $\to$ platform events $\to$ callbacks $\to$ stop};
+    \end{tikzpicture}
+    \caption{Sensor integration sequence: Trip Detection and Obstacle Detection subscribe to Sensor Manager; manager forwards GPS and motion data; stop triggers unsubscribe.}
+    \label{fig:sequence_sensor_integration}
+\end{figure}
 
 \subsection{Client-Server Communication Sequences}
 \label{subsec:client_server_sequences}%
 
-Sequence diagrams for client-server communication flows will be included here.
+Client-server communication flows cover the full path from the mobile client to the API Gateway and backend services. All traffic uses HTTPS; request and response bodies are JSON. The client attaches an authentication token (e.g., JWT) to protected requests after login (\Cref{subsec:mobile_application_sequences}).
+
+\textbf{Authenticated API request flow.} The user triggers an action (e.g., search paths, create path). The mobile client builds the request (method, path, optional JSON body), reads the stored token from local storage, and sends an HTTPS request to the API Gateway with the \texttt{Authorization} header. The gateway validates the token, resolves the target service (e.g., Path Search, Path Management), and forwards the request. The backend service processes the request (e.g., queries the database), returns a response to the gateway, and the gateway returns the response to the client. The client parses the JSON response and updates the UI or local state. \Cref{fig:sequence_client_server} illustrates this flow. A standalone version can be placed in \path{Images/Diagrams/Seq_Agent4_ClientServer.tex}.
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}[
+        every node/.style={font=\small},
+        participant/.style={rectangle, draw, minimum width=1.1cm, minimum height=0.45cm},
+        arrow/.style={->, >=stealth}
+    ]
+        \node[participant] (client) at (0,0) {Mobile Client};
+        \node[participant] (gw) at (1.8,0) {API Gateway};
+        \node[participant] (svc) at (3.6,0) {Backend Svc};
+        \node[participant] (db) at (5.4,0) {DB};
+
+        \draw[dashed] (0.9, -0.22) -- (0.9, -4.2);
+        \draw[dashed] (2.7, -0.22) -- (2.7, -4.2);
+        \draw[dashed] (4.5, -0.22) -- (4.5, -4.2);
+        \draw[dashed] (6.3, -0.22) -- (6.3, -4.2);
+
+        \draw[arrow] (0.9, -0.55) -- (2.7, -0.55) node[midway, above, font=\scriptsize] {HTTPS + Auth};
+        \draw[arrow] (2.7, -0.95) -- (4.5, -0.95) node[midway, above, font=\scriptsize] {forward};
+        \draw[arrow] (4.5, -1.35) -- (6.3, -1.35) node[midway, above, font=\scriptsize] {query};
+        \draw[arrow] (6.3, -1.75) -- (4.5, -1.75) node[midway, above, font=\scriptsize] {rows};
+        \draw[arrow] (4.5, -2.15) -- (2.7, -2.15) node[midway, above, font=\scriptsize] {200 + JSON};
+        \draw[arrow] (2.7, -2.55) -- (0.9, -2.55) node[midway, above, font=\scriptsize] {response};
+        \draw[arrow] (0.9, -2.95) -- (0.9, -3.35) node[right, font=\scriptsize] {parse; update UI};
+
+        \draw[fill=black!10] (0.7, -0.45) rectangle (1.1, -3.9);
+        \draw[fill=black!10] (2.5, -0.45) rectangle (2.9, -2.65);
+        \draw[fill=black!10] (4.3, -0.85) rectangle (4.7, -2.25);
+        \draw[fill=black!10] (6.1, -1.25) rectangle (6.5, -1.85);
+
+        \node[font=\scriptsize] at (3.6, -4.0) {Client-Server: authenticated request $\to$ Gateway $\to$ Service $\to$ DB $\to$ response};
+    \end{tikzpicture}
+    \caption{Client-Server communication sequence: Mobile client sends authenticated HTTPS request to API Gateway; gateway forwards to backend service; service queries DB and returns response; client parses JSON and updates UI.}
+    \label{fig:sequence_client_server}
+\end{figure}
+
+\textbf{Error and retry behaviour.} When the gateway or backend returns 4xx/5xx or a timeout occurs, the client should handle the error (e.g., show message, retry with backoff for 5xx). Sequence diagrams for error handling are covered in \Cref{sec:error_handling_sequences}.
 
 \section{End-to-End Integration Sequences}
 \label{sec:end_to_end_integration_sequences}%
 
-This section presents sequence diagrams illustrating complete end-to-end integration flows.
+This section presents sequence diagrams illustrating complete end-to-end integration flows from the mobile client through the API Gateway and backend services to the database, as described in \Cref{sec:end_to_end_integration}. Each diagram shows the full chain of interactions for a given use case.
 
 \subsection{Critical Use Case Sequences}
 \label{subsec:critical_use_case_sequences}%
 
-Sequence diagrams for critical use cases (UC1-UC3, UC6) will be included here.
+\textbf{UC1: User Registration.} The client sends \texttt{POST /users/register} with email, password, and profile data. The API Gateway routes to the User Management Service, which validates input, hashes the password, and calls the User repository to persist the user in PostgreSQL. Optionally, the service invokes the Email Service for verification. The response (201 + user or token) is returned along the chain. \Cref{fig:sequence_e2e_uc1} shows this flow.
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}[
+        every node/.style={font=\small},
+        participant/.style={rectangle, draw, minimum width=1cm, minimum height=0.45cm},
+        arrow/.style={->, >=stealth}
+    ]
+        \node[participant] (client) at (0,0) {Client};
+        \node[participant] (gw) at (1.6,0) {API GW};
+        \node[participant] (user) at (3.2,0) {User Mgmt};
+        \node[participant] (db) at (4.8,0) {DB};
+
+        \draw[dashed] (0.8, -0.22) -- (0.8, -3.6);
+        \draw[dashed] (2.4, -0.22) -- (2.4, -3.6);
+        \draw[dashed] (4.0, -0.22) -- (4.0, -3.6);
+        \draw[dashed] (5.6, -0.22) -- (5.6, -3.6);
+
+        \draw[arrow] (0.8, -0.55) -- (2.4, -0.55) node[midway, above, font=\scriptsize] {POST /register};
+        \draw[arrow] (2.4, -0.95) -- (4.0, -0.95) node[midway, above, font=\scriptsize] {register(payload)};
+        \draw[arrow] (4.0, -1.35) -- (5.6, -1.35) node[midway, above, font=\scriptsize] {save(user)};
+        \draw[arrow] (5.6, -1.75) -- (4.0, -1.75) node[midway, above, font=\scriptsize] {OK};
+        \draw[arrow] (4.0, -2.15) -- (2.4, -2.15) node[midway, above, font=\scriptsize] {201};
+        \draw[arrow] (2.4, -2.55) -- (0.8, -2.55) node[midway, above, font=\scriptsize] {201 + body};
+
+        \draw[fill=black!10] (0.65, -0.45) rectangle (0.95, -2.9);
+        \draw[fill=black!10] (2.25, -0.45) rectangle (2.55, -2.65);
+        \draw[fill=black!10] (3.85, -0.85) rectangle (4.15, -2.25);
+        \draw[fill=black!10] (5.45, -1.25) rectangle (5.75, -1.85);
+
+        \node[font=\scriptsize] at (2.8, -3.4) {UC1: User Registration (E2E)};
+    \end{tikzpicture}
+    \caption{End-to-End sequence for UC1 (User Registration): Client $\to$ API Gateway $\to$ User Management $\to$ DB; response returned along the chain.}
+    \label{fig:sequence_e2e_uc1}
+\end{figure}
+
+\textbf{UC2: Login.} The client sends \texttt{POST /auth/login} with email and password. The gateway forwards to the User Management Service, which looks up the user in the DB and validates the password; on success it issues a token (e.g., JWT). The client stores the token and attaches it to subsequent requests. The sequence is similar to \Cref{fig:sequence_e2e_uc1} with login payload and token in the response.
+
+\textbf{UC3: Insert Path Information (Manual).} The client sends path data (segments, metadata) with a valid token to the API Gateway; the gateway forwards to the Path Management Service, which validates and persists the path (draft) in the DB. The flow is Client $\to$ API Gateway $\to$ Path Management $\to$ DB; response 201 with path ID.
+
+\textbf{UC6: Search and Visualize Paths.} The client sends \texttt{GET /paths} with query parameters (e.g., bbox, filters) and optional token. The gateway routes to the Path Search Service, which may call the Path Management Service (or DB) to resolve path entities and returns a list. \Cref{fig:sequence_e2e_uc6} shows this flow.
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}[
+        every node/.style={font=\small},
+        participant/.style={rectangle, draw, minimum width=1cm, minimum height=0.45cm},
+        arrow/.style={->, >=stealth}
+    ]
+        \node[participant] (client) at (0,0) {Client};
+        \node[participant] (gw) at (1.5,0) {API GW};
+        \node[participant] (search) at (3.0,0) {Path Search};
+        \node[participant] (pm) at (4.5,0) {Path Mgmt};
+        \node[participant] (db) at (6.0,0) {DB};
+
+        \draw[dashed] (0.75, -0.22) -- (0.75, -4.0);
+        \draw[dashed] (2.25, -0.22) -- (2.25, -4.0);
+        \draw[dashed] (3.75, -0.22) -- (3.75, -4.0);
+        \draw[dashed] (5.25, -0.22) -- (5.25, -4.0);
+        \draw[dashed] (6.75, -0.22) -- (6.75, -4.0);
+
+        \draw[arrow] (0.75, -0.55) -- (2.25, -0.55) node[midway, above, font=\scriptsize] {GET /paths};
+        \draw[arrow] (2.25, -0.95) -- (3.75, -0.95) node[midway, above, font=\scriptsize] {search(q)};
+        \draw[arrow] (3.75, -1.35) -- (5.25, -1.35) node[midway, above, font=\scriptsize] {getPaths};
+        \draw[arrow] (5.25, -1.75) -- (6.75, -1.75) node[midway, above, font=\scriptsize] {query};
+        \draw[arrow] (6.75, -2.15) -- (5.25, -2.15) node[midway, above, font=\scriptsize] {rows};
+        \draw[arrow] (5.25, -2.55) -- (3.75, -2.55) node[midway, above, font=\scriptsize] {paths};
+        \draw[arrow] (3.75, -2.95) -- (2.25, -2.95) node[midway, above, font=\scriptsize] {results};
+        \draw[arrow] (2.25, -3.35) -- (0.75, -3.35) node[midway, above, font=\scriptsize] {200 + list};
+
+        \draw[fill=black!10] (0.6, -0.45) rectangle (0.9, -3.7);
+        \draw[fill=black!10] (2.1, -0.45) rectangle (2.4, -3.45);
+        \draw[fill=black!10] (3.6, -0.85) rectangle (3.9, -3.05);
+        \draw[fill=black!10] (5.1, -1.25) rectangle (5.4, -2.65);
+        \draw[fill=black!10] (6.6, -1.65) rectangle (6.9, -2.25);
+
+        \node[font=\scriptsize] at (3.75, -3.85) {UC6: Search and Visualize Paths (E2E)};
+    \end{tikzpicture}
+    \caption{End-to-End sequence for UC6 (Search and Visualize Paths): Client $\to$ API Gateway $\to$ Path Search $\to$ Path Management $\to$ DB; results returned along the chain.}
+    \label{fig:sequence_e2e_uc6}
+\end{figure}
 
 \subsection{Advanced Use Case Sequences}
 \label{subsec:advanced_use_case_sequences}%
 
-Sequence diagrams for advanced use cases (UC4-UC5, UC7-UC12) will be included here.
+\textbf{UC4: Insert Path Information (Automated).} The client (or Trip Detection Engine) publishes sensor payloads to RabbitMQ; the Sensor Data Processing Service consumes messages, processes them, and persists path/trip data via Path Management or Trip Management. The E2E sequence is Client $\to$ RabbitMQ $\to$ Sensor Data Service $\to$ Path/Trip Management $\to$ DB (\Cref{subsec:message_queue_sequences}).
+
+\textbf{UC5: Publish Path Information.} The client sends a publish request with valid token; the API Gateway forwards to the Path Management Service, which updates the path status to published. Flow: Client $\to$ API Gateway $\to$ Path Management $\to$ DB.
+
+\textbf{UC7: Post Review.} The client sends \texttt{POST} to the ratings endpoint with path ID, score, and comment. The gateway forwards to the Rating Service, which validates the path (e.g., via Path Management) and persists the rating in the DB. Flow: Client $\to$ API Gateway $\to$ Rating Service $\to$ Path Management (resolve path) $\to$ DB (store rating).
+
+\textbf{UC8: Record Personal Trip.} Trip data is sent via API or message queue; the Trip Management Service (and optionally Sensor Data Processing) persists the trip and segments. Flow: Client $\to$ API Gateway or RabbitMQ $\to$ Trip Management / Sensor Data $\to$ DB.
+
+\textbf{UC9: See Path Data.} The client requests \texttt{GET /paths/\{id\}}; the gateway routes to Path Management, which returns the path from the DB. Flow: Client $\to$ API Gateway $\to$ Path Management $\to$ DB.
+
+\textbf{UC10: View Trip Statistics.} The client requests \texttt{GET /trips}; the Trip Management Service returns trip data from the DB. Flow: Client $\to$ API Gateway $\to$ Trip Management $\to$ DB.
+
+\textbf{UC11: Check Review.} The client requests reviews for a path; the Rating Service (or Path Management) returns ratings and comments. Flow: Client $\to$ API Gateway $\to$ Rating Service $\to$ DB.
+
+\textbf{UC12: Merge Information from Multiple Users.} The Information Merging Service obtains path/segment data from Path Management, applies merge logic, and writes the merged result back; the client may trigger or display the merged path. Flow: Client or trigger $\to$ Information Merging $\to$ Path Management (read/write) $\to$ DB.
 
 \section{Error Handling Sequences}
 \label{sec:error_handling_sequences}%

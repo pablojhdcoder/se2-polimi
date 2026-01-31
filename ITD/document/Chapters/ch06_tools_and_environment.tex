@@ -1,27 +1,27 @@
 \section{Testing Tools}
 \label{sec:testing_tools}%
 
-This section describes the testing tools and frameworks used for integration testing.
+This section describes the testing tools and frameworks used for integration testing in the Best Bike Paths project. The stack is Node.js for the backend and React Native (Expo) for the mobile client.
 
 \subsection{Backend Testing Tools}
 \label{subsec:backend_testing_tools}%
 
-Tools for backend integration testing:
+The backend (Express.js, Node.js) uses the following tools for integration testing:
 \begin{itemize}
-    \item \textbf{Testing Framework:} [To be specified based on technology stack]
-    \item \textbf{Mocking Framework:} [To be specified]
-    \item \textbf{API Testing:} [To be specified]
-    \item \textbf{Database Testing:} [To be specified]
+    \item \textbf{Testing Framework:} Jest (v29.x), configured in \texttt{backend/package.json} with scripts \texttt{test}, \texttt{test:watch}, and \texttt{test:coverage}. Jest provides test runners, assertions, and coverage reporting for Node.js.
+    \item \textbf{Mocking Framework:} Jest's built-in mocking (\texttt{jest.mock}, \texttt{jest.spyOn}) for stubbing repositories, Redis, RabbitMQ, and external APIs (Weather, Map, Email) during integration tests.
+    \item \textbf{API Testing:} Supertest (v7.x) for HTTP integration tests against the Express application. Supertest allows sending requests to the app without binding to a port and supports assertions on status codes, headers, and response bodies.
+    \item \textbf{Database Testing:} PostgreSQL (pg driver) with test database instances provisioned via Docker. Integration tests run against a dedicated test DB (same schema as production) or use transactions with rollback for isolation.
 \end{itemize}
 
 \subsection{Frontend Testing Tools}
 \label{subsec:frontend_testing_tools}%
 
-Tools for frontend/mobile integration testing:
+The mobile application (React Native with Expo) uses:
 \begin{itemize}
-    \item \textbf{Testing Framework:} [To be specified based on technology stack]
-    \item \textbf{UI Testing:} [To be specified]
-    \item \textbf{Device Emulation:} [To be specified]
+    \item \textbf{Testing Framework:} Jest (v29.x) with the \texttt{react-native} preset, configured in \texttt{frontend/package.json}. Scripts \texttt{test}, \texttt{test:watch}, and \texttt{test:coverage} are available for unit and integration tests.
+    \item \textbf{UI and Component Testing:} React Native Testing Library (\texttt{@testing-library/react-native}, v12.x) for rendering components, querying by role/label, and simulating user interactions. This supports integration testing of screens that consume API services and local storage.
+    \item \textbf{Device Emulation:} Expo Go for physical devices and Android/iOS emulators. For automated E2E, Detox or Appium can be added; the current setup focuses on Jest + Testing Library for integration-level tests of modules (Sensor Manager, Trip Detection, API client).
 \end{itemize}
 
 \subsection{End-to-End Testing Tools}
@@ -29,64 +29,64 @@ Tools for frontend/mobile integration testing:
 
 Tools for end-to-end integration testing:
 \begin{itemize}
-    \item \textbf{E2E Testing Framework:} [To be specified]
-    \item \textbf{Test Automation:} [To be specified]
+    \item \textbf{E2E Testing Framework:} The project can use Detox (React Native E2E) or Appium for full UI flows on emulators/simulators. For API-level E2E, Supertest against a running backend (or a test container) exercises full request--response paths including API Gateway, services, and database.
+    \item \textbf{Test Automation:} Scripts (\texttt{npm run test} in backend and frontend) execute the test suites. CI (Section~\ref{sec:continuous_integration}) runs these in a pipeline with Docker-based environments for reproducible E2E runs.
 \end{itemize}
 
 \section{Environment Setup}
 \label{sec:environment_setup}%
 
-This section describes the test environment configuration.
+This section describes the test environment configuration used for integration testing. The project uses Docker Compose for infrastructure and supports dedicated test databases and mocks for external services.
 
 \subsection{Docker Configuration}
 \label{subsec:docker_configuration}%
 
-Docker and Docker Compose configuration for test environments:
+Docker and Docker Compose configuration for test environments are defined in \texttt{code/docker-compose.yml} (infrastructure only) and \texttt{code/docker-compose.dev.yml} (development stack including backend):
 \begin{itemize}
-    \item Container definitions for all services
-    \item Database containers (PostgreSQL, Redis)
-    \item Message queue container (RabbitMQ)
-    \item Service containers
-    \item Network configuration
+    \item \textbf{Container definitions:} All services run in a shared bridge network \texttt{bbp-network}. Production-like runs use \texttt{docker-compose.yml}; development and integration tests use \texttt{docker-compose.dev.yml} which adds the backend service with hot-reload.
+    \item \textbf{Database containers:} PostgreSQL~14 (\texttt{postgres:14}) with health checks (\texttt{pg\_isready}). Database name, user, and password are configurable via environment variables (\texttt{DB\_NAME}, \texttt{DB\_USER}, \texttt{DB\_PASSWORD}); defaults are \texttt{bbp\_db} and \texttt{postgres}. Redis~7 (\texttt{redis:7-alpine}) with \texttt{redis-server --appendonly yes} and \texttt{redis-cli ping} health check.
+    \item \textbf{Message queue:} RabbitMQ~3.12 with management plugin (\texttt{rabbitmq:3.12-management-alpine}). Ports 5672 (AMQP) and 15672 (management UI) are exposed. Credentials are set via \texttt{RABBITMQ\_DEFAULT\_USER} and \texttt{RABBITMQ\_DEFAULT\_PASS}.
+    \item \textbf{Service containers:} In \texttt{docker-compose.dev.yml}, the backend is built from \texttt{backend/docker/Dockerfile.dev}, receives \texttt{DB\_HOST=postgres}, \texttt{REDIS\_URL}, \texttt{RABBITMQ\_URL}, and \texttt{depends\_on} with \texttt{condition: service\_healthy} for Postgres, Redis, and RabbitMQ.
+    \item \textbf{Volumes:} Named volumes \texttt{postgres\_data}, \texttt{redis\_data}, and \texttt{rabbitmq\_data} persist data across restarts for reproducible test data when needed.
 \end{itemize}
 
 \subsection{Database Configuration}
 \label{subsec:database_configuration}%
 
-Test database setup:
+Test database setup for integration tests:
 \begin{itemize}
-    \item Test database schema
-    \item Migration scripts
-    \item Seed data for testing
-    \item Database cleanup procedures
+    \item \textbf{Test database schema:} The same PostgreSQL schema as production is used. Migrations are under \texttt{backend/migrations/} and executed via \texttt{npm run migrate} (script \texttt{node migrations/run.js}). For tests, a separate database (e.g.\ \texttt{bbp\_db\_test}) can be created and migrations applied before running the test suite.
+    \item \textbf{Migration scripts:} Migration runner is referenced in \texttt{backend/package.json}. Test runs can start from an empty DB, run migrations, then execute tests; or use transaction rollback per test to keep the DB clean.
+    \item \textbf{Seed data for testing:} Seed data can be loaded via custom scripts or fixtures (see Section~\ref{sec:test_data_management}) after migrations. Environment variables (\texttt{.env} or \texttt{.env.test}) point the backend to the test DB host and name.
+    \item \textbf{Database cleanup procedures:} Between test runs, the test database can be reset by re-running migrations (drop/recreate if supported) or by truncating tables in a \texttt{beforeAll}/\texttt{afterAll} hook. Isolated tests use transactions with rollback to avoid side effects.
 \end{itemize}
 
 \subsection{External Service Mocks}
 \label{subsec:external_service_mocks}%
 
-Mock configurations for external services:
+Mock configurations for external services used in integration tests:
 \begin{itemize}
-    \item Weather API mock
-    \item Map Service API mock
-    \item Email Service mock
-    \item Mock server configuration
+    \item \textbf{Weather API mock:} The backend integrates with an external Weather API (e.g.\ OpenWeatherMap or similar). In tests, the HTTP client (Axios) or the service layer can be mocked with \texttt{jest.mock} or a local mock server (e.g.\ \texttt{nock} or a small Express server) that returns fixed JSON responses for predefined requests.
+    \item \textbf{Map Service API mock:} Similarly, the Map Service (e.g.\ for geocoding or routing) is mocked in integration tests to avoid network calls and to control responses (success, failure, timeouts). The same approaches as for Weather apply: Jest mocks or a mock server.
+    \item \textbf{Email Service mock:} The Email/SMTP integration is mocked so that no real emails are sent. Options include in-memory mock (capturing “sent” messages for assertions), a fake SMTP server (e.g.\ Ethereal, MailHog), or \texttt{jest.mock} on the email client module.
+    \item \textbf{Mock server configuration:} A single mock server (e.g.\ WireMock, json-server, or a small Node script) can expose endpoints for Weather, Map, and Email with configurable responses. The backend is configured via environment variables to point to \texttt{http://localhost:<port>} during tests instead of production URLs.
 \end{itemize}
 
 \section{Test Data Management}
 \label{sec:test_data_management}%
 
-This section describes test data preparation and management strategies.
+This section describes test data preparation and management strategies for integration tests. Test data is organized by domain (users, trips, paths, ratings, sensors) and managed via fixtures, seed scripts, and cleanup procedures.
 
 \subsection{Test Datasets}
 \label{subsec:test_datasets}%
 
-Test data requirements:
+Test data requirements aligned with the integration test cases (Chapter~\ref{ch:integration_test_cases}):
 \begin{itemize}
-    \item User test data
-    \item Trip test data
-    \item Path test data
-    \item Rating test data
-    \item Sensor data samples
+    \item \textbf{User test data:} Users with valid credentials (email, hashed password), roles if applicable, and edge cases (invalid email, duplicate registration). Used for User Management Service and API Gateway auth tests.
+    \item \textbf{Trip test data:} Trips linked to users and paths: start/end timestamps, distance, duration, and optional sensor-derived fields. Covers Trip Management Service and Trip Detection integration.
+    \item \textbf{Path test data:} Paths with coordinates (e.g.\ GeoJSON or lat/lng arrays), names, visibility (draft/published), and owner. Supports Path Management, Path Search, and Information Merging tests.
+    \item \textbf{Rating test data:} Ratings associated to paths and users (scores, optional comments). Used for Rating Service and Post Review (UC7) integration tests.
+    \item \textbf{Sensor data samples:} Time-series or single samples for accelerometer, gyroscope, GPS, etc., in the format expected by the Sensor Data Processing Service and Trip Detection Engine. Enables tests for automated path insertion and obstacle detection.
 \end{itemize}
 
 \subsection{Fixtures and Seed Data}
@@ -94,35 +94,35 @@ Test data requirements:
 
 Fixtures and seed data management:
 \begin{itemize}
-    \item Fixture definitions
-    \item Seed data scripts
-    \item Data generation tools
+    \item \textbf{Fixture definitions:} Fixtures can be stored as JSON or JavaScript/Node modules under \texttt{backend/tests/fixtures/} or \texttt{code/test\_cases/} (e.g.\ \texttt{users.json}, \texttt{paths.json}, \texttt{trips.json}). Each fixture file exports or defines arrays of entities that can be inserted into the test database before tests run.
+    \item \textbf{Seed data scripts:} A seed script (e.g.\ \texttt{backend/scripts/seed-test.js} or \texttt{migrations/seed-test.js}) reads fixtures, connects to the test DB, and inserts data in dependency order (users first, then paths, trips, ratings). It can be run once before the test suite (\texttt{npm run test}) or as part of CI.
+    \item \textbf{Data generation tools:} For large or randomized datasets, faker-style libraries (e.g.\ Faker.js) can generate realistic users, coordinates, and timestamps. Optional scripts can produce deterministic data (fixed seeds) for reproducible integration tests.
 \end{itemize}
 
 \subsection{Test Data Cleanup}
 \label{subsec:test_data_cleanup}%
 
-Strategies for test data cleanup:
+Strategies for test data cleanup to keep tests isolated and repeatable:
 \begin{itemize}
-    \item Database reset procedures
-    \item Transaction rollback strategies
-    \item Isolated test environments
+    \item \textbf{Database reset procedures:} Before or after the full test suite, the test database can be reset by re-running migrations (if the migration runner supports “drop and recreate”) or by executing \texttt{TRUNCATE} on all application tables (with \texttt{CASCADE} if needed). This ensures a clean state for the next run.
+    \item \textbf{Transaction rollback strategies:} For each test (or each describe block), wrap execution in a database transaction and call \texttt{ROLLBACK} in \texttt{afterEach} or \texttt{afterAll}. This avoids persisting test data and keeps the DB unchanged for the next test. Requires the test DB connection to support transactions and the app to use the same connection for the test.
+    \item \textbf{Isolated test environments:} Use a dedicated test database (e.g.\ \texttt{bbp\_db\_test}) and separate Docker Compose project or \texttt{COMPOSE\_PROJECT\_NAME=bbp-test} so that test containers do not share data with development. CI runs tests in ephemeral containers and volumes when possible so that each run starts from a clean state.
 \end{itemize}
 
 \section{Continuous Integration}
 \label{sec:continuous_integration}%
 
-This section describes the CI/CD configuration for integration testing.
+This section describes the CI/CD configuration for integration testing. The project can use GitHub Actions (or similar) to run builds and tests on each push or pull request, with Docker-based environments and automated reporting.
 
 \subsection{CI Pipeline}
 \label{subsec:ci_pipeline}%
 
-Continuous integration pipeline configuration:
+Continuous integration pipeline configuration (e.g.\ \texttt{.github/workflows/integration-tests.yml}):
 \begin{itemize}
-    \item Build steps
-    \item Test execution steps
-    \item Environment provisioning
-    \item Test result reporting
+    \item \textbf{Build steps:} Checkout repository; set up Node.js (e.g.\ 18.x); run \texttt{npm ci} in \texttt{code/backend} and \texttt{code/frontend} to install dependencies from lockfile. Optional: build backend Docker image and frontend bundle to verify that the project compiles.
+    \item \textbf{Test execution steps:} Start required services with Docker Compose (PostgreSQL, Redis, RabbitMQ) using \texttt{docker-compose.yml}; optionally run migrations and seed test data; set environment variables to point to test DB and mock URLs; run \texttt{npm run test} (and \texttt{npm run test:coverage} if desired) for backend and frontend. Fail the pipeline if any test suite exits with a non-zero code.
+    \item \textbf{Environment provisioning:} Use Docker Compose to bring up Postgres, Redis, and RabbitMQ with health checks. Backend tests connect to these services; external APIs (Weather, Map, Email) are mocked via environment variables or a mock server started in the pipeline.
+    \item \textbf{Test result reporting:} Publish test results (e.g.\ JUnit XML or similar) if the CI platform supports it. Store or upload coverage reports (e.g.\ \texttt{backend/coverage/}, \texttt{frontend/coverage/}) as artifacts so that coverage can be inspected and, optionally, enforced with a minimum threshold.
 \end{itemize}
 
 \subsection{Automated Test Execution}
@@ -130,9 +130,9 @@ Continuous integration pipeline configuration:
 
 Automated test execution configuration:
 \begin{itemize}
-    \item Test scheduling
-    \item Parallel test execution
-    \item Test result aggregation
+    \item \textbf{Test scheduling:} Tests run on every push to main and on pull requests (or equivalent branches). Optional: nightly or scheduled runs for full E2E suites if they are time-consuming.
+    \item \textbf{Parallel test execution:} Backend and frontend test jobs can run in parallel in the same workflow. Within the backend, Jest runs tests in parallel by default; Supertest tests can share a single app instance or use a test DB per worker if isolation is required.
+    \item \textbf{Test result aggregation:} Jest outputs a summary to stdout; CI captures this and fails the job on test failures. Optionally, use a reporter (e.g.\ jest-junit) to produce XML for the CI platform’s test result UI.
 \end{itemize}
 
 \subsection{Test Coverage Reporting}
@@ -140,7 +140,7 @@ Automated test execution configuration:
 
 Test coverage reporting:
 \begin{itemize}
-    \item Coverage metrics
-    \item Coverage reports
-    \item Coverage thresholds
+    \item \textbf{Coverage metrics:} Jest’s built-in coverage (via \texttt{--coverage}) reports line, branch, function, and statement coverage for backend and frontend. Coverage is written under \texttt{coverage/} (e.g.\ \texttt{backend/coverage/lcov-report/index.html}).
+    \item \textbf{Coverage reports:} The \texttt{npm run test:coverage} script in both backend and frontend generates these reports. CI can archive the \texttt{coverage/} directory as an artifact and, if integrated with a service (e.g.\ Codecov, Coveralls), upload lcov or similar format for trend and diff views.
+    \item \textbf{Coverage thresholds:} In \texttt{package.json} (Jest \texttt{coverageThreshold}) or \texttt{jest.config.js}, optional thresholds (e.g.\ global or per-path minimum line coverage) can be set so that the build fails if coverage drops below the configured values, encouraging maintenance of test quality.
 \end{itemize}

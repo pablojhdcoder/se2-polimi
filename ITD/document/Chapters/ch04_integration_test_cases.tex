@@ -1,22 +1,91 @@
 \section{Data Layer Test Cases}
 \label{sec:data_layer_test_cases}%
 
-This section specifies integration test cases for the data layer components.
+This section specifies integration test cases for the data layer components: DBMS (PostgreSQL), repositories, migrations, and the cache layer (Redis), as described in \Cref{sec:data_layer_integration}.
 
-% Test cases will be added here following the template format
-% Example structure:
-% \begin{table}[ht]
-% \centering
-% \begin{tabular}{|p{3.5cm}|p{4cm}|p{3.5cm}|p{5cm}|}
-% \hline
-% \multicolumn{4}{|c|}{\textbf{Data Layer Integration Tests}} \\ 
-% \hline
-% \textbf{Functionality} & \textbf{Test Description} & \textbf{Input/Conditions} & \textbf{Assertions/Expected Outcome} \\
-% \hline
-% \end{tabular}
-% \caption{Data Layer Integration Test Cases}
-% \label{tab:test_cases_data_layer}
-% \end{table}
+\subsection{DBMS and Repository Test Cases}
+\label{subsec:data_layer_dbms_test_cases}%
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|p{3.2cm}|p{3.8cm}|p{3.2cm}|p{4.8cm}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{DBMS and Repository Integration Tests}} \\ 
+\hline
+\textbf{Functionality} & \textbf{Test Description} & \textbf{Input/Conditions} & \textbf{Assertions/Expected Outcome} \\
+\hline
+\multirow{2}{*}{Schema validation}
+ & All expected tables and columns exist
+ & Fresh test DB after migrations
+ & Schema matches DD; PK/FK and indexes present \\ \cline{2-4}
+ & Constraint violation is rejected
+ & Insert violating unique or FK constraint
+ & DB returns error; no partial insert \\
+\hline
+\multirow{2}{*}{Migrations}
+ & Migrations apply in order
+ & Run full migration set on empty DB
+ & All migrations succeed; schema and seed data correct \\ \cline{2-4}
+ & Idempotent or repeat application
+ & Re-run migrations (if supported)
+ & No duplicate objects; no data loss \\
+\hline
+\multirow{2}{*}{Repository CRUD}
+ & Create and read entity
+ & Insert user/trip/path via repository
+ & Entity persisted; findById returns same data \\ \cline{2-4}
+ & Update and delete
+ & Update entity; then delete
+ & Changes persisted; delete removes or soft-deletes \\
+\hline
+Transaction rollback
+ & Multi-step failure rolls back
+ & Trigger failure after first insert in transaction
+ & No partial commit; DB state unchanged \\
+\hline
+\end{tabular}
+\caption{DBMS and Repository Integration Test Cases}
+\label{tab:test_cases_data_layer_dbms}
+\end{table}
+
+\subsection{Cache Layer Test Cases}
+\label{subsec:data_layer_cache_test_cases}%
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|p{3.2cm}|p{3.8cm}|p{3.2cm}|p{4.8cm}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{Cache Layer (Redis) Integration Tests}} \\ 
+\hline
+\textbf{Functionality} & \textbf{Test Description} & \textbf{Input/Conditions} & \textbf{Assertions/Expected Outcome} \\
+\hline
+Connection
+ & Application connects to Redis
+ & Valid Redis host/port in config
+ & Connection established; no error \\
+\hline
+\multirow{2}{*}{Get/Set}
+ & Cache hit returns value
+ & Set key with value; then get key
+ & Same value returned; hit metric if available \\ \cline{2-4}
+ & Cache miss triggers fallback
+ & Get non-existent key
+ & Fallback (e.g., DB read) executed; value optionally cached \\
+\hline
+TTL expiry
+ & Key expires after TTL
+ & Set key with TTL; wait until expiry; get key
+ & Key missing or evicted; application handles miss \\
+\hline
+Invalidation on update
+ & DB update invalidates cache
+ & Update entity in DB; request cached read
+ & Stale cache entry invalidated; fresh data returned \\
+\hline
+\end{tabular}
+\caption{Cache Layer Integration Test Cases}
+\label{tab:test_cases_data_layer_cache}
+\end{table}
 
 \section{Service Layer Test Cases}
 \label{sec:service_layer_test_cases}%
@@ -26,17 +95,137 @@ This section specifies integration test cases for all microservices.
 \subsection{User Management Service Test Cases}
 \label{subsec:user_management_service_test_cases}%
 
-% Test cases will be added here
+Integration test cases for the User Management Service (\Cref{subsec:user_management_service_integration}) are specified in \cref{tab:test_cases_user_management}.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|p{3.2cm}|p{3.8cm}|p{3.2cm}|p{4.8cm}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{User Management Service Integration Tests}} \\ 
+\hline
+\textbf{Functionality} & \textbf{Test Description} & \textbf{Input/Conditions} & \textbf{Assertions/Expected Outcome} \\
+\hline
+\multirow{2}{*}{\texttt{registerUser}}
+ & Register new user successfully
+ & Valid email, password, name
+ & 201; user in DB; password stored hashed \\ \cline{2-4}
+ & Reject duplicate email
+ & Email already exists
+ & 400 or 409; message ``User already exists'' \\
+\hline
+\multirow{2}{*}{\texttt{login}}
+ & Login with valid credentials
+ & Valid email and password
+ & 200; token/session returned; user identity correct \\ \cline{2-4}
+ & Reject invalid credentials
+ & Wrong password or unknown email
+ & 401; no token; appropriate error message \\
+\hline
+\multirow{2}{*}{Profile update}
+ & Update profile successfully
+ & Valid token; new name or profile fields
+ & 200; DB updated; response reflects new data \\ \cline{2-4}
+ & Reject unauthenticated request
+ & Missing or invalid token
+ & 401; no update \\
+\hline
+Password change
+ & Change password and login with new one
+ & Valid token; current password; new password
+ & 200; login with new password succeeds; old fails \\
+\hline
+\end{tabular}
+\caption{User Management Service Integration Test Cases}
+\label{tab:test_cases_user_management}
+\end{table}
 
 \subsection{Trip Management Service Test Cases}
 \label{subsec:trip_management_service_test_cases}%
 
-% Test cases will be added here
+Integration test cases for the Trip Management Service (\Cref{subsec:trip_management_service_integration}) are specified in \cref{tab:test_cases_trip_management}.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|p{3.2cm}|p{3.8cm}|p{3.2cm}|p{4.8cm}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{Trip Management Service Integration Tests}} \\ 
+\hline
+\textbf{Functionality} & \textbf{Test Description} & \textbf{Input/Conditions} & \textbf{Assertions/Expected Outcome} \\
+\hline
+\multirow{2}{*}{Create trip}
+ & Create trip with valid data
+ & Authenticated user; start time; optional segments
+ & 201; trip in DB; user association correct \\ \cline{2-4}
+ & Reject invalid data
+ & Missing user or invalid timestamps
+ & 400; no trip created; validation error \\
+\hline
+\multirow{2}{*}{Update trip}
+ & End trip and update statistics
+ & Valid trip ID; end time; optional computed stats
+ & 200; trip updated; duration/distance correct \\ \cline{2-4}
+ & Reject end before start
+ & End time before start time
+ & 400; no update \\
+\hline
+List trips by user
+ & Get trips for user and date range
+ & Valid user ID; date range
+ & 200; list of trips; correct ordering/filtering \\
+\hline
+Integration with sensor data
+ & Create/update trip from sensor data
+ & Processed GPS/statistics from Sensor Data Service
+ & Trip and segments persisted; data mapped correctly \\
+\hline
+\end{tabular}
+\caption{Trip Management Service Integration Test Cases}
+\label{tab:test_cases_trip_management}
+\end{table}
 
 \subsection{Path Management Service Test Cases}
 \label{subsec:path_management_service_test_cases}%
 
-% Test cases will be added here
+Integration test cases for the Path Management Service (\Cref{subsec:path_management_service_integration}) are specified in \cref{tab:test_cases_path_management}.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|p{3.2cm}|p{3.8cm}|p{3.2cm}|p{4.8cm}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{Path Management Service Integration Tests}} \\ 
+\hline
+\textbf{Functionality} & \textbf{Test Description} & \textbf{Input/Conditions} & \textbf{Assertions/Expected Outcome} \\
+\hline
+\multirow{2}{*}{Create path}
+ & Create path (draft) with segments
+ & Authenticated user; valid segments/metadata
+ & 201; path in DB; status draft; user association correct \\ \cline{2-4}
+ & Reject invalid segments
+ & Malformed or empty segment data
+ & 400; no path created; validation error \\
+\hline
+\multirow{2}{*}{Update path}
+ & Add segments or update metadata
+ & Valid path ID; new segments or metadata
+ & 200; path updated; transaction consistent \\ \cline{2-4}
+ & Reject update of published path (if rule applies)
+ & Path already published
+ & 400 or 403; no update \\
+\hline
+Publish path
+ & Transition draft to published
+ & Valid path ID; owner token
+ & 200; status published; path visible to search \\
+\hline
+Integration with Information Merging
+ & Merge result persisted
+ & Merged path data from Information Merging Service
+ & Path updated with merged segments; consistency maintained \\
+\hline
+\end{tabular}
+\caption{Path Management Service Integration Test Cases}
+\label{tab:test_cases_path_management}
+\end{table}
 
 \subsection{Sensor Data Processing Service Test Cases}
 \label{subsec:sensor_data_processing_service_test_cases}%
@@ -61,42 +250,474 @@ This section specifies integration test cases for all microservices.
 \section{API Gateway Test Cases}
 \label{sec:api_gateway_test_cases}%
 
-This section specifies integration test cases for the API Gateway.
+Integration test cases for the API Gateway (\Cref{sec:api_gateway_integration}) are specified in \cref{tab:test_cases_api_gateway}.
 
-% Test cases will be added here
+\begin{table}[ht]
+\centering
+\begin{tabular}{|p{3.2cm}|p{3.8cm}|p{3.2cm}|p{4.8cm}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{API Gateway Integration Tests}} \\ 
+\hline
+\textbf{Functionality} & \textbf{Test Description} & \textbf{Input/Conditions} & \textbf{Assertions/Expected Outcome} \\
+\hline
+Request routing
+ & \texttt{/paths} routed to Path Service
+ & GET \texttt{/paths} with valid token
+ & Request reaches Path Search/Management; 200 and correct body \\ \hline
+ & Unknown path returns 404
+ & GET \texttt{/unknown/route}
+ & 404; no backend service invoked \\ \hline
+Authentication
+ & Protected route without token returns 401
+ & POST \texttt{/ratings} without Authorization
+ & 401; no request to Rating Service \\ \hline
+ & Valid token forwarded with user context
+ & Valid JWT or session cookie
+ & Backend receives user ID or claims; 200 if allowed \\ \hline
+Authorization
+ & Forbidden action returns 403
+ & Token for user A; request to modify user B's resource
+ & 403; no modification \\ \hline
+Request validation
+ & Oversized or invalid body rejected
+ & Payload exceeds size limit or invalid JSON
+ & 400 or 413; no backend invoked \\ \hline
+Error handling
+ & Backend unavailable returns 502/503
+ & Backend service down or timeout
+ & 502 or 503; error body consistent with API contract \\ \hline
+\end{tabular}
+\caption{API Gateway Integration Test Cases}
+\label{tab:test_cases_api_gateway}
+\end{table}
 
 \section{External Services Test Cases}
 \label{sec:external_services_test_cases}%
 
-This section specifies integration test cases for external service integrations.
+Integration test cases for external services (\Cref{sec:external_services_integration}) are specified in \cref{tab:test_cases_external_services}.
 
-% Test cases will be added here
+\begin{table}[ht]
+\centering
+\begin{tabular}{|p{3.2cm}|p{3.8cm}|p{3.2cm}|p{4.8cm}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{External Services Integration Tests}} \\ 
+\hline
+\textbf{Functionality} & \textbf{Test Description} & \textbf{Input/Conditions} & \textbf{Assertions/Expected Outcome} \\
+\hline
+Weather API
+ & Valid request returns weather data
+ & Valid coordinates or location ID; API key configured
+ & Response parsed; temperature/conditions available to Trip/Path \\ \hline
+ & Timeout or 5xx handled with fallback
+ & Simulated timeout or 503 from provider
+ & Fallback (e.g. cache) or controlled error; no crash \\ \hline
+Map Service API
+ & Geocoding or tiles retrieved
+ & Valid address or bounds; API configured
+ & Map data returned; format consistent with client expectations \\ \hline
+ & Quota or error handled
+ & Simulated 429 or invalid response
+ & Fallback or error response; no crash \\ \hline
+Email Service
+ & Email sent via SMTP
+ & Valid to, subject, template and data
+ & Message accepted by SMTP; recipient receives (in test env) \\ \hline
+ & Retry on transient failure
+ & Simulated network error or 4xx/5xx
+ & Retries according to policy; final failure logged or dead-letter \\ \hline
+\end{tabular}
+\caption{External Services Integration Test Cases}
+\label{tab:test_cases_external_services}
+\end{table}
 
 \section{Client Integration Test Cases}
 \label{sec:client_integration_test_cases}%
 
-This section specifies integration test cases for client-side components.
+This section specifies integration test cases for client-side components: Mobile Application Core (UI, Client API, Local Storage), Sensor Manager, Trip Detection Engine, and Obstacle Detection Module, as described in \Cref{sec:client_integration}.
 
-% Test cases will be added here
+\subsection{UI Module and Client API Test Cases}
+\label{subsec:ui_module_client_api_test_cases}%
+
+Integration test cases for the Mobile Application Core UI and Client API (\Cref{subsec:mobile_application_core_integration}) are specified in \cref{tab:test_cases_ui_client_api}.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|p{3.2cm}|p{3.8cm}|p{3.2cm}|p{4.8cm}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{UI Module and Client API Integration Tests}} \\ 
+\hline
+\textbf{Functionality} & \textbf{Test Description} & \textbf{Input/Conditions} & \textbf{Assertions/Expected Outcome} \\
+\hline
+Screen rendering
+ & Main screens render with valid state
+ & Mock state (e.g.\ auth, paths); render screen
+ & No crash; expected elements visible \\ \hline
+User action $\to$ API
+ & Login button triggers API call
+ & Valid credentials; press login
+ & Client API called with correct method/path/body \\ \hline
+\multirow{2}{*}{API response handling}
+ & Success response updates UI
+ & API returns 200 + JSON
+ & UI shows success; navigation or state updated \\ \cline{2-4}
+ & Error response shows message
+ & API returns 4xx/5xx or network error
+ & Error message shown; no crash \\ \hline
+Local storage
+ & Token stored after login; attached to requests
+ & Login success; then new API request
+ & Token in storage; \texttt{Authorization} header present \\ \hline
+Navigation
+ & Authenticated user reaches home after login
+ & Valid token in storage; open app
+ & Home (or main) screen shown; no redirect to login \\ \hline
+\end{tabular}
+\caption{UI Module and Client API Integration Test Cases}
+\label{tab:test_cases_ui_client_api}
+\end{table}
+
+\subsection{Sensor Manager Test Cases}
+\label{subsec:sensor_manager_test_cases}%
+
+Integration test cases for the Sensor Manager (\Cref{subsec:sensor_manager_integration}) are specified in \cref{tab:test_cases_sensor_manager}.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|p{3.2cm}|p{3.8cm}|p{3.2cm}|p{4.8cm}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{Sensor Manager Integration Tests}} \\ 
+\hline
+\textbf{Functionality} & \textbf{Test Description} & \textbf{Input/Conditions} & \textbf{Assertions/Expected Outcome} \\
+\hline
+GPS subscription
+ & Start GPS; receive location updates
+ & Permission granted; start Sensor Manager (GPS)
+ & Location updates delivered; format (lat, lon, timestamp) correct \\ \hline
+Accelerometer / gyroscope
+ & Start motion sensors; receive data
+ & Start Sensor Manager (acc, gyro)
+ & Accelerometer and gyroscope updates delivered \\ \hline
+Permission denied
+ & GPS permission denied; start manager
+ & User denies location permission
+ & Error reported (e.g.\ permission denied); no crash \\ \hline
+Stop and cleanup
+ & Stop manager; no further updates
+ & After receiving updates; call stop
+ & No further callbacks; no orphan subscriptions \\ \hline
+Sensor unavailable
+ & Sensor unavailable (e.g.\ emulator)
+ & Start manager when sensor unavailable
+ & Error or degraded state reported; no crash \\ \hline
+\end{tabular}
+\caption{Sensor Manager Integration Test Cases}
+\label{tab:test_cases_sensor_manager}
+\end{table}
+
+\subsection{Trip Detection Engine Test Cases}
+\label{subsec:trip_detection_engine_test_cases}%
+
+Integration test cases for the Trip Detection Engine (\Cref{subsec:trip_detection_engine_integration}) are specified in \cref{tab:test_cases_trip_detection}.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|p{3.2cm}|p{3.8cm}|p{3.2cm}|p{4.8cm}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{Trip Detection Engine Integration Tests}} \\ 
+\hline
+\textbf{Functionality} & \textbf{Test Description} & \textbf{Input/Conditions} & \textbf{Assertions/Expected Outcome} \\
+\hline
+Integration with Sensor Manager
+ & Engine receives sensor data when started
+ & Sensor Manager running; start Trip Detection
+ & Engine receives GPS/motion updates; no duplicate subscriptions \\ \hline
+Trip start detection
+ & Motion triggers trip start
+ & Simulated or real motion (cycling-like)
+ & Trip start event fired within acceptable delay \\ \hline
+Trip end detection
+ & Motion stop triggers trip end
+ & Trip in progress; motion stops
+ & Trip end event fired; trip duration/points consistent \\ \hline
+Integration with Client API
+ & Trip payload sent at trip end
+ & Trip end event; backend available
+ & API called with correct payload (start, end, points); 201 or handled error \\ \hline
+Stationary no trip
+ & No motion; no trip start
+ & Sensor data indicating stationary
+ & No trip start event \\ \hline
+\end{tabular}
+\caption{Trip Detection Engine Integration Test Cases}
+\label{tab:test_cases_trip_detection}
+\end{table}
+
+\subsection{Obstacle Detection Module Test Cases}
+\label{subsec:obstacle_detection_module_test_cases}%
+
+Integration test cases for the Obstacle Detection Module (\Cref{subsec:obstacle_detection_module_integration}) are specified in \cref{tab:test_cases_obstacle_detection}.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|p{3.2cm}|p{3.8cm}|p{3.2cm}|p{4.8cm}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{Obstacle Detection Module Integration Tests}} \\ 
+\hline
+\textbf{Functionality} & \textbf{Test Description} & \textbf{Input/Conditions} & \textbf{Assertions/Expected Outcome} \\
+\hline
+Integration with Sensor Manager
+ & Module receives motion data when active
+ & Sensor Manager running; Obstacle Detection active
+ & Accelerometer/gyroscope (and GPS) updates received \\ \hline
+Obstacle detection trigger
+ & Obstacle-like signal triggers detection
+ & Synthetic or recorded bump-like sensor data
+ & Detection event with location/type \\ \hline
+Confirmation flow
+ & User confirms obstacle; payload sent
+ & Detection event; user confirms
+ & Obstacle added to path/trip; API called with correct payload \\ \hline
+Dismiss flow
+ & User dismisses detection; no submit
+ & Detection event; user dismisses
+ & Obstacle not sent to backend \\ \hline
+Sensor error handling
+ & Sensor error; module reports gracefully
+ & Sensor Manager reports error (e.g.\ unavailable)
+ & Error reported to caller/UI; no crash \\ \hline
+\end{tabular}
+\caption{Obstacle Detection Module Integration Test Cases}
+\label{tab:test_cases_obstacle_detection}
+\end{table}
 
 \section{End-to-End Test Cases}
 \label{sec:end_to_end_test_cases}%
 
-This section specifies end-to-end integration test cases for complete use case flows.
+This section specifies end-to-end integration test cases for complete use case flows, as described in \Cref{sec:end_to_end_integration}. Tests run from the mobile client (or client simulator) through the API Gateway to backend services and the database.
 
 \subsection{Critical Use Cases Test Cases}
 \label{subsec:critical_use_cases_test_cases}%
 
-% Test cases will be added here
+Integration test cases for critical use cases (UC1, UC2, UC3, UC6) are specified in \Cref{tab:test_cases_e2e_critical}.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|p{2.4cm}|p{3.4cm}|p{3cm}|p{5.2cm}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{End-to-End Test Cases: Critical Use Cases}} \\ 
+\hline
+\textbf{Functionality} & \textbf{Test Description} & \textbf{Input/Conditions} & \textbf{Assertions/Expected Outcome} \\
+\hline
+\multicolumn{4}{|l|}{\textit{UC1: User Registration}} \\
+\hline
+\multirow{2}{*}{Register new user}
+ & E2E registration success
+ & Client POST \texttt{/users/register} with valid email, password, name
+ & 201; user in DB; password hashed; optional email sent \\ \cline{2-4}
+ & Duplicate email rejected
+ & Same email already in DB
+ & 400 or 409; no duplicate record; clear error message \\
+\hline
+Invalid payload
+ & Missing or invalid fields rejected
+ & POST without email or invalid format
+ & 400; no user created; validation error in response \\
+\hline
+\multicolumn{4}{|l|}{\textit{UC2: Login}} \\
+\hline
+\multirow{2}{*}{Login}
+ & Valid credentials return token
+ & Client POST login with valid email and password
+ & 200; token (e.g. JWT) returned; token accepted on next request \\ \cline{2-4}
+ & Invalid credentials rejected
+ & Wrong password or unknown email
+ & 401; no token; appropriate error message \\
+\hline
+Token usage
+ & Token used for protected endpoint
+ & GET protected resource with \texttt{Authorization} header
+ & 200 and correct data; without token 401 \\
+\hline
+\multicolumn{4}{|l|}{\textit{UC3: Insert Path Information (Manual)}} \\
+\hline
+\multirow{2}{*}{Create path (manual)}
+ & Authenticated user creates path
+ & POST path with valid token; segments and metadata
+ & 201; path in DB with status draft; user association correct \\ \cline{2-4}
+ & Unauthenticated rejected
+ & Request without valid token
+ & 401; no path created \\
+\hline
+Invalid path data
+ & Empty or malformed segments rejected
+ & POST with empty segments or invalid geometry
+ & 400; no path created; validation error \\
+\hline
+\multicolumn{4}{|l|}{\textit{UC6: Search and Visualize Paths}} \\
+\hline
+\multirow{2}{*}{Search paths}
+ & Valid search returns results
+ & GET \texttt{/paths} with bbox/filters (and token if required)
+ & 200; list of paths (or empty); consistent with published paths in DB \\ \cline{2-4}
+ & Filters applied correctly
+ & Search with difficulty, length, etc.
+ & Results match filter criteria; ordering as specified \\
+\hline
+\end{tabular}
+\caption{End-to-End Integration Test Cases: Critical Use Cases (UC1, UC2, UC3, UC6)}
+\label{tab:test_cases_e2e_critical}
+\end{table}
 
 \subsection{Advanced Use Cases Test Cases}
 \label{subsec:advanced_use_cases_test_cases}%
 
-% Test cases will be added here
+Integration test cases for advanced use cases (UC4--UC5, UC7--UC12) are specified in \Cref{tab:test_cases_e2e_advanced}.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|p{2.4cm}|p{3.4cm}|p{3cm}|p{5.2cm}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{End-to-End Test Cases: Advanced Use Cases}} \\ 
+\hline
+\textbf{Functionality} & \textbf{Test Description} & \textbf{Input/Conditions} & \textbf{Assertions/Expected Outcome} \\
+\hline
+\multicolumn{4}{|l|}{\textit{UC4: Insert Path Information (Automated)}} \\
+\hline
+Automated path pipeline
+ & Client publish to MQ $\to$ Sensor Service $\to$ DB
+ & Publish sensor payload to RabbitMQ; service consumes
+ & Path/trip created or updated in DB; correct user and segments \\
+\hline
+\multicolumn{4}{|l|}{\textit{UC5: Publish Path Information}} \\
+\hline
+\multirow{2}{*}{Publish path}
+ & Owner publishes draft
+ & PATCH/POST publish with owner token
+ & 200; path status published; visible in UC6 search \\ \cline{2-4}
+ & Non-owner rejected
+ & Publish request with non-owner token
+ & 403; no status change \\
+\hline
+\multicolumn{4}{|l|}{\textit{UC7: Post Review}} \\
+\hline
+\multirow{2}{*}{Post review}
+ & User posts rating and comment
+ & POST \texttt{/paths/\{id\}/reviews} with score and comment
+ & 201; rating in DB; aggregate updated for path \\ \cline{2-4}
+ & Invalid path returns 404
+ & POST with non-existent path ID
+ & 404; no rating created \\
+\hline
+\multicolumn{4}{|l|}{\textit{UC8: Record Personal Trip}} \\
+\hline
+Record trip
+ & Trip created and updated end-to-end
+ & Client sends trip start/end or sensor data
+ & Trip in DB with correct user; segments/stats correct; retrievable \\
+\hline
+\multicolumn{4}{|l|}{\textit{UC9: See Path Data}} \\
+\hline
+\multirow{2}{*}{View path}
+ & Published or own draft returned
+ & GET \texttt{/paths/\{id\}} with valid token
+ & 200; path data (segments, metadata) correct \\ \cline{2-4}
+ & Unauthorized draft returns 403
+ & GET another user's draft
+ & 403 or 404 as specified \\
+\hline
+\multicolumn{4}{|l|}{\textit{UC10: View Trip Statistics}} \\
+\hline
+View trip statistics
+ & User gets own trips and stats
+ & GET \texttt{/trips} with valid token
+ & 200; list of user's trips; duration/distance etc. correct; 401 without token \\
+\hline
+\multicolumn{4}{|l|}{\textit{UC11: Check Review}} \\
+\hline
+Check reviews
+ & Reviews for path returned
+ & GET reviews for path ID
+ & 200; list of ratings/comments; 404 for non-existent path \\
+\hline
+\multicolumn{4}{|l|}{\textit{UC12: Merge Information from Multiple Users}} \\
+\hline
+Merge paths
+ & Merge request produces merged path
+ & Trigger merge (e.g. shared path); Information Merging + Path Mgmt
+ & Merged path stored/retrievable; conflict/freshness rules applied \\
+\hline
+\end{tabular}
+\caption{End-to-End Integration Test Cases: Advanced Use Cases (UC4, UC5, UC7--UC12)}
+\label{tab:test_cases_e2e_advanced}
+\end{table}
 
 \section{Service-to-Service Test Cases}
 \label{sec:service_to_service_test_cases}%
 
-This section specifies integration test cases for service-to-service communication.
+This section specifies integration test cases for service-to-service communication, as described in \Cref{sec:service_to_service_integration}. Tests validate REST calls between microservices, asynchronous flows via the message queue, error handling, and timeout/retry behaviour.
 
-% Test cases will be added here
+\begin{table}[ht]
+\centering
+\begin{tabular}{|p{3cm}|p{3.6cm}|p{3cm}|p{4.4cm}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{Service-to-Service Integration Tests}} \\ 
+\hline
+\textbf{Functionality} & \textbf{Test Description} & \textbf{Input/Conditions} & \textbf{Assertions/Expected Outcome} \\
+\hline
+\multicolumn{4}{|l|}{\textit{REST between services}} \\
+\hline
+Path Search $\to$ Path Mgmt
+ & Path Search calls Path Management for path data
+ & Search request triggers getPaths(ids) or equivalent
+ & Request reaches Path Mgmt; 200 and correct path list returned \\ \hline
+Rating $\to$ Path Mgmt
+ & Rating Service validates path ID with Path Management
+ & Post review with path ID
+ & Path Mgmt called; 404 from Path Mgmt yields 404 to client \\ \hline
+Request/response contract
+ & Caller sends correct URL, method, body; parses response
+ & Valid cross-service call
+ & Callee receives expected payload; caller maps response correctly \\
+\hline
+\multicolumn{4}{|l|}{\textit{Message Queue (RabbitMQ)}} \\
+\hline
+Publish and consume
+ & Producer publishes; consumer receives and processes
+ & Client or service publishes to queue; Sensor Data Service consumes
+ & Message delivered; consumer ACKs after processing; data in DB \\ \hline
+NACK on failure
+ & Failed processing triggers NACK/requeue
+ & Malformed or invalid payload
+ & NACK sent; message requeued or dead-lettered as configured \\ \hline
+\multicolumn{4}{|l|}{\textit{Error handling}} \\
+\hline
+4xx from callee
+ & Caller handles 404/400 without infinite retry
+ & Callee returns 404 (e.g. path not found)
+ & Caller returns consistent error to client; no endless retries \\ \hline
+5xx/timeout
+ & Retries and circuit breaker (if configured)
+ & Callee returns 503 or timeout
+ & Retries with backoff; eventual failure or circuit open; no crash \\
+\hline
+\multicolumn{4}{|l|}{\textit{Service discovery and routing}} \\
+\hline
+Endpoint resolution
+ & Caller resolves callee endpoint in test env
+ & Service-to-service call in deployed/test setup
+ & Request reaches correct service instance; routing correct \\ \hline
+\multicolumn{4}{|l|}{\textit{Timeout and retry}} \\
+\hline
+Timeout applied
+ & Caller does not block indefinitely
+ & Callee slow or unresponsive
+ & Caller times out; error or fallback returned \\ \hline
+Retry policy
+ & Transient failures retried; permanent errors not
+ & Callee returns 503 then 200
+ & Retry then success; 400 not retried indefinitely \\
+\hline
+\end{tabular}
+\caption{Service-to-Service Integration Test Cases}
+\label{tab:test_cases_service_to_service}
+\end{table}

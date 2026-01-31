@@ -68,44 +68,29 @@ if (Test-Command "docker-compose") {
 
 Write-Host ""
 Write-Host "========================================" -ForegroundColor Cyan
-Write-Host "Creating .env files..." -ForegroundColor Cyan
+Write-Host "Checking .env files..." -ForegroundColor Cyan
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host ""
 
-# Create root .env
-if (-not (Test-Path ".env")) {
-    if (Test-Path ".env.example") {
-        Copy-Item ".env.example" ".env"
-        Write-Host "[OK] Created .env from .env.example" -ForegroundColor Green
-    } else {
-        Write-Host "[WARNING] .env.example not found in root" -ForegroundColor Yellow
-    }
+# Check root .env
+if (Test-Path ".env") {
+    Write-Host "[OK] .env exists" -ForegroundColor Green
 } else {
-    Write-Host "[OK] .env already exists (skipped)" -ForegroundColor Green
+    Write-Host "[WARNING] .env not found in root. Create and configure it if needed." -ForegroundColor Yellow
 }
 
-# Create backend .env
-if (-not (Test-Path "backend\.env")) {
-    if (Test-Path "backend\.env.example") {
-        Copy-Item "backend\.env.example" "backend\.env"
-        Write-Host "[OK] Created backend\.env from backend\.env.example" -ForegroundColor Green
-    } else {
-        Write-Host "[WARNING] backend\.env.example not found" -ForegroundColor Yellow
-    }
+# Check backend .env
+if (Test-Path "backend\.env") {
+    Write-Host "[OK] backend\.env exists" -ForegroundColor Green
 } else {
-    Write-Host "[OK] backend\.env already exists (skipped)" -ForegroundColor Green
+    Write-Host "[WARNING] backend\.env not found. Create and configure it if needed." -ForegroundColor Yellow
 }
 
-# Create frontend .env
-if (-not (Test-Path "frontend\.env")) {
-    if (Test-Path "frontend\.env.example") {
-        Copy-Item "frontend\.env.example" "frontend\.env"
-        Write-Host "[OK] Created frontend\.env from frontend\.env.example" -ForegroundColor Green
-    } else {
-        Write-Host "[WARNING] frontend\.env.example not found" -ForegroundColor Yellow
-    }
+# Check frontend .env
+if (Test-Path "frontend\.env") {
+    Write-Host "[OK] frontend\.env exists" -ForegroundColor Green
 } else {
-    Write-Host "[OK] frontend\.env already exists (skipped)" -ForegroundColor Green
+    Write-Host "[WARNING] frontend\.env not found. Create and configure it if needed." -ForegroundColor Yellow
 }
 
 Write-Host ""
@@ -187,9 +172,8 @@ Write-Host "Setup Complete!" -ForegroundColor Green
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host ""
 Write-Host "Next steps:" -ForegroundColor Yellow
-Write-Host "1. Review and update .env files with your configuration" -ForegroundColor White
-Write-Host "2. Start the backend: cd backend; npm run dev" -ForegroundColor White
-Write-Host "3. Start the frontend: cd frontend; npm start" -ForegroundColor White
+Write-Host "1. Start the backend: cd backend; npm run dev" -ForegroundColor White
+Write-Host "2. Start the frontend: cd frontend; npm start" -ForegroundColor White
 Write-Host ""
 Write-Host "For more information, see README.md" -ForegroundColor Cyan
 Write-Host ""

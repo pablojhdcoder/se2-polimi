@@ -1,37 +1,50 @@
 import React from 'react';
+import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-// Import screens (to be created)
-// import HomeScreen from './src/screens/HomeScreen';
-// import LoginScreen from './src/screens/LoginScreen';
+import { AuthProvider } from './src/navigation/AuthContext';
+import { RootNavigator } from './src/navigation';
+import { NetworkStatusProvider, useNetworkStatus } from './src/contexts/NetworkStatusContext';
+import OfflineBanner from './src/components/OfflineBanner/OfflineBanner';
+import PendingSyncBanner from './src/components/PendingSyncBanner/PendingSyncBanner';
 
-const Stack = createStackNavigator();
+function AppBanners() {
+  const { isOnline, pendingSyncCount } = useNetworkStatus();
+  return (
+    <>
+      <OfflineBanner visible={!isOnline} />
+      <PendingSyncBanner visible={pendingSyncCount > 0} count={pendingSyncCount} />
+    </>
+  );
+}
 
+function AppContent() {
+  return (
+    <View style={{ flex: 1 }}>
+      <AppBanners />
+      <NavigationContainer>
+        <StatusBar style="auto" />
+        <RootNavigator />
+      </NavigationContainer>
+    </View>
+  );
+}
+
+/**
+ * App BBP: E2E flows with Auth (Login/Register) and Main (Home, paths, recording, reviews, statistics, etc.).
+ * All screens are registered in MainStack and AuthStack.
+ * NetworkStatusProvider enables offline/pending-sync banners at root.
+ */
 export default function App() {
   return (
     <SafeAreaProvider>
-      <NavigationContainer>
-        <StatusBar style="auto" />
-        <Stack.Navigator
-          initialRouteName="Home"
-          screenOptions={{
-            headerStyle: {
-              backgroundColor: '#2E7D32',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-          }}
-        >
-          {/* Screens will be added here */}
-          {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
-          {/* <Stack.Screen name="Login" component={LoginScreen} /> */}
-        </Stack.Navigator>
-      </NavigationContainer>
+      <AuthProvider>
+        <NetworkStatusProvider>
+          <AppContent />
+        </NetworkStatusProvider>
+      </AuthProvider>
     </SafeAreaProvider>
   );
 }
