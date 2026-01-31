@@ -6,11 +6,20 @@ import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react-native';
 import PathCreateManualScreen from '../../src/pages/PathCreateManualScreen/PathCreateManualScreen';
 
-const mockNavigate = jest.fn();
+const _mockNavigate = jest.fn();
 const mockGoBack = jest.fn();
 
 jest.mock('../../src/services/pathsApi', () => ({
   createPath: jest.fn(),
+}));
+jest.mock('../../src/services/map/MapService', () => ({
+  default: {
+    searchPlaces: jest.fn().mockResolvedValue([]),
+    getCurrentLocation: jest.fn(),
+    reverseGeocode: jest.fn(),
+    getDirections: jest.fn(),
+    formatRecordedRoute: jest.fn(),
+  },
 }));
 jest.mock('react-native', () => {
   const RN = jest.requireActual('react-native');

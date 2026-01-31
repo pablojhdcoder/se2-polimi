@@ -58,7 +58,7 @@ describe('TripStatisticsScreen', () => {
       expect(getTrips).toHaveBeenCalled();
     });
     fireEvent.press(getByText('Record new trip'));
-    expect(mockNavigate).toHaveBeenCalledWith('StartTrip');
+    expect(mockNavigate).toHaveBeenCalledWith('StartTrip', { screen: 'TripRecording' });
   });
 
   it('Merge info navigates to MergeInfo', async () => {

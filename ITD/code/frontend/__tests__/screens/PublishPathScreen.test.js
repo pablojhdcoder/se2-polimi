@@ -64,7 +64,7 @@ describe('PublishPathScreen', () => {
   it('calls createPath and navigates to PathList on success', async () => {
     createPath.mockResolvedValueOnce({});
     const route = { params: { path: { name: 'My Path' } } };
-    const { getByText, getAllByText } = render(
+    const { getAllByText } = render(
       <PublishPathScreen route={route} navigation={navigation} />
     );
     fireEvent.press(getAllByText('Publish path (UC5)')[1]);

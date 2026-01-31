@@ -25,7 +25,7 @@ const AsyncStorage = require('@react-native-async-storage/async-storage').defaul
 
 const {
   getSyncQueue,
-  setSyncQueue,
+  setSyncQueue: _setSyncQueue,
   addToSyncQueue,
   removeFromSyncQueue,
   incrementSyncRetry,

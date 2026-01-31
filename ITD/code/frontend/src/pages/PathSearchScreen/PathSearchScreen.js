@@ -1,7 +1,8 @@
 import React, { useState, useCallback } from 'react';
-import { View, TextInput, Text, TouchableOpacity } from 'react-native';
+import { View, TextInput, Text, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
 import { PathList } from '../../components/paths';
 import { searchPaths, getCachedPaths } from '../../services/pathsApi';
+import MapService from '../../services/map/MapService';
 import { useNetworkStatus } from '../../contexts/NetworkStatusContext';
 import { layoutStyles } from '../../styles';
 import { STRINGS } from '../../constants/strings';
@@ -21,6 +22,40 @@ export default function PathSearchScreen({ navigation }) {
   const [searched, setSearched] = useState(false);
   const [error, setError] = useState(null);
   const [isCached, setIsCached] = useState(false);
+  const [placeSuggestions, setPlaceSuggestions] = useState([]);
+  const [placeSuggestionsLoading, setPlaceSuggestionsLoading] = useState(false);
+  const [locationLoading, setLocationLoading] = useState(false);
+
+  const fetchPlaceSuggestions = useCallback(async (text) => {
+    if (!text || text.length < 2) {
+      setPlaceSuggestions([]);
+      return;
+    }
+    setPlaceSuggestionsLoading(true);
+    try {
+      const features = await MapService.searchPlaces(text);
+      setPlaceSuggestions(features || []);
+    } catch (e) {
+      setPlaceSuggestions([]);
+    } finally {
+      setPlaceSuggestionsLoading(false);
+    }
+  }, []);
+
+  const handleUseCurrentLocation = useCallback(async () => {
+    setLocationLoading(true);
+    setError(null);
+    try {
+      const loc = await MapService.getCurrentLocation();
+      const address = await MapService.reverseGeocode(loc.latitude, loc.longitude);
+      setQuery(address || 'My location');
+      setPlaceSuggestions([]);
+    } catch (e) {
+      setError(e.message || 'Could not get location');
+    } finally {
+      setLocationLoading(false);
+    }
+  }, []);
 
   const doSearch = useCallback(async () => {
     setLoading(true);
@@ -65,7 +100,11 @@ export default function PathSearchScreen({ navigation }) {
           placeholder={STRINGS.SEARCH_PLACEHOLDER}
           placeholderTextColor={colors.textSecondary}
           value={query}
-          onChangeText={setQuery}
+          onChangeText={(text) => {
+            setQuery(text);
+            fetchPlaceSuggestions(text);
+          }}
+          onBlur={() => setTimeout(() => setPlaceSuggestions([]), 200)}
           onSubmitEditing={doSearch}
           returnKeyType="search"
         />
@@ -73,6 +112,42 @@ export default function PathSearchScreen({ navigation }) {
           <Text style={styles.pathSearchScreen_searchButtonText}>{STRINGS.SEARCH}</Text>
         </TouchableOpacity>
       </View>
+      <TouchableOpacity
+        style={styles.pathSearchScreen_locationButton}
+        onPress={handleUseCurrentLocation}
+        disabled={locationLoading}
+      >
+        {locationLoading ? (
+          <ActivityIndicator size="small" color={colors.primary} />
+        ) : (
+          <Text style={styles.pathSearchScreen_locationButtonText}>Use my location</Text>
+        )}
+      </TouchableOpacity>
+      {placeSuggestions.length > 0 ? (
+        <View style={styles.pathSearchScreen_suggestions}>
+          <FlatList
+            data={placeSuggestions.slice(0, 5)}
+            keyExtractor={(item) => item.id || item.place_name || String(Math.random())}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                style={styles.pathSearchScreen_suggestionItem}
+                onPress={() => {
+                  setQuery(item.place_name || item.text || '');
+                  setPlaceSuggestions([]);
+                }}
+              >
+                <Text style={styles.pathSearchScreen_suggestionText} numberOfLines={1}>
+                  {item.place_name || item.text}
+                </Text>
+              </TouchableOpacity>
+            )}
+            scrollEnabled={false}
+          />
+        </View>
+      ) : null}
+      {placeSuggestionsLoading && placeSuggestions.length === 0 && query.length >= 2 ? (
+        <ActivityIndicator size="small" style={styles.pathSearchScreen_suggestionsLoader} />
+      ) : null}
       {isCached ? (
         <View style={styles.pathSearchScreen_cachedBox}>
           <Text style={styles.pathSearchScreen_cachedText}>{STRINGS.SHOWING_CACHED_PATHS}</Text>

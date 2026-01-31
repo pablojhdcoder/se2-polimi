@@ -52,4 +52,35 @@ export default StyleSheet.create({
     color: colors.textSecondary,
     fontSize: fontSizes.body,
   },
+  pathSearchScreen_locationButton: {
+    paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.lg,
+    alignItems: 'center',
+  },
+  pathSearchScreen_locationButtonText: {
+    color: colors.primary,
+    fontSize: fontSizes.body,
+  },
+  pathSearchScreen_suggestions: {
+    marginHorizontal: spacing.lg,
+    marginTop: spacing.xs,
+    backgroundColor: colors.background,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: borderRadius.md,
+    maxHeight: 180,
+  },
+  pathSearchScreen_suggestionItem: {
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.sm,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.border,
+  },
+  pathSearchScreen_suggestionText: {
+    fontSize: fontSizes.body,
+    color: colors.text,
+  },
+  pathSearchScreen_suggestionsLoader: {
+    marginVertical: spacing.sm,
+  },
 });

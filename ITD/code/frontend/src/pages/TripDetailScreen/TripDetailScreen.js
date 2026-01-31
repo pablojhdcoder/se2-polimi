@@ -5,7 +5,7 @@
 
 import React from 'react';
 import { View, Text, ScrollView } from 'react-native';
-import { Card, Button } from '../../components';
+import { Button } from '../../components';
 import { layoutStyles } from '../../styles';
 import { STRINGS } from '../../constants/strings';
 import styles from './TripDetailScreen.styles';

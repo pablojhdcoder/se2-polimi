@@ -86,4 +86,42 @@ export default StyleSheet.create({
     color: colors.textSecondary,
     fontSize: fontSizes.medium,
   },
+  pathCreateManualScreen_suggestions: {
+    marginTop: spacing.xs,
+    backgroundColor: colors.background,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: borderRadius.md,
+    maxHeight: 180,
+  },
+  pathCreateManualScreen_suggestionItem: {
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.sm,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.border,
+  },
+  pathCreateManualScreen_suggestionText: {
+    fontSize: fontSizes.body,
+    color: colors.text,
+  },
+  pathCreateManualScreen_locationButton: {
+    marginTop: spacing.sm,
+    paddingVertical: spacing.sm,
+    alignItems: 'center',
+  },
+  pathCreateManualScreen_locationButtonText: {
+    color: colors.primary,
+    fontSize: fontSizes.body,
+  },
+  pathCreateManualScreen_calcButton: {
+    backgroundColor: colors.primary,
+    paddingVertical: spacing.sm,
+    borderRadius: borderRadius.md,
+    alignItems: 'center',
+    marginTop: spacing.sm,
+  },
+  pathCreateManualScreen_calcButtonText: {
+    color: colors.white,
+    fontSize: fontSizes.body,
+  },
 });

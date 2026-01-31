@@ -1,4 +1,5 @@
 const tripService = require('../services/trip-management/tripService');
+const tripRepository = require('../repositories/tripRepository');
 
 /**
  * Handle manual trip start
@@ -37,6 +38,36 @@ const startAutomaticTrip = async (req, res, next) => {
 };
 
 /**
+ * List trips for the authenticated user
+ */
+const getMyTrips = async (req, res, next) => {
+    try {
+        const userId = req.user.id;
+        const trips = await tripRepository.getTripsByUserId(userId);
+        res.status(200).json({ data: trips });
+    } catch (error) {
+        next(error);
+    }
+};
+
+/**
+ * Get a single trip by id (must belong to the user)
+ */
+const getTripById = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const userId = req.user.id;
+        const trip = await tripRepository.getTripById(id);
+        if (!trip || trip.user_id !== userId) {
+            return res.status(404).json({ error: 'Trip not found' });
+        }
+        res.status(200).json({ data: trip });
+    } catch (error) {
+        next(error);
+    }
+};
+
+/**
  * Update the recorded route data for a trip
  */
 const updateTrack = async (req, res, next) => {
@@ -58,5 +89,7 @@ const updateTrack = async (req, res, next) => {
 module.exports = {
     startManualTrip,
     startAutomaticTrip,
+    getMyTrips,
+    getTripById,
     updateTrack
 };

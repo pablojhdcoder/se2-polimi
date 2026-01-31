@@ -2,7 +2,7 @@
  * Client integration tests: storageService (token, user, session, offline data).
  */
 
-const AsyncStorage = require('@react-native-async-storage/async-storage').default;
+const _AsyncStorage = require('@react-native-async-storage/async-storage').default;
 const {
   getToken,
   setToken,

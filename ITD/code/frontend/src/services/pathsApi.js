@@ -1,6 +1,6 @@
 import apiClient from './api';
 import { requestWithRetry } from './requestWithRetry';
-import { setOfflineDataKey } from '../storage';
+import { setOfflineDataKey, getOfflineData } from '../storage';
 import { OFFLINE_DATA_KEYS } from '../storage/constants';
 
 /**
@@ -121,6 +121,26 @@ export async function requestRelatedPaths(origin, destination, params = {}) {
   const response = await apiClient.get(`${PATHS_BASE}/related`, {
     params: { origin: JSON.stringify(origin), destination: JSON.stringify(destination), ...params },
   });
+  return response.data;
+}
+
+/**
+ * Save a path to user's favorites (requires backend POST /paths/:id/save).
+ * @param {string|number} pathId
+ * @returns {Promise<Object>}
+ */
+export async function savePath(pathId) {
+  const response = await apiClient.post(`${PATHS_BASE}/${pathId}/save`);
+  return response.data;
+}
+
+/**
+ * Remove a path from user's favorites (requires backend DELETE /paths/:id/save).
+ * @param {string|number} pathId
+ * @returns {Promise<Object>}
+ */
+export async function unsavePath(pathId) {
+  const response = await apiClient.delete(`${PATHS_BASE}/${pathId}/save`);
   return response.data;
 }
 

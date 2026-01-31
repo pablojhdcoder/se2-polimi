@@ -113,7 +113,7 @@ describe('E2E Auth flow', () => {
         data: { token: 'new-token', user: { email: 'new@test.com' } },
       });
 
-    const { getByText, getAllByText, getByPlaceholderText } = renderAuthStack('Register');
+    const { getAllByText, getByPlaceholderText } = renderAuthStack('Register');
     fireEvent.changeText(getByPlaceholderText('your@email.com'), 'new@test.com');
     fireEvent.changeText(getByPlaceholderText('Password'), 'password6');
     fireEvent.press(getAllByText('Register').pop());

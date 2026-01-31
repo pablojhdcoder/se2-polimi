@@ -8,6 +8,9 @@ import PathDetailScreen from '../../src/pages/PathDetailScreen/PathDetailScreen'
 
 const mockNavigate = jest.fn();
 
+jest.mock('../../src/contexts/NetworkStatusContext', () => ({
+  useNetworkStatus: () => ({ isOnline: true, lastError: '', clearError: jest.fn() }),
+}));
 jest.mock('../../src/services/pathsApi', () => ({
   getPathById: jest.fn(),
 }));

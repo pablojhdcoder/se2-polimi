@@ -5,8 +5,24 @@ const rabbitmq = require('../src/config/rabbitmq');
 
 // Mock dependencies
 jest.mock('../src/repositories/tripRepository');
+jest.mock('../src/repositories/userRepository', () => ({
+  getUserById: jest.fn().mockResolvedValue(null)
+}));
 jest.mock('../src/services/external/weatherService');
+jest.mock('../src/services/external/emailService', () => ({
+  sendTripSummary: jest.fn().mockResolvedValue(undefined)
+}));
 jest.mock('../src/config/rabbitmq');
+jest.mock('../src/config/redis', () => ({
+  connectRedis: jest.fn().mockResolvedValue(undefined),
+  redisClient: {
+    set: jest.fn().mockResolvedValue(undefined),
+    rPush: jest.fn().mockResolvedValue(undefined),
+    lRange: jest.fn().mockResolvedValue([]),
+    del: jest.fn().mockResolvedValue(undefined),
+    isOpen: true
+  }
+}));
 
 describe('TripService Integration Tests', () => {
     const mockUserId = '550e8400-e29b-41d4-a716-446655440000';
@@ -28,29 +44,27 @@ describe('TripService Integration Tests', () => {
 
             expect(weatherService.getCurrentWeather).toHaveBeenCalledWith(40.7128, -74.0060);
             expect(tripRepository.createTrip).toHaveBeenCalledWith(expect.objectContaining({
-                temperature: 25,
-                rain: 0
+                temperature: 25
             }));
         });
 
-        it('should use fallback sensor data if weather fetch fails', async () => {
+        it('should reject when weather fetch fails (no fallback)', async () => {
             weatherService.getCurrentWeather.mockRejectedValue(new Error('API Down'));
             tripRepository.createTrip.mockResolvedValue({ id: 'trip-123' });
 
             const sensorData = { latitude: 10, longitude: 10, temperature: 18 };
-            await tripService.automaticTripStart(mockUserId, mockPathId, sensorData);
-
-            expect(tripRepository.createTrip).toHaveBeenCalledWith(expect.objectContaining({
-                temperature: 18
-            }));
+            await expect(
+                tripService.automaticTripStart(mockUserId, mockPathId, sensorData)
+            ).rejects.toThrow('API Down');
+            expect(tripRepository.createTrip).not.toHaveBeenCalled();
         });
     });
 
     describe('updateTripTrack', () => {
         it('should send a message to RabbitMQ only when isFinal is true', async () => {
             const tripId = 'trip-123';
-            const intermediateRoute = { metadata: { isFinal: false }, path: {} };
-            const finalRoute = { metadata: { isFinal: true }, path: {} };
+            const intermediateRoute = { metadata: { isFinal: false }, coordinates: [] };
+            const finalRoute = { metadata: { isFinal: true }, coordinates: [] };
 
             tripRepository.updateTripRoute.mockResolvedValue({ id: tripId, path_id: 'path-xyz' });
 

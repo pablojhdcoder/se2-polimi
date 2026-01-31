@@ -6,7 +6,7 @@
 import React, { useState, useMemo } from 'react';
 import { View, Text, ScrollView, Alert, TouchableOpacity } from 'react-native';
 import { Button, Card, ErrorMessage, Loading } from '../../components';
-import { createTrip } from '../../services/tripsApi';
+import { createTrip, updateTripRoute } from '../../services/tripsApi';
 import { addToSyncQueue } from '../../storage/syncQueue';
 import { getOfflineData, setOfflineDataKey } from '../../storage/storageService';
 import { layoutStyles, colors } from '../../styles';
@@ -46,7 +46,7 @@ export default function ReviewDetectedPathScreen({ route, navigation }) {
     track,
     startTime,
     endTime,
-    obstacles: visibleObstacles.map(({ id, ...rest }) => rest),
+    obstacles: visibleObstacles.map(({ id: _id, ...rest }) => rest),
   });
 
   const pathForPublish = () => ({
@@ -84,11 +84,20 @@ export default function ReviewDetectedPathScreen({ route, navigation }) {
             setError(null);
             const payload = tripPayload();
             try {
-              await createTrip(payload);
+              const trip = await createTrip({ pathId: null, sensorData: {} });
+              if (trip?.id) {
+                await updateTripRoute(trip.id, {
+                  track,
+                  isFinal: true,
+                  potholes: visibleObstacles
+                  .map((o) => ({ lat: o.latitude ?? o.lat, lng: o.longitude ?? o.lng }))
+                  .filter((p) => p.lat != null && p.lng != null),
+                });
+              }
               navigation.goBack();
             } catch (err) {
               try {
-                await addToSyncQueue({ method: 'POST', url: '/trips', body: payload });
+                await addToSyncQueue({ method: 'POST', url: '/trips/automatic', body: { pathId: null, sensorData: {} } });
                 const offline = await getOfflineData();
                 const trips = Array.isArray(offline.trips) ? offline.trips : [];
                 trips.push({ ...payload, id: `local_${Date.now()}`, pendingSync: true });

@@ -32,7 +32,7 @@ export default function RecordTripScreen({ navigation }) {
   const [isStarting, setIsStarting] = useState(false);
   const [tripDurationMs, setTripDurationMs] = useState(0);
   const [obstacleEvents, setObstacleEvents] = useState([]);
-  const [durationTimer, setDurationTimer] = useState(null);
+  const [_durationTimer, setDurationTimer] = useState(null);
   const obstacleEventsRef = useRef([]);
 
   useEffect(() => {

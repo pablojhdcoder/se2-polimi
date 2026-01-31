@@ -7,7 +7,7 @@
  */
 
 import React, { useState, useMemo } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { Text, ScrollView } from 'react-native';
 import { Button, Card, Input, ErrorMessage, Loading } from '../../components';
 import { createPath } from '../../services/pathsApi';
 import { layoutStyles } from '../../styles';

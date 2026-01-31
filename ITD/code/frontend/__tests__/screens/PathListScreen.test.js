@@ -8,6 +8,15 @@ import PathListScreen from '../../src/pages/PathListScreen/PathListScreen';
 
 const mockNavigate = jest.fn();
 
+jest.mock('../../src/contexts/NetworkStatusContext', () => ({
+  useNetworkStatus: () => ({
+    isOnline: true,
+    lastError: '',
+    clearError: jest.fn(),
+    pendingSyncCount: 0,
+    refreshPendingSync: jest.fn(),
+  }),
+}));
 jest.mock('../../src/services/pathsApi', () => ({
   getPaths: jest.fn(),
 }));

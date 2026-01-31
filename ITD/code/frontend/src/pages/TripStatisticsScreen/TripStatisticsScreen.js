@@ -5,7 +5,7 @@
  */
 
 import React, { useState, useCallback } from 'react';
-import { View, Text, ScrollView, RefreshControl, TouchableOpacity } from 'react-native';
+import { Text, ScrollView, RefreshControl, TouchableOpacity } from 'react-native';
 import { Card, ErrorMessage, Button, Loading } from '../../components';
 import { getTrips } from '../../services/tripsApi';
 import { getOfflineData } from '../../storage';

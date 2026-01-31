@@ -10,6 +10,17 @@ const mockNavigate = jest.fn();
 
 jest.mock('../../src/services/pathsApi', () => ({
   searchPaths: jest.fn(),
+  getCachedPaths: jest.fn().mockResolvedValue([]),
+}));
+jest.mock('../../src/services/map/MapService', () => ({
+  default: {
+    searchPlaces: jest.fn().mockResolvedValue([]),
+    getCurrentLocation: jest.fn(),
+    reverseGeocode: jest.fn(),
+  },
+}));
+jest.mock('../../src/contexts/NetworkStatusContext', () => ({
+  useNetworkStatus: () => ({ isOnline: true }),
 }));
 
 const searchPaths = require('../../src/services/pathsApi').searchPaths;

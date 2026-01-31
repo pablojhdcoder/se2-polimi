@@ -14,7 +14,7 @@ function getSensorsModule() {
   return _sensorsModule;
 }
 
-function isSensorsAvailable() {
+function _isSensorsAvailable() {
   return getSensorsModule() !== null;
 }
 

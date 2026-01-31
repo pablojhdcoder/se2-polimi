@@ -1,4 +1,5 @@
 const authService = require('../services/user-management/authService');
+const userRepository = require('../repositories/userRepository');
 
 /**
  * Handle user registration
@@ -46,8 +47,25 @@ const logout = async (req, res, next) => {
     }
 };
 
+/**
+ * Get current authenticated user (without password)
+ */
+const getMe = async (req, res, next) => {
+    try {
+        const user = await userRepository.getUserById(req.user.id);
+        if (!user) {
+            return res.status(404).json({ error: 'User not found.' });
+        }
+        const { password_hash: _passwordHash, ...userWithoutPassword } = user;
+        res.status(200).json(userWithoutPassword);
+    } catch (error) {
+        next(error);
+    }
+};
+
 module.exports = {
     register,
     login,
-    logout
+    logout,
+    getMe
 };

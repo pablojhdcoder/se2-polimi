@@ -136,10 +136,10 @@ describe('TripDetectionEngine', () => {
     });
   });
 
-  describe('onTripEnd assignable callback', () => {
+  describe('onTripEnd callback', () => {
     it('invokes onTripEnd when stopRecording after trip started', async () => {
       const onEnd = jest.fn();
-      TripDetectionEngine.onTripEnd = onEnd;
+      TripDetectionEngine.onTripEnd(onEnd);
       await TripDetectionEngine.start();
       for (let i = 0; i < 3; i++) {
         mockGpsCallback.current({ latitude: 45, longitude: 9, speed: 1, timestamp: Date.now() });
@@ -150,7 +150,6 @@ describe('TripDetectionEngine', () => {
       expect(callData).toHaveProperty('track');
       expect(callData).toHaveProperty('startTime');
       expect(callData).toHaveProperty('endTime');
-      TripDetectionEngine.onTripEnd = null;
     });
   });
 });
