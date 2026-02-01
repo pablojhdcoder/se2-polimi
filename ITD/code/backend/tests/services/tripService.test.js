@@ -8,9 +8,6 @@ jest.mock('../../src/repositories/userRepository', () => ({
     getUserById: jest.fn().mockResolvedValue(null)
 }));
 jest.mock('../../src/services/external/weatherService');
-jest.mock('../../src/services/external/emailService', () => ({
-    sendTripSummary: jest.fn().mockResolvedValue(undefined)
-}));
 jest.mock('../../src/config/redis', () => ({
     connectRedis: jest.fn().mockResolvedValue(undefined),
     redisClient: {

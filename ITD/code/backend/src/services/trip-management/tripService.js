@@ -1,7 +1,5 @@
 const tripRepository = require('../../repositories/tripRepository');
-const userRepository = require('../../repositories/userRepository');
 const weatherService = require('../external/weatherService');
-const emailService = require('../external/emailService');
 const { redisClient, connectRedis } = require('../../config/redis');
 const crypto = require('crypto');
 
@@ -94,18 +92,6 @@ const updateTripTrack = async (tripId, routeData = {}) => {
         const updatedTrip = await tripRepository.updateTripRoute(tripId, finalRouteData, {
             tripLength: tripLength != null ? Number(tripLength) : null
         });
-
-        // Email Summary
-        try {
-            const user = await userRepository.getUserById(updatedTrip.user_id);
-            if (user && user.email) {
-                emailService.sendTripSummary(user.email, updatedTrip).catch(err =>
-                    console.error('[TripService] Summary email failed:', err)
-                );
-            }
-        } catch (err) {
-            console.error('[TripService] Could not fetch user for email notification:', err);
-        }
 
         // Cleanup Redis
         await redisClient.del([`trip:${tripId}:coords`, `trip:${tripId}:active`]);

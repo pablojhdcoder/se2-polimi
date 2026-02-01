@@ -1,11 +1,11 @@
 /**
  * ProfileScreen - User profile and settings (DD ch03).
- * User card, options (Profile + Edit, Activity statistics, Emails), Log out button.
+ * User card, options (Profile + Edit, Activity statistics), Log out button.
  * Edit shows only Personal info form (full_name, email, phone_number); rest of screen hidden.
  */
 
 import React, { useState, useCallback, useEffect } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Switch, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
 import { Button, Avatar, Input } from '../../components';
 import { useAuth } from '../../navigation/useAuth';
 import { getTrips } from '../../services/tripsApi';
@@ -13,7 +13,6 @@ import { getOfflineData, setSession } from '../../storage';
 import { updateProfile } from '../../services/api';
 import { layoutStyles } from '../../styles';
 import { STRINGS } from '../../constants/strings';
-import { colors } from '../../styles';
 import styles from './ProfileScreen.styles';
 
 const METERS_PER_POINT_ESTIMATE = 10;
@@ -34,7 +33,6 @@ const OPTION_ICONS = {
 export default function ProfileScreen({ navigation }) {
   const { user, setUser, token, logout } = useAuth();
   const [totalDistanceKm, setTotalDistanceKm] = useState(0);
-  const [emailsOn, setEmailsOn] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [editFullName, setEditFullName] = useState('');
   const [editEmail, setEditEmail] = useState('');
@@ -217,19 +215,6 @@ export default function ProfileScreen({ navigation }) {
                   <Text style={styles.profileScreen_chevron}>{OPTION_ICONS.chevron}</Text>
                 </View>
               </TouchableOpacity>
-            </View>
-
-            <View style={styles.profileScreen_optionsCard}>
-              <View style={[styles.profileScreen_optionRow, styles.profileScreen_optionRowLast]}>
-                <Text style={styles.profileScreen_optionIcon}>{OPTION_ICONS.bell}</Text>
-                <Text style={styles.profileScreen_optionLabel}>{STRINGS.EMAILS}</Text>
-                <Switch
-                  value={emailsOn}
-                  onValueChange={setEmailsOn}
-                  trackColor={{ false: colors.border, true: colors.primary }}
-                  thumbColor={colors.background}
-                />
-              </View>
             </View>
 
             <Button

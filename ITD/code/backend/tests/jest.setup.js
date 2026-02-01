@@ -2,12 +2,6 @@
 require('dotenv').config({ path: '.env.test' });
 
 // Global Mocks for External Services
-jest.mock('../src/services/external/emailService', () => ({
-    sendWelcomeEmail: jest.fn().mockResolvedValue(true),
-    sendTripSummary: jest.fn().mockResolvedValue(true),
-    sendEmail: jest.fn().mockResolvedValue({ messageId: 'mock-id' })
-}));
-
 jest.mock('../src/services/external/weatherService', () => ({
     getCurrentWeather: jest.fn().mockResolvedValue({
         temperature: 20,

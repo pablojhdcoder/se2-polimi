@@ -2,7 +2,6 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const userRepository = require('../../repositories/userRepository');
-const emailService = require('../external/emailService');
 const { redisClient, connectRedis } = require('../../config/redis');
 
 const SALT_ROUNDS = 10;
@@ -51,12 +50,6 @@ const register = async (userData) => {
     };
 
     await userRepository.createUser(newUser);
-
-    if (emailService && typeof emailService.sendWelcomeEmail === 'function') {
-        emailService.sendWelcomeEmail(email, fullName).catch(err =>
-            console.error('[AuthService] Welcome email failed:', err)
-        );
-    }
 
     const { passwordHash: _, ...userWithoutPassword } = newUser;
     return userWithoutPassword;
