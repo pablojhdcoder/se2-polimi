@@ -123,6 +123,16 @@ export async function requestRelatedPaths(origin, destination, params = {}) {
 }
 
 /**
+ * Gets the authenticated user's saved paths (favorites).
+ * Backend: GET /paths/saved (authenticated).
+ * @returns {Promise<Array>} Array of path objects
+ */
+export async function getSavedPaths() {
+  const response = await apiClient.get(`${PATHS_BASE}/saved`);
+  return Array.isArray(response.data) ? response.data : response.data?.paths ?? [];
+}
+
+/**
  * Save a path to user's favorites (requires backend POST /paths/:id/save).
  * @param {string|number} pathId
  * @returns {Promise<Object>}

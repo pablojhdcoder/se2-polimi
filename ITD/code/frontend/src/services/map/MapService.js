@@ -1,3 +1,8 @@
+/**
+ * MapService: geocoding, reverse geocoding, and directions via Mapbox HTTP APIs.
+ * The map view in the app uses react-native-maps (MapboxMap component); this service
+ * only provides data (places, routes, current location) for the UI to display.
+ */
 import * as Location from 'expo-location';
 import axios from 'axios';
 

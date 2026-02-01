@@ -102,8 +102,10 @@ const updateTripTrack = async (tripId, routeData = {}) => {
 
         const updatedTrip = await tripRepository.updateTripRoute(tripId, finalRouteData);
 
-        // Async: Update path stats
-        rabbitmq.sendToQueue('path_stats_update', { pathId: updatedTrip.path_id });
+        // Async: Update path stats (only when trip is linked to a path)
+        if (updatedTrip.path_id) {
+            rabbitmq.sendToQueue('path_stats_update', { pathId: updatedTrip.path_id });
+        }
 
         // Email Summary
         try {
@@ -135,6 +137,9 @@ const confirmPotholes = async (tripId, selectedPotholeIndices) => {
     const trip = await tripRepository.getTripById(tripId);
     if (!trip || !trip.recorded_route || !trip.recorded_route.pothole_detections) {
         throw new Error('Trip or pothole triggers not found');
+    }
+    if (!trip.path_id) {
+        throw new Error('Trip has no path; potholes cannot be confirmed');
     }
 
     const triggers = trip.recorded_route.pothole_detections;

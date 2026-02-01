@@ -40,8 +40,8 @@ services:
     image: rabbitmq:3.12-management-alpine
     container_name: bbp-rabbitmq
     environment:
-      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-guest}
-      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-guest}
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-bbp}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-bbp}
     ports:
       - "${RABBITMQ_PORT:-5672}:5672"
       - "${RABBITMQ_MANAGEMENT_PORT:-15672}:15672"

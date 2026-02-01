@@ -12,4 +12,6 @@
  *   ObstacleDetectionModule.stop();
  */
 
-export { default as ObstacleDetectionModule } from './ObstacleDetectionModule';
+import ObstacleDetectionModule from './ObstacleDetectionModule';
+export { ObstacleDetectionModule };
+export default ObstacleDetectionModule;

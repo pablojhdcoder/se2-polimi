@@ -40,8 +40,8 @@ services:
     image: rabbitmq:3.12-management-alpine
     container_name: bbp-rabbitmq-dev
     environment:
-      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-guest}
-      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-guest}
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-bbp}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-bbp}
     ports:
       - "${RABBITMQ_PORT:-5672}:5672"
       - "${RABBITMQ_MANAGEMENT_PORT:-15672}:15672"
@@ -71,7 +71,7 @@ services:
       DB_USER: ${DB_USER:-postgres}
       DB_PASSWORD: ${DB_PASSWORD:-postgres}
       REDIS_URL: redis://redis:6379
-      RABBITMQ_URL: amqp://rabbitmq:5672
+      RABBITMQ_URL: amqp://${RABBITMQ_USER:-bbp}:${RABBITMQ_PASSWORD:-bbp}@rabbitmq:5672
     ports:
       - "3000:3000"
     volumes:

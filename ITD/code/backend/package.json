@@ -11,7 +11,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "migrate": "node migrations/run.js"
+    "migrate": "node migrations/run.js",
+    "seed": "node scripts/seed-demo-data.js"
   },
   "keywords": [
     "bike-paths",

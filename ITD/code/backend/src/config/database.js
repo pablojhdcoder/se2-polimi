@@ -19,7 +19,7 @@ pool.on('connect', () => {
 
 pool.on('error', (err) => {
   console.error('Unexpected error on idle client', err);
-  process.exit(-1);
+  // No hacer process.exit: el pool puede recuperarse; salir mata todo el backend.
 });
 
 // Helper function to execute queries

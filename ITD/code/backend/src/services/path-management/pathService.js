@@ -10,9 +10,15 @@ const crypto = require('crypto');
 const addPath = async (pathData) => {
     const path = {
         ...pathData,
-        id: crypto.randomUUID(),
-        userRating: pathData.userRating || 0,
-        status: pathData.status || 'optimal'
+        id: pathData.id || crypto.randomUUID(),
+        userRating: pathData.userRating ?? 0,
+        status: pathData.status || 'optimal',
+        length: pathData.length ?? pathData.distance ?? 0,
+        startX: pathData.startX ?? null,
+        startY: pathData.startY ?? null,
+        endX: pathData.endX ?? null,
+        endY: pathData.endY ?? null,
+        routeData: pathData.routeData ?? null
     };
     return await pathRepository.createPath(path);
 };

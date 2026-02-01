@@ -93,7 +93,7 @@ CREATE TABLE ratings (
 CREATE TABLE trips (
     id UUID PRIMARY KEY,
     user_id UUID NOT NULL,
-    path_id UUID NOT NULL,
+    path_id UUID,
 
     trip_date TIMESTAMP NOT NULL,
     trip_length INTEGER NOT NULL,

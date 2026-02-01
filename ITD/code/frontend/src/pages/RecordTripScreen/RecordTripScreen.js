@@ -1,7 +1,6 @@
 /**
- * Minimal "Record trip" screen (Agent 3 flow).
- * Integrates Trip Detection Engine and Obstacle Detection Module.
- * Uses theme and STRINGS (RECORD_TRIP, EVENTS_TRIP_OBSTACLES, etc.).
+ * "Start a trip" screen: full-screen map, compact bottom card only.
+ * Integrates Trip Detection Engine and Obstacle Detection.
  */
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
@@ -9,13 +8,14 @@ import {
   View,
   Text,
   TouchableOpacity,
-  ScrollView,
   ActivityIndicator,
   Alert,
+  StyleSheet,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { TripDetectionEngine, TripState } from '../../sensors/trip-detection';
 import ObstacleDetectionModule from '../../sensors/obstacle-detection';
-import { layoutStyles } from '../../styles';
+import { MapboxMap } from '../../components';
 import { STRINGS } from '../../constants/strings';
 import { colors } from '../../styles';
 import styles from './RecordTripScreen.styles';
@@ -28,6 +28,7 @@ const STATE_LABELS = {
 };
 
 export default function RecordTripScreen({ navigation }) {
+  const insets = useSafeAreaInsets();
   const [tripState, setTripState] = useState(TripDetectionEngine.getState());
   const [isStarting, setIsStarting] = useState(false);
   const [tripDurationMs, setTripDurationMs] = useState(0);
@@ -153,84 +154,74 @@ export default function RecordTripScreen({ navigation }) {
     return `${m}:${sec.toString().padStart(2, '0')}`;
   };
 
-  const isActive = tripState !== TripState.IDLE;
-
-  const eventLabel = (ev) => {
-    if (ev.type === 'trip_start') return STRINGS.TRIP_STARTED;
-    if (ev.type === 'trip_end') return `${STRINGS.TRIP_ENDED}${ev.durationMs ? ` (${formatDuration(ev.durationMs)})` : ''}`;
-    if (ev.type === 'bump') return `${STRINGS.OBSTACLE_BUMP} ${(ev.severity * 100).toFixed(0)}%`;
-    if (ev.type === 'rotation_spike') return `${STRINGS.SHARP_TURN} ${(ev.severity * 100).toFixed(0)}%`;
-    return ev.type;
+  const formatDurationMins = (ms) => {
+    const mins = Math.floor(ms / 60000);
+    return mins <= 0 ? '0 mins' : `${mins} min${mins !== 1 ? 's' : ''}`;
   };
 
-  return (
-    <View style={layoutStyles.screenContainer}>
-      <View style={styles.recordTripScreen_inner}>
-        <View style={styles.recordTripScreen_header}>
-          <Text style={styles.recordTripScreen_title}>{STRINGS.RECORD_TRIP}</Text>
-          <Text style={styles.recordTripScreen_subtitle}>{STRINGS.TRIP_DETECTION_OBSTACLE}</Text>
-        </View>
+  const isActive = tripState !== TripState.IDLE;
 
-        <View style={styles.recordTripScreen_stateCard}>
-          <Text style={styles.recordTripScreen_stateLabel}>{STRINGS.STATE}</Text>
-          <Text style={[styles.recordTripScreen_stateValue, isActive && styles.recordTripScreen_stateValueActive]}>
+  return (
+    <View style={StyleSheet.absoluteFill}>
+      <MapboxMap style={StyleSheet.absoluteFillObject} showUserLocation />
+
+      {/* Compact bottom card: title, state/duration, Start Ride, Trip opinions */}
+      <View
+        style={[
+          styles.bottomCard,
+          {
+            bottom: insets.bottom + 24,
+          },
+        ]}
+      >
+        <Text style={styles.bottomCardTitle}>{STRINGS.RECORD_TRIP}</Text>
+        <View style={styles.bottomCardMeta}>
+          <Text
+            style={[
+              styles.bottomCardState,
+              isActive && styles.bottomCardStateActive,
+            ]}
+          >
             {STATE_LABELS[tripState] ?? tripState}
           </Text>
           {tripState === TripState.IN_TRIP && (
-            <Text style={styles.recordTripScreen_duration}>
-              {STRINGS.DURATION}: {formatDuration(tripDurationMs)}
+            <Text style={styles.bottomCardDuration}>
+              {formatDurationMins(tripDurationMs)}
             </Text>
           )}
         </View>
 
-        <View style={styles.recordTripScreen_actions}>
+        <View style={styles.bottomCardActions}>
           <TouchableOpacity
             style={[
-              styles.recordTripScreen_button,
-              isActive ? styles.recordTripScreen_buttonStop : styles.recordTripScreen_buttonStart,
-              isStarting && styles.recordTripScreen_buttonDisabled,
+              styles.bottomCardButton,
+              isActive ? styles.bottomCardButtonStop : styles.bottomCardButtonPrimary,
+              isStarting && styles.bottomCardButtonDisabled,
             ]}
             onPress={handleStartStop}
             disabled={isStarting}
           >
             {isStarting ? (
-              <ActivityIndicator color={colors.white} />
+              <ActivityIndicator color={colors.white} size="small" />
             ) : (
-              <Text style={styles.recordTripScreen_buttonText}>
-                {isActive ? STRINGS.STOP_DETECTION : STRINGS.START_DETECTION}
-              </Text>
+              <>
+                <Text style={styles.bottomCardButtonText}>
+                  {isActive ? STRINGS.STOP_DETECTION : STRINGS.START_RIDE}
+                </Text>
+              </>
             )}
           </TouchableOpacity>
 
-          {tripState === TripState.IN_TRIP && (
-            <TouchableOpacity
-              style={[styles.recordTripScreen_button, styles.recordTripScreen_buttonSecondary]}
-              onPress={handleStopTripManually}
-            >
-              <Text style={styles.recordTripScreen_buttonTextSecondary}>{STRINGS.END_TRIP_NOW}</Text>
-            </TouchableOpacity>
-          )}
-        </View>
-
-        <View style={styles.recordTripScreen_eventsSection}>
-          <Text style={styles.recordTripScreen_eventsTitle}>{STRINGS.EVENTS_TRIP_OBSTACLES}</Text>
-          <ScrollView
-            style={styles.recordTripScreen_eventsList}
-            contentContainerStyle={styles.recordTripScreen_eventsListContent}
+          <TouchableOpacity
+            style={[styles.bottomCardButton, styles.bottomCardButtonSecondary]}
+            onPress={
+              isActive ? handleStopTripManually : () => navigation?.navigate?.('Ratings')
+            }
           >
-            {obstacleEvents.length === 0 ? (
-              <Text style={styles.recordTripScreen_eventsEmpty}>{STRINGS.NO_EVENTS_YET}</Text>
-            ) : (
-              obstacleEvents.slice().reverse().map((ev, i) => (
-                <View key={`${ev.time}-${i}`} style={styles.recordTripScreen_eventRow}>
-                  <Text style={styles.recordTripScreen_eventTime}>
-                    {new Date(ev.time).toLocaleTimeString()}
-                  </Text>
-                  <Text style={styles.recordTripScreen_eventType}>{eventLabel(ev)}</Text>
-                </View>
-              ))
-            )}
-          </ScrollView>
+            <Text style={styles.bottomCardButtonTextSecondary}>
+              {isActive ? STRINGS.END_TRIP_NOW : STRINGS.TRIP_OPINIONS.toUpperCase()}
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
     </View>

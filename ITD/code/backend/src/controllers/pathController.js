@@ -78,6 +78,24 @@ const savePath = async (req, res, next) => {
 };
 
 /**
+ * List paths saved by the authenticated user (favorites)
+ */
+const getSavedPaths = async (req, res, next) => {
+    try {
+        const username = req.user.username;
+        const saved = await savedPathRepository.getSavedPathsByUsername(username);
+        const paths = [];
+        for (const row of saved) {
+            const path = await pathRepository.getPathByName(row.path_name);
+            if (path) paths.push(path);
+        }
+        res.status(200).json(paths);
+    } catch (error) {
+        next(error);
+    }
+};
+
+/**
  * Remove a path from the authenticated user's saved list
  */
 const unsavePath = async (req, res, next) => {
@@ -124,6 +142,7 @@ module.exports = {
     createPath,
     getPaths,
     getPathById,
+    getSavedPaths,
     getNearbyPaths,
     getRelatedPaths,
     savePath,

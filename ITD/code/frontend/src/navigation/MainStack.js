@@ -34,17 +34,9 @@ const screenOptions = {
   headerTitleAlign: 'center',
 };
 
-function HeaderRightPaths({ navigation, user }) {
+function HeaderRight({ navigation, user }) {
   return (
     <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 12 }}>
-      <TouchableOpacity
-        onPress={() => navigation.navigate('PathList')}
-        style={{ marginRight: 12 }}
-      >
-        <Text style={{ color: colors.primary, fontSize: fontSizes.body, fontWeight: fontWeights.semibold }}>
-          {STRINGS.PATHS}
-        </Text>
-      </TouchableOpacity>
       <Avatar user={user} onPress={() => navigation.navigate('Profile')} />
     </View>
   );
@@ -67,14 +59,14 @@ function MainStackNavigator() {
         component={MainTabs}
         options={({ navigation }) => ({
           title: 'Best Bike Paths',
-          headerRight: () => <HeaderRightPaths navigation={navigation} user={user} />,
+          headerRight: () => <HeaderRight navigation={navigation} user={user} />,
         })}
       />
       <Stack.Screen
         name="Home"
         options={({ navigation }) => ({
           title: 'Best Bike Paths',
-          headerRight: () => <HeaderRightPaths navigation={navigation} user={user} />,
+          headerRight: () => <HeaderRight navigation={navigation} user={user} />,
         })}
       >
         {(props) => (

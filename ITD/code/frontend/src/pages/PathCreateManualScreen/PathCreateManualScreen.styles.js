@@ -3,6 +3,13 @@ import { colors, spacing, fontSizes, fontWeights } from '../../styles';
 import { borderRadius } from '../../styles/spacing';
 
 export default StyleSheet.create({
+  pathCreateManualScreen_mapWrap: {
+    height: 240,
+    width: '100%',
+  },
+  pathCreateManualScreen_map: {
+    ...StyleSheet.absoluteFillObject,
+  },
   pathCreateManualScreen_scroll: { flex: 1 },
   pathCreateManualScreen_content: {
     padding: spacing.lg,

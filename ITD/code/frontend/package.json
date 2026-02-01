@@ -5,8 +5,8 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "web": "expo start --web",
     "lint": "eslint . --ext .js,.jsx --ignore-pattern node_modules --ignore-pattern coverage",
     "lint:fix": "eslint . --ext .js,.jsx --ignore-pattern node_modules --ignore-pattern coverage --fix",
@@ -29,6 +29,7 @@
     "@react-navigation/bottom-tabs": "^6.6.1",
     "@react-navigation/native": "^6.1.18",
     "@react-navigation/stack": "^6.4.1",
+    "@rnmapbox/maps": "^10.2.10",
     "axios": "^1.7.7",
     "babel-preset-expo": "~54.0.10",
     "expo": "^54.0.32",

@@ -5,9 +5,12 @@ let _sensorsModule = undefined;
 function getSensorsModule() {
   if (_sensorsModule === undefined) {
     try {
-      _sensorsModule = require('react-native-sensors');
+      const mod = require('react-native-sensors');
+      // Probe native module; in Expo Go it throws "Native modules for sensors not available" when accessed
+      void mod.SensorTypes;
+      _sensorsModule = mod;
     } catch (e) {
-      console.warn('Sensors not available (e.g. Expo Go). Accelerometer/gyroscope disabled.', e?.message);
+      console.warn('Sensors not available (Expo Go). Recording will use GPS only.', e?.message);
       _sensorsModule = null;
     }
   }
@@ -65,9 +68,6 @@ class SensorManager {
 
   // Start monitoring accelerometer (no-op if native sensors not available, e.g. Expo Go)
   startAccelerometer(callback) {
-    const sensors = getSensorsModule();
-    if (!sensors) return;
-
     if (this.accelerometerSubscription) {
       this.stopAccelerometer();
     }
@@ -77,6 +77,8 @@ class SensorManager {
     }
 
     try {
+      const sensors = getSensorsModule();
+      if (!sensors) return;
       const { accelerometer, setUpdateIntervalForType, SensorTypes } = sensors;
       setUpdateIntervalForType(SensorTypes.accelerometer, 100);
       this.accelerometerSubscription = accelerometer.subscribe(({ x, y, z, timestamp }) => {
@@ -84,15 +86,13 @@ class SensorManager {
         this.callbacks.accelerometer.forEach(cb => cb({ x, y, z, timestamp }));
       });
     } catch (e) {
-      console.warn('Accelerometer not available:', e?.message);
+      console.warn('Accelerometer not available (Expo Go?). Recording uses GPS only.', e?.message);
+      _sensorsModule = null; // so getSensorsModule() returns null next time
     }
   }
 
-  // Start monitoring gyroscope (no-op if native sensors not available)
+  // Start monitoring gyroscope (no-op if native sensors not available, e.g. Expo Go)
   startGyroscope(callback) {
-    const sensors = getSensorsModule();
-    if (!sensors) return;
-
     if (this.gyroscopeSubscription) {
       this.stopGyroscope();
     }
@@ -102,6 +102,8 @@ class SensorManager {
     }
 
     try {
+      const sensors = getSensorsModule();
+      if (!sensors) return;
       const { gyroscope, setUpdateIntervalForType, SensorTypes } = sensors;
       setUpdateIntervalForType(SensorTypes.gyroscope, 100);
       this.gyroscopeSubscription = gyroscope.subscribe(({ x, y, z, timestamp }) => {
@@ -109,7 +111,8 @@ class SensorManager {
         this.callbacks.gyroscope.forEach(cb => cb({ x, y, z, timestamp }));
       });
     } catch (e) {
-      console.warn('Gyroscope not available:', e?.message);
+      console.warn('Gyroscope not available (Expo Go?). Recording uses GPS only.', e?.message);
+      _sensorsModule = null; // so getSensorsModule() returns null next time
     }
   }
 

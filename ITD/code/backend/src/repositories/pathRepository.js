@@ -33,6 +33,16 @@ const getPathById = async (id) => {
   return res.rows[0];
 };
 
+const getPathByName = async (pathName) => {
+  const sql = `
+    SELECT *
+    FROM paths
+    WHERE path_name = $1
+  `;
+  const res = await query(sql, [pathName]);
+  return res.rows[0];
+};
+
 const getAllPaths = async (options = {}) => {
   const { search, limit = 100, offset = 0 } = options;
   let sql = 'SELECT * FROM paths';
@@ -74,6 +84,7 @@ const updatePathRating = async (id, rating) => {
 module.exports = {
   createPath,
   getPathById,
+  getPathByName,
   getAllPaths,
   updatePathStatus,
   updatePathRating

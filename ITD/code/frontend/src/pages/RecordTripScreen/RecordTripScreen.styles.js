@@ -1,130 +1,85 @@
 import { StyleSheet } from 'react-native';
 import { colors, spacing, fontSizes, fontWeights } from '../../styles';
 import { borderRadius } from '../../styles/spacing';
+import { shadows } from '../../styles/theme';
+
+const BOTTOM_CARD_MARGIN_H = spacing.lg;
+const BOTTOM_CARD_PADDING = spacing.lg;
+const BOTTOM_CARD_BOTTOM = spacing.xl;
 
 export default StyleSheet.create({
-  recordTripScreen_inner: {
-    flex: 1,
-    padding: spacing.lg,
+  // Compact bottom card (title, state/duration, Start Ride, Trip opinions)
+  bottomCard: {
+    position: 'absolute',
+    left: BOTTOM_CARD_MARGIN_H,
+    right: BOTTOM_CARD_MARGIN_H,
+    bottom: BOTTOM_CARD_BOTTOM,
+    backgroundColor: colors.background,
+    borderRadius: borderRadius.lg,
+    padding: BOTTOM_CARD_PADDING,
+    ...shadows.card,
+    zIndex: 2,
+    elevation: 3,
   },
-  recordTripScreen_header: {
-    marginBottom: spacing.xl,
-  },
-  recordTripScreen_title: {
-    fontSize: fontSizes.headline,
+  bottomCardTitle: {
+    fontSize: fontSizes.large,
     fontWeight: fontWeights.bold,
     color: colors.text,
-  },
-  recordTripScreen_subtitle: {
-    fontSize: fontSizes.body,
-    color: colors.textSecondary,
-    marginTop: spacing.xs,
-  },
-  recordTripScreen_stateCard: {
-    backgroundColor: colors.background,
-    padding: spacing.lg,
-    borderRadius: borderRadius.md,
-    marginBottom: spacing.lg,
-    shadowColor: colors.black,
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 2,
-  },
-  recordTripScreen_stateLabel: {
-    fontSize: fontSizes.small,
-    color: colors.textSecondary,
-    textTransform: 'uppercase',
     marginBottom: spacing.xs,
   },
-  recordTripScreen_stateValue: {
-    fontSize: fontSizes.large,
-    fontWeight: fontWeights.semibold,
-    color: colors.text,
+  bottomCardMeta: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: spacing.md,
+    gap: spacing.md,
   },
-  recordTripScreen_stateValueActive: {
-    color: colors.primary,
-  },
-  recordTripScreen_duration: {
-    fontSize: fontSizes.body,
+  bottomCardState: {
+    fontSize: fontSizes.small,
     color: colors.textSecondary,
-    marginTop: spacing.sm,
   },
-  recordTripScreen_actions: {
-    marginBottom: spacing.xl,
+  bottomCardStateActive: {
+    color: colors.primary,
+    fontWeight: fontWeights.semibold,
+  },
+  bottomCardDuration: {
+    fontSize: fontSizes.small,
+    color: colors.textSecondary,
+  },
+  bottomCardActions: {
     gap: spacing.sm,
   },
-  recordTripScreen_button: {
-    padding: spacing.lg,
+  bottomCardButton: {
+    paddingVertical: spacing.md,
+    paddingHorizontal: spacing.lg,
     borderRadius: borderRadius.md,
     alignItems: 'center',
     justifyContent: 'center',
-    minHeight: 48,
+    minHeight: 44,
+    flexDirection: 'row',
+    gap: spacing.sm,
   },
-  recordTripScreen_buttonStart: {
+  bottomCardButtonPrimary: {
     backgroundColor: colors.primary,
   },
-  recordTripScreen_buttonStop: {
+  bottomCardButtonStop: {
     backgroundColor: colors.error,
   },
-  recordTripScreen_buttonSecondary: {
+  bottomCardButtonSecondary: {
     backgroundColor: 'transparent',
     borderWidth: 1,
     borderColor: colors.primary,
   },
-  recordTripScreen_buttonDisabled: {
+  bottomCardButtonDisabled: {
     opacity: 0.7,
   },
-  recordTripScreen_buttonText: {
+  bottomCardButtonText: {
     color: colors.white,
     fontSize: fontSizes.medium,
     fontWeight: fontWeights.semibold,
   },
-  recordTripScreen_buttonTextSecondary: {
+  bottomCardButtonTextSecondary: {
     color: colors.primary,
-    fontSize: fontSizes.medium,
-    fontWeight: fontWeights.semibold,
-  },
-  recordTripScreen_eventsSection: {
-    flex: 1,
-    minHeight: 180,
-  },
-  recordTripScreen_eventsTitle: {
-    fontSize: fontSizes.body,
-    fontWeight: fontWeights.semibold,
-    color: colors.text,
-    marginBottom: spacing.sm,
-  },
-  recordTripScreen_eventsList: {
-    flex: 1,
-    backgroundColor: colors.background,
-    borderRadius: borderRadius.md,
-    borderWidth: 1,
-    borderColor: colors.border,
-  },
-  recordTripScreen_eventsListContent: {
-    padding: spacing.md,
-  },
-  recordTripScreen_eventsEmpty: {
-    color: colors.textSecondary,
-    fontSize: fontSizes.body,
-  },
-  recordTripScreen_eventRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: spacing.xs,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.backgroundSecondary,
-  },
-  recordTripScreen_eventTime: {
     fontSize: fontSizes.small,
-    color: colors.textSecondary,
-    marginRight: spacing.sm,
-  },
-  recordTripScreen_eventType: {
-    fontSize: 13,
-    color: colors.text,
-    flex: 1,
+    fontWeight: fontWeights.semibold,
   },
 });

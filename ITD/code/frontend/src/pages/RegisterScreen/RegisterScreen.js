@@ -64,11 +64,13 @@ export default function RegisterScreen({ navigation }) {
         navigation.navigate('Login');
       }
     } catch (err) {
-      const msg =
-        err.response?.data?.message ??
-        err.response?.data?.error ??
-        err.message ??
-        STRINGS.REGISTER_ERROR;
+      const isNetworkError = !err.response && (err.message === 'Network Error' || err.code === 'ERR_NETWORK');
+      const msg = isNetworkError
+        ? STRINGS.REGISTER_NETWORK_ERROR
+        : (err.response?.data?.message ??
+           err.response?.data?.error ??
+           err.message ??
+           STRINGS.REGISTER_ERROR);
       setError(msg);
     } finally {
       setLoading(false);

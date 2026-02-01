@@ -23,6 +23,7 @@ export const STRINGS = {
   PASSWORD_MIN_6: 'Password must be at least 6 characters.',
   REGISTER_SUCCESS_LOGIN: 'Registration successful. Log in manually.',
   REGISTER_ERROR: 'Registration failed. Please try again.',
+  REGISTER_NETWORK_ERROR: 'Cannot reach the server. If you are on a phone or emulator, set EXPO_PUBLIC_API_URL in frontend/.env to your PC IP (e.g. http://192.168.1.x:3000/api/v1). Ensure the backend is running (npm run dev in backend).',
 
   // Home
   HELLO_USER: 'Hello,',
@@ -74,12 +75,18 @@ export const STRINGS = {
   PUBLISH_PATH: 'Publish path (UC5)',
   GO_TO_PATHS: 'Go to paths',
   VIEW_REVIEWS: 'View reviews for this path',
+  FAVORITES: 'Favorites',
+  NO_FAVORITES: 'No saved paths. Save paths from the map or path list.',
+  LOADING_FAVORITES: 'Loading favorites…',
+  ERROR_LOADING_FAVORITES: 'Error loading favorites. Log in and try again.',
 
   // Path create / publish
   EASY: 'Easy',
   MEDIUM: 'Medium',
   HARD: 'Hard',
   ROUTE_NAME_REQUIRED: 'Route name is required.',
+  START_END_POINTS_REQUIRED: 'Set start and end points (search or use location).',
+  DISTANCE_REQUIRED: 'Enter or calculate distance.',
   PATH_CREATED: 'Path created',
   PATH_CREATED_MESSAGE: 'The path was created successfully.',
   VIEW_DETAIL: 'View detail',
@@ -159,6 +166,8 @@ export const STRINGS = {
   NO_MERGE_DATA: 'No specific merge data. Merges are applied in the background when syncing paths and trips.',
 
   // Record trip / Trip recording
+  START_A_TRIP: 'Start a trip',
+  TRIP_OPINIONS: 'Trip opinions',
   RECORD_TRIP: 'Record trip',
   TRIP_DETECTION_OBSTACLE: 'Trip Detection + Obstacle Detection',
   STATE: 'State',

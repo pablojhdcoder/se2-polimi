@@ -7,25 +7,34 @@ const startStatsConsumer = async () => {
         const connection = await amqp.connect(url);
         const channel = await connection.createChannel();
 
+        connection.on('error', (err) => {
+            console.error('[RabbitMQ] Consumer connection error:', err.message);
+        });
+        connection.on('close', () => {
+            console.warn('[RabbitMQ] Consumer connection closed');
+        });
+
         const queue = 'path_stats_update';
         await channel.assertQueue(queue, { durable: true });
 
         console.log(`[RabbitMQ] Consumer started for queue: ${queue}`);
 
         channel.consume(queue, async (msg) => {
-            if (msg !== null) {
-                const { pathId } = JSON.parse(msg.content.toString());
-                console.log(`[RabbitMQ] Processing stats update for path: ${pathId}`);
-
-                try {
-                    // This updates the path's dynamic metrics based on new ratings/trips
-                    await pathService.updatePathStats(pathId);
-                    channel.ack(msg);
-                } catch (error) {
-                    console.error(`[RabbitMQ] Error processing path ${pathId}:`, error);
-                    // Re-queue for retry if it's a transient error
-                    channel.nack(msg);
+            if (msg === null) return;
+            try {
+                const body = JSON.parse(msg.content.toString());
+                const pathId = body.pathId;
+                if (!pathId) {
+                    console.warn('[RabbitMQ] Message missing pathId, nacking');
+                    channel.nack(msg, false, false);
+                    return;
                 }
+                console.log(`[RabbitMQ] Processing stats update for path: ${pathId}`);
+                await pathService.updatePathStats(pathId);
+                channel.ack(msg);
+            } catch (error) {
+                console.error('[RabbitMQ] Error processing message:', error.message);
+                channel.nack(msg, false, false);
             }
         });
     } catch (error) {

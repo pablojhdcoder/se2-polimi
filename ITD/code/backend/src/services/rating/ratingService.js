@@ -4,23 +4,25 @@ const crypto = require('crypto');
 
 /**
  * List ratings, optionally filtered by pathId (for GET /reviews?pathId= and GET /ratings?pathId=).
- * @param {Object} params - { pathId?: string }
+ * Returns enriched shape for UI: pathName, userName, comment, rating.
+ * @param {Object} params - { pathId?: string, limit?: number }
  * @returns {Promise<Array>}
  */
 const getRatings = async (params = {}) => {
     if (params.pathId) {
-        return ratingRepository.getRatingsByPathId(params.pathId);
+        return ratingRepository.getRatingsByPathIdEnriched(params.pathId);
     }
-    return ratingRepository.getAllRatings(params.limit || 100);
+    return ratingRepository.getRatingsEnriched(params.limit || 100);
 };
 
 /**
  * Get a single rating by id (for GET /reviews/:id and GET /ratings/:id).
+ * Returns enriched shape for UI: pathName, userName, comment, rating.
  * @param {string} id
  * @returns {Promise<Object|null>}
  */
 const getRatingById = async (id) => {
-    return ratingRepository.getRatingById(id);
+    return ratingRepository.getRatingByIdEnriched(id);
 };
 
 /**

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import {
   View,
   Text,
@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import { createPath } from '../../services/pathsApi';
 import MapService from '../../services/map/MapService';
+import { MapboxMap } from '../../components';
 import { layoutStyles } from '../../styles';
 import { STRINGS } from '../../constants/strings';
 import { colors } from '../../styles';
@@ -41,6 +42,7 @@ export default function PathCreateManualScreen({ navigation }) {
   const [suggestionsLoading, setSuggestionsLoading] = useState(false);
   const [locationLoading, setLocationLoading] = useState(null);
   const [routeLoading, setRouteLoading] = useState(false);
+  const [routeGeoJSON, setRouteGeoJSON] = useState(null);
 
   const fetchStartSuggestions = useCallback(async (text) => {
     if (!text || text.length < 2) {
@@ -80,6 +82,7 @@ export default function PathCreateManualScreen({ navigation }) {
     const coords = feature.geometry?.coordinates;
     setStartCoords(coords ? { lng: coords[0], lat: coords[1] } : null);
     setStartSuggestions([]);
+    setRouteGeoJSON(null);
   }, []);
 
   const handleSelectEndSuggestion = useCallback((feature) => {
@@ -88,6 +91,7 @@ export default function PathCreateManualScreen({ navigation }) {
     const coords = feature.geometry?.coordinates;
     setEndCoords(coords ? { lng: coords[0], lat: coords[1] } : null);
     setEndSuggestions([]);
+    setRouteGeoJSON(null);
   }, []);
 
   const handleUseMyLocationStart = useCallback(async () => {
@@ -137,11 +141,36 @@ export default function PathCreateManualScreen({ navigation }) {
       } else {
         setError('Could not calculate route');
       }
+      if (directions?.path) {
+        setRouteGeoJSON(directions.path);
+      } else {
+        setRouteGeoJSON(null);
+      }
     } catch (e) {
       setError(e.message || 'Could not calculate route');
+      setRouteGeoJSON(null);
     } finally {
       setRouteLoading(false);
     }
+  }, [startCoords, endCoords]);
+
+  const mapCenter = useMemo(() => {
+    if (startCoords && endCoords) {
+      return [
+        (startCoords.lng + endCoords.lng) / 2,
+        (startCoords.lat + endCoords.lat) / 2,
+      ];
+    }
+    if (startCoords) return [startCoords.lng, startCoords.lat];
+    if (endCoords) return [endCoords.lng, endCoords.lat];
+    return null;
+  }, [startCoords, endCoords]);
+
+  const mapMarkers = useMemo(() => {
+    const m = [];
+    if (startCoords) m.push({ id: 'A', coords: [startCoords.lng, startCoords.lat], label: 'A' });
+    if (endCoords) m.push({ id: 'B', coords: [endCoords.lng, endCoords.lat], label: 'B' });
+    return m;
   }, [startCoords, endCoords]);
 
   const buildPayload = () => {
@@ -149,9 +178,21 @@ export default function PathCreateManualScreen({ navigation }) {
     if (description.trim()) payload.description = description.trim();
     if (startPoint.trim()) payload.startPoint = startPoint.trim();
     if (endPoint.trim()) payload.endPoint = endPoint.trim();
-    const dist = parseFloat(distance.replace(',', '.'));
-    if (!Number.isNaN(dist) && dist >= 0) payload.distance = dist;
+    const dist = parseFloat(String(distance).replace(',', '.'));
+    if (!Number.isNaN(dist) && dist >= 0) {
+      payload.distance = dist;
+      payload.length = dist;
+    }
     if (difficulty.trim()) payload.difficulty = difficulty.trim();
+    if (startCoords) {
+      payload.startX = startCoords.lng;
+      payload.startY = startCoords.lat;
+    }
+    if (endCoords) {
+      payload.endX = endCoords.lng;
+      payload.endY = endCoords.lat;
+    }
+    if (routeGeoJSON) payload.routeData = routeGeoJSON;
     return payload;
   };
 
@@ -159,6 +200,15 @@ export default function PathCreateManualScreen({ navigation }) {
     const trimmedName = name.trim();
     if (!trimmedName) {
       setError(STRINGS.ROUTE_NAME_REQUIRED);
+      return;
+    }
+    if (!startCoords || !endCoords) {
+      setError(STRINGS.START_END_POINTS_REQUIRED);
+      return;
+    }
+    const dist = parseFloat(String(distance).replace(',', '.'));
+    if (Number.isNaN(dist) || dist < 0) {
+      setError(STRINGS.DISTANCE_REQUIRED);
       return;
     }
     setError(null);
@@ -198,6 +248,15 @@ export default function PathCreateManualScreen({ navigation }) {
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       keyboardVerticalOffset={Platform.OS === 'ios' ? 80 : 0}
     >
+      <View style={styles.pathCreateManualScreen_mapWrap}>
+        <MapboxMap
+          center={mapCenter}
+          zoom={mapMarkers.length >= 2 ? 11 : 12}
+          routeGeoJSON={routeGeoJSON}
+          markers={mapMarkers}
+          style={styles.pathCreateManualScreen_map}
+        />
+      </View>
       <ScrollView
         style={styles.pathCreateManualScreen_scroll}
         contentContainerStyle={styles.pathCreateManualScreen_content}
@@ -223,9 +282,9 @@ export default function PathCreateManualScreen({ navigation }) {
             onChangeText={(text) => {
               setStartPoint(text);
               setStartCoords(null);
+              setRouteGeoJSON(null);
               fetchStartSuggestions(text);
             }}
-            onBlur={() => setTimeout(() => setStartSuggestions([]), 200)}
             editable={!submitting}
           />
           {suggestionsLoading && startSuggestions.length === 0 && startPoint.length >= 2 ? (
@@ -273,9 +332,9 @@ export default function PathCreateManualScreen({ navigation }) {
             onChangeText={(text) => {
               setEndPoint(text);
               setEndCoords(null);
+              setRouteGeoJSON(null);
               fetchEndSuggestions(text);
             }}
-            onBlur={() => setTimeout(() => setEndSuggestions([]), 200)}
             editable={!submitting}
           />
           {suggestionsLoading && endSuggestions.length === 0 && endPoint.length >= 2 ? (

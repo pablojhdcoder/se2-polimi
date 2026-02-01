@@ -7,3 +7,4 @@ export { default as OfflineBanner } from './OfflineBanner/OfflineBanner';
 export { default as PendingSyncBanner } from './PendingSyncBanner/PendingSyncBanner';
 export { default as Header } from './Header/Header';
 export { default as Avatar } from './Avatar/Avatar';
+export { MapboxMap } from './map';

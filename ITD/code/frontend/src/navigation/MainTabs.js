@@ -9,6 +9,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { theme } from '../styles';
 import {
+  MapScreen,
+  PathCreateManualScreen,
   ReviewsScreen,
   ReviewDetailScreen,
   RecordTripScreen,
@@ -50,8 +52,18 @@ function PastTripsStack() {
   );
 }
 
+function MapStack() {
+  const Stack = createStackNavigator();
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Map" component={MapScreen} />
+      <Stack.Screen name="PathCreateManual" component={PathCreateManualScreen} />
+    </Stack.Navigator>
+  );
+}
+
 function TabIcon({ name, focused }) {
-  const icons = { Ratings: '★', StartTrip: '🚴', PastTrips: '📅' };
+  const icons = { Map: '🗺️', Ratings: '★', StartTrip: '🚴', PastTrips: '📅' };
   return (
     <View style={styles.iconWrap}>
       <Text style={[styles.icon, focused && styles.iconActive]}>
@@ -78,6 +90,11 @@ export default function MainTabs() {
         ),
       })}
     >
+      <Tab.Screen
+        name="Map"
+        component={MapStack}
+        options={{ tabBarLabel: 'Map' }}
+      />
       <Tab.Screen
         name="Ratings"
         component={RatingsStack}

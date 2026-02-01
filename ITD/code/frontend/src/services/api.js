@@ -62,9 +62,9 @@ apiClient.interceptors.response.use(
       }
     }
 
-    // Network error: notify UI (offline)
+    // Network error: notify UI (offline). Use warn to avoid red "Console Error" overlay in app.
     if (!error.response) {
-      console.error('Network error:', error.message);
+      console.warn('Network error:', error.message);
       if (networkStatusCallbacks?.setOffline) {
         networkStatusCallbacks.setOffline();
       }
