@@ -57,7 +57,6 @@ app.use((err, req, res, _next) => {
 
 const { connectRedis } = require('./config/redis');
 const { connectRabbitMQ } = require('./config/rabbitmq');
-const { startStatsConsumer } = require('./services/information-merging/statsConsumer');
 
 const PORT = process.env.PORT || 3000;
 
@@ -67,7 +66,6 @@ if (require.main === module) {
     try {
       await connectRedis();
       await connectRabbitMQ();
-      await startStatsConsumer(); // Start the background worker
     } catch (err) {
       console.error('Failed to initialize infrastructure:', err);
     }

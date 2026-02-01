@@ -1,6 +1,6 @@
 /**
  * TripDetailScreen - Drill-down view for a single trip (DD ch03 "Past trips").
- * Shows trip info and link to PathDataScreen when trip has pathId.
+ * Shows trip info and link to PathDetail when trip has pathId.
  */
 
 import React from 'react';
@@ -13,14 +13,15 @@ import styles from './TripDetailScreen.styles';
 function formatDate(ts) {
   if (ts == null) return '—';
   try {
-    const d = new Date(typeof ts === 'number' ? ts : parseInt(ts, 10));
+    const d = typeof ts === 'number' || typeof ts === 'string' ? new Date(ts) : new Date(Number(ts));
     return isNaN(d.getTime()) ? '—' : d.toLocaleDateString();
   } catch {
     return '—';
   }
 }
 
-function formatDuration(startTime, endTime) {
+function formatDuration(startTime, endTime, tripLength) {
+  if (tripLength != null && !isNaN(Number(tripLength))) return `${Number(tripLength)} min`;
   if (startTime == null || endTime == null) return '—';
   try {
     const start = typeof startTime === 'number' ? startTime : parseInt(startTime, 10);
@@ -33,13 +34,25 @@ function formatDuration(startTime, endTime) {
   }
 }
 
+function getPointsCount(trip) {
+  const track = trip.track;
+  if (Array.isArray(track) && track.length > 0) return track.length;
+  const coords = trip.recorded_route?.coordinates ?? trip.recordedRoute?.coordinates;
+  return Array.isArray(coords) ? coords.length : 0;
+}
+
 export default function TripDetailScreen({ route, navigation }) {
   const trip = route?.params?.trip ?? {};
   const pathId = trip.pathId ?? trip.path_id;
   const path = trip.path;
-  const points = trip.track?.length ?? 0;
-  const dateStr = formatDate(trip.startTime ?? trip.start_time);
-  const durationStr = formatDuration(trip.startTime ?? trip.start_time, trip.endTime ?? trip.end_time);
+  const points = getPointsCount(trip);
+  const dateTs = trip.startTime ?? trip.start_time ?? trip.trip_date;
+  const dateStr = formatDate(dateTs);
+  const durationStr = formatDuration(
+    trip.startTime ?? trip.start_time,
+    trip.endTime ?? trip.end_time,
+    trip.tripLength ?? trip.trip_length
+  );
 
   return (
     <ScrollView
@@ -62,7 +75,7 @@ export default function TripDetailScreen({ route, navigation }) {
         <Button
           title={STRINGS.VIEW_PATH_DATA_FOR_TRIP}
           variant="outline"
-          onPress={() => navigation.navigate('PathData', { pathId, path })}
+          onPress={() => navigation.navigate('PathDetail', { pathId, path })}
           style={styles.tripDetail_button}
         />
       ) : null}

@@ -10,9 +10,6 @@ const connectRabbitMQ = async () => {
       connection = await amqp.connect(url);
       channel = await connection.createChannel();
       console.log('Connected to RabbitMQ');
-
-      // Define queues
-      await channel.assertQueue('path_stats_update', { durable: true });
     }
   } catch (error) {
     console.error('RabbitMQ connection error:', error);

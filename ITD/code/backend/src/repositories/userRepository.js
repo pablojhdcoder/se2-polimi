@@ -52,10 +52,44 @@ const getAllUsers = async () => {
     return res.rows;
 };
 
+/**
+ * Update user profile fields. Only updates columns present in fields.
+ * @param {string} userId
+ * @param {Object} fields - Allowed: full_name, email, phone_number, profile_picture
+ */
+const updateUser = async (userId, fields) => {
+    const allowed = ['full_name', 'email', 'phone_number', 'profile_picture'];
+    const setClauses = [];
+    const values = [];
+    let paramIndex = 1;
+    for (const key of allowed) {
+        if (Object.prototype.hasOwnProperty.call(fields, key)) {
+            setClauses.push(`${key} = $${paramIndex}`);
+            values.push(fields[key] === '' ? null : fields[key]);
+            paramIndex += 1;
+        }
+    }
+    if (setClauses.length === 0) {
+        const user = await getUserById(userId);
+        return user;
+    }
+    setClauses.push('updated_at = CURRENT_TIMESTAMP');
+    values.push(userId);
+    const sql = `
+        UPDATE users
+        SET ${setClauses.join(', ')}
+        WHERE id = $${paramIndex}
+        RETURNING *
+    `;
+    const res = await query(sql, values);
+    return res.rows[0] || null;
+};
+
 module.exports = {
     createUser,
     getUserByUsername,
     getUserByEmail,
     getUserById,
-    getAllUsers
+    getAllUsers,
+    updateUser
 };

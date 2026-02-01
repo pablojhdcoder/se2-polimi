@@ -13,7 +13,6 @@ import {
   ReviewDetailScreen,
   TripStatisticsScreen,
   TripDetailScreen,
-  PathDataScreen,
 } from '../pages';
 import { theme } from '../styles';
 import { STRINGS } from '../constants/strings';
@@ -134,11 +133,6 @@ function MainStackNavigator() {
         name="TripDetail"
         component={TripDetailScreen}
         options={{ title: STRINGS.TRIP_DETAIL }}
-      />
-      <Stack.Screen
-        name="PathData"
-        component={PathDataScreen}
-        options={{ title: STRINGS.PATH_DATA_UC9 }}
       />
     </Stack.Navigator>
   );

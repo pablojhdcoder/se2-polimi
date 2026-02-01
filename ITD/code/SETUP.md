@@ -54,27 +54,26 @@ docker ps
 
 Deberías ver: **bbp-postgres**, **bbp-redis**, **bbp-rabbitmq**.
 
-### 2. Crear las tablas en la base de datos (solo la primera vez o tras borrar volúmenes)
+### 2. Aplicar esquema y migraciones (solo la primera vez o tras borrar volúmenes)
 
 Desde la carpeta **`code/backend/`**:
 
 ```powershell
 cd c:\Users\pablo\Desktop\Informatica\3\Polimi\SoftwareEngineering2\Project\PabloJose\ITD\code\backend
 npm install
-npm run migrate
+npm run migrate:all
 ```
 
-Debe aparecer: **Schema aplicado correctamente.**
+Eso ejecuta en orden:
 
-**Si ya tenías la base de datos creada antes** y ves el error `null value in column "path_id" of relation "trips"` al iniciar un viaje automático, ejecuta una vez la migración que permite `path_id` NULL:
+1. **Schema base** (`schema.sql`): tablas `users`, `paths`, `ratings`, `trips`, `potholes`, `saved_paths`.
+2. **Migraciones**: columnas en `paths` (`duration_minutes`, `is_published`, `route_date`, columnas de weather) y `path_id` nullable en `trips`.
 
-```powershell
-node migrations/alter-trips-path-id-nullable.js
-```
+Debe aparecer: **Todas las migraciones aplicadas correctamente.**
 
-Así los viajes grabados sin ruta asociada (p. ej. "Store locally" en Review path) podrán guardarse y el aviso "pending item(s) to sync" desaparecerá al sincronizar.
+Si solo quieres el esquema base (sin migraciones posteriores), usa `npm run migrate` en lugar de `npm run migrate:all`.
 
-Si falla con "password authentication failed", la **`DB_PASSWORD`** en **`backend/.env`** no coincide con la que usó el contenedor Postgres. Como levantas con `--env-file backend/.env`, ambas son la misma; si ya tenías contenedores creados antes con otra contraseña, pon en **`backend/.env`** esa misma contraseña o recrea todo con `docker-compose down -v` y vuelve al paso 1.
+Si falla con "password authentication failed", la **`DB_PASSWORD`** en **`backend/.env`** no coincide con la del contenedor Postgres. Ajusta **`backend/.env`** o recrea contenedores con `docker-compose down -v` y vuelve al paso 1.
 
 ### 3. Arrancar el backend
 

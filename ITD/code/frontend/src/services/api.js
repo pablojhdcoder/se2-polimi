@@ -79,4 +79,14 @@ apiClient.interceptors.response.use(
   }
 );
 
+/**
+ * Update current user profile. Sends PATCH /auth/me with full_name, email, phone_number, profile_picture.
+ * @param {Object} data - { full_name?, email?, phone_number?, profile_picture? }
+ * @returns {Promise<Object>} Updated user (without password)
+ */
+export async function updateProfile(data) {
+  const response = await apiClient.patch('/auth/me', data);
+  return response.data;
+}
+
 export default apiClient;

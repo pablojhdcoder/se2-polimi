@@ -12,9 +12,6 @@ jest.mock('../../src/config/rabbitmq', () => ({
     connectRabbitMQ: jest.fn().mockResolvedValue(undefined),
     sendToQueue: jest.fn()
 }));
-jest.mock('../../src/services/information-merging/statsConsumer', () => ({
-    startStatsConsumer: jest.fn().mockResolvedValue(undefined)
-}));
 jest.mock('../../src/repositories/tripRepository');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your_fallback_secret';

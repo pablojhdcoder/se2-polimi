@@ -9,9 +9,6 @@ jest.mock('../../src/config/redis', () => ({
 jest.mock('../../src/config/rabbitmq', () => ({
     connectRabbitMQ: jest.fn().mockResolvedValue(undefined)
 }));
-jest.mock('../../src/services/information-merging/statsConsumer', () => ({
-    startStatsConsumer: jest.fn().mockResolvedValue(undefined)
-}));
 
 describe('Server Infrastructure', () => {
     describe('GET /health', () => {

@@ -3,7 +3,6 @@ const potholeRepository = require('../../repositories/potholeRepository');
 const userRepository = require('../../repositories/userRepository');
 const weatherService = require('../external/weatherService');
 const emailService = require('../external/emailService');
-const rabbitmq = require('../../config/rabbitmq');
 const { redisClient, connectRedis } = require('../../config/redis');
 const crypto = require('crypto');
 
@@ -101,11 +100,6 @@ const updateTripTrack = async (tripId, routeData = {}) => {
         };
 
         const updatedTrip = await tripRepository.updateTripRoute(tripId, finalRouteData);
-
-        // Async: Update path stats (only when trip is linked to a path)
-        if (updatedTrip.path_id) {
-            rabbitmq.sendToQueue('path_stats_update', { pathId: updatedTrip.path_id });
-        }
 
         // Email Summary
         try {

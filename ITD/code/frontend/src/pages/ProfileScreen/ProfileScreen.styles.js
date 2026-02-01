@@ -89,4 +89,34 @@ export default StyleSheet.create({
     marginTop: spacing.md,
     alignSelf: 'stretch',
   },
+  profileScreen_editCard: {
+    backgroundColor: colors.cardBackground,
+    borderRadius: radius.medium,
+    padding: spacing.lg,
+    marginBottom: spacing.xl,
+    ...shadows.cardLight,
+  },
+  profileScreen_editTitle: {
+    fontSize: fontSizes.title,
+    fontWeight: fontWeights.bold,
+    color: colors.text,
+    marginBottom: spacing.md,
+  },
+  profileScreen_editInput: {
+    marginBottom: spacing.md,
+  },
+  profileScreen_editError: {
+    fontSize: fontSizes.small,
+    color: colors.error,
+    marginBottom: spacing.sm,
+  },
+  profileScreen_editActions: {
+    flexDirection: 'row',
+    gap: spacing.md,
+    marginTop: spacing.sm,
+    justifyContent: 'flex-end',
+  },
+  profileScreen_editActionButton: {
+    minWidth: 100,
+  },
 });

@@ -12,7 +12,7 @@ import {
   ActivityIndicator,
   Switch,
 } from 'react-native';
-import { createPath } from '../../services/pathsApi';
+import { createPath, getWeatherAtOrigin } from '../../services/pathsApi';
 import MapService from '../../services/map/MapService';
 import { MapboxMap } from '../../components';
 import { layoutStyles } from '../../styles';
@@ -45,6 +45,25 @@ export default function PathCreateManualScreen({ navigation }) {
   const [routeLoading, setRouteLoading] = useState(false);
   const [routeGeoJSON, setRouteGeoJSON] = useState(null);
   const [publish, setPublish] = useState(true);
+  const [originWeather, setOriginWeather] = useState(null);
+  const [weatherLoading, setWeatherLoading] = useState(false);
+  const [weatherError, setWeatherError] = useState(null);
+  const [durationMinutes, setDurationMinutes] = useState('');
+
+  const handleAddWeather = useCallback(async () => {
+    if (!startCoords) return;
+    setWeatherError(null);
+    setWeatherLoading(true);
+    try {
+      const data = await getWeatherAtOrigin(startCoords.lat, startCoords.lng);
+      setOriginWeather(data);
+    } catch (err) {
+      setWeatherError(err.response?.data?.error || err.message || STRINGS.UNABLE_TO_LOAD_WEATHER);
+      setOriginWeather(null);
+    } finally {
+      setWeatherLoading(false);
+    }
+  }, [startCoords]);
 
   const fetchStartSuggestions = useCallback(async (text) => {
     if (!text || text.length < 2) {
@@ -85,6 +104,8 @@ export default function PathCreateManualScreen({ navigation }) {
     setStartCoords(coords ? { lng: coords[0], lat: coords[1] } : null);
     setStartSuggestions([]);
     setRouteGeoJSON(null);
+    setOriginWeather(null);
+    setWeatherError(null);
   }, []);
 
   const handleSelectEndSuggestion = useCallback((feature) => {
@@ -99,6 +120,8 @@ export default function PathCreateManualScreen({ navigation }) {
   const handleUseMyLocationStart = useCallback(async () => {
     setLocationLoading('start');
     setError(null);
+    setOriginWeather(null);
+    setWeatherError(null);
     try {
       const loc = await MapService.getCurrentLocation();
       setStartCoords({ lng: loc.longitude, lat: loc.latitude });
@@ -198,6 +221,20 @@ export default function PathCreateManualScreen({ navigation }) {
     }
     if (routeGeoJSON) payload.routeData = routeGeoJSON;
     payload.publish = publish;
+    const durationTrimmed = durationMinutes?.trim();
+    if (durationTrimmed) {
+      const mins = parseInt(durationTrimmed, 10);
+      if (!Number.isNaN(mins) && mins > 0) payload.durationMinutes = mins;
+    }
+    if (originWeather) {
+      payload.temperature = originWeather.temperature;
+      payload.windSpeed = originWeather.windSpeed;
+      payload.windDegree = originWeather.windDegree;
+      payload.windGust = originWeather.windGust;
+      payload.visibility = originWeather.visibility;
+      payload.rain = originWeather.rain;
+      payload.clouds = originWeather.clouds;
+    }
     return payload;
   };
 
@@ -324,6 +361,61 @@ export default function PathCreateManualScreen({ navigation }) {
           </TouchableOpacity>
         </View>
 
+        {startCoords ? (
+          <View style={styles.pathCreateManualScreen_weatherCard}>
+            <Text style={styles.pathCreateManualScreen_weatherTitle}>{STRINGS.WEATHER_AT_ORIGIN}</Text>
+            <TouchableOpacity
+              style={styles.pathCreateManualScreen_weatherButton}
+              onPress={handleAddWeather}
+              disabled={submitting || weatherLoading}
+            >
+              {weatherLoading ? (
+                <ActivityIndicator size="small" color="#fff" />
+              ) : (
+                <Text style={styles.pathCreateManualScreen_weatherButtonText}>{STRINGS.ADD_WEATHER_AUTOMATICALLY}</Text>
+              )}
+            </TouchableOpacity>
+            {weatherError ? (
+              <Text style={styles.pathCreateManualScreen_weatherError}>{weatherError}</Text>
+            ) : originWeather ? (
+              <>
+                <View style={styles.pathCreateManualScreen_weatherRow}>
+                  <Text style={styles.pathCreateManualScreen_weatherLabel}>{STRINGS.TEMPERATURE}</Text>
+                  <Text style={styles.pathCreateManualScreen_weatherValue}>
+                    {originWeather.temperature != null ? `${Math.round(originWeather.temperature)} °C` : '—'}
+                  </Text>
+                </View>
+                <View style={styles.pathCreateManualScreen_weatherRow}>
+                  <Text style={styles.pathCreateManualScreen_weatherLabel}>{STRINGS.WIND}</Text>
+                  <Text style={styles.pathCreateManualScreen_weatherValue}>
+                    {originWeather.windSpeed != null
+                      ? `${originWeather.windSpeed} m/s${originWeather.windDegree != null ? `, ${originWeather.windDegree}°` : ''}`
+                      : '—'}
+                  </Text>
+                </View>
+                <View style={styles.pathCreateManualScreen_weatherRow}>
+                  <Text style={styles.pathCreateManualScreen_weatherLabel}>{STRINGS.VISIBILITY}</Text>
+                  <Text style={styles.pathCreateManualScreen_weatherValue}>
+                    {originWeather.visibility != null ? `${(originWeather.visibility / 1000).toFixed(1)} km` : '—'}
+                  </Text>
+                </View>
+                <View style={styles.pathCreateManualScreen_weatherRow}>
+                  <Text style={styles.pathCreateManualScreen_weatherLabel}>{STRINGS.RAIN}</Text>
+                  <Text style={styles.pathCreateManualScreen_weatherValue}>
+                    {originWeather.rain != null ? `${originWeather.rain} mm` : '—'}
+                  </Text>
+                </View>
+                <View style={styles.pathCreateManualScreen_weatherRow}>
+                  <Text style={styles.pathCreateManualScreen_weatherLabel}>{STRINGS.CLOUDS}</Text>
+                  <Text style={styles.pathCreateManualScreen_weatherValue}>
+                    {originWeather.clouds != null ? `${originWeather.clouds}%` : '—'}
+                  </Text>
+                </View>
+              </>
+            ) : null}
+          </View>
+        ) : null}
+
         <Text style={styles.pathCreateManualScreen_label}>{STRINGS.END_POINT}</Text>
         <View>
           <TextInput
@@ -426,6 +518,17 @@ export default function PathCreateManualScreen({ navigation }) {
           onChangeText={setDescription}
           multiline
           numberOfLines={4}
+          editable={!submitting}
+        />
+
+        <Text style={styles.pathCreateManualScreen_label}>{STRINGS.ROUTE_DURATION}</Text>
+        <TextInput
+          style={styles.pathCreateManualScreen_input}
+          placeholder={STRINGS.ROUTE_DURATION_PLACEHOLDER}
+          placeholderTextColor={colors.textSecondary}
+          value={durationMinutes}
+          onChangeText={setDurationMinutes}
+          keyboardType="number-pad"
           editable={!submitting}
         />
 
