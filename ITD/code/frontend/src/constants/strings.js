@@ -122,6 +122,10 @@ export const STRINGS = {
   BACK_TO_PATHS: 'Back to paths',
   OBSTACLES_COUNT: 'obstacle(s)',
 
+  // Map zoom
+  ZOOM_IN: 'Zoom in',
+  ZOOM_OUT: 'Zoom out',
+
   // Search
   SEARCH_PATHS_DESCRIPTION: 'The visualization of the information about possible paths between an origin and a destination specified by the user.',
   ORIGIN: 'Origin',

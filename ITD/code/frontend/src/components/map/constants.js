@@ -9,6 +9,12 @@ export const DEFAULT_CENTER = [9.19, 45.46];
 /** Default zoom level (0–20). */
 export const DEFAULT_ZOOM = 12;
 
+/** Min zoom level for map. */
+export const ZOOM_MIN = 0;
+
+/** Max zoom level for map. */
+export const ZOOM_MAX = 20;
+
 /** Polyline stroke color for route. */
 export const ROUTE_STROKE_COLOR = '#2563eb';
 

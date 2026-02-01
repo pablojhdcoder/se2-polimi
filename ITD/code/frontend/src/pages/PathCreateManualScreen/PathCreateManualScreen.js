@@ -287,9 +287,6 @@ export default function PathCreateManualScreen({ navigation }) {
             }}
             editable={!submitting}
           />
-          {suggestionsLoading && startSuggestions.length === 0 && startPoint.length >= 2 ? (
-            <ActivityIndicator size="small" style={{ marginVertical: 4 }} />
-          ) : null}
           {startSuggestions.length > 0 ? (
             <View style={styles.pathCreateManualScreen_suggestions}>
               <FlatList
@@ -337,9 +334,6 @@ export default function PathCreateManualScreen({ navigation }) {
             }}
             editable={!submitting}
           />
-          {suggestionsLoading && endSuggestions.length === 0 && endPoint.length >= 2 ? (
-            <ActivityIndicator size="small" style={{ marginVertical: 4 }} />
-          ) : null}
           {endSuggestions.length > 0 ? (
             <View style={styles.pathCreateManualScreen_suggestions}>
               <FlatList
@@ -373,6 +367,15 @@ export default function PathCreateManualScreen({ navigation }) {
         </View>
 
         <Text style={styles.pathCreateManualScreen_label}>{STRINGS.DISTANCE_KM}</Text>
+        <TextInput
+          style={styles.pathCreateManualScreen_input}
+          placeholder={STRINGS.DISTANCE_PLACEHOLDER}
+          placeholderTextColor={colors.textSecondary}
+          value={distance}
+          onChangeText={setDistance}
+          keyboardType="decimal-pad"
+          editable={!submitting}
+        />
         {startCoords && endCoords ? (
           <TouchableOpacity
             style={styles.pathCreateManualScreen_calcButton}
@@ -386,15 +389,6 @@ export default function PathCreateManualScreen({ navigation }) {
             )}
           </TouchableOpacity>
         ) : null}
-        <TextInput
-          style={styles.pathCreateManualScreen_input}
-          placeholder={STRINGS.DISTANCE_PLACEHOLDER}
-          placeholderTextColor={colors.textSecondary}
-          value={distance}
-          onChangeText={setDistance}
-          keyboardType="decimal-pad"
-          editable={!submitting}
-        />
 
         <Text style={styles.pathCreateManualScreen_label}>{STRINGS.DIFFICULTY}</Text>
         <View style={styles.pathCreateManualScreen_difficultyRow}>
