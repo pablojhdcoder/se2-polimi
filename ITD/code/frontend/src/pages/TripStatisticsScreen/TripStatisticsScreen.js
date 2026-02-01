@@ -63,15 +63,6 @@ export default function TripStatisticsScreen({ navigation }) {
   }, 0);
   const totalDurationMin = Math.round(totalDuration / 60000);
 
-  const goToRecordTrip = () => {
-    const parent = navigation.getParent?.();
-    if (parent) {
-      navigation.navigate('StartTrip', { screen: 'TripRecording' });
-    } else {
-      navigation.navigate('TripRecording');
-    }
-  };
-
   const goToPaths = () => {
     navigation.navigate('PathList');
   };
@@ -124,11 +115,6 @@ export default function TripStatisticsScreen({ navigation }) {
         })
       )}
 
-      <Button
-        title={STRINGS.RECORD_NEW_TRIP}
-        onPress={goToRecordTrip}
-        style={styles.tripStatisticsScreen_button}
-      />
       <Button
         title={STRINGS.PATHS}
         variant="outline"

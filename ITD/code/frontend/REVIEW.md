@@ -7,7 +7,7 @@
 
 - **Reviewed** all code in `frontend/src/` for correctness, consistency, and patterns.
 - **Enforced English** across the codebase: UI strings, comments, JSDoc, and log/error messages.
-- **Fixed** one correctness/consistency issue and added API compatibility for RecordTripScreen.
+- **Fixed** one correctness/consistency issue. (RecordTripScreen and trip/obstacle detection were later removed; paths are created only manually.)
 
 ---
 
@@ -18,14 +18,9 @@
 - **Issue:** `PathList` used `refreshControl` in `FlatList` but did not declare it in the function parameters. Callers (e.g. `PathListScreen`) were already passing `refreshControl`.
 - **Change:** Added `refreshControl` to the component props and JSDoc so the API is explicit and pull-to-refresh works as intended.
 
-### 1.2 TripDetectionEngine – RecordTripScreen compatibility
+### 1.2 (Historical) TripDetectionEngine – RecordTripScreen
 
-- **Issue:** `RecordTripScreen` expected `TripState` (IDLE, DETECTING, IN_TRIP, STOPPING), `start()`, `stop()`, `getCurrentTripDurationMs()`, and assignable `onStateChange` / `onTripStart` / `onTripEnd`. The engine only exposed `startRecording()` / `stopRecording()` and method-based `onTripStart(cb)` / `onTripEnd(cb)`.
-- **Change:**  
-  - Exported `TripState` with the above state aliases.  
-  - Added `start()`, `stop()`, `stopTripManually()`, and `getCurrentTripDurationMs()`.  
-  - Supported assignable `onStateChange`, `onTripStart`, `onTripEnd` and invoked them from the existing emission logic.  
-  This keeps `TripRecordingScreen` unchanged and makes `RecordTripScreen` work with the same engine.
+- Trip recording and obstacle detection were later removed. Paths are now created only via PathCreateManualScreen (Create path tab).
 
 ---
 
@@ -40,11 +35,11 @@
 
 - File/function comments and JSDoc were translated to English in:
   - **Components:** Button, Input, Card, Loading, ErrorMessage, OfflineBanner, PendingSyncBanner, PathCard, PathList.
-  - **Screens:** Login, Register, Home, PathList, PathDetail, PathCreateManual, PathSearch, PublishPath, Reviews, ReviewDetail, PathData, TripStatistics, MergeInfo, RecordTrip, TripRecording.
+  - **Screens:** Login, Register, Home, PathList, PathDetail, PathCreateManual, PathSearch, PublishPath, Reviews, ReviewDetail, PathData, TripStatistics, MergeInfo.
   - **Navigation:** AuthContext, AuthStack, MainStack, RootNavigator.
   - **Storage:** storageService, syncQueue, constants, index.
   - **Services:** api, pathsApi, requestWithRetry, reviewsApi, tripsApi, syncQueueProcessor.
-  - **Sensors:** TripDetectionEngine, ObstacleDetectionModule and its index.
+  - **Sensors:** (trip-detection and obstacle-detection were later removed.)
   - **Contexts:** NetworkStatusContext.
 
 ### 2.3 Log and error messages
@@ -71,7 +66,7 @@
 - **Navigation:** AuthContext, AuthStack, MainStack, RootNavigator.
 - **Storage:** storageService, syncQueue, constants, index.
 - **Services:** api, pathsApi, requestWithRetry, reviewsApi, tripsApi, syncQueueProcessor.
-- **Sensors:** TripDetectionEngine, trip-detection index, ObstacleDetectionModule, obstacle-detection index.
+- **Sensors:** (removed: trip-detection, obstacle-detection.)
 - **Contexts:** NetworkStatusContext.
 - **New:** `src/constants/strings.js`, `frontend/REVIEW.md`.
 

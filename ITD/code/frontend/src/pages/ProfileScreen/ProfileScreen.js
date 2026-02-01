@@ -1,7 +1,6 @@
 /**
  * ProfileScreen - User profile and settings (DD ch03).
- * Layout aligned with UI design: user card, options list (Profil, Personal info,
- * Activity statistics, Notifications, Settings), Log out button.
+ * User card, options (Profil + Edit, Activity statistics, Notifications), Log out button.
  */
 
 import React, { useState, useCallback, useEffect } from 'react';
@@ -25,10 +24,8 @@ function estimateDistanceKm(trips) {
 
 const OPTION_ICONS = {
   profile: '⚙',
-  document: '📄',
   pin: '📍',
   bell: '🔔',
-  settings: '⚙',
   chevron: '›',
 };
 
@@ -96,16 +93,6 @@ export default function ProfileScreen({ navigation }) {
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={styles.profileScreen_optionRow}
-          activeOpacity={0.7}
-          onPress={() => {}}
-        >
-          <Text style={styles.profileScreen_optionIcon}>{OPTION_ICONS.document}</Text>
-          <Text style={styles.profileScreen_optionLabel}>{STRINGS.PERSONAL_INFO}</Text>
-          <Text style={styles.profileScreen_chevron}>{OPTION_ICONS.chevron}</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
           style={[styles.profileScreen_optionRow, styles.profileScreen_optionRowLast]}
           activeOpacity={0.7}
           onPress={() => navigation.navigate('TripStatistics')}
@@ -120,7 +107,7 @@ export default function ProfileScreen({ navigation }) {
       </View>
 
       <View style={styles.profileScreen_optionsCard}>
-        <View style={styles.profileScreen_optionRow}>
+        <View style={[styles.profileScreen_optionRow, styles.profileScreen_optionRowLast]}>
           <Text style={styles.profileScreen_optionIcon}>{OPTION_ICONS.bell}</Text>
           <Text style={styles.profileScreen_optionLabel}>{STRINGS.NOTIFICATIONS}</Text>
           <Switch
@@ -130,23 +117,13 @@ export default function ProfileScreen({ navigation }) {
             thumbColor={colors.background}
           />
         </View>
-
-        <TouchableOpacity
-          style={[styles.profileScreen_optionRow, styles.profileScreen_optionRowLast]}
-          activeOpacity={0.7}
-          onPress={() => {}}
-        >
-          <Text style={styles.profileScreen_optionIcon}>{OPTION_ICONS.settings}</Text>
-          <Text style={styles.profileScreen_optionLabel}>{STRINGS.SETTINGS}</Text>
-          <Text style={styles.profileScreen_chevron}>{OPTION_ICONS.chevron}</Text>
-        </TouchableOpacity>
       </View>
 
       <Button
         title={STRINGS.LOG_OUT}
         onPress={logout}
-        variant="secondary"
-        style={styles.profileScreen_logOutButton}
+        variant="primary"
+        style={[layoutStyles.buttonSpacing, styles.profileScreen_logOutButton]}
       />
     </ScrollView>
   );

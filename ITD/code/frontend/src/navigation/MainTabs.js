@@ -1,5 +1,5 @@
 /**
- * Bottom tab navigator per DD: Ratings (star), Start trip (bike), Past trips (calendar).
+ * Bottom tab navigator: Map, Ratings, Create path, Past trips.
  * Uses theme colors and active state.
  */
 
@@ -13,7 +13,6 @@ import {
   PathCreateManualScreen,
   ReviewsScreen,
   ReviewDetailScreen,
-  RecordTripScreen,
   TripStatisticsScreen,
   MergeInfoScreen,
 } from '../pages';
@@ -31,11 +30,11 @@ function RatingsStack() {
   );
 }
 
-function StartTripStack() {
+function CreatePathStack() {
   const Stack = createStackNavigator();
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="TripRecording" component={RecordTripScreen} />
+      <Stack.Screen name="PathCreateManual" component={PathCreateManualScreen} />
     </Stack.Navigator>
   );
 }
@@ -61,7 +60,7 @@ function MapStack() {
 }
 
 function TabIcon({ name, focused }) {
-  const icons = { Map: '🗺️', Ratings: '★', StartTrip: '🚴', PastTrips: '📅' };
+  const icons = { Map: '🗺️', Ratings: '★', CreatePath: '🚴', PastTrips: '📅' };
   return (
     <View style={styles.iconWrap}>
       <Text style={[styles.icon, focused && styles.iconActive]}>
@@ -99,9 +98,9 @@ export default function MainTabs() {
         options={{ tabBarLabel: 'Ratings' }}
       />
       <Tab.Screen
-        name="StartTrip"
-        component={StartTripStack}
-        options={{ tabBarLabel: 'Start trip' }}
+        name="CreatePath"
+        component={CreatePathStack}
+        options={{ tabBarLabel: 'Create path' }}
       />
       <Tab.Screen
         name="PastTrips"

@@ -9,14 +9,12 @@ import {
   PathSearchScreen,
   PathCreateManualScreen,
   PublishPathScreen,
-  RecordTripScreen,
   ReviewsScreen,
   ReviewDetailScreen,
   TripStatisticsScreen,
   TripDetailScreen,
   PathDataScreen,
   MergeInfoScreen,
-  ReviewDetectedPathScreen,
 } from '../pages';
 import { theme } from '../styles';
 import { STRINGS } from '../constants/strings';
@@ -44,7 +42,7 @@ function HeaderRight({ navigation, user }) {
 
 /**
  * Main stack when user is authenticated.
- * Initial: MainTabs (Ratings, Start trip, Past trips). Paths and Home in stack.
+ * Initial: MainTabs (Map, Ratings, Create path, Past trips). Paths and Home in stack.
  */
 function MainStackNavigator() {
   const { isAuthenticated, user } = useAuth();
@@ -112,23 +110,6 @@ function MainStackNavigator() {
         name="PathCreateManual"
         component={PathCreateManualScreen}
         options={{ title: STRINGS.CREATE_PATH_MANUALLY }}
-      />
-      {/* Canonical screen for recording a trip (trip + obstacle detection); use this name when navigating (e.g. from PathDetail "Start ride", PathList, TripStatistics). */}
-      <Stack.Screen
-        name="TripRecording"
-        component={RecordTripScreen}
-        options={{ title: STRINGS.RECORD_TRIP_UC8 }}
-      />
-      {/* Alias: same screen as TripRecording, alternate title "Record trip". */}
-      <Stack.Screen
-        name="RecordTrip"
-        component={RecordTripScreen}
-        options={{ title: STRINGS.RECORD_TRIP, headerShown: true }}
-      />
-      <Stack.Screen
-        name="ReviewDetectedPath"
-        component={ReviewDetectedPathScreen}
-        options={{ title: STRINGS.REVIEW_DETECTED_PATH }}
       />
       <Stack.Screen
         name="PublishPath"

@@ -127,11 +127,6 @@ export default function PathDetailScreen({ route, navigation }) {
       ) : null}
       <View style={styles.pathDetailScreen_actions}>
         <Button
-          title={STRINGS.START_RIDE}
-          onPress={() => navigation.navigate('TripRecording', { pathId: pathId || p.id, path: p })}
-          style={styles.pathDetailScreen_actionButton}
-        />
-        <Button
           title={STRINGS.VIEW_PATH_DATA}
           variant="outline"
           onPress={() => navigation.navigate('PathData', { pathId: pathId || p.id, path: p })}

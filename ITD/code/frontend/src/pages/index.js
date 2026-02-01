@@ -7,7 +7,6 @@ export { default as PathListScreen } from './PathListScreen/PathListScreen';
 export { default as PathDetailScreen } from './PathDetailScreen/PathDetailScreen';
 export { default as PathSearchScreen } from './PathSearchScreen/PathSearchScreen';
 export { default as PathCreateManualScreen } from './PathCreateManualScreen/PathCreateManualScreen';
-export { default as TripRecordingScreen } from './TripRecordingScreen/TripRecordingScreen';
 export { default as PublishPathScreen } from './PublishPathScreen/PublishPathScreen';
 export { default as ReviewsScreen } from './ReviewsScreen/ReviewsScreen';
 export { default as ReviewDetailScreen } from './ReviewDetailScreen/ReviewDetailScreen';
@@ -15,5 +14,3 @@ export { default as TripStatisticsScreen } from './TripStatisticsScreen/TripStat
 export { default as TripDetailScreen } from './TripDetailScreen/TripDetailScreen';
 export { default as PathDataScreen } from './PathDataScreen/PathDataScreen';
 export { default as MergeInfoScreen } from './MergeInfoScreen/MergeInfoScreen';
-export { default as RecordTripScreen } from './RecordTripScreen/RecordTripScreen';
-export { default as ReviewDetectedPathScreen } from './ReviewDetectedPathScreen/ReviewDetectedPathScreen';

@@ -36,7 +36,6 @@ describe('TripStatisticsScreen', () => {
     expect(getByText('Total trips')).toBeTruthy();
     expect(getByText('Recorded points')).toBeTruthy();
     expect(getByText('Total time (approx.)')).toBeTruthy();
-    expect(getByText('Record new trip')).toBeTruthy();
     expect(getByText('Paths')).toBeTruthy();
     expect(getByText('Merge info (UC12)')).toBeTruthy();
   });
@@ -47,18 +46,6 @@ describe('TripStatisticsScreen', () => {
       <TripStatisticsScreen navigation={navigation} />
     );
     expect(getByText('Loading statistics…')).toBeTruthy();
-  });
-
-  it('Record new trip navigates to StartTrip tab', async () => {
-    const navWithParent = { navigate: mockNavigate, getParent: () => ({ navigate: mockNavigate }) };
-    const { getByText } = render(
-      <TripStatisticsScreen navigation={navWithParent} />
-    );
-    await waitFor(() => {
-      expect(getTrips).toHaveBeenCalled();
-    });
-    fireEvent.press(getByText('Record new trip'));
-    expect(mockNavigate).toHaveBeenCalledWith('StartTrip', { screen: 'TripRecording' });
   });
 
   it('Paths navigates to PathList', async () => {

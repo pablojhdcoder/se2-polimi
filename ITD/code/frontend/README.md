@@ -7,9 +7,8 @@ React Native mobile app for Best Bike Paths built with Expo.
 This mobile application allows users to:
 - Register and log in
 - Search and view bike paths
-- Record personal trips with automatic detection
+- Create paths manually (form with start/end points, distance, difficulty)
 - Rate and review paths
-- Detect obstacles during the trip
 - View trip statistics
 
 ## Technologies
@@ -35,10 +34,7 @@ frontend/
 │   │       └── SensorManager.js
 │   ├── utils/                 # Utilities
 │   ├── navigation/            # Navigation configuration
-│   ├── storage/               # Local storage management
-│   └── sensors/               # Sensor modules
-│       ├── trip-detection/   # Trip detection
-│       └── obstacle-detection/ # Obstacle detection
+│   └── storage/               # Local storage management
 ├── __tests__/                 # Tests
 ├── App.js                     # Main component
 ├── babel.config.js            # Babel configuration
@@ -117,7 +113,6 @@ npm test -- --testPathPattern="__tests__/e2e"
 
 - **`__tests__/e2e/authFlow.test.js`**: Authentication flow (Home → Login/Register, submit, setSession, validation errors).
 - **`__tests__/e2e/pathFlow.test.js`**: Path flow (PathList → PathDetail → PathCreateManual, PublishPath, navigation and mocked APIs).
-- **`__tests__/e2e/recordTripFlow.test.js`**: Trip recording flow (TripRecordingScreen: start/stop, createTrip, sync queue when network fails).
 - **`__tests__/e2e/syncOffline.test.js`**: Sync/offline scenarios (OfflineBanner, PendingSyncBanner, NetworkStatusProvider, mocked sync queue).
 
 Client E2E tests use mocked API, storage and sensors; no server is required.

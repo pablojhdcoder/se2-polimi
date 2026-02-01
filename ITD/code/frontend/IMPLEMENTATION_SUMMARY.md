@@ -8,8 +8,8 @@
 
 - **RootNavigator.js**: Decides whether to show **Auth** (no token) or **Main** (with token). While loading state from AsyncStorage it shows `Loading`.
 - **AuthStack.js**: Stack for unauthenticated users: **Home** (landing), **Login**, **Register**.
-- **MainStack.js**: Main authenticated stack: **MainTabs**, **Home**, **PathList**, **PathDetail**, **PathSearch**, **PathCreateManual**, **TripRecording** / **RecordTrip**, **PublishPath**, **Reviews**, **ReviewDetail**, **TripStatistics**, **PathData**, **MergeInfo**. Header with links to Paths and Avatar.
-- **MainTabs.js**: Bottom tabs per DD: **Ratings** (★), **Start trip** (🚴), **Past trips** (📅). Each tab has its stack (Reviews/ReviewDetail, TripRecording, TripStatistics/PathData/MergeInfo).
+- **MainStack.js**: Main authenticated stack: **MainTabs**, **Home**, **PathList**, **PathDetail**, **PathSearch**, **PathCreateManual**, **PublishPath**, **Reviews**, **ReviewDetail**, **TripStatistics**, **PathData**, **MergeInfo**. Header with links to Paths and Avatar.
+- **MainTabs.js**: Bottom tabs: **Map**, **Ratings** (★), **Create path** (➕), **Past trips** (📅). Each tab has its stack (Map/PathCreateManual, Reviews/ReviewDetail, PathCreateManual, TripStatistics/MergeInfo).
 - **AuthContext.js** / **useAuth.js**: Authentication context (token, user, login, logout).
 
 ---
@@ -24,10 +24,8 @@
 | **PathListScreen** | Path list. |
 | **PathDetailScreen** | Path detail. |
 | **PathSearchScreen** | Path search. |
-| **PathCreateManualScreen** | Create path manually. |
+| **PathCreateManualScreen** | Create path manually (also shown in Create path tab). |
 | **PublishPathScreen** | Publish path (UC5). |
-| **TripRecordingScreen** | Record trip in progress. |
-| **RecordTripScreen** | Start/record trip. |
 | **ReviewsScreen** | Review list. |
 | **ReviewDetailScreen** | Review detail. |
 | **TripStatisticsScreen** | Trip statistics (UC10). |
@@ -68,14 +66,7 @@
 
 ---
 
-## 7. Sensors (`src/sensors/`)
-
-- **trip-detection**: **TripDetectionEngine.js** – trip detection.
-- **obstacle-detection**: **ObstacleDetectionModule.js** – obstacle detection.
-
----
-
-## 8. Styles and constants (`src/styles/`, `src/constants/`)
+## 7. Styles and constants (`src/styles/`, `src/constants/`)
 
 - **theme.js**, **colors.js**, **typography.js**, **spacing.js**.
 - **strings.js**: UI text (PATHS, RECORD_TRIP, SEARCH, etc.).

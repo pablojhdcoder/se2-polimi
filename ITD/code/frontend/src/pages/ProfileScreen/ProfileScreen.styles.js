@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors, spacing, fontSizes, fontWeights, radius } from '../../styles';
+import { colors, spacing, fontSizes, fontWeights, radius, shadows } from '../../styles';
 
 export default StyleSheet.create({
   profileScreen_content: {
@@ -34,10 +34,11 @@ export default StyleSheet.create({
     color: colors.textSecondary,
   },
   profileScreen_optionsCard: {
-    backgroundColor: colors.background,
+    backgroundColor: colors.cardBackground,
     borderRadius: radius.medium,
     overflow: 'hidden',
     marginBottom: spacing.xl,
+    ...shadows.cardLight,
   },
   profileScreen_optionRow: {
     flexDirection: 'row',

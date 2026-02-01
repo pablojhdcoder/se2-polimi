@@ -6,12 +6,11 @@
 
 import apiClient from './api';
 import { requestWithRetry } from './requestWithRetry';
-import { trip_record } from '../sensors/trip-detection/tripRecorder';
 
 const TRIPS_BASE = '/trips';
 
 /**
- * Start a trip (manual or automatic). If trip is created with id, calls trip_record(id).
+ * Start a trip (manual or automatic).
  * @param {Object} tripData - { pathId: string, sensorData?: object } for automatic; { pathId: string } for manual
  * @returns {Promise<Object>} The created trip (response.data.trip)
  */
@@ -24,10 +23,6 @@ export async function startTrip(tripData) {
     const body = isAutomatic ? { pathId, sensorData } : { pathId };
     const response = await requestWithRetry(() => apiClient.post(url, body));
     const trip = response.data?.trip;
-
-    if (trip?.id) {
-      trip_record(trip.id);
-    }
 
     return trip;
   } catch (error) {
