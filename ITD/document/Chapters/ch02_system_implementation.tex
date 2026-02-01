@@ -131,7 +131,7 @@ Security implementation:
 
 The following features from the Design Document have been successfully implemented in this release.
 
-\subsection{User Management (F1)}
+\subsection{User Management}
 \label{subsec:impl_user_mgmt}
 
 \begin{itemize}
@@ -141,7 +141,7 @@ The following features from the Design Document have been successfully implement
     \item \textbf{Session Management:} Session expiration after 24 hours or manual logout option
 \end{itemize}
 
-\subsection{Trip Management (F2)}
+\subsection{Trip Management}
 \label{subsec:impl_trip_mgmt}
 
 \begin{itemize}
@@ -152,7 +152,7 @@ The following features from the Design Document have been successfully implement
     \item \textbf{Weather Integration:} Real-time weather data fetched at trip start
 \end{itemize}
 
-\subsection{Path Management (F3)}
+\subsection{Path Management}
 \label{subsec:impl_path_mgmt}
 
 \begin{itemize}
@@ -163,7 +163,7 @@ The following features from the Design Document have been successfully implement
     \item \textbf{Path Data Viewing (UC9):} Detailed view of path information including route geometry
 \end{itemize}
 
-\subsection{Path Discovery (F5)}
+\subsection{Path Discovery}
 \label{subsec:impl_path_discovery}
 
 \begin{itemize}
@@ -172,7 +172,7 @@ The following features from the Design Document have been successfully implement
     \item \textbf{Path Details:} View comprehensive path information including map visualization
 \end{itemize}
 
-\subsection{Rating \& Reviews (F6)}
+\subsection{Rating \& Reviews}
 \label{subsec:impl_ratings}
 
 \begin{itemize}
@@ -200,7 +200,7 @@ The following features were intentionally excluded from this release due to tech
 \subsection{Advanced Sensor-Based Detection}
 \label{subsec:excluded_sensors}
 
-Features such as automatic trip detection (F4.2), obstacle detection (F4.3), and gyroscope integration were intentionally excluded. The assignment guidelines allowed for the exclusion of these advanced sensor-based features to focus on a stable MVP.
+Features such as automatic trip detection , obstacle detection , and gyroscope integration were intentionally excluded. The assignment guidelines allowed for the exclusion of these advanced sensor-based features to focus on a stable MVP.
 
 
 \subsection{Automated Path Generation} 
@@ -211,7 +211,16 @@ Automatic creation of paths from completed trips was another feature not yet imp
  \subsection {Route Planning}
 \label{subsec:excluded_route_planning}
 
- Suggesting optimal routes between two points, it would require routing engines integration (e.g., OSRM, GraphHopper) and wasnt included in the assignment either.
+ Suggesting optimal routes between two points, it would require routing engines integration (e.g., OSRM, GraphHopper) and wasn't included in the assignment either.
+
+\subsection{Email Notifications}
+\label{subsec:excluded_email}
+
+Integration with email services for registration confirmation and password recovery was de-prioritized.
+\begin{itemize}
+    \item \textbf{Reason:} Setting up reliable email delivery (SMTP/providers) requires significant configuration and external dependencies.
+    \item \textbf{Decision:} The team focused on ensuring the stability of core features (Tracking, Path Management) within the limited development timeframe.
+\end{itemize}
 
 \section{Source Code Structure}
 \label{sec:source_code_structure}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.1.31)  1 FEB 2026 22:02
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.1.31)  1 FEB 2026 23:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1635,41 +1635,41 @@ LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
             Default family used instead on input line 161.
  [13]
-LaTeX Font Info:    Trying to load font information for T1+pcr on input line 21
-9.
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 22
+8.
 
 (C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
 [14]
-Overfull \hbox (2.33607pt too wide) in paragraph at lines 230--231
+Overfull \hbox (2.33607pt too wide) in paragraph at lines 239--240
 []\T1/pcr/m/n/12 package.json\T1/ptm/m/n/12 : De-fines \T1/pcr/m/n/12 src/app.j
 s \T1/ptm/m/n/12 as the main en-try point with scripts for \T1/pcr/m/n/12 start
 \T1/ptm/m/n/12 ,
  []
 
-
-Overfull \hbox (8.05219pt too wide) in paragraph at lines 267--268
+[15]
+Overfull \hbox (8.05219pt too wide) in paragraph at lines 276--277
 []\T1/pcr/m/n/12 authRoutes.js\T1/ptm/m/n/12 , \T1/pcr/m/n/12 pathRoutes.js\T1/
 ptm/m/n/12 , \T1/pcr/m/n/12 tripRoutes.js\T1/ptm/m/n/12 , \T1/pcr/m/n/12 rating
 Routes.js\T1/ptm/m/n/12 ,
  []
 
-[15]
-Overfull \hbox (96.72894pt too wide) in paragraph at lines 285--286
+
+Overfull \hbox (96.72894pt too wide) in paragraph at lines 294--295
 []\T1/ptm/m/n/12 Schema evo-lu-tion scripts: \T1/pcr/m/n/12 add-paths-duration-
 minutes.js\T1/ptm/m/n/12 , \T1/pcr/m/n/12 add-paths-is-published.js\T1/ptm/m/n/
 12 ,
  []
 
 
-Overfull \hbox (117.77841pt too wide) in paragraph at lines 285--286
+Overfull \hbox (117.77841pt too wide) in paragraph at lines 294--295
 \T1/pcr/m/n/12 add-paths-route-date.js\T1/ptm/m/n/12 , \T1/pcr/m/n/12 add-paths
 -weather.js\T1/ptm/m/n/12 , \T1/pcr/m/n/12 alter-trips-path-id-nullable.js 
  []
 
 [16]
-Overfull \hbox (4.06566pt too wide) in paragraph at lines 332--333
+Overfull \hbox (4.06566pt too wide) in paragraph at lines 341--342
 []\T1/pcr/m/n/12 pathsApi.js\T1/ptm/m/n/12 , \T1/pcr/m/n/12 tripsApi.js\T1/ptm/
 m/n/12 , \T1/pcr/m/n/12 reviewsApi.js\T1/ptm/m/n/12 : Domain-specific API clien
 ts 
@@ -1765,12 +1765,7 @@ Chapter 5.
 
 ]) [48]
 Chapter 6.
-(Chapters/ch06_effort_spent.tex
-Overfull \hbox (8.95946pt too wide) in paragraph at lines 8--17
- [][] 
- []
-
-) [49
+(Chapters/ch06_effort_spent.tex) [49
 
 
 ] [50
@@ -1811,30 +1806,26 @@ Package rerunfilecheck Warning: File `ITD.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `ITD.out':
-(rerunfilecheck)             Before: F37BC1410F34DDA3F06C8A78432A1507;16248
-(rerunfilecheck)             After:  D183D039CC4AC379435B1A4CCD664554;16070.
+(rerunfilecheck)             Before: D302B4715C6889D7EFF15C983D1EDCA3;16264
+(rerunfilecheck)             After:  8B7310F6A5F0913A0A9D6EC00B759A6D;16060.
  ) 
 Here is how much of TeX's memory you used:
  32489 strings out of 467871
- 610983 string characters out of 5417408
+ 610967 string characters out of 5417408
  1110015 words of memory out of 5000000
  60503 multiletter control sequences out of 15000+600000
  671901 words of font info for 100 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,13n,94p,1194b,750s stack positions out of 10000i,1000n,20000p,200000b,200000s
-
-pdfTeX warning (dest): name{subsection.2.6.4} has been referenced but does not 
-exist, replaced by a fixed one
-
- <C:\Users\Usuario\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrb
-1200.pk> <C:\Users\Usuario\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi
-600\tcrm1200.pk><C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fonts/type1/urw
-/courier/ucrb8a.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fonts/type1
-/urw/courier/ucrr8a.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fonts/t
-ype1/urw/times/utmb8a.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fonts
-/type1/urw/times/utmr8a.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fon
-ts/type1/urw/times/utmri8a.pfb>
-Output written on ITD.pdf (56 pages, 263681 bytes).
+ <C:\Users\Usuario\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tc
+rb1200.pk> <C:\Users\Usuario\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/d
+pi600\tcrm1200.pk><C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fonts/type1/u
+rw/courier/ucrb8a.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fonts/typ
+e1/urw/courier/ucrr8a.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fonts
+/type1/urw/times/utmb8a.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fon
+ts/type1/urw/times/utmr8a.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX/f
+onts/type1/urw/times/utmri8a.pfb>
+Output written on ITD.pdf (56 pages, 264178 bytes).
 PDF statistics:
  903 PDF objects out of 1000 (max. 8388607)
  235 named destinations out of 1000 (max. 500000)
