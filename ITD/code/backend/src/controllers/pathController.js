@@ -20,6 +20,12 @@ const createPath = async (req, res, next) => {
             path
         });
     } catch (error) {
+        if (error.code === '23505' && error.constraint === 'paths_path_name_key') {
+            return res.status(409).json({
+                error: 'A path with this name already exists.',
+                code: 'PATH_NAME_DUPLICATE'
+            });
+        }
         next(error);
     }
 };

@@ -59,6 +59,7 @@ export const STRINGS = {
   PATHS: 'Paths',
   ALL_PATHS: 'All paths',
   MY_PATHS: 'My paths',
+  YOUR_PATHS: 'Your paths',
   PUBLISHED_TAB: 'Published',
   UNPUBLISHED_TAB: 'Unpublished',
   NO_PUBLISHED_PATHS: 'No published paths.',

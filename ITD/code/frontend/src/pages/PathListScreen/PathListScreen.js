@@ -124,7 +124,7 @@ export default function PathListScreen({ navigation }) {
             onPress={() => setFilter(FILTER_PUBLISHED)}
           >
             <Text style={[styles.pathListScreen_filterText, filter === FILTER_PUBLISHED && styles.pathListScreen_filterTextActive]}>
-              {STRINGS.PUBLISHED_TAB}
+              {STRINGS.ALL_PATHS}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -132,7 +132,7 @@ export default function PathListScreen({ navigation }) {
             onPress={() => setFilter(FILTER_UNPUBLISHED)}
           >
             <Text style={[styles.pathListScreen_filterText, filter === FILTER_UNPUBLISHED && styles.pathListScreen_filterTextActive]}>
-              {STRINGS.UNPUBLISHED_TAB}
+              {STRINGS.YOUR_PATHS}
             </Text>
           </TouchableOpacity>
         </View>

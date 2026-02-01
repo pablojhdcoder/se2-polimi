@@ -26,9 +26,6 @@ export default StyleSheet.create({
     fontWeight: fontWeights.bold,
     color: colors.primary,
   },
-  tripStatisticsScreen_button: {
-    marginTop: spacing.lg,
-  },
   tripStatisticsScreen_sectionTitle: {
     fontSize: fontSizes.headline,
     fontWeight: fontWeights.bold,

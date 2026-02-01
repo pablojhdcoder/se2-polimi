@@ -7,7 +7,7 @@
 import React, { useState, useCallback } from 'react';
 import { Text, ScrollView, RefreshControl, TouchableOpacity } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
-import { Card, ErrorMessage, Button, Loading } from '../../components';
+import { Card, ErrorMessage, Loading } from '../../components';
 import { getTrips } from '../../services/tripsApi';
 import { getOfflineData } from '../../storage';
 import { layoutStyles } from '../../styles';
@@ -66,10 +66,6 @@ export default function TripStatisticsScreen({ navigation }) {
     return acc;
   }, 0);
 
-  const goToPaths = () => {
-    navigation.navigate('PathList');
-  };
-
   if (loading) return <Loading message={STRINGS.LOADING_STATISTICS} />;
 
   return (
@@ -113,13 +109,6 @@ export default function TripStatisticsScreen({ navigation }) {
           </TouchableOpacity>
         );
       })}
-
-      <Button
-        title={STRINGS.PATHS}
-        variant="primary"
-        onPress={goToPaths}
-        style={styles.tripStatisticsScreen_button}
-      />
     </ScrollView>
   );
 }

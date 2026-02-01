@@ -11,6 +11,7 @@ import { theme } from '../styles';
 import {
   MapScreen,
   PathCreateManualScreen,
+  PathListScreen,
   ReviewsScreen,
   ReviewDetailScreen,
   TripStatisticsScreen,
@@ -47,6 +48,15 @@ function PastTripsStack() {
   );
 }
 
+function PathsStack() {
+  const Stack = createStackNavigator();
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="PathList" component={PathListScreen} />
+    </Stack.Navigator>
+  );
+}
+
 function MapStack() {
   const Stack = createStackNavigator();
   return (
@@ -58,7 +68,7 @@ function MapStack() {
 }
 
 function TabIcon({ name, focused }) {
-  const icons = { Map: '🗺️', Ratings: '★', CreatePath: '🚴', PastTrips: '📅' };
+  const icons = { Map: '🗺️', Ratings: '★', CreatePath: '🚴', Paths: '🛤️', PastTrips: '📅' };
   return (
     <View style={styles.iconWrap}>
       <Text style={[styles.icon, focused && styles.iconActive]}>
@@ -99,6 +109,11 @@ export default function MainTabs() {
         name="CreatePath"
         component={CreatePathStack}
         options={{ tabBarLabel: 'Create path' }}
+      />
+      <Tab.Screen
+        name="Paths"
+        component={PathsStack}
+        options={{ tabBarLabel: 'Paths' }}
       />
       <Tab.Screen
         name="PastTrips"

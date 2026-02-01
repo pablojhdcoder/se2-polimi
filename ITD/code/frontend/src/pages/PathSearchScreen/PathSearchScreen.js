@@ -612,11 +612,9 @@ export default function PathSearchScreen({ navigation }) {
                       {item.distance != null ? `${item.distance} km` : ''}
                       {item.difficulty ? ` • ${item.difficulty}` : ''}
                     </Text>
-                    {(item.startPoint || item.endPoint) ? (
-                      <Text style={styles.pathSearchScreen_sheetItemPoints} numberOfLines={1}>
-                        {item.startPoint || '?'} → {item.endPoint || '?'}
-                      </Text>
-                    ) : null}
+                    <Text style={styles.pathSearchScreen_sheetItemPoints} numberOfLines={1}>
+                      {STRINGS.USER_RATING}: {item.userRating != null ? `${Number(item.userRating).toFixed(1)} ★` : STRINGS.NO_RATING}
+                    </Text>
                   </TouchableOpacity>
                 )}
                 contentContainerStyle={{ paddingBottom: SHEET_PADDING_BOTTOM }}

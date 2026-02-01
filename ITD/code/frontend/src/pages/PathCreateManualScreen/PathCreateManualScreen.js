@@ -553,21 +553,6 @@ export default function PathCreateManualScreen({ navigation }) {
             <Text style={styles.pathCreateManualScreen_successText}>
               {STRINGS.PATH_CREATED_MESSAGE}
             </Text>
-            <View style={styles.pathCreateManualScreen_successActions}>
-              <TouchableOpacity
-                style={styles.pathCreateManualScreen_successButton}
-                onPress={() =>
-                  navigation.replace('PathDetail', {
-                    pathId: createdPath?.id,
-                    path: createdPath,
-                  })
-                }
-              >
-                <Text style={styles.pathCreateManualScreen_successButtonText}>
-                  {STRINGS.VIEW_DETAIL}
-                </Text>
-              </TouchableOpacity>
-            </View>
           </View>
         ) : null}
       </ScrollView>

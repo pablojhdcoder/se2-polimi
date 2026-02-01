@@ -79,33 +79,6 @@ export default StyleSheet.create({
     color: colors.white,
     fontSize: fontSizes.medium,
     fontWeight: fontWeights.semibold,
-    marginBottom: spacing.md,
-  },
-  pathCreateManualScreen_successActions: {
-    flexDirection: 'row',
-    gap: spacing.md,
-  },
-  pathCreateManualScreen_successButton: {
-    flex: 1,
-    backgroundColor: colors.white,
-    paddingVertical: spacing.sm,
-    borderRadius: borderRadius.md,
-    alignItems: 'center',
-  },
-  pathCreateManualScreen_successButtonSecondary: {
-    backgroundColor: 'transparent',
-    borderWidth: 1,
-    borderColor: colors.white,
-  },
-  pathCreateManualScreen_successButtonText: {
-    color: colors.primary,
-    fontSize: fontSizes.body,
-    fontWeight: fontWeights.semibold,
-  },
-  pathCreateManualScreen_successButtonTextSecondary: {
-    color: colors.white,
-    fontSize: fontSizes.body,
-    fontWeight: fontWeights.semibold,
   },
   pathCreateManualScreen_submitButton: {
     backgroundColor: colors.primary,
