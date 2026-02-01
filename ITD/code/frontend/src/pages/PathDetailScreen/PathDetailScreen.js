@@ -227,7 +227,7 @@ export default function PathDetailScreen({ route, navigation }) {
   const startDisplay = startPlaceName ?? (isCoordLike(startPointRaw) ? null : startPointRaw) ?? startPointRaw ?? '—';
   const endDisplay = endPlaceName ?? (isCoordLike(endPointRaw) ? null : endPointRaw) ?? endPointRaw ?? '—';
   const distance = p.distance ?? p.length;
-  const isOwner = user?.username && (p.posted_by_username || p.postedByUsername) === user.username;
+  const isOwner = user?.id && (p.posted_by_user_id || p.postedByUserId) === user.id;
   const isPublished = p.is_published !== false;
 
   const routeGeoJSON = useMemo(() => {
@@ -264,7 +264,8 @@ export default function PathDetailScreen({ route, navigation }) {
   }, [p.start_x, p.start_y, p.end_x, p.end_y, routeGeoJSON, mapMarkers]);
 
   const hasMap = mapMarkers.length > 0 || routeGeoJSON;
-  const postedBy = p.posted_by_username || p.postedByUsername || null;
+  // Note: Backend no longer returns username in paths; consider fetching user details separately if needed
+  const postedBy = p.posted_by_username || p.postedByUsername || '—';
 
   const pathRating = p.user_rating != null ? Number(p.user_rating) : (p.userRating != null ? Number(p.userRating) : null);
   const reviewsAvg = reviews.length > 0

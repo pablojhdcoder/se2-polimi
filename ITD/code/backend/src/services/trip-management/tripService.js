@@ -90,7 +90,10 @@ const updateTripTrack = async (tripId, routeData = {}) => {
             coordinates: allCoords
         };
 
-        const updatedTrip = await tripRepository.updateTripRoute(tripId, finalRouteData);
+        const tripLength = routeData.metadata?.tripLength ?? routeData.metadata?.durationMinutes ?? null;
+        const updatedTrip = await tripRepository.updateTripRoute(tripId, finalRouteData, {
+            tripLength: tripLength != null ? Number(tripLength) : null
+        });
 
         // Email Summary
         try {

@@ -35,4 +35,9 @@ export default StyleSheet.create({
     color: colors.textMuted,
     marginTop: spacing.xs,
   },
+  pathCard_rating: {
+    fontSize: fontSizes.xs,
+    color: colors.textMuted,
+    marginTop: spacing.xs,
+  },
 });

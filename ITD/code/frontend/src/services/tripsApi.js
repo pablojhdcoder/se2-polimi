@@ -122,11 +122,14 @@ export function trackToCoordinates(track) {
  * @returns {Promise<Object>} response.data.trip
  */
 export async function updateTripRoute(tripId, options = {}) {
-  const { track = [], isFinal = false, potholes = [] } = options;
+  const { track = [], isFinal = false, potholes = [], durationMinutes } = options;
   const coordinates = trackToCoordinates(track);
   const routeData = {
     coordinates,
-    metadata: { isFinal },
+    metadata: {
+      isFinal,
+      ...(durationMinutes != null && !Number.isNaN(Number(durationMinutes)) && { durationMinutes: Number(durationMinutes) }),
+    },
     ...(potholes.length > 0 && { potholes }),
   };
   const response = await requestWithRetry(() =>

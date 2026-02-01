@@ -9,7 +9,7 @@ import styles from './PathCard.styles';
  * @param {Function} onPress - Callback when the card is pressed
  */
 export default function PathCard({ path, onPress }) {
-  const { name, description, distance, difficulty, startPoint, endPoint } = path || {};
+  const { name, description, distance, difficulty, userRating } = path || {};
   const snippet = description ? (description.length > 80 ? `${description.slice(0, 80)}…` : description) : '';
 
   return (
@@ -20,11 +20,9 @@ export default function PathCard({ path, onPress }) {
         {distance != null ? <Text style={styles.pathCard_metaText}>{distance} km</Text> : null}
         {difficulty ? <Text style={styles.pathCard_metaText}> • {difficulty}</Text> : null}
       </View>
-      {(startPoint || endPoint) ? (
-        <Text style={styles.pathCard_points} numberOfLines={1}>
-          {startPoint || '?'} → {endPoint || '?'}
-        </Text>
-      ) : null}
+      <Text style={styles.pathCard_rating} numberOfLines={1}>
+        {userRating != null && userRating > 0 ? `${Number(userRating).toFixed(1)} ★` : '— ★'}
+      </Text>
     </TouchableOpacity>
   );
 }

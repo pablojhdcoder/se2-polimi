@@ -8,9 +8,9 @@ const savedPathRepository = require('../repositories/savedPathRepository');
 const createPath = async (req, res, next) => {
     try {
         const pathData = req.body;
-        // Assume username comes from auth middleware
-        if (req.user && req.user.username) {
-            pathData.postedByUsername = req.user.username;
+        // Use user ID from auth middleware (req.user should have id)
+        if (req.user && req.user.id) {
+            pathData.postedByUserId = req.user.id;
         }
         pathData.isPublished = req.body.publish ?? req.body.isPublished ?? true;
 
@@ -68,9 +68,9 @@ const savePath = async (req, res, next) => {
         if (!path) {
             return res.status(404).json({ error: 'Path not found.' });
         }
-        const username = req.user.username;
-        await savedPathRepository.savePath(username, path.path_name);
-        res.status(201).json({ message: 'Path saved.', path_name: path.path_name });
+        const userId = req.user.id;
+        await savedPathRepository.savePath(userId, id);
+        res.status(201).json({ message: 'Path saved.', path_id: id });
     } catch (error) {
         if (error.code === '23505') {
             return res.status(409).json({ error: 'Path already saved.' });
@@ -84,13 +84,8 @@ const savePath = async (req, res, next) => {
  */
 const getSavedPaths = async (req, res, next) => {
     try {
-        const username = req.user.username;
-        const saved = await savedPathRepository.getSavedPathsByUsername(username);
-        const paths = [];
-        for (const row of saved) {
-            const path = await pathRepository.getPathByName(row.path_name);
-            if (path) paths.push(path);
-        }
+        const userId = req.user.id;
+        const paths = await savedPathRepository.getSavedPathsByUserId(userId);
         res.status(200).json(paths);
     } catch (error) {
         next(error);
@@ -103,12 +98,8 @@ const getSavedPaths = async (req, res, next) => {
 const unsavePath = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const path = await pathRepository.getPathById(id);
-        if (!path) {
-            return res.status(404).json({ error: 'Path not found.' });
-        }
-        const username = req.user.username;
-        const deleted = await savedPathRepository.deleteSavedPath(username, path.path_name);
+        const userId = req.user.id;
+        const deleted = await savedPathRepository.deleteSavedPath(userId, id);
         if (!deleted) {
             return res.status(404).json({ error: 'Saved path not found.' });
         }
@@ -161,8 +152,8 @@ const getRelatedPaths = async (req, res, next) => {
  */
 const getMyPaths = async (req, res, next) => {
     try {
-        const username = req.user.username;
-        const paths = await pathService.getPathsByUsername(username);
+        const userId = req.user.id;
+        const paths = await pathService.getPathsByUserId(userId);
         res.status(200).json(paths);
     } catch (error) {
         next(error);
@@ -179,7 +170,7 @@ const patchPath = async (req, res, next) => {
         if (!path) {
             return res.status(404).json({ error: 'Path not found' });
         }
-        if (path.posted_by_username !== req.user.username) {
+        if (path.posted_by_user_id !== req.user.id) {
             return res.status(403).json({ error: 'Only the path owner can update it' });
         }
         const publish = req.body.publish ?? req.body.isPublished;

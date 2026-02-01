@@ -1,37 +1,40 @@
 const { query } = require('../pool');
 
-const savePath = async (username, pathName) => {
+const savePath = async (userId, pathId) => {
     const sql = `
-    INSERT INTO saved_paths (username, path_name)
+    INSERT INTO saved_paths (user_id, path_id)
     VALUES ($1, $2)
+    ON CONFLICT (user_id, path_id) DO NOTHING
     RETURNING *
   `;
-    const res = await query(sql, [username, pathName]);
+    const res = await query(sql, [userId, pathId]);
     return res.rows[0];
 };
 
-const getSavedPathsByUsername = async (username) => {
+const getSavedPathsByUserId = async (userId) => {
     const sql = `
-    SELECT *
-    FROM saved_paths
-    WHERE username = $1
+    SELECT sp.*, p.*
+    FROM saved_paths sp
+    JOIN paths p ON sp.path_id = p.id
+    WHERE sp.user_id = $1
+    ORDER BY sp.saved_at DESC
   `;
-    const res = await query(sql, [username]);
+    const res = await query(sql, [userId]);
     return res.rows;
 };
 
-const deleteSavedPath = async (username, pathName) => {
+const deleteSavedPath = async (userId, pathId) => {
     const sql = `
     DELETE FROM saved_paths
-    WHERE username = $1 AND path_name = $2
+    WHERE user_id = $1 AND path_id = $2
     RETURNING *
   `;
-    const res = await query(sql, [username, pathName]);
+    const res = await query(sql, [userId, pathId]);
     return res.rows[0];
 };
 
 module.exports = {
     savePath,
-    getSavedPathsByUsername,
+    getSavedPathsByUserId,
     deleteSavedPath
 };

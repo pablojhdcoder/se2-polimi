@@ -4,9 +4,9 @@ const createPath = async (path) => {
   console.log('[PathRepository] Creating path with data:', JSON.stringify(path, null, 2));
   const isPublished = path.isPublished !== false;
   const sql = `
-    INSERT INTO paths (id, path_name, start_x, start_y, end_x, end_y, length, user_rating, status, posted_by_username, route_data, is_published,
-      temperature, wind_speed, wind_degree, wind_gust, visibility, rain, clouds, duration_minutes, origin_place, destination_place)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22)
+    INSERT INTO paths (id, path_name, start_x, start_y, end_x, end_y, length, user_rating, status, posted_by_user_id, route_data, is_published,
+      temperature, wind_speed, wind_degree, wind_gust, visibility, rain, clouds, duration_minutes, origin_place, destination_place, description, difficulty)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24)
     RETURNING *
   `;
   const res = await query(sql, [
@@ -19,7 +19,7 @@ const createPath = async (path) => {
     path.length,
     path.userRating || 0,
     path.status || 'optimal',
-    path.postedByUsername,
+    path.postedByUserId,
     path.routeData,
     isPublished,
     path.temperature ?? null,
@@ -32,6 +32,8 @@ const createPath = async (path) => {
     path.durationMinutes ?? null,
     path.originPlace ?? null,
     path.destinationPlace ?? null,
+    path.description ?? null,
+    path.difficulty ?? null,
   ]);
   return res.rows[0];
 };
@@ -78,13 +80,17 @@ const getAllPaths = async (options = {}) => {
   return res.rows;
 };
 
-const getPathsByUsername = async (username) => {
+/**
+ * Get all paths created by the given user ID (posted_by_user_id).
+ * @param {string} userId - UUID of the user
+ */
+const getPathsByUserId = async (userId) => {
   const sql = `
     SELECT * FROM paths
-    WHERE posted_by_username = $1
+    WHERE posted_by_user_id = $1
     ORDER BY path_name
   `;
-  const res = await query(sql, [username]);
+  const res = await query(sql, [userId]);
   return res.rows;
 };
 
@@ -160,7 +166,7 @@ module.exports = {
   getPathById,
   getPathByName,
   getAllPaths,
-  getPathsByUsername,
+  getPathsByUserId,
   getPathsByOriginDestination,
   updatePathStatus,
   updatePathRating,

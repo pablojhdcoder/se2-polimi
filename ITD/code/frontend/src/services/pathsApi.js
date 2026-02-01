@@ -36,6 +36,8 @@ export function normalizePathForDisplay(raw) {
     (raw.start_x != null && raw.start_y != null ? `${raw.start_x}, ${raw.start_y}` : null);
   const endPoint =
     raw.endPoint ?? (raw.end_x != null && raw.end_y != null ? `${raw.end_x}, ${raw.end_y}` : null);
+  const userRating = raw.user_rating != null ? Number(raw.user_rating) : (raw.userRating != null ? Number(raw.userRating) : null);
+  const isPublished = raw.is_published != null ? Boolean(raw.is_published) : (raw.isPublished != null ? Boolean(raw.isPublished) : true);
   return {
     ...raw,
     id: raw.id,
@@ -45,6 +47,8 @@ export function normalizePathForDisplay(raw) {
     endPoint: endPoint ?? null,
     distance: raw.length ?? raw.distance,
     difficulty: raw.difficulty ?? null,
+    userRating: userRating,
+    isPublished,
   };
 }
 

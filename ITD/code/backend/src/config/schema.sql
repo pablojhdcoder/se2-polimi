@@ -36,37 +36,49 @@ CREATE TABLE paths (
 
     length DOUBLE PRECISION NOT NULL,
 
-    user_rating INTEGER, -- calculated
+    user_rating INTEGER, -- calculated (average from ratings table)
     status path_status_enum NOT NULL,
     route_data JSONB, -- Abstracted route data (geometry, checkpoints, etc)
 
-    posted_by_username VARCHAR(50) NOT NULL,
+    posted_by_user_id UUID NOT NULL,
     is_published BOOLEAN NOT NULL DEFAULT true,
     origin_place TEXT,
     destination_place TEXT,
 
+    description TEXT,
+    difficulty VARCHAR(50),
+
+    temperature INTEGER,
+    wind_speed INTEGER,
+    wind_degree INTEGER,
+    wind_gust DOUBLE PRECISION,
+    visibility INTEGER,
+    rain DOUBLE PRECISION,
+    clouds INTEGER,
+    duration_minutes INTEGER,
+
     CONSTRAINT fk_path_user
-        FOREIGN KEY (posted_by_username)
-        REFERENCES users(username)
+        FOREIGN KEY (posted_by_user_id)
+        REFERENCES users(id)
         ON DELETE CASCADE
 );
 
 CREATE TABLE saved_paths (
-    username VARCHAR(50) NOT NULL,
-    path_name VARCHAR(100) NOT NULL,
+    user_id UUID NOT NULL,
+    path_id UUID NOT NULL,
 
     saved_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
-    PRIMARY KEY (username, path_name),
+    PRIMARY KEY (user_id, path_id),
 
     CONSTRAINT fk_saved_user
-        FOREIGN KEY (username)
-        REFERENCES users(username)
+        FOREIGN KEY (user_id)
+        REFERENCES users(id)
         ON DELETE CASCADE,
 
     CONSTRAINT fk_saved_path
-        FOREIGN KEY (path_name)
-        REFERENCES paths(path_name)
+        FOREIGN KEY (path_id)
+        REFERENCES paths(id)
         ON DELETE CASCADE
 );
 

@@ -42,10 +42,21 @@ const startAutomaticTrip = async (req, res, next) => {
  */
 const getMyTrips = async (req, res, next) => {
     try {
+        console.log('[TripController] ========== GET MY TRIPS ==========');
         const userId = req.user.id;
+        console.log('[TripController] User ID:', userId);
+        
         const trips = await tripRepository.getTripsByUserId(userId);
+        console.log('[TripController] Found', trips.length, 'trips');
+        
+        if (trips.length > 0) {
+            console.log('[TripController] First trip sample:', JSON.stringify(trips[0], null, 2));
+        }
+        
         res.status(200).json({ data: trips });
+        console.log('[TripController] ========== END GET MY TRIPS ==========');
     } catch (error) {
+        console.error('[TripController] ERROR getting trips:', error);
         next(error);
     }
 };

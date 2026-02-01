@@ -12,6 +12,9 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "migrate": "node migrations/run.js",
+    "migrate:schema": "node migrations/run.js",
+    "migrate:description": "node migrations/add-paths-description-difficulty.js",
+    "migrate:normalize": "node migrations/normalize-foreign-keys.js",
     "migrate:all": "node migrations/run-all.js",
     "seed": "node scripts/seed-demo-data.js"
   },

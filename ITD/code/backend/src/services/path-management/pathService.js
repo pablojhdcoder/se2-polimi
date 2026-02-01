@@ -1,6 +1,7 @@
 const pathRepository = require('../../repositories/pathRepository');
 const ratingRepository = require('../../repositories/ratingRepository');
 const userRepository = require('../../repositories/userRepository');
+const tripRepository = require('../../repositories/tripRepository');
 const weatherService = require('../external/weatherService');
 const crypto = require('crypto');
 
@@ -10,6 +11,9 @@ const crypto = require('crypto');
  * @returns {Promise<Object>} Created path
  */
 const addPath = async (pathData) => {
+    console.log('[PathService] ========== ADD PATH START ==========');
+    console.log('[PathService] Input data:', JSON.stringify(pathData, null, 2));
+    
     const path = {
         ...pathData,
         id: pathData.id || crypto.randomUUID(),
@@ -24,14 +28,19 @@ const addPath = async (pathData) => {
         isPublished: pathData.isPublished !== false && pathData.publish !== false,
         durationMinutes: pathData.durationMinutes != null ? parseInt(pathData.durationMinutes, 10) : null,
         originPlace: pathData.startPoint != null && String(pathData.startPoint).trim() ? String(pathData.startPoint).trim() : null,
-        destinationPlace: pathData.endPoint != null && String(pathData.endPoint).trim() ? String(pathData.endPoint).trim() : null
+        destinationPlace: pathData.endPoint != null && String(pathData.endPoint).trim() ? String(pathData.endPoint).trim() : null,
+        description: pathData.description != null && String(pathData.description).trim() !== '' ? String(pathData.description).trim() : null,
+        difficulty: pathData.difficulty != null && String(pathData.difficulty).trim() !== '' ? String(pathData.difficulty).trim() : null
     };
     if (path.durationMinutes != null && Number.isNaN(path.durationMinutes)) {
         path.durationMinutes = null;
     }
 
+    console.log('[PathService] Normalized path object:', JSON.stringify(path, null, 2));
+
     const hasWeatherFromFrontend = pathData.temperature != null || pathData.windSpeed != null;
     if (hasWeatherFromFrontend) {
+        console.log('[PathService] Using weather from frontend');
         path.temperature = pathData.temperature != null ? Math.round(Number(pathData.temperature)) : null;
         path.windSpeed = pathData.windSpeed != null ? Math.round(Number(pathData.windSpeed)) : null;
         path.windDegree = pathData.windDegree != null ? Math.round(Number(pathData.windDegree)) : null;
@@ -43,8 +52,10 @@ const addPath = async (pathData) => {
         const startX = path.startX != null ? Number(path.startX) : NaN;
         const startY = path.startY != null ? Number(path.startY) : NaN;
         if (!Number.isNaN(startX) && !Number.isNaN(startY)) {
+            console.log('[PathService] Fetching weather for coords:', startX, startY);
             try {
                 const weather = await weatherService.getCurrentWeather(startY, startX);
+                console.log('[PathService] Weather fetched:', weather);
                 path.temperature = weather.temperature != null ? Math.round(weather.temperature) : null;
                 path.windSpeed = weather.windSpeed != null ? Math.round(weather.windSpeed) : null;
                 path.windDegree = weather.windDegree != null ? Math.round(weather.windDegree) : null;
@@ -58,10 +69,16 @@ const addPath = async (pathData) => {
         }
     }
 
+    console.log('[PathService] Calling pathRepository.createPath...');
     const createdPath = await pathRepository.createPath(path);
-    const creator = await userRepository.getUserByUsername(path.postedByUsername);
+    console.log('[PathService] Path created in DB:', createdPath ? createdPath.id : 'NULL');
+    
+    const creator = await userRepository.getUserById(path.postedByUserId);
+    console.log('[PathService] Creator found:', creator ? creator.id : 'NULL');
+    
     if (creator && createdPath && createdPath.id) {
         try {
+            console.log('[PathService] Creating default rating...');
             await ratingRepository.createRating({
                 id: crypto.randomUUID(),
                 userId: creator.id,
@@ -70,13 +87,43 @@ const addPath = async (pathData) => {
                 opinion: 'great path',
                 reportedStatus: 'optimal'
             });
+            console.log('[PathService] Default rating created');
         } catch (err) {
             console.warn('[PathService] Default rating creation failed:', err.message);
         }
+        console.log('[PathService] Updating path rating to 5...');
         await pathRepository.updatePathRating(createdPath.id, 5);
+        
+        // Create associated trip automatically
+        try {
+            console.log('[PathService] Creating associated trip for path...');
+            const tripData = {
+                id: crypto.randomUUID(),
+                userId: creator.id,
+                pathId: createdPath.id,
+                tripDate: new Date(),
+                tripLength: path.durationMinutes ?? 0,
+                personalRating: null,
+                temperature: path.temperature ?? null,
+                windSpeed: path.windSpeed ?? null,
+                windDegree: path.windDegree ?? null,
+                windGust: path.windGust ?? null,
+                visibility: path.visibility ?? null,
+                rain: path.rain ?? null,
+                clouds: path.clouds ?? null,
+                recordedRoute: path.routeData ?? null
+            };
+            await tripRepository.createTrip(tripData);
+            console.log('[PathService] Associated trip created successfully');
+        } catch (err) {
+            console.warn('[PathService] Associated trip creation failed:', err.message);
+        }
+        
         const pathWithRating = await pathRepository.getPathById(createdPath.id);
+        console.log('[PathService] ========== ADD PATH END (SUCCESS) ==========');
         return pathWithRating || createdPath;
     }
+    console.log('[PathService] ========== ADD PATH END (NO RATING) ==========');
     return createdPath;
 };
 
@@ -126,20 +173,20 @@ const getPathById = async (id) => {
 };
 
 /**
- * Get all paths created by the given username (includes drafts and published).
+ * Get all paths created by the given user ID (includes drafts and published).
  */
-const getPathsByUsername = async (username) => {
-    return await pathRepository.getPathsByUsername(username);
+const getPathsByUserId = async (userId) => {
+    return await pathRepository.getPathsByUserId(userId);
 };
 
 /**
- * Update path published flag (owner only; enforced in controller).
- * @param {string} pathId Path ID
+ * Update the published state of a path.
+ * @param {string} id - Path ID
  * @param {boolean} isPublished
- * @returns {Promise<Object|null>} Updated path or null
+ * @returns {Promise<Object>} Updated path
  */
-const updatePathPublished = async (pathId, isPublished) => {
-    return await pathRepository.updatePathPublished(pathId, isPublished);
+const updatePathPublished = async (id, isPublished) => {
+    return await pathRepository.updatePathPublished(id, isPublished);
 };
 
 module.exports = {
@@ -148,6 +195,6 @@ module.exports = {
     getAllPaths,
     getPathsByOriginDestination,
     getPathById,
-    getPathsByUsername,
+    getPathsByUserId,
     updatePathPublished
 };

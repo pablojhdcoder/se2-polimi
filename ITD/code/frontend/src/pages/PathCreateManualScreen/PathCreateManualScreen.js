@@ -567,14 +567,6 @@ export default function PathCreateManualScreen({ navigation }) {
                   {STRINGS.VIEW_DETAIL}
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity
-                style={[styles.pathCreateManualScreen_successButton, styles.pathCreateManualScreen_successButtonSecondary]}
-                onPress={() => navigation.replace('PathList')}
-              >
-                <Text style={styles.pathCreateManualScreen_successButtonTextSecondary}>
-                  {STRINGS.BACK_TO_LIST}
-                </Text>
-              </TouchableOpacity>
             </View>
           </View>
         ) : null}

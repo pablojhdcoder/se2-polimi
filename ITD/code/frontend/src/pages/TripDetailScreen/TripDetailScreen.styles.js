@@ -19,9 +19,6 @@ export default StyleSheet.create({
     color: colors.text,
     fontWeight: fontWeights.medium,
   },
-  tripDetail_button: {
-    marginTop: spacing.md,
-  },
   tripDetail_listItem: {
     padding: spacing.lg,
     marginBottom: spacing.sm,

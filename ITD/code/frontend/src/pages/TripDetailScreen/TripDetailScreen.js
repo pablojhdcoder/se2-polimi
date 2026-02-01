@@ -5,7 +5,6 @@
 
 import React from 'react';
 import { View, Text, ScrollView } from 'react-native';
-import { Button } from '../../components';
 import { layoutStyles } from '../../styles';
 import { STRINGS } from '../../constants/strings';
 import styles from './TripDetailScreen.styles';
@@ -41,10 +40,8 @@ function getPointsCount(trip) {
   return Array.isArray(coords) ? coords.length : 0;
 }
 
-export default function TripDetailScreen({ route, navigation }) {
+export default function TripDetailScreen({ route }) {
   const trip = route?.params?.trip ?? {};
-  const pathId = trip.pathId ?? trip.path_id;
-  const path = trip.path;
   const points = getPointsCount(trip);
   const dateTs = trip.startTime ?? trip.start_time ?? trip.trip_date;
   const dateStr = formatDate(dateTs);
@@ -71,14 +68,6 @@ export default function TripDetailScreen({ route, navigation }) {
         <Text style={styles.tripDetail_label}>{STRINGS.TRIP_POINTS}</Text>
         <Text style={styles.tripDetail_value}>{points}</Text>
       </View>
-      {(pathId || path) ? (
-        <Button
-          title={STRINGS.VIEW_PATH_DATA_FOR_TRIP}
-          variant="outline"
-          onPress={() => navigation.navigate('PathDetail', { pathId, path })}
-          style={styles.tripDetail_button}
-        />
-      ) : null}
     </ScrollView>
   );
 }

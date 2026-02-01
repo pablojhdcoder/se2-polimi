@@ -50,7 +50,24 @@ const getTripById = async (id) => {
   return res.rows[0];
 };
 
-const updateTripRoute = async (id, recordedRoute) => {
+/**
+ * Updates the recorded route and optionally trip_length when finalizing a trip.
+ * @param {string} id - Trip ID
+ * @param {Object} recordedRoute - JSONB route data (coordinates, metadata, etc.)
+ * @param {Object} options - { tripLength?: number } duration/length in minutes to persist
+ */
+const updateTripRoute = async (id, recordedRoute, options = {}) => {
+  const tripLength = options.tripLength != null ? Number(options.tripLength) : null;
+  if (tripLength != null && !Number.isNaN(tripLength)) {
+    const sql = `
+      UPDATE trips
+      SET recorded_route = $1, trip_length = $2
+      WHERE id = $3
+      RETURNING *
+    `;
+    const res = await query(sql, [recordedRoute, Math.round(tripLength), id]);
+    return res.rows[0];
+  }
   const sql = `
     UPDATE trips
     SET recorded_route = $1
