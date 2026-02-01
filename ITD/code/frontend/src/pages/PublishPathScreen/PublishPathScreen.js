@@ -14,14 +14,38 @@ import { layoutStyles } from '../../styles';
 import { STRINGS } from '../../constants/strings';
 import styles from './PublishPathScreen.styles';
 
+/**
+ * Derives display and numeric fields from path track for API payload.
+ * Backend requires start_x, start_y, end_x, end_y, length NOT NULL.
+ * When track is missing, returns default coords (0,0) and length 0 so INSERT can succeed.
+ */
 function deriveFromTrack(pathFromRoute) {
   const track = pathFromRoute?.track;
-  if (!track?.length) return {};
-  const first = track[0];
-  const last = track[track.length - 1];
+  const first = track?.[0];
+  const last = track?.length ? track[track.length - 1] : null;
+  const startPoint = pathFromRoute?.startPoint || (first && `Start (${first.lat?.toFixed(5)}, ${first.lng?.toFixed(5)})`) || '';
+  const endPoint = pathFromRoute?.endPoint || (last && `End (${last.lat?.toFixed(5)}, ${last.lng?.toFixed(5)})`) || '';
+  let length = pathFromRoute?.distance ?? pathFromRoute?.length;
+  if (length == null && track?.length > 1) {
+    let sum = 0;
+    for (let i = 1; i < track.length; i++) {
+      const a = track[i - 1];
+      const b = track[i];
+      if (a?.lat != null && a?.lng != null && b?.lat != null && b?.lng != null) {
+        sum += Math.sqrt(Math.pow(b.lat - a.lat, 2) + Math.pow(b.lng - a.lng, 2));
+      }
+    }
+    length = sum * 111; // rough km (degrees to km approx)
+  }
   return {
-    startPoint: pathFromRoute.startPoint || (first && `Start (${first.lat?.toFixed(5)}, ${first.lng?.toFixed(5)})`) || '',
-    endPoint: pathFromRoute.endPoint || (last && `End (${last.lat?.toFixed(5)}, ${last.lng?.toFixed(5)})`) || '',
+    startPoint,
+    endPoint,
+    startX: first?.lng ?? 0,
+    startY: first?.lat ?? 0,
+    endX: last?.lng ?? 0,
+    endY: last?.lat ?? 0,
+    length: typeof length === 'number' ? length : (typeof length === 'string' ? parseFloat(length) : 0) || 0,
+    routeData: pathFromRoute?.routeData ?? (track?.length ? { type: 'LineString', coordinates: track.map((p) => [p.lng, p.lat]).filter((c) => c[0] != null && c[1] != null) } : null),
   };
 }
 
@@ -46,6 +70,8 @@ export default function PublishPathScreen({ route, navigation }) {
       setError(STRINGS.NAME_REQUIRED);
       return;
     }
+    const distNum = distance ? parseFloat(distance) : undefined;
+    const lengthVal = derived.length != null && derived.length > 0 ? derived.length : (distNum != null && !Number.isNaN(distNum) ? distNum : 0);
     setLoading(true);
     try {
       await createPath({
@@ -53,8 +79,14 @@ export default function PublishPathScreen({ route, navigation }) {
         description: description.trim() || undefined,
         startPoint: startPoint.trim() || undefined,
         endPoint: endPoint.trim() || undefined,
-        distance: distance ? parseFloat(distance) : undefined,
+        distance: distNum,
+        length: lengthVal,
         difficulty: difficulty.trim() || undefined,
+        startX: derived.startX,
+        startY: derived.startY,
+        endX: derived.endX,
+        endY: derived.endY,
+        routeData: derived.routeData || undefined,
       });
       setSuccess(true);
       setTimeout(() => navigation.navigate('PathList'), 1500);

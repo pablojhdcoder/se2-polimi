@@ -1,8 +1,3 @@
-/**
- * Ejecuta el schema SQL para crear tablas en PostgreSQL.
- * Uso: node migrations/run.js
- * Requiere: DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD (o .env)
- */
 require('dotenv').config({ path: require('path').resolve(__dirname, '../.env') });
 const { Pool } = require('pg');
 const fs = require('fs');

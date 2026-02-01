@@ -53,6 +53,9 @@ export const STRINGS = {
 
   // Paths
   PATHS: 'Paths',
+  ALL_PATHS: 'All paths',
+  MY_PATHS: 'My paths',
+  NO_MY_PATHS: "You haven't created any paths yet.",
   PATH_DETAIL: 'Path detail',
   SEARCH_PATHS: 'Search paths',
   NEW_PATH: 'New path',
@@ -86,6 +89,7 @@ export const STRINGS = {
   ERROR_LOADING_FAVORITES: 'Error loading favorites. Log in and try again.',
 
   // Path create / publish
+  PUBLISH_VISIBLE_TO_ALL: 'Publish so visible to all users',
   EASY: 'Easy',
   MEDIUM: 'Medium',
   HARD: 'Hard',
@@ -98,10 +102,10 @@ export const STRINGS = {
   BACK_TO_LIST: 'Back to list',
   ROUTE_NAME_LABEL: 'Route name *',
   ROUTE_NAME_PLACEHOLDER: 'e.g. Park route',
-  START_POINT: 'Start point',
-  END_POINT: 'End point',
+  START_POINT: 'Start point *',
+  END_POINT: 'End point *',
   ADDRESS_OR_PLACE: 'Address or place',
-  DISTANCE_KM: 'Distance (km)',
+  DISTANCE_KM: 'Distance (km) *',
   DISTANCE_PLACEHOLDER: 'e.g. 12.5',
   OPTIONAL_DESCRIPTION: 'Optional route description',
   CREATING: 'Creating…',
@@ -109,6 +113,8 @@ export const STRINGS = {
   CREATE_PATH_MANUALLY: 'Create path manually',
   CANCEL: 'Cancel',
   ERROR_CREATING_PATH: 'Error creating path.',
+  NO_BIKE_ROUTE_FOUND: 'No bike route found.',
+  ERROR_CALCULATING_ROUTE: 'Could not calculate route.',
   NAME_REQUIRED: 'Name is required.',
   PUBLISH_PATH_UC5: 'Publish path',
   COMPLETE_AND_PUBLISH: 'Complete the details and publish the path to share it.',

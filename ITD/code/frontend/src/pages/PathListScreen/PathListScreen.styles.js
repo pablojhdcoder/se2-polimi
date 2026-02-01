@@ -31,4 +31,28 @@ export default StyleSheet.create({
     color: colors.textSecondary,
     fontSize: fontSizes.body,
   },
+  pathListScreen_filterRow: {
+    flexDirection: 'row',
+    paddingHorizontal: spacing.lg,
+    paddingVertical: spacing.sm,
+    gap: spacing.sm,
+  },
+  pathListScreen_filterBtn: {
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.sm,
+    borderRadius: theme.borderRadius?.md ?? 8,
+    backgroundColor: colors.backgroundSecondary ?? '#f0f0f0',
+  },
+  pathListScreen_filterBtnActive: {
+    backgroundColor: colors.primary,
+  },
+  pathListScreen_filterText: {
+    fontSize: fontSizes.body,
+    color: colors.textSecondary,
+    fontWeight: fontWeights.medium,
+  },
+  pathListScreen_filterTextActive: {
+    color: colors.primaryContrast ?? '#fff',
+    fontWeight: fontWeights.semibold,
+  },
 });

@@ -158,6 +158,16 @@ export async function getSavedPaths() {
 }
 
 /**
+ * Gets paths created by the authenticated user (includes drafts and published).
+ * Backend: GET /paths/mine (authenticated).
+ * @returns {Promise<Array>} Array of path objects
+ */
+export async function getMyPaths() {
+  const response = await apiClient.get(`${PATHS_BASE}/mine`);
+  return Array.isArray(response.data) ? response.data : response.data?.paths ?? [];
+}
+
+/**
  * Save a path to user's favorites (requires backend POST /paths/:id/save).
  * @param {string|number} pathId
  * @returns {Promise<Object>}

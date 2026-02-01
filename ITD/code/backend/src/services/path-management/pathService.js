@@ -18,7 +18,8 @@ const addPath = async (pathData) => {
         startY: pathData.startY ?? null,
         endX: pathData.endX ?? null,
         endY: pathData.endY ?? null,
-        routeData: pathData.routeData ?? null
+        routeData: pathData.routeData ?? null,
+        isPublished: pathData.isPublished !== false && pathData.publish !== false
     };
     return await pathRepository.createPath(path);
 };
@@ -63,9 +64,17 @@ const getPathById = async (id) => {
     return await pathRepository.getPathById(id);
 };
 
+/**
+ * Get all paths created by the given username (includes drafts and published).
+ */
+const getPathsByUsername = async (username) => {
+    return await pathRepository.getPathsByUsername(username);
+};
+
 module.exports = {
     addPath,
     updatePathStats,
     getAllPaths,
-    getPathById
+    getPathById,
+    getPathsByUsername
 };

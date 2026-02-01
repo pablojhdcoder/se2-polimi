@@ -42,8 +42,8 @@ CREATE TABLE paths (
     route_data JSONB, -- Abstracted route data (geometry, checkpoints, etc)
 
     posted_by_username VARCHAR(50) NOT NULL,
+    is_published BOOLEAN NOT NULL DEFAULT true,
 
-    
     CONSTRAINT fk_path_user
         FOREIGN KEY (posted_by_username)
         REFERENCES users(username)

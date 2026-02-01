@@ -2,9 +2,10 @@ const { query } = require('../pool');
 
 const createPath = async (path) => {
   console.log('[PathRepository] Creating path with data:', JSON.stringify(path, null, 2));
+  const isPublished = path.isPublished !== false;
   const sql = `
-    INSERT INTO paths (id, path_name, start_x, start_y, end_x, end_y, length, user_rating, status, posted_by_username, route_data)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+    INSERT INTO paths (id, path_name, start_x, start_y, end_x, end_y, length, user_rating, status, posted_by_username, route_data, is_published)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
     RETURNING *
   `;
   const res = await query(sql, [
@@ -18,7 +19,8 @@ const createPath = async (path) => {
     path.userRating || 0,
     path.status || 'optimal',
     path.postedByUsername,
-    path.routeData
+    path.routeData,
+    isPublished
   ]);
   return res.rows[0];
 };
@@ -45,17 +47,27 @@ const getPathByName = async (pathName) => {
 
 const getAllPaths = async (options = {}) => {
   const { search, limit = 100, offset = 0 } = options;
-  let sql = 'SELECT * FROM paths';
+  let sql = 'SELECT * FROM paths WHERE is_published = true';
   const params = [];
 
   if (search && typeof search === 'string' && search.trim()) {
-    sql += ' WHERE path_name ILIKE $1';
+    sql += ' AND path_name ILIKE $1';
     params.push(`%${search.trim()}%`);
   }
   sql += ' ORDER BY path_name LIMIT $' + (params.length + 1) + ' OFFSET $' + (params.length + 2);
   params.push(limit, offset);
 
   const res = await query(sql, params);
+  return res.rows;
+};
+
+const getPathsByUsername = async (username) => {
+  const sql = `
+    SELECT * FROM paths
+    WHERE posted_by_username = $1
+    ORDER BY path_name
+  `;
+  const res = await query(sql, [username]);
   return res.rows;
 };
 
@@ -86,6 +98,7 @@ module.exports = {
   getPathById,
   getPathByName,
   getAllPaths,
+  getPathsByUsername,
   updatePathStatus,
   updatePathRating
 };

@@ -10,6 +10,7 @@ import {
   Alert,
   FlatList,
   ActivityIndicator,
+  Switch,
 } from 'react-native';
 import { createPath } from '../../services/pathsApi';
 import MapService from '../../services/map/MapService';
@@ -43,6 +44,7 @@ export default function PathCreateManualScreen({ navigation }) {
   const [locationLoading, setLocationLoading] = useState(null);
   const [routeLoading, setRouteLoading] = useState(false);
   const [routeGeoJSON, setRouteGeoJSON] = useState(null);
+  const [publish, setPublish] = useState(true);
 
   const fetchStartSuggestions = useCallback(async (text) => {
     if (!text || text.length < 2) {
@@ -139,7 +141,7 @@ export default function PathCreateManualScreen({ navigation }) {
         const km = (directions.summary.distance / 1000).toFixed(2);
         setDistance(km);
       } else {
-        setError('Could not calculate route');
+        setError(STRINGS.ERROR_CALCULATING_ROUTE);
       }
       if (directions?.path) {
         setRouteGeoJSON(directions.path);
@@ -147,7 +149,9 @@ export default function PathCreateManualScreen({ navigation }) {
         setRouteGeoJSON(null);
       }
     } catch (e) {
-      setError(e.message || 'Could not calculate route');
+      setError(
+        e.message === 'NO_BIKE_ROUTE' ? STRINGS.NO_BIKE_ROUTE_FOUND : (e.message || STRINGS.ERROR_CALCULATING_ROUTE)
+      );
       setRouteGeoJSON(null);
     } finally {
       setRouteLoading(false);
@@ -193,6 +197,7 @@ export default function PathCreateManualScreen({ navigation }) {
       payload.endY = endCoords.lat;
     }
     if (routeGeoJSON) payload.routeData = routeGeoJSON;
+    payload.publish = publish;
     return payload;
   };
 
@@ -390,6 +395,12 @@ export default function PathCreateManualScreen({ navigation }) {
           </TouchableOpacity>
         ) : null}
 
+        {error ? (
+          <View style={styles.pathCreateManualScreen_errorBox}>
+            <Text style={styles.pathCreateManualScreen_errorText}>{error}</Text>
+          </View>
+        ) : null}
+
         <Text style={styles.pathCreateManualScreen_label}>{STRINGS.DIFFICULTY}</Text>
         <View style={styles.pathCreateManualScreen_difficultyRow}>
           {DIFFICULTIES.map((d) => (
@@ -418,11 +429,14 @@ export default function PathCreateManualScreen({ navigation }) {
           editable={!submitting}
         />
 
-        {error ? (
-          <View style={styles.pathCreateManualScreen_errorBox}>
-            <Text style={styles.pathCreateManualScreen_errorText}>{error}</Text>
-          </View>
-        ) : null}
+        <View style={styles.pathCreateManualScreen_publishRow}>
+          <Text style={styles.pathCreateManualScreen_publishLabel}>{STRINGS.PUBLISH_VISIBLE_TO_ALL}</Text>
+          <Switch
+            value={publish}
+            onValueChange={setPublish}
+            disabled={submitting}
+          />
+        </View>
 
         <TouchableOpacity
           style={[styles.pathCreateManualScreen_submitButton, submitting && styles.pathCreateManualScreen_submitButtonDisabled]}

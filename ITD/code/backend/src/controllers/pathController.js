@@ -12,6 +12,7 @@ const createPath = async (req, res, next) => {
         if (req.user && req.user.username) {
             pathData.postedByUsername = req.user.username;
         }
+        pathData.isPublished = req.body.publish ?? req.body.isPublished ?? true;
 
         const path = await pathService.addPath(pathData);
         res.status(201).json({
@@ -141,11 +142,25 @@ const getRelatedPaths = async (req, res, next) => {
     }
 };
 
+/**
+ * List paths created by the authenticated user (includes drafts and published).
+ */
+const getMyPaths = async (req, res, next) => {
+    try {
+        const username = req.user.username;
+        const paths = await pathService.getPathsByUsername(username);
+        res.status(200).json(paths);
+    } catch (error) {
+        next(error);
+    }
+};
+
 module.exports = {
     createPath,
     getPaths,
     getPathById,
     getSavedPaths,
+    getMyPaths,
     getNearbyPaths,
     getRelatedPaths,
     savePath,

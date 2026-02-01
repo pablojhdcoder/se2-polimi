@@ -131,4 +131,15 @@ export default StyleSheet.create({
     color: colors.white,
     fontSize: fontSizes.body,
   },
+  pathCreateManualScreen_publishRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: spacing.lg,
+  },
+  pathCreateManualScreen_publishLabel: {
+    fontSize: fontSizes.body,
+    color: colors.text,
+    flex: 1,
+  },
 });

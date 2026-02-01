@@ -122,6 +122,11 @@ class MapService {
 
             return this._transformRoute(response.data);
         } catch (error) {
+            const status = error.response?.status;
+            if (status === 422) {
+                console.warn('No cycling route available for this pair of points.');
+                throw new Error('NO_BIKE_ROUTE');
+            }
             console.error('Error getting directions:', error);
             return null;
         }

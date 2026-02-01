@@ -1,7 +1,3 @@
-/**
- * Migración: permite path_id NULL en la tabla trips (para viajes automáticos sin ruta asociada).
- * Ejecutar una vez si ya tienes la base de datos creada: node migrations/alter-trips-path-id-nullable.js
- */
 require('dotenv').config({ path: require('path').resolve(__dirname, '../.env') });
 const { Pool } = require('pg');
 
