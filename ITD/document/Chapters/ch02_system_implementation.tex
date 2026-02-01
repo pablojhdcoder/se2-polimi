@@ -1,81 +1,368 @@
-\section{System Implementation}
-\label{sec:system_implementation}
+\section{Overview}
+\label{sec:system_implementation_overview}
 
-This chapter provides an overview of the implemented system, including the functional requirements addressed in this release, the adopted infrastructure and programming languages, and the organization of the source code.
+This chapter provides a thorough overview of the implemented Best Bike Paths system, documenting the design decisions made during development, the technologies and frameworks employed, features successfully implemented from the Design Document, and features that were excluded from this release.
 
-\subsection{Implemented Requirements}
-\label{subsec:implemented_requirements}
+\section{Design Choices and Architecture}
+\label{sec:design_choices}
 
-The implementation focuses on the core functional requirements defined in the Design Document (DD), prioritizing the "Phase 0" and "Phase 1" goals to establish a viable prototype. Below is a summary of the implemented requirements.
+\subsection{Architectural Pattern}
+\label{subsec:architectural_pattern}
 
-\subsubsection{User Management (F1)}
+The system follows a \textbf{Layered Architecture} with clear separation of concerns:
+
 \begin{itemize}
-    \item \textbf{Registration (F1.1):} Users can create accounts using a valid email and password.
-    \item \textbf{Login (F1.2):} Secure authentication using JWT tokens and bcrypt password hashing.
-    \item \textbf{Profile Management (F1.3):} Users can view and simple update their profile information.
+    \item \textbf{Presentation Layer:} React Native mobile application providing the user interface
+    \item \textbf{API Layer:} RESTful API endpoints using Express.js for client-server communication
+    \item \textbf{Business Logic Layer:} Service modules implementing domain logic (User Management, Trip Management, Path Management)
+    \item \textbf{Data Access Layer:} Repository pattern abstracting database operations
+    \item \textbf{Infrastructure Layer:} PostgreSQL (persistent storage), Redis (caching/sessions), RabbitMQ (message queuing)
 \end{itemize}
 
-\subsubsection{Trip Management (F2)}
+This architecture was chosen to support:
 \begin{itemize}
-    \item \textbf{Manual Trip Recording (F2.1):} Users can start and stop a trip recording manually.
-    \item \textbf{Trip Statistics (F2.5):} The system calculates distance and duration for recorded trips.
-    \item \textbf{Trip History (F2.7):} Users can retrieve their past trips.
+    \item \textbf{Testability:} Each layer can be tested independently with mocked dependencies
+    \item \textbf{Maintainability:} Changes in one layer have minimal impact on others
+    \item \textbf{Scalability:} Services can be deployed independently in the future
 \end{itemize}
 
-\subsubsection{Path Management (F3)}
+\subsection{Database Design}
+\label{subsec:database_design}
+
+\textbf{PostgreSQL} was selected as the primary database for several reasons:
 \begin{itemize}
-    \item \textbf{Path Insertion (F3.1):} Users can insert new paths with geospatial data (coordinates) and metadata (name, status).
-    \item \textbf{Path Search (F5.1 - F5.2):} Basic search functionality to find paths near a location or within a region.
+    \item \textbf{PostGIS Extension:} Provides robust geospatial capabilities required for storing and querying bike path coordinates
+    \item \textbf{ACID Compliance:} Ensures data integrity for critical operations like user registration and trip recording
+    \item \textbf{JSON Support:} Allows flexible storage of trip metadata and sensor data
 \end{itemize}
 
-\subsubsection{Automated Detection (F4)}
+Key design decisions:
 \begin{itemize}
-    \item \textbf{Sensor Data Acquisition:} The mobile app collects data from GPS, Accelerometer, and Gyroscope (F4.1), which is sent to the backend for processing.
-    \item \textbf{Obstacle Detection (F4.3):} Basic server-side logic to identify potential anomalies (potholes) from sensor streams.
+    \item \textbf{Normalized Schema:} Reduces data redundancy and maintains referential integrity
+    \item \textbf{Spatial Indexing:} GiST indexes on path geometries for efficient proximity queries
+    \item \textbf{UUID Primary Keys:} Enables distributed ID generation and prevents enumeration attacks
 \end{itemize}
 
-\subsubsection{Exclusions}
-Requirements related to **Social Features (F7)** were excluded from this release to focus on the core functionality of data collection and path management. The "Bottom-Up" strategy prioritized establishing robust data layers before implementing higher-level social interactions.
+\subsection{Caching Strategy}
+\label{subsec:caching_strategy}
 
-\subsection{Implemented Infrastructure}
-\label{subsec:implemented_infrastructure}
-To support the system's functional requirements and ensure scalability, the following infrastructure components have been implemented:
+\textbf{Redis} serves multiple purposes:
 \begin{itemize}
-    \item \textbf{PostgreSQL:} Serves as the primary relational database management system, storing persistent data such as user profiles, trip histories, and path metadata. PostGIS is enabled for spatial indexing.
-    \item \textbf{Redis:} Utilized as a high-performance in-memory caching layer, specifically for managing active user sessions and real-time trip data to reduce database load.
-    \item \textbf{RabbitMQ:} Implemented as a message broker to handle asynchronous communication between services, decoupling heavy processing tasks (like path statistics calculation) from the main request flow.
+    \item \textbf{Session Management:} Stores JWT tokens with automatic expiration (24-hour TTL)
+    \item \textbf{Live Trip Tracking:} Maintains real-time coordinates during active trips to reduce database load
+    \item \textbf{Cache Invalidation:} Implements write-through caching for frequently accessed path data
 \end{itemize}
 
-\subsection{Programming Languages}
-\label{subsec:programming_languages}
-The implementation leverages a unified language stack to streamline development:
+\subsection{Asynchronous Processing}
+\label{subsec:async_processing}
+
+\textbf{RabbitMQ} message broker enables:
 \begin{itemize}
-    \item \textbf{Backend:} Developed in \textbf{Node.js} (JavaScript), utilizing Express.js for the REST API and standard libraries for service integrations.
-    \item \textbf{Frontend (Mobile):} Built with \textbf{React Native} (JavaScript) using the Expo framework, allowing for a cross-platform mobile application that interacts with the backend services.
+    \item \textbf{Path Statistics Updates:} Decouples trip completion from path rating recalculations
+    \item \textbf{Email Notifications:} Sends welcome and trip summary emails asynchronously
+    \item \textbf{Fault Tolerance:} Messages persist in queues if consumers are temporarily unavailable
 \end{itemize}
 
-\subsection{Source Code Structure}
-\label{subsec:source_code_structure}
+\subsection{Authentication \& Authorization}
+\label{subsec:auth_design}
 
-The project uses a **Monorepo** structure. This organization was chosen to keep backend and frontend code synchronized, share configuration (linting, prettier), and simplify dependency management.
-
-\textbf{Directory Structure:}
+Security implementation:
 \begin{itemize}
-    \item \textbf{\texttt{code/backend/}}: Contains the server-side Node.js application.
+    \item \textbf{JWT Tokens:} Stateless authentication with 24-hour expiration
+    \item \textbf{bcrypt Hashing:} Password storage with salt rounds = 10
+    \item \textbf{Middleware-based Auth:} Centralized token verification in API routes
+    \item \textbf{Role-based Access:} Future-ready design for admin/moderator roles
+\end{itemize}
+
+\section{Technologies and Frameworks}
+\label{sec:technologies_frameworks}
+
+\subsection{Backend Stack}
+\label{subsec:backend_stack}
+
+\begin{itemize}
+    \item \textbf{Runtime:} Node.js v18 LTS
+    \item \textbf{Framework:} Express.js v4.18 - Minimalist web framework with extensive middleware ecosystem
+    \item \textbf{Database Client:} pg (node-postgres) v8.11 - Native PostgreSQL driver
+    \item \textbf{Authentication:} jsonwebtoken v9.0, bcrypt v5.1
+    \item \textbf{Validation:} express-validator for request payload validation
+    \item \textbf{Message Queue:} amqplib v0.10 - RabbitMQ client library
+    \item \textbf{Caching:} redis v4.6
+    \item \textbf{HTTP Client:} axios v1.6 - For external API integrations (Weather API, Map Service)
+\end{itemize}
+
+\subsection{Frontend Stack}
+\label{subsec:frontend_stack}
+
+\begin{itemize}
+    \item \textbf{Framework:} React Native v0.72 with Expo SDK v49
+    \item \textbf{Navigation:} React Navigation v6 - Stack and tab-based navigation
+    \item \textbf{State Management:} React Context API for auth state, local component state for UI
+    \item \textbf{Mapping:} react-native-maps integrated with Mapbox GL
+    \item \textbf{Storage:} AsyncStorage for offline data persistence
+    \item \textbf{HTTP Client:} axios with custom retry logic
+    \item \textbf{Location Services:} expo-location for GPS access
+\end{itemize}
+
+\subsection{Development \& Testing Tools}
+\label{subsec:dev_tools}
+
+\begin{itemize}
+    \item \textbf{Testing Framework:} Jest v29 for both backend and frontend
+    \item \textbf{API Testing:} Supertest v6 for HTTP assertions
+    \item \textbf{Frontend Testing:} React Native Testing Library for component tests
+    \item \textbf{Containerization:} Docker \& Docker Compose for infrastructure services
+    \item \textbf{Code Quality:} ESLint for linting, Prettier for formatting
+    \item \textbf{Version Control:} Git with GitHub repository
+\end{itemize}
+
+\subsection{External Services}
+\label{subsec:external_services}
+
+\begin{itemize}
+    \item \textbf{Weather API:} OpenWeatherMap API for fetching weather conditions during trips
+    \item \textbf{Map Service:} Mapbox for geocoding, reverse geocoding, and map tile rendering
+    \item \textbf{Email Service:} SMTP configuration for transactional emails (with mock fallback in development)
+\end{itemize}
+
+\section{Implemented Features}
+\label{sec:implemented_features}
+
+The following features from the Design Document have been successfully implemented in this release.
+
+\subsection{User Management (F1)}
+\label{subsec:impl_user_mgmt}
+
+\begin{itemize}
+    \item \textbf{User Registration (UC1):} Users can create accounts with email, password, and optional profile information
+    \item \textbf{User Login (UC2):} Secure authentication with session management via JWT tokens
+    \item \textbf{Profile View:} Users can view their profile information
+    \item \textbf{Session Management:} Automatic logout after 24 hours or manual logout option
+\end{itemize}
+
+\subsection{Trip Management (F2)}
+\label{subsec:impl_trip_mgmt}
+
+\begin{itemize}
+    \item \textbf{Manual Trip Recording:} Users can manually start and stop trip recording
+    \item \textbf{Trip Data Collection:} GPS coordinates, timestamps, and weather conditions are captured
+    \item \textbf{Trip Statistics:} Automatic calculation of distance, duration, and average speed
+    \item \textbf{Trip History (UC8):} Users can view their past trips with full details
+    \item \textbf{Weather Integration:} Real-time weather data fetched at trip start
+\end{itemize}
+
+\subsection{Path Management (F3)}
+\label{subsec:impl_path_mgmt}
+
+\begin{itemize}
+    \item \textbf{Manual Path Creation (UC3):} Users can manually create paths by specifying waypoints
+    \item \textbf{Path Metadata:} Paths include name, description, difficulty level, start/end points
+    \item \textbf{Path Status Workflow:} Draft → Published state transitions
+    \item \textbf{Path Publishing (UC5):} Users can publish their created paths for others to view
+    \item \textbf{Path Data Viewing (UC9):} Detailed view of path information including route geometry
+\end{itemize}
+
+\subsection{Path Discovery (F5)}
+\label{subsec:impl_path_discovery}
+
+\begin{itemize}
+    \item \textbf{Path Search (UC6):} Basic search functionality to find paths by name or location
+    \item \textbf{Path List View:} Display all available published paths
+    \item \textbf{Path Details:} View comprehensive path information including map visualization
+    \item \textbf{Location-based Search:} Find paths near user's current location using PostGIS
+\end{itemize}
+
+\subsection{Rating \& Reviews (F6)}
+\label{subsec:impl_ratings}
+
+\begin{itemize}
+    \item \textbf{Path Rating:} Users can rate paths on a 1-5 scale
+    \item \textbf{Review Submission (UC7):} Users can write textual reviews for paths
+    \item \textbf{Average Rating Calculation:} Automatic aggregation of user ratings
+    \item \textbf{Review Display:} View all reviews for a specific path
+\end{itemize}
+
+\subsection{Infrastructure Features}
+\label{subsec:impl_infrastructure}
+
+\begin{itemize}
+    \item \textbf{Offline Support:} Frontend queues operations when offline and syncs when connectivity returns
+    \item \textbf{Error Handling:} Comprehensive error handling with user-friendly messages
+    \item \textbf{Data Validation:} Input validation on both client and server sides
+    \item \textbf{API Versioning:} RESTful API with /api/v1 prefix for future compatibility
+\end{itemize}
+
+\section{Excluded Features}
+\label{sec:excluded_features}
+
+The following features were intentionally excluded from this release due to technical complexity and time constraints. These exclusions were made after careful consideration during the design phase.
+
+\subsection{Advanced Sensor-Based Detection}
+\label{subsec:excluded_sensors}
+
+\textbf{Rationale:} Automatic trip and obstacle detection using device sensors proved to be significantly more complex than initially anticipated.
+
+Excluded components:
+\begin{itemize}
+    \item \textbf{Automatic Trip Detection (F4.2):} Using accelerometer and gyroscope to automatically detect trip start/stop
     \begin{itemize}
-        \item \texttt{src/controllers/}: Handles HTTP requests and response formatting.
-        \item \texttt{src/services/}: Contains the business logic for Users, Trips, and Paths.
-        \item \texttt{src/repositories/}: Encapsulates raw Database/SQL queries.
-        \item \texttt{migrations/}: SQL scripts to create and update database schema.
+        \item \textit{Challenge:} Distinguishing cycling motion from walking, car travel, or stationary periods
+        \item \textit{Complexity:} Required sophisticated machine learning models for motion classification
+        \item \textit{Testing:} Difficult to create reliable test cases for motion patterns
     \end{itemize}
-
-    \item \textbf{\texttt{code/frontend/}}: Contains the React Native mobile application.
+    
+    \item \textbf{Obstacle Detection (F4.3):} Real-time pothole and road hazard detection
     \begin{itemize}
-        \item \texttt{src/pages/}: React components representing full application screens.
-        \item \texttt{src/components/}: Reusable UI elements (Buttons, Cards).
-        \item \texttt{src/services/}: API clients for backend communication.
-        \item \texttt{src/sensors/}: Modules interfacing with device hardware (GPS, Gyroscope).
+        \item \textit{Challenge:} Accurately correlating accelerometer spikes with actual road obstacles
+        \item \textit{Complexity:} High false-positive rates without advanced signal processing
+        \item \textit{Privacy:} Continuous sensor monitoring raised battery and privacy concerns
     \end{itemize}
+    
+    \item \textbf{Gyroscope Integration:} Using gyroscope data for turn detection and path geometry
+    \begin{itemize}
+        \item \textit{Challenge:} Sensor calibration varies significantly across devices
+        \item \textit{Complexity:} Integration of gyroscope + GPS + accelerometer data requires sensor fusion algorithms
+    \end{itemize}
+\end{itemize}
 
-    \item \textbf{\texttt{code/docker-compose.yml}}: Describes the infrastructure services (Postgres, Redis, RabbitMQ) required to run the system locally.
+\textbf{Alternative Approach Implemented:} 
+\begin{itemize}
+    \item Manual trip recording with GPS-only tracking provides reliable, battery-efficient functionality
+    \item Users can manually mark obstacles/potholes through the UI if this feature is prioritized in future releases
+\end{itemize}
+
+\subsection{Social Features (F7)}
+\label{subsec:excluded_social}
+
+Social interaction features were de-prioritized to focus on core path and trip management:
+
+\begin{itemize}
+    \item \textbf{User Following:} Ability to follow other users
+    \item \textbf{Activity Feed:} Social feed showing trips and paths from followed users
+    \item \textbf{Comments on Reviews:} Threaded discussions on path reviews
+    \item \textbf{Path Sharing:} Direct sharing of paths via social media or messaging
+\end{itemize}
+
+\textbf{Rationale:} These features require additional infrastructure (notification system, feed generation algorithm) and can be added in future iterations without affecting core functionality.
+
+\subsection{Advanced Path Features}
+\label{subsec:excluded_path_features}
+
+\begin{itemize}
+    \item \textbf{Automated Path Generation (UC4):} Automatic creation of paths from completed trips
+    \begin{itemize}
+        \item \textit{Reason:} Requires complex route simplification and merging algorithms
+        \item \textit{Decision:} Manual path creation provides better quality control
+    \end{itemize}
+    
+    \item \textbf{Path Elevation Profiles:} Displaying elevation gain/loss for paths
+    \begin{itemize}
+        \item \textit{Reason:} Requires integration with elevation APIs and additional data processing
+    \end{itemize}
+    
+    \item \textbf{Route Planning:} Suggesting optimal routes between two points
+    \begin{itemize}
+        \item \textit{Reason:} Requires routing engine integration (e.g., OSRM, GraphHopper)
+    \end{itemize}
+\end{itemize}
+
+\section{Source Code Structure}
+\label{sec:source_code_structure}
+
+The project employs a \textbf{monorepo} organization to synchronize backend and frontend development.
+
+\subsection{Backend Structure}
+\label{subsec:backend_structure}
+
+\begin{verbatim}
+code/backend/
++-- src/
+|   +-- app.js                    # Express app configuration
+|   +-- server.js                 # HTTP server entry point
+|   +-- pool.js                   # PostgreSQL connection pool
+|   +-- config/
+|   |   +-- redis.js              # Redis client configuration
+|   |   +-- rabbitmq.js           # RabbitMQ connection
+|   +-- controllers/
+|   |   +-- authController.js     # Authentication endpoints
+|   |   +-- tripController.js     # Trip CRUD endpoints
+|   |   +-- pathController.js     # Path management endpoints
+|   +-- services/
+|   |   +-- user-management/
+|   |   |   +-- authService.js    # Login/register logic
+|   |   |   +-- userService.js    # Profile operations
+|   |   +-- trip-management/
+|   |   |   +-- tripService.js    # Trip business logic
+|   |   +-- path-management/
+|   |   |   +-- pathService.js    # Path operations
+|   |   +-- external/
+|   |   |   +-- weatherService.js # Weather API client
+|   |   |   +-- emailService.js   # Email sending
+|   |   +-- information-merging/
+|   |       +-- statsConsumer.js  # RabbitMQ consumer
+|   +-- repositories/
+|   |   +-- userRepository.js     # User DB queries
+|   |   +-- tripRepository.js     # Trip DB queries
+|   |   +-- pathRepository.js     # Path DB queries
+|   |   +-- ratingRepository.js   # Rating DB queries
+|   +-- middleware/
+|   |   +-- authMiddleware.js     # JWT verification
+|   +-- routes/
+|       +-- authRoutes.js         # /auth routes
+|       +-- tripRoutes.js         # /trips routes
+|       +-- pathRoutes.js         # /paths routes
++-- tests/                        # Test suites (detailed in Chapter 4)
++-- migrations/                   # SQL schema migrations
++-- docker-compose.yml            # Infrastructure setup
+\end{verbatim}
+
+\subsection{Frontend Structure}
+\label{subsec:frontend_structure}
+
+\begin{verbatim}
+code/frontend/
++-- App.js                        # Root component
++-- src/
+|   +-- navigation/
+|   |   +-- AuthContext.js        # Authentication state provider
+|   |   +-- MainStack.js          # Stack navigator
+|   |   +-- MainTabs.js           # Tab navigator
+|   +-- pages/
+|   |   +-- HomeScreen/           # Landing page
+|   |   +-- LoginScreen/          # Login UI
+|   |   +-- RegisterScreen/       # Registration UI
+|   |   +-- ProfileScreen/        # User profile
+|   |   +-- PathListScreen/       # Browse paths
+|   |   +-- PathDetailScreen/     # Path details
+|   |   +-- PathCreateManualScreen/ # Create path
+|   |   +-- PublishPathScreen/    # Publish confirmation
+|   |   +-- ReviewsScreen/        # Path reviews
+|   +-- components/
+|   |   +-- Button.js             # Reusable button
+|   |   +-- Card.js               # Card container
+|   |   +-- Input.js              # Form input
+|   |   +-- Loading.js            # Loading spinner
+|   |   +-- paths/
+|   |       +-- PathCard.js       # Path list item
+|   |       +-- PathList.js       # Path list container
+|   +-- services/
+|   |   +-- api.js                # Axios instance
+|   |   +-- pathsApi.js           # Path API client
+|   |   +-- tripsApi.js           # Trip API client
+|   |   +-- map/
+|   |       +-- MapService.js     # Mapbox integration
+|   +-- storage/
+|   |   +-- storageService.js     # AsyncStorage wrapper
+|   |   +-- syncQueue.js          # Offline sync queue
+|   +-- contexts/
+|       +-- NetworkStatusContext.js # Online/offline state
++-- __tests__/                    # Test suites (detailed in Chapter 4)
+\end{verbatim}
+
+This structure follows best practices:
+\begin{itemize}
+    \item \textbf{Separation of Concerns:} Clear boundaries between layers
+    \item \textbf{Testability:} Each module can be independently tested
+    \item \textbf{Scalability:} Easy to locate and modify specific functionality
+    \item \textbf{Reusability:} Shared components and utilities
 \end{itemize}

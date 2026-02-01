@@ -1,84 +1,498 @@
-\section{Integration Strategy}
-\label{sec:integration_strategy}
+\section{Integration Approach}
+\label{sec:integration_approach}
 
-This chapter details the strategy adopted for integrating the various components of the Best Bike Paths system, along with the supporting tools and environment.
+This chapter describes the integration strategy employed during the development of the Best Bike Paths system, detailing the bottom-up approach in the backend, parallel frontend development, and the final synchronization phase.
 
-\subsection{Integration Approach}
-\label{subsec:integration_approach}
+\subsection{Overall Strategy}
+\label{subsec:overall_strategy}
 
-The integration testing strategy for the Best Bike Paths system follows a \textbf{Bottom-Up approach}, as defined in the Design Document. This approach ensures that foundational components are tested and validated before higher-level components are integrated.
+The integration process followed a \textbf{hybrid approach}:
 
-The Bottom-Up strategy provides several advantages:
 \begin{itemize}
-    \item Early validation of core data and service layers
-    \item Easier debugging by isolating issues at lower levels first
-    \item Support for parallel development across different components
-    \item Reduced integration effort by ensuring stable dependencies
+    \item \textbf{Backend:} Bottom-Up integration starting from the data layer
+    \item \textbf{Frontend:} Component-based development with incremental feature integration
+    \item \textbf{Synchronization:} Regular integration points where frontend and backend were connected and tested together
 \end{itemize}
 
-\subsection{Integration Levels}
-\label{subsec:integration_levels}
+This strategy provided several advantages:
+\begin{itemize}
+    \item \textbf{Parallel Development:} Frontend and backend teams could work independently
+    \item \textbf{Early Validation:} Core backend components were validated before API integration
+    \item \textbf{Reduced Risk:} Issues were identified within individual layers before full system integration
+    \item \textbf{Iterative Testing:} Tests were written during integration and refined as components matured
+\end{itemize}
 
-The integration process is organized into the following levels:
+\section{Backend Integration (Bottom-Up)}
+\label{sec:backend_integration}
 
-\subsubsection{Level 1: Data Layer Integration}
-Integration of database components, repositories, and data access layers (PostgreSQL, Redis, Migrations).
+The backend followed a strict bottom-up integration approach, building from foundational layers to higher-level components.
 
-\subsubsection{Level 2: Service Layer Integration}
-Integration of individual microservices (User, Trip, Path, etc.) with the data layer and with each other via internal APIs and message queues.
+\subsection{Phase 1: Data Layer Foundation}
+\label{subsec:phase1_data_layer}
 
-\subsubsection{Level 3: API Gateway Integration}
-Integration of the API Gateway with all backend services, handling routing, authentication, and validation.
+\textbf{Objective:} Establish a stable data persistence layer before implementing business logic.
 
-\subsubsection{Level 4: External Services Integration}
-Integration with third-party services (Weather API, Map Service, Email Service) using mocks and fallbacks.
+\textbf{Components Integrated:}
+\begin{itemize}
+    \item PostgreSQL database with PostGIS extension
+    \item Database schema creation via SQL migrations
+    \item Connection pool configuration
+    \item Repository pattern implementation (User, Trip, Path, Rating repositories)
+    \item Redis client for caching and session storage
+\end{itemize}
 
-\subsubsection{Level 5: Client Integration}
-Integration of the mobile application components (UI, API Client, Sensors) with the backend services.
-
-\subsubsection{Level 6: End-to-End Integration}
-Complete system integration testing covering critical and advanced use case scenarios.
-
-\subsection{Integration Order}
-\label{subsec:integration_order}
-
-The integration order aligns with the implementation phases:
+\textbf{Integration Activities:}
 \begin{enumerate}
-    \item \textbf{Phase 0:} Project foundations (repository, schema).
-    \item \textbf{Phase 1:} Core services (User, Trip, Path, Rating).
-    \item \textbf{Phase 2:} API Gateway and API stabilization.
-    \item \textbf{Phase 3:} Client flows and discovery (Search, Maps).
-    \item \textbf{Phase 4:} Automated detection and sensor processing.
-    \item \textbf{Phase 5:} Information merging.
+    \item Set up Docker Compose infrastructure (PostgreSQL, Redis, RabbitMQ)
+    \item Run database migrations to create schema
+    \item Implement repository modules with CRUD operations
+    \item Test repository methods against live database instances
+    \item Verify referential integrity and constraint enforcement
 \end{enumerate}
+
+\textbf{Testing During Integration:}
+\begin{itemize}
+    \item Repository tests with mocked database pool
+    \item SQL query validation
+    \item Transaction rollback scenarios
+    \item Cache hit/miss verification
+\end{itemize}
+
+\subsection{Phase 2: Service Layer Integration}
+\label{subsec:phase2_service_layer}
+
+\textbf{Objective:} Implement business logic that orchestrates repository operations.
+
+\textbf{Components Integrated:}
+\begin{itemize}
+    \item Authentication Service (registration, login, JWT generation)
+    \item User Service (profile management)
+    \item Trip Service (manual trip recording, statistics calculation)
+    \item Path Service (CRUD operations, state transitions)
+    \item Weather Service (external API integration with fallback)
+    \item Email Service (SMTP configuration with mock mode)
+\end{itemize}
+
+\textbf{Integration Activities:}
+\begin{enumerate}
+    \item Connect services to repositories
+    \item Implement service-to-service communication (e.g., Trip Service calls Weather Service)
+    \item Configure RabbitMQ message queues for asynchronous tasks
+    \item Implement retry logic and error handling
+    \item Test services with mocked repositories
+\end{enumerate}
+
+\textbf{Testing During Integration:}
+\begin{itemize}
+    \item Unit tests for service logic (authService, pathService, tripService, weatherService)
+    \item Integration tests for service-repository interactions
+    \item Mock external API responses
+    \item Validate business rules (e.g., password hashing, token expiration)
+\end{itemize}
+
+\subsection{Phase 3: API Layer Integration}
+\label{subsec:phase3_api_layer}
+
+\textbf{Objective:} Expose services through RESTful API endpoints.
+
+\textbf{Components Integrated:}
+\begin{itemize}
+    \item Express.js application setup
+    \item Controller layer (Auth, Trip, Path controllers)
+    \item Route definitions (/api/v1/auth, /api/v1/trips, /api/v1/paths)
+    \item Authentication middleware (JWT verification)
+    \item Request validation middleware
+    \item Error handling middleware
+\end{itemize}
+
+\textbf{Integration Activities:}
+\begin{enumerate}
+    \item Create controllers that call services
+    \item Define API routes and HTTP methods
+    \item Implement authentication middleware chain
+    \item Add request body validation
+    \item Configure CORS for frontend communication
+    \item Standardize error response format
+\end{enumerate}
+
+\textbf{Testing During Integration:}
+\begin{itemize}
+    \item API route tests using Supertest
+    \item Authentication flow tests (401, 403 responses)
+    \item HTTP method validation (GET, POST, PUT, DELETE)
+    \item Request/response payload validation
+\end{itemize}
+
+\subsection{Phase 4: Infrastructure Integration}
+\label{subsec:phase4_infrastructure}
+
+\textbf{Objective:} Integrate message queuing and caching for production-ready features.
+
+\textbf{Components Integrated:}
+\begin{itemize}
+    \item RabbitMQ consumer for path statistics updates
+    \item Redis session management integration
+    \item Cache invalidation on write operations
+    \item Email queue for asynchronous notifications
+\end{itemize}
+
+\textbf{Integration Activities:}
+\begin{enumerate}
+    \item Configure RabbitMQ exchanges and queues
+    \item Implement consumer services
+    \item Test message publishing and consumption
+    \item Verify Redis session expiration (24-hour TTL)
+    \item Test cache invalidation logic
+\end{enumerate}
+
+\textbf{Testing During Integration:}
+\begin{itemize}
+    \item Infrastructure tests (server health check, Redis connection)
+    \item Message queue tests (publishing, consumer processing)
+    \item Session lifecycle tests
+\end{itemize}
+
+\section{Frontend Development (Parallel)}
+\label{sec:frontend_development}
+
+While the backend followed bottom-up integration, the frontend was developed in parallel using a component-based approach.
+
+\subsection{Phase 1: Core Components \& Navigation}
+\label{subsec:frontend_phase1}
+
+\textbf{Objective:} Establish UI foundation and navigation structure.
+
+\textbf{Components Developed:}
+\begin{itemize}
+    \item Reusable UI components (Button, Card, Input, Loading)
+    \item Navigation stack and tab structure
+    \item Authentication context for state management
+    \item Splash screen and home screen
+\end{itemize}
+
+\textbf{Testing:}
+\begin{itemize}
+    \item Component unit tests (Button.test.js, Card.test.js, Input.test.js)
+    \item Navigation flow tests
+    \item Context provider tests
+\end{itemize}
+
+\subsection{Phase 2: Authentication Screens}
+\label{subsec:frontend_phase2}
+
+\textbf{Objective:} Implement user registration and login flows.
+
+\textbf{Components Developed:}
+\begin{itemize}
+    \item LoginScreen with form validation
+    \item RegisterScreen with password strength checks
+    \item ProfileScreen for user info display
+    \item API client configuration with axios
+    \item Session storage using AsyncStorage
+\end{itemize}
+
+\textbf{Testing:}
+\begin{itemize}
+    \item Screen rendering tests (LoginScreen.test.js, RegisterScreen.test.js)
+    \item E2E authentication flow (authFlow.test.js)
+    \item API mock tests for login/register endpoints
+\end{itemize}
+
+\subsection{Phase 3: Path Management Screens}
+\label{subsec:frontend_phase3}
+
+\textbf{Objective:} Implement path browsing, viewing, and creation.
+
+\textbf{Components Developed:}
+\begin{itemize}
+    \item PathListScreen for browsing published paths
+    \item PathDetailScreen for viewing path information
+    \item PathCreateManualScreen for manual path creation
+    \item PublishPathScreen for publishing paths
+    \item PathCard and PathList components
+    \item Map integration with Mapbox
+\end{itemize}
+
+\textbf{Testing:}
+\begin{itemize}
+    \item Path component tests (PathCard.test.js, PathList.test.js)
+    \item E2E path flow (pathFlow.test.js)
+    \item Map service tests (MapService.test.js)
+\end{itemize}
+
+\subsection{Phase 4: Offline Support \& Sync}
+\label{subsec:frontend_phase4}
+
+\textbf{Objective:} Add offline capabilities and data synchronization.
+
+\textbf{Components Developed:}
+\begin{itemize}
+    \item Network status detection
+    \item Offline banner components
+    \item Sync queue for pending operations
+    \item Storage service wrappers
+    \item Retry logic for failed requests
+\end{itemize}
+
+\textbf{Testing:}
+\begin{itemize}
+    \item Storage tests (storageService.test.js, syncQueue.test.js)
+    \item Offline sync tests (syncOffline.test.js)
+    \item Network status tests
+\end{itemize}
+
+\section{Frontend-Backend Synchronization}
+\label{sec:synchronization}
+
+After developing frontend and backend components in parallel, several integration and synchronization sprints ensured seamless communication.
+
+\subsection{API Contract Definition}
+\label{subsec:api_contract}
+
+\textbf{Activities:}
+\begin{itemize}
+    \item Documented API endpoints, request/response schemas
+    \item Aligned frontend API client with backend route definitions
+    \item Standardized error response format
+    \item Agreed on authentication header format (Bearer token)
+\end{itemize}
+
+\subsection{Integration Testing Sessions}
+\label{subsec:integration_sessions}
+
+\textbf{Sprint 1: Authentication Integration}
+\begin{itemize}
+    \item Connected LoginScreen to POST /api/v1/auth/login
+    \item Connected RegisterScreen to POST /api/v1/auth/register
+    \item Verified token storage and retrieval
+    \item Tested session expiration and logout
+\end{itemize}
+
+\textbf{Sprint 2: Path Management Integration}
+\begin{itemize}
+    \item Connected PathListScreen to GET /api/v1/paths
+    \item Connected PathDetailScreen to GET /api/v1/paths/:id
+    \item Connected PathCreateManualScreen to POST /api/v1/paths
+    \item Verified map rendering with backend geospatial data
+\end{itemize}
+
+\textbf{Sprint 3: Trip Recording Integration}
+\begin{itemize}
+    \item Connected trip recording to POST /api/v1/trips
+    \item Integrated weather data display
+    \item Verified trip statistics calculation
+    \item Tested trip history retrieval
+\end{itemize}
+
+\subsection{End-to-End Validation}
+\label{subsec:e2e_validation}
+
+\textbf{Complete User Flows Tested:}
+\begin{enumerate}
+    \item \textbf{UC1 - Registration:} New user creates account → Receives verification email → Logs in
+    \item \textbf{UC2 - Login:} User logs in → Token stored → Authenticated requests succeed
+    \item \textbf{UC3 - Manual Path Creation:} User creates path → Saves as draft → Publishes → Appears in search
+    \item \textbf{UC6 - Path Search:} User searches paths → Views results → Selects path → Views details
+    \item \textbf{UC8 - Trip History:} User records trip → Views trip in history → Sees statistics
+\end{enumerate}
+
+\section{Testing Methodology}
+\label{sec:testing_methodology}
+
+Tests were implemented \textbf{during integration} and \textbf{refined after integration} as the system matured.
+
+\subsection{Test-Driven Integration}
+\label{subsec:test_driven_integration}
+
+The integration process followed these practices:
+
+\begin{itemize}
+    \item \textbf{Write Repository Tests First:} Before implementing service logic, repository tests ensured data layer correctness
+    \item \textbf{Mock Lower Layers:} Service tests mocked repositories; controller tests mocked services
+    \item \textbf{Integration Tests for Boundaries:} Tested service-repository and controller-service boundaries
+    \item \textbf{E2E Tests Last:} Full user flows tested after all components integrated
+\end{itemize}
+
+\subsection{Test Evolution}
+\label{subsec:test_evolution}
+
+As the system evolved, tests were refined:
+
+\begin{itemize}
+    \item \textbf{Initial Tests:} Simple happy-path scenarios
+    \item \textbf{Mid-Integration:} Added error handling tests (404, 401, 500 responses)
+    \item \textbf{Post-Integration:} Edge cases, boundary conditions, concurrent operations
+    \item \textbf{Final Refinement:} Performance tests, load tests, security tests (SQL injection, XSS)
+\end{itemize}
+
+\subsection{Continuous Integration}
+\label{subsec:ci_pipeline}
+
+A CI pipeline automated testing throughout integration:
+
+\begin{itemize}
+    \item \textbf{On Commit:} Linting and unit tests run
+    \item \textbf{On Pull Request:} Full integration test suite runs with Dockerized infrastructure
+    \item \textbf{On Merge:} Deployment to staging environment for manual QA
+\end{itemize}
+
+\section{Integration Challenges \& Solutions}
+\label{sec:integration_challenges}
+
+\subsection{Challenge 1: Database Connection Pool Exhaustion}
+\label{subsec:challenge_db_pool}
+
+\textbf{Issue:} Tests created new database connections without closing them, leading to pool exhaustion.
+
+\textbf{Solution:} 
+\begin{itemize}
+    \item Implemented global Jest setup/teardown to manage connection pools
+    \item Added \texttt{afterAll} hooks to close connections
+    \item Configured pool size limits in test environment
+\end{itemize}
+
+\subsection{Challenge 2: Asynchronous Message Processing}
+\label{subsec{challenge_async}
+
+\textbf{Issue:} RabbitMQ consumers processed messages asynchronously, causing test timing issues.
+
+\textbf{Solution:}
+\begin{itemize}
+    \item Mocked RabbitMQ in integration tests
+    \item Added explicit wait conditions in E2E tests
+    \item Implemented test helpers to drain message queues before assertions
+\end{itemize}
+
+\subsection{Challenge 3: Frontend-Backend CORS Configuration}
+\label{subsec:challenge_cors}
+
+\textbf{Issue:} Mobile app requests blocked by CORS policy during local development.
+
+\textbf{Solution:}
+\begin{itemize}
+    \item Configured Express CORS middleware to allow localhost origins
+    \item Used environment variables for origin whitelist
+    \item Documented CORS setup in installation instructions
+\end{itemize}
+
+\subsection{Challenge 4: Test Isolation}
+\label{subsec:challenge_isolation}
+
+\textbf{Issue:} Tests affecting each other due to shared database state and singleton services.
+
+\textbf{Solution:}
+\begin{itemize}
+    \item Reset database schema between test suites
+    \item Cleared Redis cache in \texttt{beforeEach} hooks
+    \item Used unique test data for each test case
+    \item Fixed WeatherService singleton to read API key dynamically instead of caching in constructor
+\end{itemize}
+
+\section{Integration Sequence Diagrams}
+\label{sec:integration_sequence_diagrams}
+
+The following diagrams illustrate key integration flows.
+
+\subsection{Service-to-Database Integration}
+\label{subsec:seq_service_db}
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}[
+        every node/.style={font=\small},
+        participant/.style={rectangle, draw, minimum width=1.2cm, minimum height=0.45cm},
+        arrow/.style={->, >=stealth}
+    ]
+        \node[participant] (service) at (0,0) {Service};
+        \node[participant] (repo) at (2.5,0) {Repository};
+        \node[participant] (db) at (5.0,0) {PostgreSQL};
+        \node[participant] (cache) at (7.5,0) {Redis};
+
+        \draw[dashed] (0, -0.4) -- (0, -3.0);
+        \draw[dashed] (2.5, -0.4) -- (2.5, -3.0);
+        \draw[dashed] (5.0, -0.4) -- (5.0, -3.0);
+        \draw[dashed] (7.5, -0.4) -- (7.5, -3.0);
+
+        \draw[arrow] (0, -0.8) -- (2.5, -0.8) node[midway, above, font=\scriptsize] {save(entity)};
+        \draw[arrow] (2.5, -1.2) -- (5.0, -1.2) node[midway, above, font=\scriptsize] {INSERT};
+        \draw[arrow] (5.0, -1.6) -- (2.5, -1.6) node[midway, above, font=\scriptsize] {OK};
+        \draw[arrow] (2.5, -2.0) -- (7.5, -2.0) node[midway, above, font=\scriptsize] {invalidate};
+        \draw[arrow] (2.5, -2.4) -- (0, -2.4) node[midway, above, font=\scriptsize] {result};
+    \end{tikzpicture}
+    \caption{Service-to-Database Integration Flow}
+    \label{fig:seq_service_db}
+\end{figure}
+
+\subsection{Client-Server Integration}
+\label{subsec:seq_client_server}
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}[
+        every node/.style={font=\small},
+        participant/.style={rectangle, draw, minimum width=1.2cm, minimum height=0.45cm},
+        arrow/.style={->, >=stealth}
+    ]
+        \node[participant] (client) at (0,0) {Mobile App};
+        \node[participant] (api) at (3.0,0) {API Gateway};
+        \node[participant] (service) at (6.0,0) {Service};
+        \node[participant] (db) at (9.0,0) {Database};
+
+        \draw[dashed] (0, -0.4) -- (0, -4.0);
+        \draw[dashed] (3.0, -0.4) -- (3.0, -4.0);
+        \draw[dashed] (6.0, -0.4) -- (6.0, -4.0);
+        \draw[dashed] (9.0, -0.4) -- (9.0, -4.0);
+
+        \draw[arrow] (0, -0.8) -- (3.0, -0.8) node[midway, above, font=\scriptsize] {POST /login};
+        \draw[arrow] (3.0, -1.2) -- (6.0, -1.2) node[midway, above, font=\scriptsize] {authenticate};
+        \draw[arrow] (6.0, -1.6) -- (9.0, -1.6) node[midway, above, font=\scriptsize] {query user};
+        \draw[arrow] (9.0, -2.0) -- (6.0, -2.0) node[midway, above, font=\scriptsize] {user data};
+        \draw[arrow] (6.0, -2.4) -- (3.0, -2.4) node[midway, above, font=\scriptsize] {JWT token};
+        \draw[arrow] (3.0, -2.8) -- (0, -2.8) node[midway, above, font=\scriptsize] {200 OK (token)};
+        \draw[arrow] (0, -3.5) -- (3.0, -3.5) node[midway, above, font=\scriptsize] {GET /paths (Bearer token)};
+        \draw[arrow] (3.0, -3.8) -- (9.0, -3.8) node[midway, above, font=\scriptsize] {fetch paths};
+        \draw[arrow] (9.0, -3.5) -- (0, -3.5) node[midway, below, font=\scriptsize] {200 OK (paths)};
+    \end{tikzpicture}
+    \caption{Client-Server Authenticated Flow}
+    \label{fig:seq_client_server}
+\end{figure}
+
+\section{Integration Tools \& Environment}
+\label{sec:integration_tools}
 
 \subsection{Testing Tools}
 \label{subsec:testing_tools}
 
-The project uses a comprehensive set of testing tools:
-
-\subsubsection{Backend}
+\textbf{Backend:}
 \begin{itemize}
-    \item \textbf{Jest:} Primary test framework.
-    \item \textbf{Supertest:} HTTP assertion library for API testing.
-    \item \textbf{Docker:} For provisioning test databases (PostgreSQL, Redis).
+    \item \textbf{Jest:} Test framework for unit and integration tests
+    \item \textbf{Supertest:} HTTP assertion library for API testing
+    \item \textbf{Docker:} Containerized infrastructure for consistent test environments
 \end{itemize}
 
-\subsubsection{Frontend}
+\textbf{Frontend:}
 \begin{itemize}
-    \item \textbf{Jest:} Unit and integration testing.
-    \item \textbf{React Native Testing Library:} Component rendering and user interaction simulation.
-    \item \textbf{Expo Go:} Device emulation and manual testing.
+    \item \textbf{Jest:} Unit and integration testing
+    \item \textbf{React Native Testing Library:} Component rendering and interaction simulation
+    \item \textbf{Expo Go:} Device emulation for manual testing
 \end{itemize}
 
-\subsection{Environment Setup}
-\label{subsec:environment_setup}
+\subsection{Environment Configuration}
+\label{subsec:environment_config}
 
-The integration environment is containerized using Docker Compose:
+The integration environment uses Docker Compose:
+
+\begin{verbatim}
+docker-compose.yml        # PostgreSQL, Redis, RabbitMQ
+docker-compose.dev.yml    # Backend service with hot-reload
+\end{verbatim}
+
+Environment variables control:
 \begin{itemize}
-    \item \textbf{Infrastructure:} \texttt{docker-compose.yml} defines PostgreSQL, Redis, and RabbitMQ services.
-    \item \textbf{Development/Test:} \texttt{docker-compose.dev.yml} adds the backend service with hot-reload and connects it to the infrastructure.
-    \item \textbf{Configuration:} Environment variables control database connections, API keys (mocked in tests), and feature flags.
+    \item Database connection strings
+    \item API keys (mocked in test environment)
+    \item Feature flags
+    \item Log levels
 \end{itemize}
 
 \subsection{Test Data Management}
@@ -86,17 +500,7 @@ The integration environment is containerized using Docker Compose:
 
 Test data is managed to ensure reproducibility:
 \begin{itemize}
-    \item \textbf{Fixtures:} JSON/JS files define static test data (users, paths).
-    \item \textbf{Seeding:} Scripts populate the test database before runs.
-    \item \textbf{Cleanup:} Database transactions are rolled back or tables truncated between tests.
-\end{itemize}
-
-\subsection{Continuous Integration}
-\label{subsec:ci}
-
-A CI pipeline automates the integration process:
-\begin{itemize}
-    \item \textbf{Build:} Installs dependencies and verifies compilation.
-    \item \textbf{Test:} Spins up Docker containers and executes the full test suite.
-    \item \textbf{Reporting:} Generates coverage reports and build status notifications.
+    \item \textbf{Fixtures:} JSON files define static test data
+    \item \textbf{Factories:} Functions generate randomized test entities
+    \item \textbf{Cleanup:} Database transactions rolled back or tables truncated between tests
 \end{itemize}
