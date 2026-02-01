@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { View, Text, TouchableOpacity, RefreshControl } from 'react-native';
 import { PathList } from '../../components/paths';
-import { getPaths, getCachedPaths } from '../../services/pathsApi';
+import { getPaths, getCachedPaths, normalizePathForDisplay } from '../../services/pathsApi';
 import { useNetworkStatus } from '../../contexts/NetworkStatusContext';
 import { layoutStyles } from '../../styles';
 import { STRINGS } from '../../constants/strings';
@@ -35,8 +35,9 @@ export default function PathListScreen({ navigation }) {
     } catch (err) {
       if (!isOnline) {
         const cached = await getCachedPaths();
-        setPaths(Array.isArray(cached) ? cached : []);
-        setIsCached(cached.length > 0);
+        const list = Array.isArray(cached) ? cached : [];
+        setPaths(list.map(normalizePathForDisplay).filter(Boolean));
+        setIsCached(list.length > 0);
       } else {
         setError(err.message || STRINGS.ERROR_LOADING_PATHS);
         setPaths([]);

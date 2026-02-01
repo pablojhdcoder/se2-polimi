@@ -89,22 +89,6 @@ function MainStackNavigator() {
           title: STRINGS.PATHS,
           headerRight: () => (
             <View style={{ flexDirection: 'row', marginRight: 12 }}>
-              <TouchableOpacity
-                onPress={() => navigation.navigate('TripRecording')}
-                style={{ marginRight: 16 }}
-              >
-                <Text style={{ color: colors.primary, fontSize: fontSizes.body, fontWeight: fontWeights.semibold }}>
-                  {STRINGS.RECORD_TRIP}
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => navigation.navigate('PathSearch')}
-                style={{ marginRight: 16 }}
-              >
-                <Text style={{ color: colors.primary, fontSize: fontSizes.body, fontWeight: fontWeights.semibold }}>
-                  {STRINGS.SEARCH}
-                </Text>
-              </TouchableOpacity>
               <TouchableOpacity onPress={() => navigation.navigate('PathCreateManual')}>
                 <Text style={{ color: colors.primary, fontSize: fontSizes.body, fontWeight: fontWeights.semibold }}>
                   {STRINGS.NEW_PATH}

@@ -92,6 +92,12 @@ export default function PathSearchScreen({ navigation }) {
     [navigation]
   );
 
+  const handleSelectSuggestion = useCallback((feature) => {
+    const placeName = feature.place_name || feature.text || '';
+    setQuery(placeName);
+    setPlaceSuggestions([]);
+  }, []);
+
   return (
     <View style={layoutStyles.screenContainer}>
       <View style={styles.pathSearchScreen_searchRow}>
@@ -104,7 +110,6 @@ export default function PathSearchScreen({ navigation }) {
             setQuery(text);
             fetchPlaceSuggestions(text);
           }}
-          onBlur={() => setTimeout(() => setPlaceSuggestions([]), 200)}
           onSubmitEditing={doSearch}
           returnKeyType="search"
         />
@@ -131,10 +136,7 @@ export default function PathSearchScreen({ navigation }) {
             renderItem={({ item }) => (
               <TouchableOpacity
                 style={styles.pathSearchScreen_suggestionItem}
-                onPress={() => {
-                  setQuery(item.place_name || item.text || '');
-                  setPlaceSuggestions([]);
-                }}
+                onPress={() => handleSelectSuggestion(item)}
               >
                 <Text style={styles.pathSearchScreen_suggestionText} numberOfLines={1}>
                   {item.place_name || item.text}

@@ -46,6 +46,10 @@ export const STRINGS = {
   TOTAL_TRIPS_COUNT: 'Number of trips',
   KM: 'km',
   VIEW_PAST_TRIPS: 'View past trips',
+  PROFILE_AND_SETTINGS: 'Profile & Settings',
+  EDIT: 'Edit',
+  PERSONAL_INFO: 'Personal info',
+  ACTIVITY_STATISTICS: 'Activity statistics',
 
   // Paths
   PATHS: 'Paths',

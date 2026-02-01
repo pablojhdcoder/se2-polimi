@@ -15,7 +15,6 @@ import {
   ReviewDetailScreen,
   RecordTripScreen,
   TripStatisticsScreen,
-  PathDataScreen,
   MergeInfoScreen,
 } from '../pages';
 
@@ -46,7 +45,6 @@ function PastTripsStack() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="TripStatistics" component={TripStatisticsScreen} />
-      <Stack.Screen name="PathData" component={PathDataScreen} />
       <Stack.Screen name="MergeInfo" component={MergeInfoScreen} />
     </Stack.Navigator>
   );

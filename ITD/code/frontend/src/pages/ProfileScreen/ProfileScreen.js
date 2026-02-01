@@ -1,19 +1,20 @@
 /**
  * ProfileScreen - User profile and settings (DD ch03).
- * Shows statistics, account data, preferences and notifications.
+ * Layout aligned with UI design: user card, options list (Profil, Personal info,
+ * Activity statistics, Notifications, Settings), Log out button.
  */
 
 import React, { useState, useCallback, useEffect } from 'react';
-import { View, Text, ScrollView } from 'react-native';
-import { Card, Button } from '../../components';
+import { View, Text, ScrollView, TouchableOpacity, Switch } from 'react-native';
+import { Button, Avatar } from '../../components';
 import { useAuth } from '../../navigation/useAuth';
 import { getTrips } from '../../services/tripsApi';
 import { getOfflineData } from '../../storage';
 import { layoutStyles } from '../../styles';
 import { STRINGS } from '../../constants/strings';
+import { colors } from '../../styles';
 import styles from './ProfileScreen.styles';
 
-// Approximate meters per point for rough distance (simplified; real impl could use haversine).
 const METERS_PER_POINT_ESTIMATE = 10;
 
 function estimateDistanceKm(trips) {
@@ -22,26 +23,32 @@ function estimateDistanceKm(trips) {
   return Math.round((totalM / 1000) * 10) / 10;
 }
 
+const OPTION_ICONS = {
+  profile: '⚙',
+  document: '📄',
+  pin: '📍',
+  bell: '🔔',
+  settings: '⚙',
+  chevron: '›',
+};
+
 export default function ProfileScreen({ navigation }) {
   const { user, logout } = useAuth();
   const [totalDistanceKm, setTotalDistanceKm] = useState(0);
-  const [totalTripsCount, setTotalTripsCount] = useState(0);
+  const [notificationsOn, setNotificationsOn] = useState(true);
 
   const loadStats = useCallback(async () => {
     try {
       const result = await getTrips();
       const list = Array.isArray(result) ? result : result?.data ?? result?.trips ?? [];
-      setTotalTripsCount(list.length);
       setTotalDistanceKm(estimateDistanceKm(list));
     } catch {
       try {
         const offline = await getOfflineData();
         const trips = offline?.trips ?? [];
         const list = Array.isArray(trips) ? trips : [];
-        setTotalTripsCount(list.length);
         setTotalDistanceKm(estimateDistanceKm(list));
       } catch {
-        setTotalTripsCount(0);
         setTotalDistanceKm(0);
       }
     }
@@ -51,60 +58,95 @@ export default function ProfileScreen({ navigation }) {
     loadStats();
   }, [loadStats]);
 
+  const displayName = user?.name?.trim() || STRINGS.USER;
+  const displayEmail = user?.email || '—';
+
   return (
     <ScrollView
       style={layoutStyles.screenContainer}
       contentContainerStyle={styles.profileScreen_content}
     >
-      <View style={styles.profileScreen_section}>
-        <Text style={styles.profileScreen_sectionTitle}>{STRINGS.ACTIVITY_SUMMARY}</Text>
-        <Card style={styles.profileScreen_card}>
-          <View style={styles.profileScreen_statRow}>
-            <Text style={styles.profileScreen_statLabel}>{STRINGS.TOTAL_DISTANCE}</Text>
-            <Text style={styles.profileScreen_statValue}>{totalDistanceKm} {STRINGS.KM}</Text>
-          </View>
-          <View style={styles.profileScreen_statRow}>
-            <Text style={styles.profileScreen_statLabel}>{STRINGS.TOTAL_TRIPS_COUNT}</Text>
-            <Text style={styles.profileScreen_statValue}>{totalTripsCount}</Text>
-          </View>
+      <Text style={styles.profileScreen_sectionTitle}>{STRINGS.PROFILE_AND_SETTINGS}</Text>
+
+      <View style={styles.profileScreen_userCard}>
+        <View style={styles.profileScreen_avatarWrap}>
+          <Avatar user={user} size={72} />
+        </View>
+        <View style={styles.profileScreen_userInfo}>
+          <Text style={styles.profileScreen_userName}>{displayName}</Text>
+          <Text style={styles.profileScreen_userEmail}>{displayEmail}</Text>
+        </View>
+      </View>
+
+      <View style={styles.profileScreen_optionsCard}>
+        <TouchableOpacity
+          style={styles.profileScreen_optionRow}
+          activeOpacity={0.7}
+          onPress={() => {}}
+        >
+          <Text style={styles.profileScreen_optionIcon}>{OPTION_ICONS.profile}</Text>
+          <Text style={styles.profileScreen_optionLabel}>{STRINGS.PROFILE}</Text>
           <Button
-            title={STRINGS.VIEW_PAST_TRIPS}
-            variant="outline"
-            onPress={() => navigation.navigate('TripStatistics')}
-            style={styles.profileScreen_button}
+            title={STRINGS.EDIT}
+            variant="primary"
+            onPress={() => {}}
+            style={styles.profileScreen_editButton}
+            textStyle={styles.profileScreen_editButtonText}
           />
-        </Card>
-      </View>
+        </TouchableOpacity>
 
-      <View style={styles.profileScreen_section}>
-        <Text style={styles.profileScreen_sectionTitle}>{STRINGS.ACCOUNT}</Text>
-        <Card style={styles.profileScreen_card}>
-          <View style={styles.profileScreen_accountRow}>
-            <Text style={styles.profileScreen_accountLabel}>{STRINGS.EMAIL}</Text>
-            <Text style={styles.profileScreen_accountValue}>{user?.email || '—'}</Text>
+        <TouchableOpacity
+          style={styles.profileScreen_optionRow}
+          activeOpacity={0.7}
+          onPress={() => {}}
+        >
+          <Text style={styles.profileScreen_optionIcon}>{OPTION_ICONS.document}</Text>
+          <Text style={styles.profileScreen_optionLabel}>{STRINGS.PERSONAL_INFO}</Text>
+          <Text style={styles.profileScreen_chevron}>{OPTION_ICONS.chevron}</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.profileScreen_optionRow, styles.profileScreen_optionRowLast]}
+          activeOpacity={0.7}
+          onPress={() => navigation.navigate('TripStatistics')}
+        >
+          <Text style={styles.profileScreen_optionIcon}>{OPTION_ICONS.pin}</Text>
+          <Text style={styles.profileScreen_optionLabel}>{STRINGS.ACTIVITY_STATISTICS}</Text>
+          <View style={styles.profileScreen_optionRight}>
+            <Text style={styles.profileScreen_optionValue}>{totalDistanceKm} {STRINGS.KM}</Text>
+            <Text style={styles.profileScreen_chevron}>{OPTION_ICONS.chevron}</Text>
           </View>
-          {user?.name ? (
-            <View style={styles.profileScreen_accountRow}>
-              <Text style={styles.profileScreen_accountLabel}>{STRINGS.YOUR_NAME}</Text>
-              <Text style={styles.profileScreen_accountValue}>{user.name}</Text>
-            </View>
-          ) : null}
-        </Card>
+        </TouchableOpacity>
       </View>
 
-      <View style={styles.profileScreen_section}>
-        <Text style={styles.profileScreen_sectionTitle}>{STRINGS.PREFERENCES}</Text>
-        <Card style={styles.profileScreen_card}>
-          <Text style={styles.profileScreen_accountLabel}>{STRINGS.NOTIFICATIONS}</Text>
-          <Text style={styles.profileScreen_accountValue}>{STRINGS.NOTIFICATIONS_DESCRIPTION}</Text>
-        </Card>
+      <View style={styles.profileScreen_optionsCard}>
+        <View style={styles.profileScreen_optionRow}>
+          <Text style={styles.profileScreen_optionIcon}>{OPTION_ICONS.bell}</Text>
+          <Text style={styles.profileScreen_optionLabel}>{STRINGS.NOTIFICATIONS}</Text>
+          <Switch
+            value={notificationsOn}
+            onValueChange={setNotificationsOn}
+            trackColor={{ false: colors.border, true: colors.primary }}
+            thumbColor={colors.background}
+          />
+        </View>
+
+        <TouchableOpacity
+          style={[styles.profileScreen_optionRow, styles.profileScreen_optionRowLast]}
+          activeOpacity={0.7}
+          onPress={() => {}}
+        >
+          <Text style={styles.profileScreen_optionIcon}>{OPTION_ICONS.settings}</Text>
+          <Text style={styles.profileScreen_optionLabel}>{STRINGS.SETTINGS}</Text>
+          <Text style={styles.profileScreen_chevron}>{OPTION_ICONS.chevron}</Text>
+        </TouchableOpacity>
       </View>
 
       <Button
         title={STRINGS.LOG_OUT}
         onPress={logout}
-        variant="outline"
-        style={styles.profileScreen_button}
+        variant="secondary"
+        style={styles.profileScreen_logOutButton}
       />
     </ScrollView>
   );

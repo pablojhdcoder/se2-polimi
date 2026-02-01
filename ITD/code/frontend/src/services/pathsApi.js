@@ -12,6 +12,31 @@ import { OFFLINE_DATA_KEYS } from '../storage/constants';
 const PATHS_BASE = '/paths';
 
 /**
+ * Normalizes a raw path from the backend to the format expected by PathCard.
+ * Backend may send path_name, start_x, start_y, end_x, end_y, length; PathCard expects name, startPoint, endPoint, distance, description, difficulty.
+ * @param {Object} raw - Raw path from API (path_name, start_x, start_y, end_x, end_y, length, etc.)
+ * @returns {Object} - { id, name, description, startPoint, endPoint, distance, difficulty, ...rest }
+ */
+export function normalizePathForDisplay(raw) {
+  if (raw == null) return null;
+  const startPoint =
+    raw.startPoint ??
+    (raw.start_x != null && raw.start_y != null ? `${raw.start_x}, ${raw.start_y}` : null);
+  const endPoint =
+    raw.endPoint ?? (raw.end_x != null && raw.end_y != null ? `${raw.end_x}, ${raw.end_y}` : null);
+  return {
+    ...raw,
+    id: raw.id,
+    name: raw.path_name ?? raw.name,
+    description: raw.description ?? '',
+    startPoint: startPoint ?? null,
+    endPoint: endPoint ?? null,
+    distance: raw.length ?? raw.distance,
+    difficulty: raw.difficulty ?? null,
+  };
+}
+
+/**
  * Lists all paths (optional query for search).
  * On success writes to OFFLINE_DATA for offline use.
  * @param {Object} params - { search?, difficulty?, limit?, offset? }

@@ -47,7 +47,7 @@ export default function LoginScreen({ navigation }) {
         await setSession(token, user ?? null);
         setToken(token);
         setUser(user ?? null);
-        navigation.getParent()?.navigate('Main');
+        // RootNavigator re-renders with isAuthenticated=true and shows Main stack; no need to navigate
       } else {
         setError(STRINGS.SERVER_NO_TOKEN);
       }

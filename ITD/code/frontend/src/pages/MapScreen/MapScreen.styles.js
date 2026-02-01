@@ -37,20 +37,18 @@ export default StyleSheet.create({
     fontSize: fontSizes.medium,
     color: colors.textSecondary,
   },
-  actionRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
+  newPathButton: {
     marginTop: spacing.sm,
-    gap: spacing.lg,
+    backgroundColor: colors.primary,
+    paddingVertical: spacing.md,
+    paddingHorizontal: spacing.lg,
+    borderRadius: borderRadius.lg,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  actionLink: {
-    paddingVertical: spacing.xs,
-    paddingHorizontal: 0,
-  },
-  actionLinkText: {
+  newPathButtonText: {
     fontSize: fontSizes.medium,
-    color: colors.primary,
+    color: colors.textInverse,
     fontWeight: '600',
   },
 });

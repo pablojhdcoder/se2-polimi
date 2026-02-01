@@ -72,6 +72,10 @@ export default function TripStatisticsScreen({ navigation }) {
     }
   };
 
+  const goToPaths = () => {
+    navigation.navigate('PathList');
+  };
+
   if (loading) return <Loading message={STRINGS.LOADING_STATISTICS} />;
 
   return (
@@ -126,9 +130,9 @@ export default function TripStatisticsScreen({ navigation }) {
         style={styles.tripStatisticsScreen_button}
       />
       <Button
-        title={STRINGS.VIEW_PATH_DATA_BUTTON}
+        title={STRINGS.PATHS}
         variant="outline"
-        onPress={() => navigation.navigate('PathData')}
+        onPress={goToPaths}
         style={styles.tripStatisticsScreen_button}
       />
       <Button

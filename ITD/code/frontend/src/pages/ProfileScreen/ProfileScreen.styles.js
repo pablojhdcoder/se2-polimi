@@ -1,52 +1,91 @@
 import { StyleSheet } from 'react-native';
-import { colors, spacing, fontSizes, fontWeights } from '../../styles';
+import { colors, spacing, fontSizes, fontWeights, radius } from '../../styles';
 
 export default StyleSheet.create({
   profileScreen_content: {
     padding: spacing.xl,
     paddingBottom: 48,
   },
-  profileScreen_section: {
-    marginBottom: spacing.xl,
-  },
   profileScreen_sectionTitle: {
-    fontSize: fontSizes.medium,
+    fontSize: fontSizes.headline,
     fontWeight: fontWeights.bold,
     color: colors.text,
-    marginBottom: spacing.md,
+    marginBottom: spacing.lg,
   },
-  profileScreen_card: {
-    padding: spacing.lg,
-    marginBottom: spacing.md,
-  },
-  profileScreen_statRow: {
+  profileScreen_userCard: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: spacing.sm,
+    marginBottom: spacing.xl,
   },
-  profileScreen_statLabel: {
-    fontSize: fontSizes.body,
-    color: colors.textSecondary,
+  profileScreen_avatarWrap: {
+    marginRight: spacing.lg,
   },
-  profileScreen_statValue: {
-    fontSize: fontSizes.body,
-    fontWeight: fontWeights.semibold,
+  profileScreen_userInfo: {
+    flex: 1,
+  },
+  profileScreen_userName: {
+    fontSize: fontSizes.title,
+    fontWeight: fontWeights.bold,
     color: colors.text,
-  },
-  profileScreen_accountRow: {
-    marginBottom: spacing.sm,
-  },
-  profileScreen_accountLabel: {
-    fontSize: fontSizes.small,
-    color: colors.textSecondary,
     marginBottom: spacing.xs,
   },
-  profileScreen_accountValue: {
+  profileScreen_userEmail: {
     fontSize: fontSizes.body,
+    color: colors.textSecondary,
+  },
+  profileScreen_optionsCard: {
+    backgroundColor: colors.background,
+    borderRadius: radius.medium,
+    overflow: 'hidden',
+    marginBottom: spacing.xl,
+  },
+  profileScreen_optionRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: spacing.md,
+    paddingHorizontal: spacing.lg,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: colors.border,
+  },
+  profileScreen_optionRowLast: {
+    borderBottomWidth: 0,
+  },
+  profileScreen_optionIcon: {
+    width: 24,
+    marginRight: spacing.md,
+    fontSize: 18,
+    color: colors.textSecondary,
+    textAlign: 'center',
+  },
+  profileScreen_optionLabel: {
+    flex: 1,
+    fontSize: fontSizes.md,
     color: colors.text,
   },
-  profileScreen_button: {
+  profileScreen_optionRight: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+  },
+  profileScreen_editButton: {
+    paddingVertical: spacing.xs,
+    paddingHorizontal: spacing.md,
+    minHeight: 32,
+  },
+  profileScreen_editButtonText: {
+    fontSize: fontSizes.small,
+    color: colors.textInverse,
+  },
+  profileScreen_optionValue: {
+    fontSize: fontSizes.body,
+    color: colors.textMuted,
+  },
+  profileScreen_chevron: {
+    fontSize: fontSizes.large,
+    color: colors.textMuted,
+  },
+  profileScreen_logOutButton: {
     marginTop: spacing.md,
+    alignSelf: 'stretch',
   },
 });

@@ -39,22 +39,13 @@ export default function MapScreen({ navigation }) {
           <Text style={styles.searchBarIcon}>🔍</Text>
           <Text style={styles.searchBarPlaceholder}>{STRINGS.SEARCH_PATHS}</Text>
         </TouchableOpacity>
-        <View style={styles.actionRow}>
-          <TouchableOpacity
-            style={styles.actionLink}
-            onPress={() => navigation.navigate('PathList')}
-            activeOpacity={0.7}
-          >
-            <Text style={styles.actionLinkText}>{STRINGS.PATHS}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.actionLink}
-            onPress={openCreatePathManual}
-            activeOpacity={0.7}
-          >
-            <Text style={styles.actionLinkText}>{STRINGS.NEW_PATH}</Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity
+          style={styles.newPathButton}
+          onPress={openCreatePathManual}
+          activeOpacity={0.8}
+        >
+          <Text style={styles.newPathButtonText}>{STRINGS.NEW_PATH}</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
