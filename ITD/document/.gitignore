@@ -16,6 +16,3 @@ build/
 *.fdb_latexmk
 *.fls
 
-# PDF files (keep only in DeliveryFolder)
-*.pdf
-!DeliveryFolder/*.pdf
