@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.1.31)  1 FEB 2026 20:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.1.31)  1 FEB 2026 22:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1563,7 +1563,7 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 ))
 \c@lstlisting=\count408
-<./Images/PolimiLogo.png, id=386, 405.515pt x 125.46875pt>
+<./Images/PolimiLogo.png, id=390, 405.515pt x 125.46875pt>
 File: ./Images/PolimiLogo.png Graphic file (type png)
 <use ./Images/PolimiLogo.png>
 Package pdftex.def Info: ./Images/PolimiLogo.png  used on input line 152.
@@ -1606,7 +1606,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.73 ...est Data Management}{26}{subsection.3.7.3}
+l.82 ...3.7.1}Testing Tools}{29}{subsection.3.7.1}
                                                   % [2])
 \tf@toc=\write5
 \openout5 = `ITD.toc'.
@@ -1634,24 +1634,54 @@ Overfull \hbox (5.72961pt too wide) in paragraph at lines 52--53
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
             Default family used instead on input line 161.
- [13] [14]
-LaTeX Font Info:    Trying to load font information for T1+pcr on input line 26
-3.
+ [13]
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 21
+9.
 
 (C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
-Overfull \hbox (17.38278pt too wide) in paragraph at lines 266--267
-[]\T1/pcr/m/n/12 src/repositories/\T1/ptm/m/n/12 : Data ac-cess layer im-ple-me
-nt-ing the repos-i-tory pat-tern for database
+[14]
+Overfull \hbox (2.33607pt too wide) in paragraph at lines 230--231
+[]\T1/pcr/m/n/12 package.json\T1/ptm/m/n/12 : De-fines \T1/pcr/m/n/12 src/app.j
+s \T1/ptm/m/n/12 as the main en-try point with scripts for \T1/pcr/m/n/12 start
+\T1/ptm/m/n/12 ,
  []
 
-[15]) [16]
+
+Overfull \hbox (8.05219pt too wide) in paragraph at lines 267--268
+[]\T1/pcr/m/n/12 authRoutes.js\T1/ptm/m/n/12 , \T1/pcr/m/n/12 pathRoutes.js\T1/
+ptm/m/n/12 , \T1/pcr/m/n/12 tripRoutes.js\T1/ptm/m/n/12 , \T1/pcr/m/n/12 rating
+Routes.js\T1/ptm/m/n/12 ,
+ []
+
+[15]
+Overfull \hbox (96.72894pt too wide) in paragraph at lines 285--286
+[]\T1/ptm/m/n/12 Schema evo-lu-tion scripts: \T1/pcr/m/n/12 add-paths-duration-
+minutes.js\T1/ptm/m/n/12 , \T1/pcr/m/n/12 add-paths-is-published.js\T1/ptm/m/n/
+12 ,
+ []
+
+
+Overfull \hbox (117.77841pt too wide) in paragraph at lines 285--286
+\T1/pcr/m/n/12 add-paths-route-date.js\T1/ptm/m/n/12 , \T1/pcr/m/n/12 add-paths
+-weather.js\T1/ptm/m/n/12 , \T1/pcr/m/n/12 alter-trips-path-id-nullable.js 
+ []
+
+[16]
+Overfull \hbox (4.06566pt too wide) in paragraph at lines 332--333
+[]\T1/pcr/m/n/12 pathsApi.js\T1/ptm/m/n/12 , \T1/pcr/m/n/12 tripsApi.js\T1/ptm/
+m/n/12 , \T1/pcr/m/n/12 reviewsApi.js\T1/ptm/m/n/12 : Domain-specific API clien
+ts 
+ []
+
+[17] [18]) [19] [20
+
+]
 Chapter 3.
-(Chapters/ch03_integration_strategy.tex [17
+(Chapters/ch03_integration_strategy.tex [21
 
-
-] [18] [19] [20] [21] [22] [23]
+] [22] [23] [24] [25] [26] [27]
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
             Default family used instead on input line 285.
@@ -1694,7 +1724,7 @@ Overfull \hbox (8.21422pt too wide) in paragraph at lines 305--306
 ce-repository and controller-service bound-
  []
 
-[24] [25]) [26]
+[28] [29]) [30]
 Chapter 4.
 (Chapters/ch04_testing.tex
 Overfull \hbox (4.92749pt too wide) in paragraph at lines 21--22
@@ -1702,48 +1732,48 @@ Overfull \hbox (4.92749pt too wide) in paragraph at lines 21--22
 da-tion for au-then-ti-ca-tion, path man-
  []
 
-[27
+[31
 
 
-] [28] [29] [30] [31] [32] [33] [34]
+] [32] [33] [34] [35] [36] [37] [38]
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
-            Default family used instead on input line 400.
+            Default family used instead on input line 397.
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
-            Default family used instead on input line 400.
- [35]
+            Default family used instead on input line 397.
+ [39]
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
-            Default family used instead on input line 429.
+            Default family used instead on input line 426.
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
-            Default family used instead on input line 429.
+            Default family used instead on input line 426.
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
-            Default family used instead on input line 429.
- [36]
-Overfull \hbox (3.52422pt too wide) in paragraph at lines 466--467
+            Default family used instead on input line 426.
+ [40]
+Overfull \hbox (3.52422pt too wide) in paragraph at lines 463--464
 []\T1/ptm/b/n/12 Reason for re-moval: \T1/ptm/m/n/12 Sensor-based au-to-matic t
 rip de-tec-tion proved too com-plex; man-ual record-
  []
 
-[37] [38] [39] [40] [41]) [42]
+[41] [42] [43] [44] [45]) [46]
 Chapter 5.
-(Chapters/ch05_installation_instructions.tex [43
+(Chapters/ch05_installation_instructions.tex [47
 
 
-]) [44]
+]) [48]
 Chapter 6.
 (Chapters/ch06_effort_spent.tex
 Overfull \hbox (8.95946pt too wide) in paragraph at lines 8--17
  [][] 
  []
 
-) [45
+) [49
 
 
-] [46
+] [50
 
 ]
 Chapter 7.
@@ -1753,9 +1783,9 @@ Overfull \hbox (15.65515pt too wide) in paragraph at lines 16--17
 e-act Na-tive, [][]$\T1/pcr/m/n/12 https : / / callstack .
  []
 
-[47
+[51
 
-]) [48] [49] [50
+]) [52] [53] [54
 
 ]
 
@@ -1771,27 +1801,42 @@ See the caption package documentation for explanation.
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
-Package rerunfilecheck Info: File `ITD.out' has not changed.
-(rerunfilecheck)             Checksum: 0C9A323C902C3E17819F47972EAFB6FA;16066.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `ITD.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `ITD.out':
+(rerunfilecheck)             Before: F37BC1410F34DDA3F06C8A78432A1507;16248
+(rerunfilecheck)             After:  D183D039CC4AC379435B1A4CCD664554;16070.
  ) 
 Here is how much of TeX's memory you used:
- 32469 strings out of 467871
- 610650 string characters out of 5417408
+ 32489 strings out of 467871
+ 610983 string characters out of 5417408
  1110015 words of memory out of 5000000
- 60499 multiletter control sequences out of 15000+600000
- 671280 words of font info for 98 fonts, out of 8000000 for 9000
+ 60503 multiletter control sequences out of 15000+600000
+ 671901 words of font info for 100 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,13n,94p,1194b,750s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\Usuario\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tc
-rb1200.pk> <C:\Users\Usuario\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/d
-pi600\tcrm1200.pk><C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fonts/type1/u
-rw/courier/ucrr8a.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fonts/typ
-e1/urw/times/utmb8a.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fonts/t
-ype1/urw/times/utmr8a.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fonts
-/type1/urw/times/utmri8a.pfb>
-Output written on ITD.pdf (52 pages, 247074 bytes).
+
+pdfTeX warning (dest): name{subsection.2.6.4} has been referenced but does not 
+exist, replaced by a fixed one
+
+ <C:\Users\Usuario\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrb
+1200.pk> <C:\Users\Usuario\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi
+600\tcrm1200.pk><C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fonts/type1/urw
+/courier/ucrb8a.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fonts/type1
+/urw/courier/ucrr8a.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fonts/t
+ype1/urw/times/utmb8a.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fonts
+/type1/urw/times/utmr8a.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fon
+ts/type1/urw/times/utmri8a.pfb>
+Output written on ITD.pdf (56 pages, 263681 bytes).
 PDF statistics:
- 864 PDF objects out of 1000 (max. 8388607)
- 221 named destinations out of 1000 (max. 500000)
- 778 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 903 PDF objects out of 1000 (max. 8388607)
+ 235 named destinations out of 1000 (max. 500000)
+ 786 words of extra memory for PDF output out of 10000 (max. 10000000)
 

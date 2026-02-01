@@ -373,17 +373,14 @@ Tests external weather API integration with comprehensive coverage.
 
 The frontend employs a comprehensive testing strategy covering components, screens, services, and complete user flows.
 
-\subsection{Test Organization}
-\label{subsec:frontend_test_organization}
-
-The frontend test suite is organized as follows:
+The frontend test suite is organized into a bottom-up architecture:
 \begin{itemize}
-    \item \texttt{frontend/\_\_tests\_\_/components/}: Unit tests for individual UI components (Button, Card, Input) and path-specific UI elements.
-    \item \texttt{frontend/\_\_tests\_\_/e2e/}: End-to-end flow tests for authentication, path management, and offline synchronization.
-    \item \texttt{frontend/\_\_tests\_\_/screens/}: Rendering and interaction tests for primary application screens (Login, Register, Path Details, etc.).
-    \item \texttt{frontend/\_\_tests\_\_/services/}: Validation of frontend logic, including Mapbox integration, retry logic, and sync queue processing.
-    \item \texttt{frontend/\_\_tests\_\_/storage/}: Tests for local data persistence and AsyncStorage wrappers.
+    \item \texttt{frontend/\_\_tests\_\_/unit/}: Consolidated unit tests for UI components and the data layer (storage, sync queue, retry logic).
+    \item \texttt{frontend/\_\_tests\_\_/integration/}: Integration tests for primary screens and feature modules (Auth, Paths, Search, Stats).
+    \item \texttt{frontend/\_\_tests\_\_/flows/}: High-level end-to-end user journeys focusing on navigation and transitions.
 \end{itemize}
+
+Total: 28 tests across 5 test suites are implemented to ensure a robust frontend user experience.
 
 \subsection{End-to-End (E2E) Tests}
 \label{subsec:frontend_e2e_tests}
@@ -676,12 +673,19 @@ All backend tests pass successfully with 100\% pass rate.
 
 \textbf{Command:} \texttt{npm test}
 
+\textbf{Results:}
+\begin{verbatim}
+Test Suites: 5 passed, 5 total
+Tests:       28 passed, 28 total
+Snapshots:   0 total
+Time:        4.10s
+\end{verbatim}
+
 \textbf{Coverage:}
 \begin{itemize}
-    \item \textbf{Components:} All reusable components have unit tests
-    \item \textbf{Screens:} Primary user-facing screens are tested
-    \item \textbf{E2E Flows:} Critical user journeys (auth, path management) are covered
-    \item \textbf{Services:} API clients and utility services are tested
+    \item \textbf{Components \& Data:} Core UI elements and storage logic have unit tests
+    \item \textbf{Screens:} Primary user-facing screens (Auth, Paths, Search, Stats) are tested
+    \item \textbf{High-Level Flows:} Critical user journeys (auth, navigation) are covered
 \end{itemize}
 
 \subsection{Continuous Integration}

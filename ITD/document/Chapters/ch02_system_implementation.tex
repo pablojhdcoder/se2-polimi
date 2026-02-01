@@ -138,7 +138,7 @@ The following features from the Design Document have been successfully implement
     \item \textbf{User Registration (UC1):} Users can create accounts with email, password, and optional profile information
     \item \textbf{User Login (UC2):} Secure authentication with session management via JWT tokens
     \item \textbf{Profile View:} Users can view their profile information
-    \item \textbf{Session Management:} Automatic logout after 24 hours or manual logout option
+    \item \textbf{Session Management:} Session expiration after 24 hours or manual logout option
 \end{itemize}
 
 \subsection{Trip Management (F2)}
@@ -200,96 +200,186 @@ The following features were intentionally excluded from this release due to tech
 \subsection{Advanced Sensor-Based Detection}
 \label{subsec:excluded_sensors}
 
-\textbf{Rationale:} Automatic trip and obstacle detection using device sensors proved to be significantly more complex than initially anticipated.
+Features such as automatic trip detection (F4.2), obstacle detection (F4.3), and gyroscope integration were intentionally excluded. The assignment guidelines allowed for the exclusion of these advanced sensor-based features to focus on a stable MVP.
 
-Excluded components:
-\begin{itemize}
-    \item \textbf{Advanced Sensor-Based Detection:} Features such as automatic trip detection (F4.2), obstacle detection (F4.3), and gyroscope integration were intentionally excluded. 
-\end{itemize}
 
-\textbf{Rationale:} These features proved to be significantly more complex than initially anticipated. Due to the limited size of our project team and the high implementation complexity involving signal processing and motion classification, we decided to prioritize core functionality. Furthermore, the assignment guidelines allowed for the exclusion of these advanced sensor-based features to focus on a stable MVP.
+\subsection{Automated Path Generation} 
+\label{subsec:excluded_automated_path_generation}
+  
+Automatic creation of paths from completed trips was another feature not yet implemented according to the assignment guidelines.
 
-\textbf{Alternative Approach Implemented:} 
-\begin{itemize}
-    \item Manual trip recording with GPS-only tracking provides reliable, battery-efficient functionality
-    \item Users can manually mark obstacles/potholes through the UI if this feature is prioritized in future releases
-\end{itemize}
+ \subsection {Route Planning}
+\label{subsec:excluded_route_planning}
 
-\subsection{Social Features (F7)}
-\label{subsec:excluded_social}
-
-Social interaction features were de-prioritized to focus on core path and trip management:
-
-\begin{itemize}
-    \item \textbf{User Following:} Ability to follow other users
-    \item \textbf{Activity Feed:} Social feed showing trips and paths from followed users
-    \item \textbf{Comments on Reviews:} Threaded discussions on path reviews
-    \item \textbf{Path Sharing:} Direct sharing of paths via social media or messaging
-\end{itemize}
-
-\textbf{Rationale:} These features require additional infrastructure (notification system, feed generation algorithm) and can be added in future iterations without affecting core functionality.
-
-\subsection{Advanced Path Features}
-\label{subsec:excluded_path_features}
-
-\begin{itemize}
-    \item \textbf{Automated Path Generation (UC4):} Automatic creation of paths from completed trips
-    \begin{itemize}
-        \item \textit{Reason:} Requires complex route simplification and merging algorithms
-        \item \textit{Decision:} Manual path creation provides better quality control
-    \end{itemize}
-    
-    \item \textbf{Path Elevation Profiles:} Displaying elevation gain/loss for paths
-    \begin{itemize}
-        \item \textit{Reason:} Requires integration with elevation APIs and additional data processing
-    \end{itemize}
-    
-    \item \textbf{Route Planning:} Suggesting optimal routes between two points
-    \begin{itemize}
-        \item \textit{Reason:} Requires routing engine integration (e.g., OSRM, GraphHopper)
-    \end{itemize}
-\end{itemize}
+ Suggesting optimal routes between two points, it would require routing engines integration (e.g., OSRM, GraphHopper) and wasnt included in the assignment either.
 
 \section{Source Code Structure}
 \label{sec:source_code_structure}
 
-The project employs a \textbf{monorepo} organization to synchronize backend and frontend development.
+The project is organized as a \textbf{monorepo} located at \texttt{ITD/code/}, containing both backend and frontend codebases alongside shared infrastructure configuration.
 
 \subsection{Backend Structure}
 \label{subsec:backend_structure}
 
-The backend source code is organized into several key directories:
+The backend follows a layered architecture with clear separation of concerns:
+
+\subsubsection{Core Application Files}
 \begin{itemize}
-    \item \texttt{src/app.js} \& \texttt{server.js}: Application configuration and server entry point.
-    \item \texttt{src/controllers/}: Handlers for API endpoints (Auth, Trip, Path).
-    \item \texttt{src/services/}: Implementation of business logic, divided by domain (User, Trip, Path, External APIs).
-    \item \texttt{src/repositories/}: Data access layer implementing the repository pattern for database interactions.
-    \item \texttt{src/middleware/}: Express middleware for authentication and request validation.
-    \item \texttt{src/routes/}: API route definitions connecting endpoints to controllers.
-    \item \texttt{tests/}: Comprehensive test suites for all layers.
-    \item \texttt{migrations/}: SQL scripts for database schema management.
-    \item \texttt{docker-compose.yml}: Configuration for infrastructure services (PostgreSQL, Redis, RabbitMQ).
+    \item \texttt{src/app.js}: Main application entry point that configures Express middleware, routes, error handlers, and initializes infrastructure connections (Redis, RabbitMQ)
+    \item \texttt{src/pool.js}: PostgreSQL connection pool configuration
+    \item \texttt{package.json}: Defines \texttt{src/app.js} as the main entry point with scripts for \texttt{start}, \texttt{dev}, \texttt{test}, \texttt{migrate}, and \texttt{seed}
+\end{itemize}
+
+\subsubsection{Source Code Organization (\texttt{src/})}
+\begin{itemize}
+    \item \texttt{controllers/}: HTTP request handlers for each domain:
+    \begin{itemize}
+        \item \texttt{authController.js}: User authentication (login, register, logout)
+        \item \texttt{pathController.js}: Path CRUD operations and search
+        \item \texttt{tripController.js}: Trip recording and retrieval
+        \item \texttt{ratingController.js}: Path rating and review management
+        \item \texttt{potholeController.js}: Pothole/obstacle reporting
+        \item \texttt{weatherController.js}: Weather data proxy
+    \end{itemize}
+    
+    \item \texttt{services/}: Business logic layer organized by domain:
+    \begin{itemize}
+        \item \texttt{user-management/}: \texttt{authService.js}, \texttt{userService.js}
+        \item \texttt{trip-management/}: Trip recording and statistics logic
+        \item \texttt{path-management/}: Path creation and publishing workflows
+        \item \texttt{rating/}: Review and rating aggregation
+        \item \texttt{external/}: Integration with OpenWeatherMap API and email service
+    \end{itemize}
+    
+    \item \texttt{repositories/}: Data access layer implementing the repository pattern:
+    \begin{itemize}
+        \item \texttt{userRepository.js}: User CRUD operations
+        \item \texttt{pathRepository.js}: Path database interactions
+        \item \texttt{tripRepository.js}: Trip data persistence
+        \item \texttt{ratingRepository.js}: Rating and review storage
+        \item \texttt{savedPathRepository.js}: User favorites management
+        \item \texttt{potholeRepository.js}: Obstacle data storage
+    \end{itemize}
+    
+    \item \texttt{routes/}: API endpoint definitions:
+    \begin{itemize}
+        \item \texttt{index.js}: Main router aggregating all sub-routes
+        \item \texttt{authRoutes.js}, \texttt{pathRoutes.js}, \texttt{tripRoutes.js}, \texttt{ratingRoutes.js}, \texttt{potholeRoutes.js}, \texttt{weatherRoutes.js}
+    \end{itemize}
+    
+    \item \texttt{config/}: Infrastructure and database configuration:
+    \begin{itemize}
+        \item \texttt{database.js}: PostgreSQL connection and query utilities
+        \item \texttt{redis.js}: Redis client initialization
+        \item \texttt{rabbitmq.js}: RabbitMQ connection and channel management
+        \item \texttt{schema.sql}: Complete database schema definition with PostGIS extensions
+    \end{itemize}
+    
+    \item \texttt{utils/}: Contains \texttt{authMiddleware.js} for JWT token verification
+\end{itemize}
+
+\subsubsection{Database Migrations (\texttt{migrations/})}
+\begin{itemize}
+    \item \texttt{run.js}: Single migration runner
+    \item \texttt{run-all.js}: Batch migration executor
+    \item Schema evolution scripts: \texttt{add-paths-duration-minutes.js}, \texttt{add-paths-is-published.js}, \texttt{add-paths-route-date.js}, \texttt{add-paths-weather.js}, \texttt{alter-trips-path-id-nullable.js}
+\end{itemize}
+
+\subsubsection{Utility Scripts (\texttt{scripts/})}
+\begin{itemize}
+    \item \texttt{init-infra.js}: Infrastructure initialization helper
+    \item \texttt{seed-demo-data.js}: Populates database with sample data for testing
+    \item \texttt{test-full-integration.js}: End-to-end integration validation script
+\end{itemize}
+
+\subsubsection{Testing (\texttt{tests/})}
+Organized by layer: \texttt{api/}, \texttt{infrastructure/}, \texttt{repositories/}, \texttt{services/} (detailed in Chapter 4).
+
+\subsubsection{Docker Configuration}
+\begin{itemize}
+    \item \texttt{docker/Dockerfile.dev}: Development container definition
+    \item Root-level \texttt{docker-compose.yml}: Defines PostgreSQL 14, Redis 7, and RabbitMQ 3.12 services with health checks and persistent volumes
 \end{itemize}
 
 \subsection{Frontend Structure}
 \label{subsec:frontend_structure}
 
-The frontend source code is structured as follows:
+The frontend is a React Native application using Expo SDK 54:
+
+\subsubsection{Core Application Files}
 \begin{itemize}
-    \item \texttt{App.js}: The root component and entry point of the mobile application.
-    \item \texttt{src/navigation/}: Navigation stack and tab configurations, including authentication state.
-    \item \texttt{src/pages/}: UI screens for all application features (Login, Register, Paths, Profile).
-    \item \texttt{src/components/}: Reusable UI components used throughout the application.
-    \item \texttt{src/services/}: API clients and map-related utility services.
-    \item \texttt{src/storage/}: Utilities for local data persistence and offline synchronization.
-    \item \texttt{src/contexts/}: React Context providers for global state management (e.g., Network Status).
-    \item \texttt{\_\_tests\_\_/}: Unit and integration tests for components, screens, and services.
+    \item \texttt{App.js}: Root component that initializes navigation, authentication context, and network status provider
+    \item \texttt{app.json} and \texttt{app.config.js}: Expo configuration
+    \item \texttt{package.json}: Defines Expo entry point with scripts for \texttt{start}, \texttt{android}, \texttt{ios}, \texttt{web}, and \texttt{test}
 \end{itemize}
 
-This structure follows best practices:
+\subsubsection{Source Code Organization (\texttt{src/})}
 \begin{itemize}
-    \item \textbf{Separation of Concerns:} Clear boundaries between layers
-    \item \textbf{Testability:} Each module can be independently tested
-    \item \textbf{Scalability:} Easy to locate and modify specific functionality
-    \item \textbf{Reusability:} Shared components and utilities
+    \item \texttt{pages/}: Screen components for each application feature (29 screens including Login, Register, PathList, PathDetail, PathCreateManual, TripStatistics, Reviews, etc.)
+    
+    \item \texttt{components/}: Reusable UI components (26 components including Button, Card, Input, Loading, ErrorMessage, MapboxMap, OfflineBanner, PendingSyncBanner)
+    
+    \item \texttt{navigation/}: Navigation configuration and authentication state:
+    \begin{itemize}
+        \item \texttt{AuthContext.js}: Authentication state provider
+        \item \texttt{useAuth.js}: Authentication hook
+        \item Stack and tab navigator definitions
+    \end{itemize}
+    
+    \item \texttt{services/}: API clients and external service integrations:
+    \begin{itemize}
+        \item \texttt{api.js}: Axios instance with interceptors for authentication and error handling
+        \item \texttt{pathsApi.js}, \texttt{tripsApi.js}, \texttt{reviewsApi.js}: Domain-specific API clients
+        \item \texttt{map/MapService.js}: Mapbox integration for geocoding and routing
+        \item \texttt{requestWithRetry.js}: HTTP retry logic with exponential backoff
+        \item \texttt{syncQueueProcessor.js}: Offline synchronization queue processor
+    \end{itemize}
+    
+    \item \texttt{storage/}: Local data persistence layer:
+    \begin{itemize}
+        \item \texttt{storageService.js}: AsyncStorage wrapper for session and offline data
+        \item \texttt{syncQueue.js}: Queue management for offline operations
+        \item \texttt{constants.js}: Storage key definitions
+        \item \texttt{index.js}: Public API exports
+    \end{itemize}
+    
+    \item \texttt{contexts/}: React Context providers:
+    \begin{itemize}
+        \item \texttt{NetworkStatusContext.js}: Network connectivity monitoring and offline state management
+    \end{itemize}
+    
+    \item \texttt{styles/}: Shared styling utilities and theme definitions
+    
+    \item \texttt{constants/}: Application-wide constants including UI strings
+\end{itemize}
+
+\subsubsection{Testing (\texttt{\_\_tests\_\_/})}
+Organized into three layers:
+\begin{itemize}
+    \item \texttt{unit/}: Component and data layer unit tests
+    \item \texttt{integration/}: Screen and feature integration tests
+    \item \texttt{flows/}: High-level user journey tests
+    \item \texttt{setup.js}: Jest configuration and global mocks
+\end{itemize}
+
+\subsection{Infrastructure as Code}
+\label{subsec:infrastructure_code}
+
+The \texttt{docker-compose.yml} at the project root defines the complete infrastructure stack:
+
+\begin{itemize}
+    \item \textbf{PostgreSQL 14} (\texttt{bbp-postgres}): Primary database with persistent volume, health checks, and automatic restart policy
+    \item \textbf{Redis 7} (\texttt{bbp-redis}): Session storage and caching with AOF persistence enabled
+    \item \textbf{RabbitMQ 3.12} (\texttt{bbp-rabbitmq}): Message broker with management UI exposed on port 15672
+    \item \textbf{Network}: All services connected via \texttt{bbp-network} bridge network
+    \item \textbf{Volumes}: Named volumes for data persistence across container restarts
+\end{itemize}
+
+This architecture ensures:
+\begin{itemize}
+    \item \textbf{Separation of Concerns:} Clear boundaries between presentation, business logic, and data layers
+    \item \textbf{Testability:} Each module can be independently tested with appropriate mocks
+    \item \textbf{Maintainability:} Domain-driven organization makes it easy to locate and modify specific functionality
+    \item \textbf{Scalability:} Microservice-ready structure with infrastructure services containerized
+    \item \textbf{Portability:} Docker-based infrastructure ensures consistent environments across development and deployment
 \end{itemize}

@@ -38,87 +38,96 @@
 \contentsline {subsection}{\numberline {2.4.6}Infrastructure Features}{13}{subsection.2.4.6}%
 \contentsline {section}{\numberline {2.5}Excluded Features}{14}{section.2.5}%
 \contentsline {subsection}{\numberline {2.5.1}Advanced Sensor-Based Detection}{14}{subsection.2.5.1}%
-\contentsline {subsection}{\numberline {2.5.2}Social Features (F7)}{14}{subsection.2.5.2}%
-\contentsline {subsection}{\numberline {2.5.3}Advanced Path Features}{15}{subsection.2.5.3}%
-\contentsline {section}{\numberline {2.6}Source Code Structure}{15}{section.2.6}%
-\contentsline {subsection}{\numberline {2.6.1}Backend Structure}{15}{subsection.2.6.1}%
+\contentsline {subsection}{\numberline {2.5.2}Automated Path Generation}{14}{subsection.2.5.2}%
+\contentsline {subsection}{\numberline {2.5.3}Route Planning}{14}{subsection.2.5.3}%
+\contentsline {section}{\numberline {2.6}Source Code Structure}{14}{section.2.6}%
+\contentsline {subsection}{\numberline {2.6.1}Backend Structure}{14}{subsection.2.6.1}%
+\contentsline {subsubsection}{Core Application Files}{14}{subsubsection*.13}%
+\contentsline {subsubsection}{Source Code Organization (\texttt {src/})}{15}{subsubsection*.14}%
+\contentsline {subsubsection}{Database Migrations (\texttt {migrations/})}{16}{subsubsection*.15}%
+\contentsline {subsubsection}{Utility Scripts (\texttt {scripts/})}{16}{subsubsection*.16}%
+\contentsline {subsubsection}{Testing (\texttt {tests/})}{16}{subsubsection*.17}%
+\contentsline {subsubsection}{Docker Configuration}{16}{subsubsection*.18}%
 \contentsline {subsection}{\numberline {2.6.2}Frontend Structure}{16}{subsection.2.6.2}%
-\contentsline {chapter}{\numberline {3}Integration Strategy and System Integration}{17}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Integration Approach}{17}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Overall Strategy}{17}{subsection.3.1.1}%
-\contentsline {section}{\numberline {3.2}Backend Integration (Bottom-Up)}{18}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Phase 1: Data Layer Foundation}{18}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Phase 2: Service Layer Integration}{18}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}Phase 3: API Layer Integration}{19}{subsection.3.2.3}%
-\contentsline {subsection}{\numberline {3.2.4}Phase 4: Infrastructure Integration}{20}{subsection.3.2.4}%
-\contentsline {section}{\numberline {3.3}Frontend Development (Parallel)}{20}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Phase 1: Core Components \& Navigation}{21}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Phase 2: Authentication Screens}{21}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Phase 3: Path Management Screens}{21}{subsection.3.3.3}%
-\contentsline {subsection}{\numberline {3.3.4}Phase 4: Offline Support \& Sync}{22}{subsection.3.3.4}%
-\contentsline {section}{\numberline {3.4}Frontend-Backend Synchronization}{23}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}API Contract Definition}{23}{subsection.3.4.1}%
-\contentsline {subsection}{\numberline {3.4.2}Integration Testing Sessions}{23}{subsection.3.4.2}%
-\contentsline {subsection}{\numberline {3.4.3}End-to-End Validation}{24}{subsection.3.4.3}%
-\contentsline {section}{\numberline {3.5}Testing Methodology}{24}{section.3.5}%
-\contentsline {subsection}{\numberline {3.5.1}Test-Driven Integration}{24}{subsection.3.5.1}%
-\contentsline {subsection}{\numberline {3.5.2}Test Evolution}{24}{subsection.3.5.2}%
-\contentsline {subsection}{\numberline {3.5.3}Continuous Integration}{25}{subsection.3.5.3}%
-\contentsline {section}{\numberline {3.6}Integration Challenges \& Solutions}{25}{section.3.6}%
-\contentsline {subsection}{\numberline {3.6.1}Challenge 1: Mapbox API integration in expo}{25}{subsection.3.6.1}%
-\contentsline {subsection}{\numberline {3.6.2}Challenge 2: Git branching and merging}{25}{subsection.3.6.2}%
-\contentsline {section}{\numberline {3.7}Integration Tools \& Environment}{25}{section.3.7}%
-\contentsline {subsection}{\numberline {3.7.1}Testing Tools}{25}{subsection.3.7.1}%
-\contentsline {subsection}{\numberline {3.7.2}Environment Configuration}{26}{subsection.3.7.2}%
-\contentsline {subsection}{\numberline {3.7.3}Test Data Management}{26}{subsection.3.7.3}%
-\contentsline {chapter}{\numberline {4}Testing Procedure}{27}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Overview}{27}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Backend Test Structure}{27}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Test Organization}{27}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}API Tests}{28}{subsection.4.2.2}%
-\contentsline {subsubsection}{authRoutes.test.js (3 tests)}{28}{subsubsection*.15}%
-\contentsline {subsubsection}{tripRoutes.test.js (3 tests)}{28}{subsubsection*.16}%
-\contentsline {subsection}{\numberline {4.2.3}Infrastructure Tests}{29}{subsection.4.2.3}%
-\contentsline {subsubsection}{server.test.js (1 test)}{29}{subsubsection*.17}%
-\contentsline {subsubsection}{redis.test.js (1 test)}{29}{subsubsection*.18}%
-\contentsline {subsection}{\numberline {4.2.4}Repository Tests}{30}{subsection.4.2.4}%
-\contentsline {subsubsection}{userRepository.test.js (3 tests)}{30}{subsubsection*.19}%
-\contentsline {subsubsection}{tripRepository.test.js (3 tests)}{31}{subsubsection*.20}%
-\contentsline {subsection}{\numberline {4.2.5}Service Tests}{31}{subsection.4.2.5}%
-\contentsline {subsubsection}{authService.test.js (5 tests)}{31}{subsubsection*.21}%
-\contentsline {subsubsection}{pathService.test.js (3 tests)}{32}{subsubsection*.22}%
-\contentsline {subsubsection}{tripService.test.js (2 tests)}{33}{subsubsection*.23}%
-\contentsline {subsubsection}{userService.test.js (3 tests)}{33}{subsubsection*.24}%
-\contentsline {subsubsection}{weatherService.test.js (8 tests)}{34}{subsubsection*.25}%
-\contentsline {section}{\numberline {4.3}Frontend Test Structure}{35}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Test Organization}{35}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}End-to-End (E2E) Tests}{35}{subsection.4.3.2}%
-\contentsline {subsubsection}{authFlow.test.js}{35}{subsubsection*.26}%
-\contentsline {subsubsection}{pathFlow.test.js}{36}{subsubsection*.27}%
-\contentsline {subsubsection}{recordTripFlow.test.js (Removed)}{37}{subsubsection*.28}%
-\contentsline {subsubsection}{syncOffline.test.js}{37}{subsubsection*.29}%
-\contentsline {subsection}{\numberline {4.3.3}Component Tests}{38}{subsection.4.3.3}%
-\contentsline {subsubsection}{UI Component Tests}{38}{subsubsection*.30}%
-\contentsline {subsection}{\numberline {4.3.4}Screen Tests}{39}{subsection.4.3.4}%
-\contentsline {subsubsection}{Primary Screen Tests}{39}{subsubsection*.31}%
-\contentsline {subsection}{\numberline {4.3.5}Service \& Logic Tests}{40}{subsection.4.3.5}%
-\contentsline {subsubsection}{MapService.test.js}{40}{subsubsection*.32}%
-\contentsline {subsubsection}{requestWithRetry.test.js}{40}{subsubsection*.33}%
-\contentsline {subsubsection}{syncQueueProcessor.test.js}{40}{subsubsection*.34}%
-\contentsline {subsection}{\numberline {4.3.6}Storage Tests}{41}{subsection.4.3.6}%
-\contentsline {section}{\numberline {4.4}Test Execution \& Results}{41}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Backend Test Results}{41}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}Frontend Test Results}{42}{subsection.4.4.2}%
-\contentsline {subsection}{\numberline {4.4.3}Continuous Integration}{42}{subsection.4.4.3}%
-\contentsline {section}{\numberline {4.5}Testing Best Practices Followed}{42}{section.4.5}%
-\contentsline {chapter}{\numberline {5}Installation Instructions}{43}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Installation Instructions}{43}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}Prerequisites}{43}{subsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.1.2}Backend Setup}{43}{subsection.5.1.2}%
-\contentsline {subsection}{\numberline {5.1.3}Frontend Setup}{44}{subsection.5.1.3}%
-\contentsline {chapter}{\numberline {6}Effort Spent}{45}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Effort Spent}{45}{section.6.1}%
-\contentsline {subsection}{\numberline {6.1.1}Tool used}{45}{subsection.6.1.1}%
-\contentsline {chapter}{\numberline {7}References}{47}{chapter.7}%
-\contentsline {section}{\numberline {7.1}References}{47}{section.7.1}%
-\contentsline {subsection}{\numberline {7.1.1}Use of Generative AI tools}{48}{subsection.7.1.1}%
+\contentsline {subsubsection}{Core Application Files}{17}{subsubsection*.19}%
+\contentsline {subsubsection}{Source Code Organization (\texttt {src/})}{17}{subsubsection*.20}%
+\contentsline {subsubsection}{Testing (\texttt {\_\_tests\_\_/})}{18}{subsubsection*.21}%
+\contentsline {subsection}{\numberline {2.6.3}Infrastructure as Code}{18}{subsection.2.6.3}%
+\contentsline {chapter}{\numberline {3}Integration Strategy and System Integration}{21}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Integration Approach}{21}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Overall Strategy}{21}{subsection.3.1.1}%
+\contentsline {section}{\numberline {3.2}Backend Integration (Bottom-Up)}{22}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Phase 1: Data Layer Foundation}{22}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Phase 2: Service Layer Integration}{22}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Phase 3: API Layer Integration}{23}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}Phase 4: Infrastructure Integration}{24}{subsection.3.2.4}%
+\contentsline {section}{\numberline {3.3}Frontend Development (Parallel)}{24}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Phase 1: Core Components \& Navigation}{25}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Phase 2: Authentication Screens}{25}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Phase 3: Path Management Screens}{25}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4}Phase 4: Offline Support \& Sync}{26}{subsection.3.3.4}%
+\contentsline {section}{\numberline {3.4}Frontend-Backend Synchronization}{27}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}API Contract Definition}{27}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Integration Testing Sessions}{27}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}End-to-End Validation}{28}{subsection.3.4.3}%
+\contentsline {section}{\numberline {3.5}Testing Methodology}{28}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Test-Driven Integration}{28}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Test Evolution}{28}{subsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.5.3}Continuous Integration}{29}{subsection.3.5.3}%
+\contentsline {section}{\numberline {3.6}Integration Challenges \& Solutions}{29}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Challenge 1: Mapbox API integration in expo}{29}{subsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.6.2}Challenge 2: Git branching and merging}{29}{subsection.3.6.2}%
+\contentsline {section}{\numberline {3.7}Integration Tools \& Environment}{29}{section.3.7}%
+\contentsline {subsection}{\numberline {3.7.1}Testing Tools}{29}{subsection.3.7.1}%
+\contentsline {subsection}{\numberline {3.7.2}Environment Configuration}{30}{subsection.3.7.2}%
+\contentsline {subsection}{\numberline {3.7.3}Test Data Management}{30}{subsection.3.7.3}%
+\contentsline {chapter}{\numberline {4}Testing Procedure}{31}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Overview}{31}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Backend Test Structure}{31}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Test Organization}{31}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}API Tests}{32}{subsection.4.2.2}%
+\contentsline {subsubsection}{authRoutes.test.js (3 tests)}{32}{subsubsection*.24}%
+\contentsline {subsubsection}{tripRoutes.test.js (3 tests)}{32}{subsubsection*.25}%
+\contentsline {subsection}{\numberline {4.2.3}Infrastructure Tests}{33}{subsection.4.2.3}%
+\contentsline {subsubsection}{server.test.js (1 test)}{33}{subsubsection*.26}%
+\contentsline {subsubsection}{redis.test.js (1 test)}{33}{subsubsection*.27}%
+\contentsline {subsection}{\numberline {4.2.4}Repository Tests}{34}{subsection.4.2.4}%
+\contentsline {subsubsection}{userRepository.test.js (3 tests)}{34}{subsubsection*.28}%
+\contentsline {subsubsection}{tripRepository.test.js (3 tests)}{35}{subsubsection*.29}%
+\contentsline {subsection}{\numberline {4.2.5}Service Tests}{35}{subsection.4.2.5}%
+\contentsline {subsubsection}{authService.test.js (5 tests)}{35}{subsubsection*.30}%
+\contentsline {subsubsection}{pathService.test.js (3 tests)}{36}{subsubsection*.31}%
+\contentsline {subsubsection}{tripService.test.js (2 tests)}{37}{subsubsection*.32}%
+\contentsline {subsubsection}{userService.test.js (3 tests)}{37}{subsubsection*.33}%
+\contentsline {subsubsection}{weatherService.test.js (8 tests)}{38}{subsubsection*.34}%
+\contentsline {section}{\numberline {4.3}Frontend Test Structure}{39}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}End-to-End (E2E) Tests}{39}{subsection.4.3.1}%
+\contentsline {subsubsection}{authFlow.test.js}{39}{subsubsection*.35}%
+\contentsline {subsubsection}{pathFlow.test.js}{40}{subsubsection*.36}%
+\contentsline {subsubsection}{recordTripFlow.test.js (Removed)}{41}{subsubsection*.37}%
+\contentsline {subsubsection}{syncOffline.test.js}{41}{subsubsection*.38}%
+\contentsline {subsection}{\numberline {4.3.2}Component Tests}{42}{subsection.4.3.2}%
+\contentsline {subsubsection}{UI Component Tests}{42}{subsubsection*.39}%
+\contentsline {subsection}{\numberline {4.3.3}Screen Tests}{43}{subsection.4.3.3}%
+\contentsline {subsubsection}{Primary Screen Tests}{43}{subsubsection*.40}%
+\contentsline {subsection}{\numberline {4.3.4}Service \& Logic Tests}{44}{subsection.4.3.4}%
+\contentsline {subsubsection}{MapService.test.js}{44}{subsubsection*.41}%
+\contentsline {subsubsection}{requestWithRetry.test.js}{44}{subsubsection*.42}%
+\contentsline {subsubsection}{syncQueueProcessor.test.js}{44}{subsubsection*.43}%
+\contentsline {subsection}{\numberline {4.3.5}Storage Tests}{45}{subsection.4.3.5}%
+\contentsline {section}{\numberline {4.4}Test Execution \& Results}{45}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Backend Test Results}{45}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Frontend Test Results}{45}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Continuous Integration}{46}{subsection.4.4.3}%
+\contentsline {section}{\numberline {4.5}Testing Best Practices Followed}{46}{section.4.5}%
+\contentsline {chapter}{\numberline {5}Installation Instructions}{47}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Installation Instructions}{47}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Prerequisites}{47}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}Backend Setup}{47}{subsection.5.1.2}%
+\contentsline {subsection}{\numberline {5.1.3}Frontend Setup}{48}{subsection.5.1.3}%
+\contentsline {chapter}{\numberline {6}Effort Spent}{49}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Effort Spent}{49}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Tool used}{49}{subsection.6.1.1}%
+\contentsline {chapter}{\numberline {7}References}{51}{chapter.7}%
+\contentsline {section}{\numberline {7.1}References}{51}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}Use of Generative AI tools}{52}{subsection.7.1.1}%
