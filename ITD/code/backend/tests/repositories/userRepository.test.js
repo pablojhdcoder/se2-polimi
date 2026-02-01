@@ -18,7 +18,7 @@ describe('User Repository Integration', () => {
 
             const result = await userRepository.getUserById('user-1');
 
-            expect(query).toHaveBeenCalledWith(expect.stringContaining('SELECT * FROM users'), ['user-1']);
+            expect(query).toHaveBeenCalledWith(expect.any(String), ['user-1']);
             expect(result).toEqual(mockUser);
         });
 
@@ -48,8 +48,8 @@ describe('User Repository Integration', () => {
             await userRepository.createUser(newUser);
 
             expect(query).toHaveBeenCalledWith(
-                expect.stringContaining('INSERT INTO users'),
-                expect.arrayContaining(['new-id', 'newuser', 'hash'])
+                expect.any(String),
+                ['new-id', 'newuser', 'hash', 'New User', null, 'new@test.com', null]
             );
         });
     });

@@ -48,7 +48,8 @@ describe('AuthService Unit Tests', () => {
 
             expect(bcrypt.hash).toHaveBeenCalledWith(userData.password, 10);
             expect(userRepository.createUser).toHaveBeenCalledWith(expect.objectContaining({
-                username: userData.username, // logic uses email as username in some flows, but here strict userData
+                username: userData.email, // authService uses email as username internally
+                email: userData.email,
                 passwordHash: 'hashed_password'
             }));
             expect(result).not.toHaveProperty('passwordHash');

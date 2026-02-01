@@ -6,8 +6,15 @@ const axios = require('axios');
  */
 class WeatherService {
     constructor() {
-        this.apiKey = process.env.WEATHER_API_KEY;
         this.baseUrl = 'https://api.openweathermap.org/data/2.5/weather';
+    }
+
+    /**
+     * Get the API key from environment (dynamic to support testing)
+     * @private
+     */
+    _getApiKey() {
+        return process.env.WEATHER_API_KEY;
     }
 
     /**
@@ -17,7 +24,8 @@ class WeatherService {
      * @returns {Promise<Object>} Weather data
      */
     async getCurrentWeather(lat, lon) {
-        if (!this.apiKey) {
+        const apiKey = this._getApiKey();
+        if (!apiKey) {
             console.warn('Weather API key missing, returning mock data.');
             return this._getMockData();
         }
@@ -27,7 +35,7 @@ class WeatherService {
                 params: {
                     lat,
                     lon,
-                    appid: this.apiKey,
+                    appid: apiKey,
                     units: 'metric'
                 }
             });

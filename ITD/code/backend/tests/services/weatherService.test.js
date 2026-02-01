@@ -16,7 +16,7 @@ describe('WeatherService Tests', () => {
         axios.get.mockResolvedValue({
             data: {
                 main: { temp: 20 },
-                wind: { speed: 1, deg: 0 },
+                wind: { speed: 1, deg: 0, gust: 2 },
                 visibility: 10000,
                 clouds: { all: 0 }
             }
@@ -66,7 +66,7 @@ describe('WeatherService Tests', () => {
         const mockResponse = {
             data: {
                 main: { temp: 10 },
-                wind: { speed: 2, deg: 10 },
+                wind: { speed: 2, deg: 10, gust: 3 },
                 visibility: 10000,
                 clouds: { all: 5 }
                 // No rain

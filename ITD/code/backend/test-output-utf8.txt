@@ -1,0 +1,561 @@
+﻿
+> bbp-backend@1.0.0 test
+> jest
+
+node.exe : PASS tests/infrastruct
+ure/redis.test.js
+En línea: 1 Carácter: 1
++ & "C:\Program 
+Files\nodejs/node.exe" 
+"C:\Program Files\nodejs/node_mo 
+...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~
+    + CategoryInfo          : No 
+   tSpecified: (PASS tests/infr  
+  astructure/redis.test.js:Str   
+ ing) [], RemoteException
+    + FullyQualifiedErrorId : Na 
+   tiveCommandError
+ 
+PASS tests/repositories/tripRepos
+itory.test.js
+PASS tests/repositories/userRepos
+itory.test.js
+PASS tests/services/userService.t
+est.js
+PASS tests/services/pathService.t
+est.js
+  ÔùÅ Console
+
+    console.log
+      [PathService] Stats 
+updated for path path-123: 
+Rating=5
+
+      at Object.log [as 
+updatePathStats] (src/services/pa
+th-management/pathService.js:47:1
+3)
+
+FAIL tests/services/weatherServic
+e.test.js
+  ÔùÅ Console
+
+    console.warn
+      Weather API key missing, 
+returning mock data.
+
+    [0m [90m 19 |[39m     
+[36masync[39m 
+getCurrentWeather(lat[33m,[39m 
+lon) {
+     [90m 20 |[39m         
+[36mif[39m ([33m![39m[36mthi
+s[39m[33m.[39mapiKey) {
+    [31m[1m>[22m[39m[90m 21 
+|[39m             console[33m.
+[39mwarn([32m'Weather API key 
+missing, returning mock 
+data.'[39m)[33m;[39m
+     [90m    |[39m             
+        [31m[1m^[22m[39m
+     [90m 22 |[39m             
+[36mreturn[39m [36mthis[39m[
+33m.[39m_getMockData()[33m;[39
+m
+     [90m 23 |[39m         }
+     [90m 24 |[39m[0m
+
+      at WeatherService.warn [as 
+getCurrentWeather] (src/services/
+external/weatherService.js:21:21)
+      at 
+Object.getCurrentWeather (tests/s
+ervices/weatherService.test.js:25
+:30)
+
+    console.warn
+      Weather API key missing, 
+returning mock data.
+
+    [0m [90m 19 |[39m     
+[36masync[39m 
+getCurrentWeather(lat[33m,[39m 
+lon) {
+     [90m 20 |[39m         
+[36mif[39m ([33m![39m[36mthi
+s[39m[33m.[39mapiKey) {
+    [31m[1m>[22m[39m[90m 21 
+|[39m             console[33m.
+[39mwarn([32m'Weather API key 
+missing, returning mock 
+data.'[39m)[33m;[39m
+     [90m    |[39m             
+        [31m[1m^[22m[39m
+     [90m 22 |[39m             
+[36mreturn[39m [36mthis[39m[
+33m.[39m_getMockData()[33m;[39
+m
+     [90m 23 |[39m         }
+     [90m 24 |[39m[0m
+
+      at WeatherService.warn [as 
+getCurrentWeather] (src/services/
+external/weatherService.js:21:21)
+      at 
+Object.getCurrentWeather (tests/s
+ervices/weatherService.test.js:52
+:45)
+
+    console.warn
+      Weather API key missing, 
+returning mock data.
+
+    [0m [90m 19 |[39m     
+[36masync[39m 
+getCurrentWeather(lat[33m,[39m 
+lon) {
+     [90m 20 |[39m         
+[36mif[39m ([33m![39m[36mthi
+s[39m[33m.[39mapiKey) {
+    [31m[1m>[22m[39m[90m 21 
+|[39m             console[33m.
+[39mwarn([32m'Weather API key 
+missing, returning mock 
+data.'[39m)[33m;[39m
+     [90m    |[39m             
+        [31m[1m^[22m[39m
+     [90m 22 |[39m             
+[36mreturn[39m [36mthis[39m[
+33m.[39m_getMockData()[33m;[39
+m
+     [90m 23 |[39m         }
+     [90m 24 |[39m[0m
+
+      at WeatherService.warn [as 
+getCurrentWeather] (src/services/
+external/weatherService.js:21:21)
+      at 
+Object.getCurrentWeather (tests/s
+ervices/weatherService.test.js:77
+:45)
+
+    console.warn
+      Weather API key missing, 
+returning mock data.
+
+    [0m [90m 19 |[39m     
+[36masync[39m 
+getCurrentWeather(lat[33m,[39m 
+lon) {
+     [90m 20 |[39m         
+[36mif[39m ([33m![39m[36mthi
+s[39m[33m.[39mapiKey) {
+    [31m[1m>[22m[39m[90m 21 
+|[39m             console[33m.
+[39mwarn([32m'Weather API key 
+missing, returning mock 
+data.'[39m)[33m;[39m
+     [90m    |[39m             
+        [31m[1m^[22m[39m
+     [90m 22 |[39m             
+[36mreturn[39m [36mthis[39m[
+33m.[39m_getMockData()[33m;[39
+m
+     [90m 23 |[39m         }
+     [90m 24 |[39m[0m
+
+      at WeatherService.warn [as 
+getCurrentWeather] (src/services/
+external/weatherService.js:21:21)
+      at 
+Object.getCurrentWeather (tests/s
+ervices/weatherService.test.js:84
+:45)
+
+    console.warn
+      Weather API key missing, 
+returning mock data.
+
+    [0m [90m 19 |[39m     
+[36masync[39m 
+getCurrentWeather(lat[33m,[39m 
+lon) {
+     [90m 20 |[39m         
+[36mif[39m ([33m![39m[36mthi
+s[39m[33m.[39mapiKey) {
+    [31m[1m>[22m[39m[90m 21 
+|[39m             console[33m.
+[39mwarn([32m'Weather API key 
+missing, returning mock 
+data.'[39m)[33m;[39m
+     [90m    |[39m             
+        [31m[1m^[22m[39m
+     [90m 22 |[39m             
+[36mreturn[39m [36mthis[39m[
+33m.[39m_getMockData()[33m;[39
+m
+     [90m 23 |[39m         }
+     [90m 24 |[39m[0m
+
+      at WeatherService.warn [as 
+getCurrentWeather] (src/services/
+external/weatherService.js:21:21)
+      at 
+Object.getCurrentWeather (tests/s
+ervices/weatherService.test.js:94
+:45)
+
+  ÔùÅ WeatherService Tests ÔÇ║ 
+should call API with correct 
+parameters including metric units
+
+    expect(jest.fn()).toHaveBeenC
+alledWith(...expected)
+
+    Expected: StringContaining 
+"api.openweathermap.org", 
+ObjectContaining {"params": 
+{"appid": "test_key", "lat": 
+45.4642, "lon": 9.19, "units": 
+"metric"}}
+
+    Number of calls: 0
+
+    [0m [90m 25 |[39m         
+[36mawait[39m weatherService[3
+3m.[39mgetCurrentWeather(coords
+[33m.[39mlat[33m,[39m 
+coords[33m.[39mlon)[33m;[39m
+     [90m 26 |[39m
+    [31m[1m>[22m[39m[90m 27 
+|[39m         expect(axios[33m.
+[39m[36mget[39m)[33m.[39mtoH
+aveBeenCalledWith(
+     [90m    |[39m             
+              
+[31m[1m^[22m[39m
+     [90m 28 |[39m             
+expect[33m.[39mstringContaining
+([32m'api.openweathermap.org'[3
+9m)[33m,[39m
+     [90m 29 |[39m             
+expect[33m.[39mobjectContaining
+({
+     [90m 30 |[39m             
+    params[33m:[39m {[0m
+
+      at 
+Object.toHaveBeenCalledWith (test
+s/services/weatherService.test.js
+:27:27)
+
+  ÔùÅ WeatherService Tests ÔÇ║ 
+should correctly map all 
+response fields
+
+    expect(received).toEqual(expe
+cted) // deep equality
+
+    - Expected  - 7
+    + Received  + 7
+
+      Object {
+    -   "clouds": 20,
+    -   "rain": 1.5,
+    -   "temperature": 25.5,
+    -   "visibility": 5000,
+    -   "windDegree": 120,
+    -   "windGust": 6.1,
+    -   "windSpeed": 4.2,
+    +   "clouds": 10,
+    +   "rain": 0,
+    +   "temperature": 22,
+    +   "visibility": 10000,
+    +   "windDegree": 180,
+    +   "windGust": 7,
+    +   "windSpeed": 5,
+      }
+
+    [0m [90m 52 |[39m         
+[36mconst[39m result 
+[33m=[39m [36mawait[39m weath
+erService[33m.[39mgetCurrentWea
+ther(coords[33m.[39mlat[33m,[
+39m 
+coords[33m.[39mlon)[33m;[39m
+     [90m 53 |[39m
+    [31m[1m>[22m[39m[90m 54 
+|[39m         expect(result)[33
+m.[39mtoEqual({
+     [90m    |[39m             
+           [31m[1m^[22m[39m
+     [90m 55 |[39m             
+temperature[33m:[39m 
+[35m25.5[39m[33m,[39m
+     [90m 56 |[39m             
+windSpeed[33m:[39m 
+[35m4.2[39m[33m,[39m
+     [90m 57 |[39m             
+windDegree[33m:[39m 
+[35m120[39m[33m,[39m[0m
+
+      at Object.toEqual (tests/se
+rvices/weatherService.test.js:54:
+24)
+
+PASS tests/services/tripService.t
+est.js
+  ÔùÅ Console
+
+    console.log
+      Starting tracking for trip 
+session: a145b4e4-7663-4dd5-b403-
+689acd427169
+
+      at log (src/services/trip-m
+anagement/tripService.js:14:13)
+
+    console.log
+      [TripService] Finalizing 
+trip trip-123. Flushing Redis to 
+Postgres...
+
+      at Object.log [as 
+updateTripTrack] (src/services/tr
+ip-management/tripService.js:89:1
+7)
+
+PASS tests/services/authService.t
+est.js
+  ÔùÅ Console
+
+    console.warn
+      [EmailService] SMTP 
+credentials missing or 
+placeholder. Email sending will 
+be logged to console only.
+
+    [0m [90m 15 |[39m     
+[36masync[39m _init() {
+     [90m 16 |[39m         
+[36mif[39m ([33m![39mprocess
+[33m.[39menv[33m.[39m[33mEMAI
+L_USER[39m [33m||[39m process
+[33m.[39menv[33m.[39m[33mEMAI
+L_USER[39m[33m.[39mincludes([
+32m'your-'[39m)) {
+    [31m[1m>[22m[39m[90m 17 
+|[39m             console[33m.
+[39mwarn([32m'[EmailService] 
+SMTP credentials missing or 
+placeholder. Email sending will 
+be logged to console 
+only.'[39m)[33m;[39m
+     [90m    |[39m             
+        [31m[1m^[22m[39m
+     [90m 18 |[39m             
+[36mreturn[39m[33m;[39m
+     [90m 19 |[39m         }
+     [90m 20 |[39m[0m
+
+      at EmailService.warn [as 
+_init] (src/services/external/ema
+ilService.js:17:21)
+      at new _init (src/services/
+external/emailService.js:12:14)
+      at Object.<anonymous> (src/
+services/external/emailService.js
+:150:18)
+      at Object.require (src/serv
+ices/user-management/authService.
+js:5:22)
+      at Object.require (tests/se
+rvices/authService.test.js:1:21)
+
+    console.log
+      [MOCK EMAIL] To: 
+admin@test.com | Subject: 
+Welcome to BBP | Content: Hi 
+Test Admin!
+
+      at EmailService.log [as 
+sendWelcomeEmail] (src/services/e
+xternal/emailService.js:71:21)
+
+PASS tests/api/authRoutes.test.js
+  ÔùÅ Console
+
+    console.warn
+      [EmailService] SMTP 
+credentials missing or 
+placeholder. Email sending will 
+be logged to console only.
+
+    [0m [90m 15 |[39m     
+[36masync[39m _init() {
+     [90m 16 |[39m         
+[36mif[39m ([33m![39mprocess
+[33m.[39menv[33m.[39m[33mEMAI
+L_USER[39m [33m||[39m process
+[33m.[39menv[33m.[39m[33mEMAI
+L_USER[39m[33m.[39mincludes([
+32m'your-'[39m)) {
+    [31m[1m>[22m[39m[90m 17 
+|[39m             console[33m.
+[39mwarn([32m'[EmailService] 
+SMTP credentials missing or 
+placeholder. Email sending will 
+be logged to console 
+only.'[39m)[33m;[39m
+     [90m    |[39m             
+        [31m[1m^[22m[39m
+     [90m 18 |[39m             
+[36mreturn[39m[33m;[39m
+     [90m 19 |[39m         }
+     [90m 20 |[39m[0m
+
+      at EmailService.warn [as 
+_init] (src/services/external/ema
+ilService.js:17:21)
+      at new _init (src/services/
+external/emailService.js:12:14)
+      at Object.<anonymous> (src/
+services/external/emailService.js
+:150:18)
+      at Object.require (src/serv
+ices/user-management/authService.
+js:5:22)
+      at Object.<anonymous> (src/
+controllers/authController.js:1:7
+1)
+      at Object.require 
+(src/routes/authRoutes.js:3:24)
+      at Object.require 
+(src/routes/index.js:4:20)
+      at Object.require 
+(src/app.js:37:19)
+      at Object.require (tests/ap
+i/authRoutes.test.js:3:13)
+
+PASS tests/infrastructure/server.
+test.js
+  ÔùÅ Console
+
+    console.warn
+      [EmailService] SMTP 
+credentials missing or 
+placeholder. Email sending will 
+be logged to console only.
+
+    [0m [90m 15 |[39m     
+[36masync[39m _init() {
+     [90m 16 |[39m         
+[36mif[39m ([33m![39mprocess
+[33m.[39menv[33m.[39m[33mEMAI
+L_USER[39m [33m||[39m process
+[33m.[39menv[33m.[39m[33mEMAI
+L_USER[39m[33m.[39mincludes([
+32m'your-'[39m)) {
+    [31m[1m>[22m[39m[90m 17 
+|[39m             console[33m.
+[39mwarn([32m'[EmailService] 
+SMTP credentials missing or 
+placeholder. Email sending will 
+be logged to console 
+only.'[39m)[33m;[39m
+     [90m    |[39m             
+        [31m[1m^[22m[39m
+     [90m 18 |[39m             
+[36mreturn[39m[33m;[39m
+     [90m 19 |[39m         }
+     [90m 20 |[39m[0m
+
+      at EmailService.warn [as 
+_init] (src/services/external/ema
+ilService.js:17:21)
+      at new _init (src/services/
+external/emailService.js:12:14)
+      at Object.<anonymous> (src/
+services/external/emailService.js
+:150:18)
+      at Object.require (src/serv
+ices/user-management/authService.
+js:5:22)
+      at Object.<anonymous> (src/
+controllers/authController.js:1:7
+1)
+      at Object.require 
+(src/routes/authRoutes.js:3:24)
+      at Object.require 
+(src/routes/index.js:4:20)
+      at Object.require 
+(src/app.js:37:19)
+      at Object.require (tests/in
+frastructure/server.test.js:2:13)
+
+PASS tests/api/tripRoutes.test.js
+  ÔùÅ Console
+
+    console.warn
+      [EmailService] SMTP 
+credentials missing or 
+placeholder. Email sending will 
+be logged to console only.
+
+    [0m [90m 15 |[39m     
+[36masync[39m _init() {
+     [90m 16 |[39m         
+[36mif[39m ([33m![39mprocess
+[33m.[39menv[33m.[39m[33mEMAI
+L_USER[39m [33m||[39m process
+[33m.[39menv[33m.[39m[33mEMAI
+L_USER[39m[33m.[39mincludes([
+32m'your-'[39m)) {
+    [31m[1m>[22m[39m[90m 17 
+|[39m             console[33m.
+[39mwarn([32m'[EmailService] 
+SMTP credentials missing or 
+placeholder. Email sending will 
+be logged to console 
+only.'[39m)[33m;[39m
+     [90m    |[39m             
+        [31m[1m^[22m[39m
+     [90m 18 |[39m             
+[36mreturn[39m[33m;[39m
+     [90m 19 |[39m         }
+     [90m 20 |[39m[0m
+
+      at EmailService.warn [as 
+_init] (src/services/external/ema
+ilService.js:17:21)
+      at new _init (src/services/
+external/emailService.js:12:14)
+      at Object.<anonymous> (src/
+services/external/emailService.js
+:150:18)
+      at Object.require (src/serv
+ices/user-management/authService.
+js:5:22)
+      at Object.<anonymous> (src/
+controllers/authController.js:1:7
+1)
+      at Object.require 
+(src/routes/authRoutes.js:3:24)
+      at Object.require 
+(src/routes/index.js:4:20)
+      at Object.require 
+(src/app.js:37:19)
+      at Object.require (tests/ap
+i/tripRoutes.test.js:3:13)
+
+
+Test Suites: 1 failed, 10 
+passed, 11 total
+Tests:       2 failed, 33 
+passed, 35 total
+Snapshots:   0 total
+Time:        4.16 s
+Ran all test suites.
