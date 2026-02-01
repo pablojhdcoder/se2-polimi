@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.1.31)  1 FEB 2026 18:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.1.31)  1 FEB 2026 19:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1441,7 +1441,7 @@ Package: listings 2025/11/14 1.11b (Carsten Heinz)
 \c@algsubstate=\count401
 )
 LaTeX Font Info:    Trying to load font information for T1+ptm on input line 12
-4.
+5.
 
 (C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
@@ -1449,24 +1449,24 @@ File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 (ITD.aux)
 \openout1 = `ITD.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 124.
-LaTeX Font Info:    ... okay on input line 124.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 124.
-LaTeX Font Info:    ... okay on input line 124.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 124.
-LaTeX Font Info:    ... okay on input line 124.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 124.
-LaTeX Font Info:    ... okay on input line 124.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 124.
-LaTeX Font Info:    ... okay on input line 124.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 124.
-LaTeX Font Info:    ... okay on input line 124.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 124.
-LaTeX Font Info:    ... okay on input line 124.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 124.
-LaTeX Font Info:    ... okay on input line 124.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 124.
-LaTeX Font Info:    ... okay on input line 124.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 125.
+LaTeX Font Info:    ... okay on input line 125.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 125.
+LaTeX Font Info:    ... okay on input line 125.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 125.
+LaTeX Font Info:    ... okay on input line 125.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 125.
+LaTeX Font Info:    ... okay on input line 125.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 125.
+LaTeX Font Info:    ... okay on input line 125.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 125.
+LaTeX Font Info:    ... okay on input line 125.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 125.
+LaTeX Font Info:    ... okay on input line 125.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 125.
+LaTeX Font Info:    ... okay on input line 125.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 125.
+LaTeX Font Info:    ... okay on input line 125.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1540,9 +1540,9 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 .cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-LaTeX Info: Redefining \[ on input line 124.
-LaTeX Info: Redefining \] on input line 124.
-Package hyperref Info: Link coloring ON on input line 124.
+LaTeX Info: Redefining \[ on input line 125.
+LaTeX Info: Redefining \] on input line 125.
+Package hyperref Info: Link coloring ON on input line 125.
  (ITD.out) (ITD.out)
 \@outlinefile=\write4
 \openout4 = `ITD.out'.
@@ -1563,17 +1563,17 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 ))
 \c@lstlisting=\count408
-<./Images/PolimiLogo.png, id=402, 405.515pt x 125.46875pt>
+<./Images/PolimiLogo.png, id=386, 405.515pt x 125.46875pt>
 File: ./Images/PolimiLogo.png Graphic file (type png)
 <use ./Images/PolimiLogo.png>
-Package pdftex.def Info: ./Images/PolimiLogo.png  used on input line 151.
+Package pdftex.def Info: ./Images/PolimiLogo.png  used on input line 152.
 (pdftex.def)             Requested size: 302.73503pt x 93.67055pt.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 151
+LaTeX Font Info:    Trying to load font information for U+msa on input line 152
 .
  (C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 151
+LaTeX Font Info:    Trying to load font information for U+msb on input line 152
 .
 
 (C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
@@ -1587,7 +1587,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 uario/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc} <./Images/Poli
 miLogo.png>]
 (C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1ptm.fd)
-Overfull \hbox (23.99998pt too wide) in alignment at lines 151--151
+Overfull \hbox (23.99998pt too wide) in alignment at lines 152--152
 [][] 
  []
 
@@ -1606,15 +1606,16 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.73 ...atabase Integration}{28}{subsection.3.7.1}
-                                                  % [2] [3])
+l.73 ...est Data Management}{26}{subsection.3.7.3}
+                                                  % [2])
 \tf@toc=\write5
 \openout5 = `ITD.toc'.
 
- [4]
+ [3] [4
+
+]
 Chapter 1.
 (Chapters/ch01_introduction.tex [5
-
 
 
 ] [6]) [7] [8
@@ -1632,145 +1633,135 @@ Overfull \hbox (5.72961pt too wide) in paragraph at lines 52--53
 [10] [11] [12]
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
-            Default family used instead on input line 160.
+            Default family used instead on input line 161.
  [13] [14]
-LaTeX Font Info:    Trying to load font information for T1+pcr on input line 27
-7.
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 26
+3.
 
 (C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
-[15] [16]
-Overfull \hbox (55.95567pt too wide) in paragraph at lines 317--317
-[]\T1/pcr/m/n/12 +-- tests/                        # Test suites (detailed in C
-hapter 4)[] 
+Overfull \hbox (17.38278pt too wide) in paragraph at lines 266--267
+[]\T1/pcr/m/n/12 src/repositories/\T1/ptm/m/n/12 : Data ac-cess layer im-ple-me
+nt-ing the repos-i-tory pat-tern for database
  []
 
-
-Overfull \hbox (12.75569pt too wide) in paragraph at lines 360--360
-[]\T1/pcr/m/n/12 |   |   +-- AuthContext.js        # Authentication state provi
-der[] 
- []
-
-[17]
-Overfull \hbox (55.95567pt too wide) in paragraph at lines 360--360
-[]\T1/pcr/m/n/12 +-- __tests__/                    # Test suites (detailed in C
-hapter 4)[] 
- []
-
-) [18]
+[15]) [16]
 Chapter 3.
-(Chapters/ch03_integration_strategy.tex [19
+(Chapters/ch03_integration_strategy.tex [17
 
 
-] [20] [21] [22] [23] [24] [25]
+] [18] [19] [20] [21] [22] [23]
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
-            Default family used instead on input line 292.
+            Default family used instead on input line 285.
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
-            Default family used instead on input line 292.
+            Default family used instead on input line 285.
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
-            Default family used instead on input line 293.
+            Default family used instead on input line 286.
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
-            Default family used instead on input line 293.
+            Default family used instead on input line 286.
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
-            Default family used instead on input line 294.
+            Default family used instead on input line 287.
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
-            Default family used instead on input line 294.
+            Default family used instead on input line 287.
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
-            Default family used instead on input line 294.
+            Default family used instead on input line 287.
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
-            Default family used instead on input line 295.
+            Default family used instead on input line 288.
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
-            Default family used instead on input line 295.
+            Default family used instead on input line 288.
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
-            Default family used instead on input line 295.
+            Default family used instead on input line 288.
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
-            Default family used instead on input line 296.
+            Default family used instead on input line 289.
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
-            Default family used instead on input line 296.
+            Default family used instead on input line 289.
 
-Overfull \hbox (8.21422pt too wide) in paragraph at lines 312--313
+Overfull \hbox (8.21422pt too wide) in paragraph at lines 305--306
 []\T1/ptm/b/n/12 Integration Tests for Bound-aries: \T1/ptm/m/n/12 Tested servi
 ce-repository and controller-service bound-
  []
 
-[26] [27] [28] [29]) [30]
+[24] [25]) [26]
 Chapter 4.
-(Chapters/ch05_testing.tex [31
+(Chapters/ch04_testing.tex
+Overfull \hbox (4.92749pt too wide) in paragraph at lines 21--22
+[]\T1/pcr/m/n/12 backend/tests/services/\T1/ptm/m/n/12 : Busi-ness logic val-i-
+da-tion for au-then-ti-ca-tion, path man-
+ []
+
+[27
 
 
-] [32] [33] [34] [35] [36] [37] [38] [39]
+] [28] [29] [30] [31] [32] [33] [34]
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
-            Default family used instead on input line 445.
+            Default family used instead on input line 400.
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
-            Default family used instead on input line 445.
-
-[40]
+            Default family used instead on input line 400.
+ [35]
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
-            Default family used instead on input line 474.
+            Default family used instead on input line 429.
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
-            Default family used instead on input line 474.
+            Default family used instead on input line 429.
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
-            Default family used instead on input line 474.
- [41]
-Overfull \hbox (3.52422pt too wide) in paragraph at lines 511--512
+            Default family used instead on input line 429.
+ [36]
+Overfull \hbox (3.52422pt too wide) in paragraph at lines 466--467
 []\T1/ptm/b/n/12 Reason for re-moval: \T1/ptm/m/n/12 Sensor-based au-to-matic t
 rip de-tec-tion proved too com-plex; man-ual record-
  []
 
-[42] [43] [44] [45]
-Overfull \hbox (9.041pt too wide) in paragraph at lines 705--706
-[]\T1/ptm/b/n/12 sensors/ObstacleDetectionModule.test.js: \T1/ptm/m/n/12 Tests 
-for pot-hole/obstacle de-tec-tion al-go-rithms 
- []
-
-[46] [47]) [48]
+[37] [38] [39] [40] [41]) [42]
 Chapter 5.
-(Chapters/ch06_installation_instructions.tex [49
+(Chapters/ch05_installation_instructions.tex [43
 
 
-]) [50]
+]) [44]
 Chapter 6.
-(Chapters/ch07_effort_spent.tex
+(Chapters/ch06_effort_spent.tex
 Overfull \hbox (8.95946pt too wide) in paragraph at lines 8--17
  [][] 
  []
 
-) [51
+) [45
 
 
-] [52
+] [46
 
 ]
 Chapter 7.
-(Chapters/ch08_references.tex
+(Chapters/ch07_references.tex
 Overfull \hbox (15.65515pt too wide) in paragraph at lines 16--17
 []\T1/ptm/m/n/12 React Na-tive Test-ing Li-brary --- Test-ing util-i-ties for R
 e-act Na-tive, [][]$\T1/pcr/m/n/12 https : / / callstack .
  []
 
-) [53
+[47
 
-] [54
+]) [48] [49] [50
 
 ]
+
+Package caption Warning: Unused \captionsetup[figure] on input line 12.
+See the caption package documentation for explanation.
+
 
 Package caption Warning: Unused \captionsetup[algorithm] on input line 14.
 See the caption package documentation for explanation.
@@ -1781,16 +1772,16 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
 Package rerunfilecheck Info: File `ITD.out' has not changed.
-(rerunfilecheck)             Checksum: 5AEB265E2D2524306FC8578047FFEDFC;17192.
+(rerunfilecheck)             Checksum: 0C9A323C902C3E17819F47972EAFB6FA;16066.
  ) 
 Here is how much of TeX's memory you used:
- 32627 strings out of 467871
- 613936 string characters out of 5417408
+ 32469 strings out of 467871
+ 610650 string characters out of 5417408
  1110015 words of memory out of 5000000
- 60649 multiletter control sequences out of 15000+600000
- 674002 words of font info for 100 fonts, out of 8000000 for 9000
+ 60499 multiletter control sequences out of 15000+600000
+ 671280 words of font info for 98 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,13n,94p,1194b,788s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,13n,94p,1194b,750s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\Usuario\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tc
 rb1200.pk> <C:\Users\Usuario\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/d
 pi600\tcrm1200.pk><C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fonts/type1/u
@@ -1798,9 +1789,9 @@ rw/courier/ucrr8a.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fonts/typ
 e1/urw/times/utmb8a.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fonts/t
 ype1/urw/times/utmr8a.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fonts
 /type1/urw/times/utmri8a.pfb>
-Output written on ITD.pdf (56 pages, 254746 bytes).
+Output written on ITD.pdf (52 pages, 247118 bytes).
 PDF statistics:
- 901 PDF objects out of 1000 (max. 8388607)
- 228 named destinations out of 1000 (max. 500000)
- 810 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 864 PDF objects out of 1000 (max. 8388607)
+ 221 named destinations out of 1000 (max. 500000)
+ 778 words of extra memory for PDF output out of 10000 (max. 10000000)
 

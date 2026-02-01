@@ -81,24 +81,25 @@ Security implementation:
 \label{subsec:backend_stack}
 
 \begin{itemize}
-    \item \textbf{Runtime:} Node.js v18 LTS
-    \item \textbf{Framework:} Express.js v4.18 - Minimalist web framework with extensive middleware ecosystem
-    \item \textbf{Database Client:} pg (node-postgres) v8.11 - Native PostgreSQL driver
-    \item \textbf{Authentication:} jsonwebtoken v9.0, bcrypt v5.1
+    \item \textbf{Runtime:} Node.js
+    \item \textbf{Framework:} Express.js - Minimalist web framework with extensive middleware ecosystem
+    \item \textbf{Database Client:} pg (node-postgres) - Native PostgreSQL driver
+    \item \textbf{Authentication:} jsonwebtoken, bcrypt
     \item \textbf{Validation:} express-validator for request payload validation
-    \item \textbf{Message Queue:} amqplib v0.10 - RabbitMQ client library
-    \item \textbf{Caching:} redis v4.6
-    \item \textbf{HTTP Client:} axios v1.6 - For external API integrations (Weather API, Map Service)
+    \item \textbf{Message Queue:} amqplib - RabbitMQ client library
+    \item \textbf{Caching:} redis
+    \item \textbf{HTTP Client:} axios - For external API integrations (Weather API, Map Service)
 \end{itemize}
 
 \subsection{Frontend Stack}
 \label{subsec:frontend_stack}
 
 \begin{itemize}
-    \item \textbf{Framework:} React Native v0.72 with Expo SDK v49
-    \item \textbf{Navigation:} React Navigation v6 - Stack and tab-based navigation
+    \item \textbf{Framework:} React Native with Expo SDK
+    \item \textbf{Navigation:} React Navigation - Stack and tab-based navigation
     \item \textbf{State Management:} React Context API for auth state, local component state for UI
-    \item \textbf{Mapping:} react-native-maps integrated with Mapbox GL
+    \item \textbf{Mapping:} react-native-maps API
+    \item \textbf{Route Calculations:} routes and distances are calculated using the Mapbox API
     \item \textbf{Storage:} AsyncStorage for offline data persistence
     \item \textbf{HTTP Client:} axios with custom retry logic
     \item \textbf{Location Services:} expo-location for GPS access
@@ -108,8 +109,8 @@ Security implementation:
 \label{subsec:dev_tools}
 
 \begin{itemize}
-    \item \textbf{Testing Framework:} Jest v29 for both backend and frontend
-    \item \textbf{API Testing:} Supertest v6 for HTTP assertions
+    \item \textbf{Testing Framework:} Jest for both backend and frontend
+    \item \textbf{API Testing:} Supertest for HTTP assertions
     \item \textbf{Frontend Testing:} React Native Testing Library for component tests
     \item \textbf{Containerization:} Docker \& Docker Compose for infrastructure services
     \item \textbf{Code Quality:} ESLint for linting, Prettier for formatting
@@ -169,7 +170,6 @@ The following features from the Design Document have been successfully implement
     \item \textbf{Path Search (UC6):} Basic search functionality to find paths by name or location
     \item \textbf{Path List View:} Display all available published paths
     \item \textbf{Path Details:} View comprehensive path information including map visualization
-    \item \textbf{Location-based Search:} Find paths near user's current location using PostGIS
 \end{itemize}
 
 \subsection{Rating \& Reviews (F6)}
@@ -204,26 +204,10 @@ The following features were intentionally excluded from this release due to tech
 
 Excluded components:
 \begin{itemize}
-    \item \textbf{Automatic Trip Detection (F4.2):} Using accelerometer and gyroscope to automatically detect trip start/stop
-    \begin{itemize}
-        \item \textit{Challenge:} Distinguishing cycling motion from walking, car travel, or stationary periods
-        \item \textit{Complexity:} Required sophisticated machine learning models for motion classification
-        \item \textit{Testing:} Difficult to create reliable test cases for motion patterns
-    \end{itemize}
-    
-    \item \textbf{Obstacle Detection (F4.3):} Real-time pothole and road hazard detection
-    \begin{itemize}
-        \item \textit{Challenge:} Accurately correlating accelerometer spikes with actual road obstacles
-        \item \textit{Complexity:} High false-positive rates without advanced signal processing
-        \item \textit{Privacy:} Continuous sensor monitoring raised battery and privacy concerns
-    \end{itemize}
-    
-    \item \textbf{Gyroscope Integration:} Using gyroscope data for turn detection and path geometry
-    \begin{itemize}
-        \item \textit{Challenge:} Sensor calibration varies significantly across devices
-        \item \textit{Complexity:} Integration of gyroscope + GPS + accelerometer data requires sensor fusion algorithms
-    \end{itemize}
+    \item \textbf{Advanced Sensor-Based Detection:} Features such as automatic trip detection (F4.2), obstacle detection (F4.3), and gyroscope integration were intentionally excluded. 
 \end{itemize}
+
+\textbf{Rationale:} These features proved to be significantly more complex than initially anticipated. Due to the limited size of our project team and the high implementation complexity involving signal processing and motion classification, we decided to prioritize core functionality. Furthermore, the assignment guidelines allowed for the exclusion of these advanced sensor-based features to focus on a stable MVP.
 
 \textbf{Alternative Approach Implemented:} 
 \begin{itemize}
@@ -274,90 +258,33 @@ The project employs a \textbf{monorepo} organization to synchronize backend and 
 \subsection{Backend Structure}
 \label{subsec:backend_structure}
 
-\begin{verbatim}
-code/backend/
-+-- src/
-|   +-- app.js                    # Express app configuration
-|   +-- server.js                 # HTTP server entry point
-|   +-- pool.js                   # PostgreSQL connection pool
-|   +-- config/
-|   |   +-- redis.js              # Redis client configuration
-|   |   +-- rabbitmq.js           # RabbitMQ connection
-|   +-- controllers/
-|   |   +-- authController.js     # Authentication endpoints
-|   |   +-- tripController.js     # Trip CRUD endpoints
-|   |   +-- pathController.js     # Path management endpoints
-|   +-- services/
-|   |   +-- user-management/
-|   |   |   +-- authService.js    # Login/register logic
-|   |   |   +-- userService.js    # Profile operations
-|   |   +-- trip-management/
-|   |   |   +-- tripService.js    # Trip business logic
-|   |   +-- path-management/
-|   |   |   +-- pathService.js    # Path operations
-|   |   +-- external/
-|   |   |   +-- weatherService.js # Weather API client
-|   |   |   +-- emailService.js   # Email sending
-|   |   +-- information-merging/
-|   |       +-- statsConsumer.js  # RabbitMQ consumer
-|   +-- repositories/
-|   |   +-- userRepository.js     # User DB queries
-|   |   +-- tripRepository.js     # Trip DB queries
-|   |   +-- pathRepository.js     # Path DB queries
-|   |   +-- ratingRepository.js   # Rating DB queries
-|   +-- middleware/
-|   |   +-- authMiddleware.js     # JWT verification
-|   +-- routes/
-|       +-- authRoutes.js         # /auth routes
-|       +-- tripRoutes.js         # /trips routes
-|       +-- pathRoutes.js         # /paths routes
-+-- tests/                        # Test suites (detailed in Chapter 4)
-+-- migrations/                   # SQL schema migrations
-+-- docker-compose.yml            # Infrastructure setup
-\end{verbatim}
+The backend source code is organized into several key directories:
+\begin{itemize}
+    \item \texttt{src/app.js} \& \texttt{server.js}: Application configuration and server entry point.
+    \item \texttt{src/controllers/}: Handlers for API endpoints (Auth, Trip, Path).
+    \item \texttt{src/services/}: Implementation of business logic, divided by domain (User, Trip, Path, External APIs).
+    \item \texttt{src/repositories/}: Data access layer implementing the repository pattern for database interactions.
+    \item \texttt{src/middleware/}: Express middleware for authentication and request validation.
+    \item \texttt{src/routes/}: API route definitions connecting endpoints to controllers.
+    \item \texttt{tests/}: Comprehensive test suites for all layers.
+    \item \texttt{migrations/}: SQL scripts for database schema management.
+    \item \texttt{docker-compose.yml}: Configuration for infrastructure services (PostgreSQL, Redis, RabbitMQ).
+\end{itemize}
 
 \subsection{Frontend Structure}
 \label{subsec:frontend_structure}
 
-\begin{verbatim}
-code/frontend/
-+-- App.js                        # Root component
-+-- src/
-|   +-- navigation/
-|   |   +-- AuthContext.js        # Authentication state provider
-|   |   +-- MainStack.js          # Stack navigator
-|   |   +-- MainTabs.js           # Tab navigator
-|   +-- pages/
-|   |   +-- HomeScreen/           # Landing page
-|   |   +-- LoginScreen/          # Login UI
-|   |   +-- RegisterScreen/       # Registration UI
-|   |   +-- ProfileScreen/        # User profile
-|   |   +-- PathListScreen/       # Browse paths
-|   |   +-- PathDetailScreen/     # Path details
-|   |   +-- PathCreateManualScreen/ # Create path
-|   |   +-- PublishPathScreen/    # Publish confirmation
-|   |   +-- ReviewsScreen/        # Path reviews
-|   +-- components/
-|   |   +-- Button.js             # Reusable button
-|   |   +-- Card.js               # Card container
-|   |   +-- Input.js              # Form input
-|   |   +-- Loading.js            # Loading spinner
-|   |   +-- paths/
-|   |       +-- PathCard.js       # Path list item
-|   |       +-- PathList.js       # Path list container
-|   +-- services/
-|   |   +-- api.js                # Axios instance
-|   |   +-- pathsApi.js           # Path API client
-|   |   +-- tripsApi.js           # Trip API client
-|   |   +-- map/
-|   |       +-- MapService.js     # Mapbox integration
-|   +-- storage/
-|   |   +-- storageService.js     # AsyncStorage wrapper
-|   |   +-- syncQueue.js          # Offline sync queue
-|   +-- contexts/
-|       +-- NetworkStatusContext.js # Online/offline state
-+-- __tests__/                    # Test suites (detailed in Chapter 4)
-\end{verbatim}
+The frontend source code is structured as follows:
+\begin{itemize}
+    \item \texttt{App.js}: The root component and entry point of the mobile application.
+    \item \texttt{src/navigation/}: Navigation stack and tab configurations, including authentication state.
+    \item \texttt{src/pages/}: UI screens for all application features (Login, Register, Paths, Profile).
+    \item \texttt{src/components/}: Reusable UI components used throughout the application.
+    \item \texttt{src/services/}: API clients and map-related utility services.
+    \item \texttt{src/storage/}: Utilities for local data persistence and offline synchronization.
+    \item \texttt{src/contexts/}: React Context providers for global state management (e.g., Network Status).
+    \item \texttt{\_\_tests\_\_/}: Unit and integration tests for components, screens, and services.
+\end{itemize}
 
 This structure follows best practices:
 \begin{itemize}

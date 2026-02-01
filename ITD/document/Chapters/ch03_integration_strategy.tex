@@ -54,8 +54,6 @@ The backend followed a strict bottom-up integration approach, building from foun
 \begin{itemize}
     \item Repository tests with mocked database pool
     \item SQL query validation
-    \item Transaction rollback scenarios
-    \item Cache hit/miss verification
 \end{itemize}
 
 \subsection{Phase 2: Service Layer Integration}
@@ -131,8 +129,6 @@ The backend followed a strict bottom-up integration approach, building from foun
 \textbf{Components Integrated:}
 \begin{itemize}
     \item RabbitMQ consumer for path statistics updates
-    \item Redis session management integration
-    \item Cache invalidation on write operations
     \item Email queue for asynchronous notifications
 \end{itemize}
 
@@ -141,15 +137,12 @@ The backend followed a strict bottom-up integration approach, building from foun
     \item Configure RabbitMQ exchanges and queues
     \item Implement consumer services
     \item Test message publishing and consumption
-    \item Verify Redis session expiration (24-hour TTL)
-    \item Test cache invalidation logic
 \end{enumerate}
 
 \textbf{Testing During Integration:}
 \begin{itemize}
     \item Infrastructure tests (server health check, Redis connection)
     \item Message queue tests (publishing, consumer processing)
-    \item Session lifecycle tests
 \end{itemize}
 
 \section{Frontend Development (Parallel)}
@@ -339,123 +332,15 @@ A CI pipeline automated testing throughout integration:
 \section{Integration Challenges \& Solutions}
 \label{sec:integration_challenges}
 
-\subsection{Challenge 1: Database Connection Pool Exhaustion}
-\label{subsec:challenge_db_pool}
+\subsection{Challenge 1: Mapbox API integration in expo}
+\label{subsec:challenge_mapbox_expo}
 
-\textbf{Issue:} Tests created new database connections without closing them, leading to pool exhaustion.
+\textbf{Issue:} Expo does not support Mapbox API by itself, so to avoid any issues, we decided to keep it just for the calculations. For the map we later used the react-native-maps API.
 
-\textbf{Solution:} 
-\begin{itemize}
-    \item Implemented global Jest setup/teardown to manage connection pools
-    \item Added \texttt{afterAll} hooks to close connections
-    \item Configured pool size limits in test environment
-\end{itemize}
+\subsection{Challenge 2: Git branching and merging}
+\label{subsec:challenge_git_merging}
 
-\subsection{Challenge 2: Asynchronous Message Processing}
-\label{subsec:challenge_async}
-
-\textbf{Issue:} RabbitMQ consumers processed messages asynchronously, causing test timing issues.
-
-\textbf{Solution:}
-\begin{itemize}
-    \item Mocked RabbitMQ in integration tests
-    \item Added explicit wait conditions in E2E tests
-    \item Implemented test helpers to drain message queues before assertions
-\end{itemize}
-
-\subsection{Challenge 3: Frontend-Backend CORS Configuration}
-\label{subsec:challenge_cors}
-
-\textbf{Issue:} Mobile app requests blocked by CORS policy during local development.
-
-\textbf{Solution:}
-\begin{itemize}
-    \item Configured Express CORS middleware to allow localhost origins
-    \item Used environment variables for origin whitelist
-    \item Documented CORS setup in installation instructions
-\end{itemize}
-
-\subsection{Challenge 4: Test Isolation}
-\label{subsec:challenge_isolation}
-
-\textbf{Issue:} Tests affecting each other due to shared database state and singleton services.
-
-\textbf{Solution:}
-\begin{itemize}
-    \item Reset database schema between test suites
-    \item Cleared Redis cache in \texttt{beforeEach} hooks
-    \item Used unique test data for each test case
-    \item Fixed WeatherService singleton to read API key dynamically instead of caching in constructor
-\end{itemize}
-
-\section{Integration Sequence Diagrams}
-\label{sec:integration_sequence_diagrams}
-
-The following diagrams illustrate key integration flows.
-
-\subsection{Service-to-Database Integration}
-\label{subsec:seq_service_db}
-
-\begin{figure}[ht]
-    \centering
-    \begin{tikzpicture}[
-        every node/.style={font=\small},
-        participant/.style={rectangle, draw, minimum width=1.2cm, minimum height=0.45cm},
-        arrow/.style={->, >=stealth}
-    ]
-        \node[participant] (service) at (0,0) {Service};
-        \node[participant] (repo) at (2.5,0) {Repository};
-        \node[participant] (db) at (5.0,0) {PostgreSQL};
-        \node[participant] (cache) at (7.5,0) {Redis};
-
-        \draw[dashed] (0, -0.4) -- (0, -3.0);
-        \draw[dashed] (2.5, -0.4) -- (2.5, -3.0);
-        \draw[dashed] (5.0, -0.4) -- (5.0, -3.0);
-        \draw[dashed] (7.5, -0.4) -- (7.5, -3.0);
-
-        \draw[arrow] (0, -0.8) -- (2.5, -0.8) node[midway, above, font=\scriptsize] {save(entity)};
-        \draw[arrow] (2.5, -1.2) -- (5.0, -1.2) node[midway, above, font=\scriptsize] {INSERT};
-        \draw[arrow] (5.0, -1.6) -- (2.5, -1.6) node[midway, above, font=\scriptsize] {OK};
-        \draw[arrow] (2.5, -2.0) -- (7.5, -2.0) node[midway, above, font=\scriptsize] {invalidate};
-        \draw[arrow] (2.5, -2.4) -- (0, -2.4) node[midway, above, font=\scriptsize] {result};
-    \end{tikzpicture}
-    \caption{Service-to-Database Integration Flow}
-    \label{fig:seq_service_db}
-\end{figure}
-
-\subsection{Client-Server Integration}
-\label{subsec:seq_client_server}
-
-\begin{figure}[ht]
-    \centering
-    \begin{tikzpicture}[
-        every node/.style={font=\small},
-        participant/.style={rectangle, draw, minimum width=1.2cm, minimum height=0.45cm},
-        arrow/.style={->, >=stealth}
-    ]
-        \node[participant] (client) at (0,0) {Mobile App};
-        \node[participant] (api) at (3.0,0) {API Gateway};
-        \node[participant] (service) at (6.0,0) {Service};
-        \node[participant] (db) at (9.0,0) {Database};
-
-        \draw[dashed] (0, -0.4) -- (0, -4.0);
-        \draw[dashed] (3.0, -0.4) -- (3.0, -4.0);
-        \draw[dashed] (6.0, -0.4) -- (6.0, -4.0);
-        \draw[dashed] (9.0, -0.4) -- (9.0, -4.0);
-
-        \draw[arrow] (0, -0.8) -- (3.0, -0.8) node[midway, above, font=\scriptsize] {POST /login};
-        \draw[arrow] (3.0, -1.2) -- (6.0, -1.2) node[midway, above, font=\scriptsize] {authenticate};
-        \draw[arrow] (6.0, -1.6) -- (9.0, -1.6) node[midway, above, font=\scriptsize] {query user};
-        \draw[arrow] (9.0, -2.0) -- (6.0, -2.0) node[midway, above, font=\scriptsize] {user data};
-        \draw[arrow] (6.0, -2.4) -- (3.0, -2.4) node[midway, above, font=\scriptsize] {JWT token};
-        \draw[arrow] (3.0, -2.8) -- (0, -2.8) node[midway, above, font=\scriptsize] {200 OK (token)};
-        \draw[arrow] (0, -3.5) -- (3.0, -3.5) node[midway, above, font=\scriptsize] {GET /paths (Bearer token)};
-        \draw[arrow] (3.0, -3.8) -- (9.0, -3.8) node[midway, above, font=\scriptsize] {fetch paths};
-        \draw[arrow] (9.0, -3.5) -- (0, -3.5) node[midway, below, font=\scriptsize] {200 OK (paths)};
-    \end{tikzpicture}
-    \caption{Client-Server Authenticated Flow}
-    \label{fig:seq_client_server}
-\end{figure}
+\textbf{Issue:} During the integration phase, we had to simultaneously work on the same files, which led to some merge conflicts that significantly slowed down the integration process.
 
 \section{Integration Tools \& Environment}
 \label{sec:integration_tools}
