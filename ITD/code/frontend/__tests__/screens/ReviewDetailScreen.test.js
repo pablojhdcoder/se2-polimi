@@ -1,5 +1,5 @@
 /**
- * Client integration tests: ReviewDetailScreen (UC11).
+ * Client integration tests: ReviewDetailScreen.
  */
 
 import React from 'react';
@@ -28,7 +28,7 @@ describe('ReviewDetailScreen', () => {
     const { getByText } = render(
       <ReviewDetailScreen route={route} navigation={navigation} />
     );
-    expect(getByText('Review detail (UC11)')).toBeTruthy();
+    expect(getByText('Review detail')).toBeTruthy();
     expect(getByText('Path A')).toBeTruthy();
     expect(getByText('Great')).toBeTruthy();
     expect(getByText(/Rating: ★ 5/)).toBeTruthy();

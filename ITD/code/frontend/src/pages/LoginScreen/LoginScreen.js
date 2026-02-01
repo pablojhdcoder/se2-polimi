@@ -15,7 +15,7 @@ import { STRINGS } from '../../constants/strings';
 import styles from './LoginScreen.styles';
 
 /**
- * Login screen (UC2).
+ * Login screen.
  * Uses api.js for POST /auth/login; saves token and user in storage and updates AuthContext.
  * @param {Object} navigation - React Navigation object
  */

@@ -1,5 +1,5 @@
 /**
- * Client integration tests: ReviewsScreen (UC7).
+ * Client integration tests: ReviewsScreen.
  */
 
 import React from 'react';

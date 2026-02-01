@@ -74,7 +74,7 @@ describe('PathDetailScreen', () => {
     const { getByText } = render(
       <PathDetailScreen route={route} navigation={navigation} />
     );
-    fireEvent.press(getByText('View path data (UC9)'));
+    fireEvent.press(getByText('View path data'));
     expect(mockNavigate).toHaveBeenCalledWith('PathData', {
       pathId: '1',
       path,
@@ -87,7 +87,7 @@ describe('PathDetailScreen', () => {
     const { getByText } = render(
       <PathDetailScreen route={route} navigation={navigation} />
     );
-    fireEvent.press(getByText('Publish path (UC5)'));
+    fireEvent.press(getByText('Publish path'));
     expect(mockNavigate).toHaveBeenCalledWith('PublishPath', { path });
   });
 });

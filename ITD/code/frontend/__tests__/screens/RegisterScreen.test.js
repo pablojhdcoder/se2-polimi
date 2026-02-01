@@ -1,5 +1,5 @@
 /**
- * Client integration tests: RegisterScreen (UC1).
+ * Client integration tests: RegisterScreen.
  */
 
 import React from 'react';

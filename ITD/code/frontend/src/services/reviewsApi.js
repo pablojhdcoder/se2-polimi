@@ -1,5 +1,5 @@
 /**
- * Reviews API contract - UC7, UC11.
+ * Reviews API contract.
  * Expected endpoints: GET /reviews, GET /reviews/:id, POST /reviews
  */
 

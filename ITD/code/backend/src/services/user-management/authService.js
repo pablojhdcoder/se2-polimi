@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const userRepository = require('../../repositories/userRepository');
 const emailService = require('../external/emailService');
-const { redisClient, connectRedis } = require('./redisClient');
+const { redisClient, connectRedis } = require('../../config/redis');
 
 const SALT_ROUNDS = 10;
 const TOKEN_EXPIRY = 3600 * 24; // 24 hours in seconds

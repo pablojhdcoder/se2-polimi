@@ -157,11 +157,11 @@ describe('E2E Path flow', () => {
     const path = { id: 'p1', name: 'Path' };
     pathsApi.getPathById.mockResolvedValue(path);
     const { getByText } = renderPathDetail({ pathId: 'p1', path });
-    await waitFor(() => expect(getByText('View path data (UC9)')).toBeTruthy());
-    fireEvent.press(getByText('View path data (UC9)'));
+    await waitFor(() => expect(getByText('View path data')).toBeTruthy());
+    fireEvent.press(getByText('View path data'));
     await waitFor(
       () => {
-        expect(getByText('Path data (UC9)')).toBeTruthy();
+        expect(getByText('Path data')).toBeTruthy();
       },
       { timeout: 3000 }
     );
@@ -170,10 +170,10 @@ describe('E2E Path flow', () => {
   it.skip('PathDetail: Publish path navigates to PublishPath', async () => {
     const path = { id: 'p1', name: 'Path', startPoint: 'A', endPoint: 'B' };
     const { getByText } = renderPathDetail({ pathId: 'p1', path });
-    await waitFor(() => expect(getByText('Publish path (UC5)')).toBeTruthy());
-    fireEvent.press(getByText('Publish path (UC5)'));
+    await waitFor(() => expect(getByText('Publish path')).toBeTruthy());
+    fireEvent.press(getByText('Publish path'));
     await waitFor(() => {
-      expect(getByText('Publish path (UC5)')).toBeTruthy();
+      expect(getByText('Publish path')).toBeTruthy();
       expect(getByText(/Complete the details/)).toBeTruthy();
     });
   });

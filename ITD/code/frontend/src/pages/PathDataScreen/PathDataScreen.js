@@ -1,5 +1,5 @@
 /**
- * PathDataScreen - UC9: View path data (statistics, points, etc.).
+ * PathDataScreen - View path data (statistics, points, etc.).
  * @param {Object} route - React Navigation route (params: pathId, path)
  * @param {Object} navigation - React Navigation object
  */

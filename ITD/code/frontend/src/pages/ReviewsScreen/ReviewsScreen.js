@@ -1,5 +1,5 @@
 /**
- * ReviewsScreen - UC7: List path reviews.
+ * ReviewsScreen - List path reviews.
  * @param {Object} navigation - React Navigation object
  */
 

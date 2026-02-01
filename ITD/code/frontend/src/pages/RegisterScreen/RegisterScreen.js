@@ -15,7 +15,7 @@ import { STRINGS } from '../../constants/strings';
 import styles from './RegisterScreen.styles';
 
 /**
- * Register screen (UC1).
+ * Register screen.
  * Uses api.js for POST /auth/register; optionally logs in and saves token/user in storage.
  * @param {Object} navigation - React Navigation object
  */

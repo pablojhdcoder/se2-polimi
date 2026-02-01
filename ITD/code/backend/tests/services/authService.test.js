@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 jest.mock('../../src/repositories/userRepository');
 jest.mock('bcrypt');
 jest.mock('jsonwebtoken');
-jest.mock('../../src/services/user-management/redisClient', () => ({
+jest.mock('../../src/config/redis', () => ({
     connectRedis: jest.fn(),
     redisClient: {
         set: jest.fn(),

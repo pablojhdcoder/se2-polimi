@@ -22,7 +22,7 @@ import styles from './PathCreateManualScreen.styles';
 const DIFFICULTIES = [STRINGS.EASY, STRINGS.MEDIUM, STRINGS.HARD];
 
 /**
- * Create path manually (UC). Form to create a new path and optionally navigate to detail or list.
+ * Create path manually. Form to create a new path and optionally navigate to detail or list.
  * Uses MapService for place search, current location, and directions/distance.
  * @param {Object} navigation - React Navigation object
  */

@@ -1,5 +1,5 @@
 /**
- * Client integration tests: LoginScreen (UC2).
+ * Client integration tests: LoginScreen.
  */
 
 import React from 'react';

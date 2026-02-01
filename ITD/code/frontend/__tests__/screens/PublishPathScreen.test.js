@@ -1,5 +1,5 @@
 /**
- * Client integration tests: PublishPathScreen (UC5).
+ * Client integration tests: PublishPathScreen.
  */
 
 import React from 'react';
@@ -26,9 +26,9 @@ describe('PublishPathScreen', () => {
     const { getByText, getByPlaceholderText, getAllByText } = render(
       <PublishPathScreen route={route} navigation={navigation} />
     );
-    expect(getAllByText('Publish path (UC5)')[0]).toBeTruthy();
+    expect(getAllByText('Publish path')[0]).toBeTruthy();
     expect(getByPlaceholderText('Route name')).toBeTruthy();
-    expect(getAllByText('Publish path (UC5)').length).toBeGreaterThanOrEqual(1);
+    expect(getAllByText('Publish path').length).toBeGreaterThanOrEqual(1);
     expect(getByText('Back to paths')).toBeTruthy();
   });
 
@@ -55,7 +55,7 @@ describe('PublishPathScreen', () => {
     const { getByText, getAllByText } = render(
       <PublishPathScreen route={route} navigation={navigation} />
     );
-    fireEvent.press(getAllByText('Publish path (UC5)')[1]);
+    fireEvent.press(getAllByText('Publish path')[1]);
     await waitFor(() => {
       expect(getByText('Name is required.')).toBeTruthy();
     });
@@ -67,7 +67,7 @@ describe('PublishPathScreen', () => {
     const { getAllByText } = render(
       <PublishPathScreen route={route} navigation={navigation} />
     );
-    fireEvent.press(getAllByText('Publish path (UC5)')[1]);
+    fireEvent.press(getAllByText('Publish path')[1]);
     await waitFor(() => {
       expect(createPath).toHaveBeenCalled();
     });

@@ -1,5 +1,5 @@
 /**
- * TripStatisticsScreen - UC10: User trip statistics.
+ * TripStatisticsScreen - User trip statistics.
  * Shows aggregated stats and list of past trips with drill-down to trip detail.
  * @param {Object} navigation - React Navigation object
  */

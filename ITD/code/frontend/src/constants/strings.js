@@ -75,9 +75,9 @@ export const STRINGS = {
   END: 'End',
   DESCRIPTION: 'Description',
   WAYPOINTS: 'Waypoints',
-  VIEW_PATH_DATA: 'View path data (UC9)',
+  VIEW_PATH_DATA: 'View path data',
   START_RIDE: 'Start ride',
-  PUBLISH_PATH: 'Publish path (UC5)',
+  PUBLISH_PATH: 'Publish path',
   GO_TO_PATHS: 'Go to paths',
   VIEW_REVIEWS: 'View reviews for this path',
   FAVORITES: 'Favorites',
@@ -110,7 +110,7 @@ export const STRINGS = {
   CANCEL: 'Cancel',
   ERROR_CREATING_PATH: 'Error creating path.',
   NAME_REQUIRED: 'Name is required.',
-  PUBLISH_PATH_UC5: 'Publish path (UC5)',
+  PUBLISH_PATH_UC5: 'Publish path',
   COMPLETE_AND_PUBLISH: 'Complete the details and publish the path to share it.',
   PATH_PUBLISHED: 'Path published successfully.',
   ROUTE_NAME: 'Route name',
@@ -132,7 +132,7 @@ export const STRINGS = {
   SEARCH_MODE_ORIGIN_DESTINATION: 'Origin & destination',
   SEARCH_MODE_KEYWORD: 'Keyword',
   SEARCH_BY_KEYWORD: 'Search by keyword',
-  SEARCH_PLACEHOLDER: 'Name, place, difficulty...',
+  SEARCH_PLACEHOLDER: 'Keyword or place...',
   ERROR_SEARCH: 'Search error',
   NO_PATHS_FOUND: 'No paths found.',
   TYPE_AND_SEARCH: 'Type and tap Search.',
@@ -140,10 +140,11 @@ export const STRINGS = {
   SHOW_LESS: 'Show less',
   NEW_SEARCH: 'New search',
   RESULTS: 'Results',
+  LOAD_MORE_PATHS: 'Load more paths',
 
   // Reviews
   REVIEWS: 'Reviews',
-  REVIEW_DETAIL: 'Review detail (UC11)',
+  REVIEW_DETAIL: 'Review detail',
   PATH: 'Path',
   NO_COMMENT: 'No comment',
   RATING: 'Rating',
@@ -154,12 +155,12 @@ export const STRINGS = {
   LOADING_REVIEW: 'Loading review…',
   ERROR_LOADING_REVIEW: 'Error loading review',
 
-  // Path data (UC9)
-  PATH_DATA_UC9: 'Path data (UC9)',
+  // Path data
+  PATH_DATA_UC9: 'Path data',
   SELECT_PATH_FOR_DATA: 'Select a path from the list to view its data.',
 
-  // Trip statistics (UC10)
-  TRIP_STATISTICS_UC10: 'Trip statistics (UC10)',
+  // Trip statistics
+  TRIP_STATISTICS_UC10: 'Trip statistics',
   LOADING_STATISTICS: 'Loading statistics…',
   TRIPS_LOAD_ERROR: 'Could not load trips from server. Showing local data.',
   TOTAL_TRIPS: 'Total trips',

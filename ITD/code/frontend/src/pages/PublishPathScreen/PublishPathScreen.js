@@ -1,5 +1,5 @@
 /**
- * PublishPathScreen - UC5: Publish path (send created path to server to share).
+ * PublishPathScreen - Publish path (send created path to server to share).
  * Accepts route.params.path (and optionally track, startTime, endTime from ReviewDetectedPath)
  * and route.params.obstacles for pre-fill and correct-then-publish flow.
  * @param {Object} route - React Navigation route (params: path, obstacles?)

@@ -1,5 +1,5 @@
 /**
- * Client integration tests: PathDataScreen (UC9).
+ * Client integration tests: PathDataScreen.
  */
 
 import React from 'react';
@@ -54,7 +54,7 @@ describe('PathDataScreen', () => {
     const { getByText } = render(
       <PathDataScreen route={route} navigation={navigation} />
     );
-    expect(getByText('Path data (UC9)')).toBeTruthy();
+    expect(getByText('Path data')).toBeTruthy();
     expect(getByText('Data Path')).toBeTruthy();
     expect(getByText('Desc')).toBeTruthy();
     expect(getByText('Start')).toBeTruthy();

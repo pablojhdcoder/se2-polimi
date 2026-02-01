@@ -25,11 +25,11 @@
 | **PathDetailScreen** | Path detail. |
 | **PathSearchScreen** | Path search. |
 | **PathCreateManualScreen** | Create path manually (also shown in Create path tab). |
-| **PublishPathScreen** | Publish path (UC5). |
+| **PublishPathScreen** | Publish path. |
 | **ReviewsScreen** | Review list. |
 | **ReviewDetailScreen** | Review detail. |
-| **TripStatisticsScreen** | Trip statistics (UC10). |
-| **PathDataScreen** | Path data (UC9). |
+| **TripStatisticsScreen** | Trip statistics. |
+| **PathDataScreen** | Path data. |
 
 ---
 

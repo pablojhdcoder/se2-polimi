@@ -78,7 +78,7 @@ export async function getPathById(id) {
 }
 
 /**
- * Creates a path (UC3 - manual insertion).
+ * Creates a path (manual insertion).
  * @param {Object} body - { name, description?, startPoint?, endPoint?, distance?, difficulty?, waypoints? }
  * @returns {Promise<Object>}
  */
@@ -120,7 +120,7 @@ export async function searchPaths(params = {}) {
 }
 
 /**
- * Gets paths near a location (F5, UC6 - "nearby"). Backend stub returns [] until geo search is implemented.
+ * Gets paths near a location ("nearby"). Backend stub returns [] until geo search is implemented.
  * @param {number} lat - Latitude
  * @param {number} lng - Longitude
  * @param {Object} params - Optional { radius?, limit? }
@@ -134,7 +134,7 @@ export async function getNearbyPaths(lat, lng, params = {}) {
 }
 
 /**
- * Requests paths between two points (F5, UC6). Backend stub returns [] until route search is implemented.
+ * Requests paths between two points. Backend stub returns [] until route search is implemented.
  * @param {{ lat: number, lng: number }|string} origin - Origin point or address
  * @param {{ lat: number, lng: number }|string} destination - Destination point or address
  * @param {Object} params - Optional extra params

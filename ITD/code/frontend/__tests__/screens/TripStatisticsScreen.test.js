@@ -1,5 +1,5 @@
 /**
- * Client integration tests: TripStatisticsScreen (UC10).
+ * Client integration tests: TripStatisticsScreen.
  */
 
 import React from 'react';
@@ -32,7 +32,7 @@ describe('TripStatisticsScreen', () => {
     await waitFor(() => {
       expect(getTrips).toHaveBeenCalled();
     });
-    expect(getByText('Trip statistics (UC10)')).toBeTruthy();
+    expect(getByText('Trip statistics')).toBeTruthy();
     expect(getByText('Total trips')).toBeTruthy();
     expect(getByText('Recorded points')).toBeTruthy();
     expect(getByText('Total time (approx.)')).toBeTruthy();

@@ -1,5 +1,5 @@
 /**
- * ReviewDetailScreen - UC11: Review detail.
+ * ReviewDetailScreen - Review detail.
  * @param {Object} route - React Navigation route (params: reviewId, review)
  * @param {Object} navigation - React Navigation object
  */
