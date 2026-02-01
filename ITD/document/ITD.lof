@@ -1,0 +1,18 @@
+\babel@toc {english}{}\relax 
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Service-to-Database integration sequence: generic write flow (e.g., create or update). The service calls the repository, which persists to PostgreSQL and invalidates the cache; the repository returns the result to the service.}}{44}{figure.caption.31}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Service-to-Service integration sequence: Client requests paths via API Gateway; Path Search calls Path Management to resolve path data; Path Management queries the database and returns results back along the chain.}}{45}{figure.caption.32}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Message Queue integration sequence: Client publishes sensor payload to RabbitMQ; Sensor Data Processing Service consumes the message, persists processed data to PostgreSQL, and sends ACK to the queue.}}{45}{figure.caption.33}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces External Service integration sequence: Backend service calls external API (e.g. Weather or Map); on success, response is parsed and optionally cached; on timeout or error, cache can be used as fallback.}}{46}{figure.caption.34}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Mobile Application integration sequence: login, token persistence in local storage, and subsequent authenticated request (e.g.\ get paths).}}{47}{figure.caption.35}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Sensor integration sequence: Trip Detection and Obstacle Detection subscribe to Sensor Manager; manager forwards GPS and motion data; stop triggers unsubscribe.}}{47}{figure.caption.36}%
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Client-Server communication sequence: Mobile client sends authenticated HTTPS request to API Gateway; gateway forwards to backend service; service queries DB and returns response; client parses JSON and updates UI.}}{48}{figure.caption.37}%
+\contentsline {figure}{\numberline {5.8}{\ignorespaces End-to-End sequence for UC1 (User Registration): Client $\to $ API Gateway $\to $ User Management $\to $ DB; response returned along the chain.}}{49}{figure.caption.38}%
+\contentsline {figure}{\numberline {5.9}{\ignorespaces End-to-End sequence for UC6 (Search and Visualize Paths): Client $\to $ API Gateway $\to $ Path Search $\to $ Path Management $\to $ DB; results returned along the chain.}}{50}{figure.caption.39}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
