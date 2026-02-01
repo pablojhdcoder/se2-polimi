@@ -15,21 +15,21 @@ The backend test directory is structured as follows:
 
 \begin{verbatim}
 backend/tests/
-├── api/
-│   ├── authRoutes.test.js (3 tests)
-│   └── tripRoutes.test.js (3 tests)
-├── infrastructure/
-│   ├── server.test.js (1 test)
-│   └── redis.test.js (1 test)
-├── repositories/
-│   ├── userRepository.test.js (3 tests)
-│   └── tripRepository.test.js (3 tests)
-└── services/
-    ├── authService.test.js (5 tests)     
-    ├── pathService.test.js (3 tests)
-    ├── tripService.test.js (2 tests)
-    ├── userService.test.js (3 tests)
-    └── weatherService.test.js (8 tests)
++-- api/
+|   +-- authRoutes.test.js (3 tests)
+|   +-- tripRoutes.test.js (3 tests)
++-- infrastructure/
+|   +-- server.test.js (1 test)
+|   +-- redis.test.js (1 test)
++-- repositories/
+|   +-- userRepository.test.js (3 tests)
+|   +-- tripRepository.test.js (3 tests)
++-- services/
+    +-- authService.test.js (5 tests)     
+    +-- pathService.test.js (3 tests)
+    +-- tripService.test.js (2 tests)
+    +-- userService.test.js (3 tests)
+    +-- weatherService.test.js (8 tests)
 
 Total: 35 tests across 11 test suites
 \end{verbatim}
@@ -55,7 +55,7 @@ Tests the authentication endpoints using Supertest to make HTTP requests against
         \item Returns 200 with user data (excluding password) when a valid token is provided
         \item Returns 404 when the token is valid but user doesn't exist in database
     \end{itemize}
-\end{\item}
+\end{itemize}
 
 \textbf{Testing approach:}
 \begin{itemize}
@@ -358,7 +358,8 @@ Tests external weather API integration with comprehensive coverage.
     \end{itemize}
     
     \item \textbf{Error handling:}
-    \item Uses mock data when API key is missing
+    \begin{itemize}
+        \item Uses mock data when API key is missing
         \item Falls back to mock data when axios throws error
         \item Doesn't call external API if key is unavailable
     \end{itemize}
@@ -388,45 +389,45 @@ The frontend employs a comprehensive testing strategy covering components, scree
 
 \begin{verbatim}
 frontend/__tests__/
-├── components/
-│   ├── Button.test.js
-│   ├── Card.test.js
-│   ├── ErrorMessage.test.js
-│   ├── Input.test.js
-│   ├── Loading.test.js
-│   ├── OfflineBanner.test.js
-│   ├── PendingSyncBanner.test.js
-│   └── paths/
-│       ├── PathCard.test.js
-│       └── PathList.test.js
-├── e2e/
-│   ├── authFlow.test.js
-│   ├── pathFlow.test.js
-│   ├── recordTripFlow.test.js (removed)
-│   └── syncOffline.test.js
-├── screens/
-│   ├── HomeScreen.test.js
-│   ├── LoginScreen.test.js
-│   ├── MergeInfoScreen.test.js
-│   ├── PathCreateManualScreen.test.js
-│   ├── PathDataScreen.test.js
-│   ├── PathDetailScreen.test.js
-│   ├── PathListScreen.test.js
-│   ├── PathSearchScreen.test.js
-│   ├── PublishPathScreen.test.js
-│   ├── RegisterScreen.test.js
-│   ├── ReviewDetailScreen.test.js
-│   └── ReviewsScreen.test.js
-├── sensors/ (removed - too complex)
-├── services/
-│   ├── map/
-│   │   └── MapService.test.js
-│   ├── requestWithRetry.test.js
-│   └── syncQueueProcessor.test.js
-└── storage/
-    ├── constants.test.js
-    ├── storageService.test.js
-    └── syncQueue.test.js
++-- components/
+|   +-- Button.test.js
+|   +-- Card.test.js
+|   +-- ErrorMessage.test.js
+|   +-- Input.test.js
+|   +-- Loading.test.js
+|   +-- OfflineBanner.test.js
+|   +-- PendingSyncBanner.test.js
+|   +-- paths/
+|       +-- PathCard.test.js
+|       +-- PathList.test.js
++-- e2e/
+|   +-- authFlow.test.js
+|   +-- pathFlow.test.js
+|   +-- recordTripFlow.test.js (removed)
+|   +-- syncOffline.test.js
++-- screens/
+|   +-- HomeScreen.test.js
+|   +-- LoginScreen.test.js
+|   +-- MergeInfoScreen.test.js
+|   +-- PathCreateManualScreen.test.js
+|   +-- PathDataScreen.test.js
+|   +-- PathDetailScreen.test.js
+|   +-- PathListScreen.test.js
+|   +-- PathSearchScreen.test.js
+|   +-- PublishPathScreen.test.js
+|   +-- RegisterScreen.test.js
+|   +-- ReviewDetailScreen.test.js
+|   +-- ReviewsScreen.test.js
++-- sensors/ (removed - too complex)
++-- services/
+|   +-- map/
+|   |   +-- MapService.test.js
+|   +-- requestWithRetry.test.js
+|   +-- syncQueueProcessor.test.js
++-- storage/
+    +-- constants.test.js
+    +-- storageService.test.js
+    +-- syncQueue.test.js
 \end{verbatim}
 
 \subsection{End-to-End (E2E) Tests}
