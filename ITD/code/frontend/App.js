@@ -7,8 +7,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AuthProvider } from './src/navigation/AuthContext';
 import { RootNavigator } from './src/navigation';
 import { NetworkStatusProvider, useNetworkStatus } from './src/contexts/NetworkStatusContext';
-import OfflineBanner from './src/components/OfflineBanner/OfflineBanner';
-import PendingSyncBanner from './src/components/PendingSyncBanner/PendingSyncBanner';
+import { OfflineBanner, PendingSyncBanner } from './src/components';
 
 function AppBanners() {
   const { isOnline, pendingSyncCount } = useNetworkStatus();

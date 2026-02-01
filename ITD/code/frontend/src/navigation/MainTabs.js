@@ -14,7 +14,6 @@ import {
   ReviewsScreen,
   ReviewDetailScreen,
   TripStatisticsScreen,
-  MergeInfoScreen,
 } from '../pages';
 
 const Tab = createBottomTabNavigator();
@@ -44,7 +43,6 @@ function PastTripsStack() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="TripStatistics" component={TripStatisticsScreen} />
-      <Stack.Screen name="MergeInfo" component={MergeInfoScreen} />
     </Stack.Navigator>
   );
 }

@@ -173,6 +173,8 @@ O desde la raíz del repo: `node PabloJose/ITD/code/backend/scripts/seed-demo-da
 
 - **`--force`**: borra antes los datos demo existentes (usuarios demo@*, sus rutas, valoraciones, viajes y favoritos) y vuelve a insertar. Úsalo si quieres resetear los datos de prueba.
 
+Run the seed to load example paths so that the **Search paths** screen (Paths > Search) shows results when searching by origin/destination or by keyword.
+
 ### Credenciales de prueba
 
 Tras ejecutar el seed puedes iniciar sesión en la app con cualquiera de estos usuarios:

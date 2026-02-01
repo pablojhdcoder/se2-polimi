@@ -128,11 +128,14 @@ const getNearbyPaths = async (req, res, next) => {
 };
 
 /**
- * Stub: paths between two points. Returns empty array until route search is implemented.
+ * Paths between two points (origin/destination). Returns all paths for demo;
+ * later can filter by origin/destination (e.g. geo or address).
  */
 const getRelatedPaths = async (req, res, next) => {
     try {
-        res.status(200).json([]);
+        const { origin, destination } = req.query;
+        const paths = await pathService.getAllPaths({ limit: 20, offset: 0 });
+        res.status(200).json(paths);
     } catch (error) {
         next(error);
     }

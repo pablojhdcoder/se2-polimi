@@ -14,7 +14,6 @@ import {
   TripStatisticsScreen,
   TripDetailScreen,
   PathDataScreen,
-  MergeInfoScreen,
 } from '../pages';
 import { theme } from '../styles';
 import { STRINGS } from '../constants/strings';
@@ -140,11 +139,6 @@ function MainStackNavigator() {
         name="PathData"
         component={PathDataScreen}
         options={{ title: STRINGS.PATH_DATA_UC9 }}
-      />
-      <Stack.Screen
-        name="MergeInfo"
-        component={MergeInfoScreen}
-        options={{ title: STRINGS.MERGE_INFO_UC12 }}
       />
     </Stack.Navigator>
   );

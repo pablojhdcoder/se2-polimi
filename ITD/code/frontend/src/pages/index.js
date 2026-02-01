@@ -13,4 +13,3 @@ export { default as ReviewDetailScreen } from './ReviewDetailScreen/ReviewDetail
 export { default as TripStatisticsScreen } from './TripStatisticsScreen/TripStatisticsScreen';
 export { default as TripDetailScreen } from './TripDetailScreen/TripDetailScreen';
 export { default as PathDataScreen } from './PathDataScreen/PathDataScreen';
-export { default as MergeInfoScreen } from './MergeInfoScreen/MergeInfoScreen';

@@ -121,12 +121,6 @@ export default function TripStatisticsScreen({ navigation }) {
         onPress={goToPaths}
         style={styles.tripStatisticsScreen_button}
       />
-      <Button
-        title={STRINGS.MERGE_INFO_UC12}
-        variant="outline"
-        onPress={() => navigation.navigate('MergeInfo')}
-        style={styles.tripStatisticsScreen_button}
-      />
     </ScrollView>
   );
 }

@@ -180,16 +180,40 @@ describe('E2E Path flow', () => {
 
   it('PathCreateManual: submit creates path and calls createPath', async () => {
     const pathsApi = require('../../src/services/pathsApi');
+    const MapService = require('../../src/services/map/MapService').default;
     const created = { id: 'new-1', name: 'New route' };
     pathsApi.createPath.mockResolvedValue(created);
 
-    const { getByText, getByPlaceholderText } = renderPathCreateManual();
+    const startFeature = { place_name: 'Start place', geometry: { coordinates: [0, 0] } };
+    const endFeature = { place_name: 'End place', geometry: { coordinates: [1, 1] } };
+    MapService.searchPlaces.mockResolvedValue([startFeature, endFeature]);
+
+    const { getByText, getByPlaceholderText, getAllByPlaceholderText } = renderPathCreateManual();
+    const addressInputs = () => getAllByPlaceholderText('Address or place');
+
     fireEvent.changeText(getByPlaceholderText('e.g. Park route'), 'New route');
+
+    fireEvent.changeText(addressInputs()[0], 'St');
+    await waitFor(() => expect(getByText('Start place')).toBeTruthy());
+    fireEvent.press(getByText('Start place'));
+
+    fireEvent.changeText(addressInputs()[1], 'En');
+    await waitFor(() => expect(getByText('End place')).toBeTruthy());
+    fireEvent.press(getByText('End place'));
+
+    fireEvent.changeText(getByPlaceholderText('e.g. 12.5'), '5');
     fireEvent.press(getByText('Create path'));
 
     await waitFor(() => {
       expect(pathsApi.createPath).toHaveBeenCalledWith(
-        expect.objectContaining({ name: 'New route' })
+        expect.objectContaining({
+          name: 'New route',
+          startX: 0,
+          startY: 0,
+          endX: 1,
+          endY: 1,
+          distance: 5,
+        })
       );
     });
   });

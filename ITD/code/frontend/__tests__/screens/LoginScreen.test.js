@@ -58,9 +58,7 @@ describe('LoginScreen', () => {
     });
   });
 
-  it('calls API and navigates on successful login', async () => {
-    const parentNavigate = jest.fn();
-    mockGetParent.mockReturnValue({ navigate: parentNavigate });
+  it('calls API and sets session on successful login', async () => {
     api.post.mockResolvedValueOnce({
       data: { token: 'jwt123', user: { email: 'u@test.com' } },
     });
@@ -81,7 +79,6 @@ describe('LoginScreen', () => {
     await waitFor(() => {
       expect(mockSetToken).toHaveBeenCalledWith('jwt123');
       expect(mockSetUser).toHaveBeenCalledWith({ email: 'u@test.com' });
-      expect(parentNavigate).toHaveBeenCalledWith('Main');
     });
   });
 

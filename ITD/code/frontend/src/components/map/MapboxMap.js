@@ -24,7 +24,8 @@ import { zoomToDelta } from './mapUtils';
  * Map component. Props:
  * @param {[number, number] | { lng: number, lat: number }} [center] - Map center [lng, lat] or { lng, lat }
  * @param {number} [zoom] - Zoom level (0–20)
- * @param {Object} [routeGeoJSON] - GeoJSON LineString { type: 'LineString', coordinates: [[lng, lat], ...] }
+ * @param {Object} [routeGeoJSON] - GeoJSON LineString { type: 'LineString', coordinates: [[lng, lat], ...] } (single route)
+ * @param {Array<Object>} [routes] - Array of GeoJSON LineStrings for multiple polylines (overrides routeGeoJSON when non-empty)
  * @param {Array<{ id: string, coords: [number, number] | { lng, lat }, label?: string }>} [markers] - Markers (e.g. A/B)
  * @param {boolean} [showUserLocation] - Show user location and "my location" button
  * @param {Object} [style] - Container style
@@ -33,6 +34,7 @@ export default function MapboxMap({
   center,
   zoom = DEFAULT_ZOOM,
   routeGeoJSON,
+  routes = [],
   markers = [],
   showUserLocation = false,
   style,
@@ -70,6 +72,13 @@ export default function MapboxMap({
     return routeGeoJSON.coordinates.map(([lng, lat]) => ({ latitude: lat, longitude: lng }));
   }, [routeGeoJSON]);
 
+  const routesCoords = useMemo(() => {
+    if (!Array.isArray(routes) || routes.length === 0) return [];
+    return routes
+      .filter((r) => r?.coordinates && r.coordinates.length >= 2)
+      .map((r) => r.coordinates.map(([lng, lat]) => ({ latitude: lat, longitude: lng })));
+  }, [routes]);
+
   const getMarkerColor = (label) => {
     if (label === 'A') return MARKER_A_COLOR;
     if (label === 'B') return MARKER_B_COLOR;
@@ -86,15 +95,26 @@ export default function MapboxMap({
       showsCompass={false}
       mapType="standard"
     >
-      {routeCoords && (
-        <Polyline
-          coordinates={routeCoords}
-          strokeColor={ROUTE_STROKE_COLOR}
-          strokeWidth={4}
-          lineCap="round"
-          lineJoin="round"
-        />
-      )}
+      {routesCoords.length > 0
+        ? routesCoords.map((coords, i) => (
+            <Polyline
+              key={i}
+              coordinates={coords}
+              strokeColor={ROUTE_STROKE_COLOR}
+              strokeWidth={4}
+              lineCap="round"
+              lineJoin="round"
+            />
+          ))
+        : routeCoords && (
+            <Polyline
+              coordinates={routeCoords}
+              strokeColor={ROUTE_STROKE_COLOR}
+              strokeWidth={4}
+              lineCap="round"
+              lineJoin="round"
+            />
+          )}
       {/* pinColor applies on Android; iOS uses default pin */}
       {markers.map((m) => {
         const coord = Array.isArray(m.coords) ? m.coords : [m.coords.lng, m.coords.lat];

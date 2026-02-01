@@ -8,8 +8,8 @@
 
 - **RootNavigator.js**: Decides whether to show **Auth** (no token) or **Main** (with token). While loading state from AsyncStorage it shows `Loading`.
 - **AuthStack.js**: Stack for unauthenticated users: **Home** (landing), **Login**, **Register**.
-- **MainStack.js**: Main authenticated stack: **MainTabs**, **Home**, **PathList**, **PathDetail**, **PathSearch**, **PathCreateManual**, **PublishPath**, **Reviews**, **ReviewDetail**, **TripStatistics**, **PathData**, **MergeInfo**. Header with links to Paths and Avatar.
-- **MainTabs.js**: Bottom tabs: **Map**, **Ratings** (★), **Create path** (➕), **Past trips** (📅). Each tab has its stack (Map/PathCreateManual, Reviews/ReviewDetail, PathCreateManual, TripStatistics/MergeInfo).
+- **MainStack.js**: Main authenticated stack: **MainTabs**, **Home**, **PathList**, **PathDetail**, **PathSearch**, **PathCreateManual**, **PublishPath**, **Reviews**, **ReviewDetail**, **TripStatistics**, **PathData**. Header right with Avatar and link to Paths.
+- **MainTabs.js**: Bottom tabs: **Map**, **Ratings** (★), **Create path** (🚴), **Past trips** (📅). Each tab has its stack (Map/PathCreateManual, Reviews/ReviewDetail, PathCreateManual, TripStatistics).
 - **AuthContext.js** / **useAuth.js**: Authentication context (token, user, login, logout).
 
 ---
@@ -30,13 +30,12 @@
 | **ReviewDetailScreen** | Review detail. |
 | **TripStatisticsScreen** | Trip statistics (UC10). |
 | **PathDataScreen** | Path data (UC9). |
-| **MergeInfoScreen** | Merge info (UC12). |
 
 ---
 
 ## 3. Components (`src/components/`)
 
-- **Avatar**, **Button**, **Card**, **ErrorMessage**, **Header**, **Input**, **Loading**.
+- **Avatar**, **Button**, **Card**, **ErrorMessage**, **Input**, **Loading**.
 - **OfflineBanner**, **PendingSyncBanner**: network and sync queue notices.
 - **paths/**: **PathCard**, **PathList** (path lists).
 
@@ -48,8 +47,6 @@
 - **pathsApi.js**, **reviewsApi.js**, **tripsApi.js**: Paths, reviews and trips APIs.
 - **requestWithRetry.js**: Request retries.
 - **syncQueueProcessor.js**: Offline sync queue processing.
-- **sensors/SensorManager.js**: Sensor management.
-
 ---
 
 ## 5. Storage (`src/storage/`)

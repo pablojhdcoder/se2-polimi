@@ -35,7 +35,7 @@
 
 - File/function comments and JSDoc were translated to English in:
   - **Components:** Button, Input, Card, Loading, ErrorMessage, OfflineBanner, PendingSyncBanner, PathCard, PathList.
-  - **Screens:** Login, Register, Home, PathList, PathDetail, PathCreateManual, PathSearch, PublishPath, Reviews, ReviewDetail, PathData, TripStatistics, MergeInfo.
+  - **Screens:** Login, Register, Home, PathList, PathDetail, PathCreateManual, PathSearch, PublishPath, Reviews, ReviewDetail, PathData, TripStatistics.
   - **Navigation:** AuthContext, AuthStack, MainStack, RootNavigator.
   - **Storage:** storageService, syncQueue, constants, index.
   - **Services:** api, pathsApi, requestWithRetry, reviewsApi, tripsApi, syncQueueProcessor.

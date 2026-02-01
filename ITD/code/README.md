@@ -122,6 +122,9 @@ npm run test:coverage
 
 # Migrations
 npm run migrate
+
+# Seed example data (paths, users, ratings) for testing Search paths
+npm run seed
 ```
 
 ### Frontend

@@ -29,9 +29,7 @@ frontend/
 │   ├── components/           # Reusable UI components
 │   ├── screens/               # Application screens
 │   ├── services/              # API services
-│   │   ├── api.js             # Configured API client
-│   │   └── sensors/           # Sensor management
-│   │       └── SensorManager.js
+│   │   └── api.js             # Configured API client
 │   ├── utils/                 # Utilities
 │   ├── navigation/            # Navigation configuration
 │   └── storage/               # Local storage management
@@ -136,34 +134,7 @@ The `app.json` file contains Expo configuration, including:
 
 ## Main Components
 
-### SensorManager
-
-The `SensorManager` (`src/services/sensors/SensorManager.js`) manages access to:
-- **GPS**: Device location
-- **Accelerometer**: Acceleration on 3 axes
-- **Gyroscope**: Rotation on 3 axes
-
-Usage example:
-
-```javascript
-import SensorManager from './src/services/sensors/SensorManager';
-
-// Start monitoring
-await SensorManager.startAll({
-  gps: (data) => {
-    console.log('GPS:', data);
-  },
-  accelerometer: (data) => {
-    console.log('Accelerometer:', data);
-  },
-  gyroscope: (data) => {
-    console.log('Gyroscope:', data);
-  }
-});
-
-// Stop monitoring
-SensorManager.stopAll();
-```
+Reusable UI components live in `src/components/` (Button, Input, Card, Loading, ErrorMessage, OfflineBanner, PendingSyncBanner, Avatar, MapboxMap, PathList, PathCard). Screens use the shared theme from `src/styles/` and strings from `src/constants/strings.js`.
 
 ### API Client
 

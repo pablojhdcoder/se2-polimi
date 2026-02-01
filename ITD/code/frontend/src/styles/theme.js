@@ -1,6 +1,6 @@
 /**
  * Theme combining DD palette (primary blue, accent orange), typography and spacing.
- * Used by screens and shared Header/BottomNav.
+ * Used by screens and shared BottomNav.
  */
 
 import { colors } from './colors';

@@ -13,6 +13,7 @@ jest.mock('../../src/services/pathsApi', () => ({
   createPath: jest.fn(),
 }));
 jest.mock('../../src/services/map/MapService', () => ({
+  __esModule: true,
   default: {
     searchPlaces: jest.fn().mockResolvedValue([]),
     getCurrentLocation: jest.fn(),
@@ -63,18 +64,41 @@ describe('PathCreateManualScreen', () => {
   });
 
   it('calls createPath and shows alert on success', async () => {
+    const MapService = require('../../src/services/map/MapService').default;
     const created = { id: 'new1', name: 'My Route' };
     createPath.mockResolvedValueOnce(created);
 
-    const { getByPlaceholderText, getByText } = render(
+    const startFeature = { place_name: 'Start A', geometry: { coordinates: [0, 0] } };
+    const endFeature = { place_name: 'End B', geometry: { coordinates: [1, 1] } };
+    MapService.searchPlaces.mockResolvedValue([startFeature, endFeature]);
+
+    const { getByPlaceholderText, getByText, getAllByPlaceholderText } = render(
       <PathCreateManualScreen navigation={navigation} />
     );
     fireEvent.changeText(getByPlaceholderText('e.g. Park route'), 'My Route');
+
+    const addressInputs = getAllByPlaceholderText('Address or place');
+    fireEvent.changeText(addressInputs[0], 'St');
+    await waitFor(() => expect(getByText('Start A')).toBeTruthy());
+    fireEvent.press(getByText('Start A'));
+
+    fireEvent.changeText(addressInputs[1], 'En');
+    await waitFor(() => expect(getByText('End B')).toBeTruthy());
+    fireEvent.press(getByText('End B'));
+
+    fireEvent.changeText(getByPlaceholderText('e.g. 12.5'), '5');
     fireEvent.press(getByText('Create path'));
 
     await waitFor(() => {
       expect(createPath).toHaveBeenCalledWith(
-        expect.objectContaining({ name: 'My Route' })
+        expect.objectContaining({
+          name: 'My Route',
+          startX: 0,
+          startY: 0,
+          endX: 1,
+          endY: 1,
+          distance: 5,
+        })
       );
     });
     expect(navigation.replace).toHaveBeenCalled();
