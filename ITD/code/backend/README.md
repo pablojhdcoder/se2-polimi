@@ -1,35 +1,35 @@
 # Best Bike Paths - Backend
 
-Backend del sistema Best Bike Paths construido con Express.js y arquitectura de microservicios.
+Backend for the Best Bike Paths system built with Express.js and a microservices architecture.
 
-## Descripción
+## Description
 
-Este backend proporciona una API REST para la aplicación móvil Best Bike Paths. Está estructurado en microservicios que manejan diferentes aspectos del sistema:
+This backend provides a REST API for the Best Bike Paths mobile app. It is structured in microservices that handle different aspects of the system:
 
-- **User Management**: Gestión de usuarios, autenticación y autorización
-- **Trip Management**: Gestión de viajes personales
-- **Path Management**: Gestión de rutas y caminos
-- **Path Search**: Búsqueda y recomendación de rutas
-- **Rating**: Sistema de calificaciones y reseñas
-- **Sensor Processing**: Procesamiento de datos de sensores
-- **Information Merging**: Fusión de información de múltiples usuarios
+- **User Management**: User management, authentication and authorization
+- **Trip Management**: Personal trip management
+- **Path Management**: Route and path management
+- **Path Search**: Route search and recommendation
+- **Rating**: Rating and review system
+- **Sensor Processing**: Sensor data processing
+- **Information Merging**: Merging information from multiple users
 
-## Tecnologías
+## Technologies
 
-- **Express.js**: Framework web
-- **PostgreSQL**: Base de datos relacional
-- **Redis**: Cache y sesiones
-- **RabbitMQ**: Message queue para comunicación asíncrona
-- **JWT**: Autenticación
-- **Joi**: Validación de datos
+- **Express.js**: Web framework
+- **PostgreSQL**: Relational database
+- **Redis**: Cache and sessions
+- **RabbitMQ**: Message queue for asynchronous communication
+- **JWT**: Authentication
+- **Joi**: Data validation
 - **Jest**: Testing framework
 
-## Estructura de Archivos
+## File Structure
 
 ```
 backend/
 ├── src/
-│   ├── services/              # Microservicios
+│   ├── services/              # Microservices
 │   │   ├── user-management/
 │   │   ├── trip-management/
 │   │   ├── path-management/
@@ -38,65 +38,65 @@ backend/
 │   │   ├── sensor-processing/
 │   │   └── information-merging/
 │   ├── api-gateway/          # API Gateway (routing, auth, validation)
-│   ├── repositories/         # Capa de acceso a datos
-│   ├── models/               # Modelos de datos
-│   ├── utils/                # Utilidades
-│   ├── config/               # Configuraciones
+│   ├── repositories/         # Data access layer
+│   ├── models/               # Data models
+│   ├── utils/                # Utilities
+│   ├── config/               # Configuration
 │   │   ├── database.js       # PostgreSQL
 │   │   ├── redis.js          # Redis
-│   │   └── rabbitmq.js        # RabbitMQ
-│   └── app.js                # Aplicación principal
-├── tests/                    # Tests de integración
-├── migrations/               # Migraciones de base de datos
+│   │   └── rabbitmq.js       # RabbitMQ
+│   └── app.js                # Main application
+├── tests/                    # Integration tests
+├── migrations/               # Database migrations
 ├── docker/                   # Dockerfiles
 ├── package.json
 └── README.md
 ```
 
-## Instalación
+## Installation
 
-### Requisitos Previos
+### Prerequisites
 
 - Node.js >= 18.0.0
 - npm >= 9.0.0
-- PostgreSQL (o usar Docker)
-- Redis (o usar Docker)
-- RabbitMQ (o usar Docker)
+- PostgreSQL (or use Docker)
+- Redis (or use Docker)
+- RabbitMQ (or use Docker)
 
-### Pasos
+### Steps
 
-1. **Instalar dependencias:**
+1. **Install dependencies:**
 
 ```bash
 npm install
 ```
 
-2. **Variables de entorno:** El archivo `.env` está ya configurado en el proyecto. Si necesitas modificarlo, edita `.env` con tus configuraciones.
+2. **Environment variables:** The `.env` file is already configured in the project. If you need to change it, edit `.env` with your settings.
 
-3. **Iniciar servicios Docker (si usas Docker):**
+3. **Start Docker services (if using Docker):**
 
 ```bash
-# Desde la raíz del proyecto
+# From the project root
 docker-compose up -d
 ```
 
-4. **Ejecutar migraciones (cuando estén disponibles):**
+4. **Run migrations (when available):**
 
 ```bash
 npm run migrate
 ```
 
-## Uso
+## Usage
 
-### Desarrollo
+### Development
 
 ```bash
 npm run dev
 ```
 
-Inicia el servidor con nodemon para hot-reload.
+Starts the server with nodemon for hot-reload.
 
-### Producción
+### Production
 
 ```bash
 npm start
@@ -105,31 +105,31 @@ npm start
 ### Testing
 
 ```bash
-# Ejecutar todos los tests
+# Run all tests
 npm test
 
-# Modo watch
+# Watch mode
 npm run test:watch
 
-# Con cobertura
+# With coverage
 npm run test:coverage
 ```
 
-## Configuración
+## Configuration
 
-### Variables de Entorno
+### Environment Variables
 
-Las principales variables de entorno son:
+The main environment variables are:
 
-- `NODE_ENV`: Entorno (development, production, test)
-- `PORT`: Puerto del servidor (default: 3000)
-- `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`: Configuración PostgreSQL
-- `REDIS_URL`: URL de conexión a Redis
-- `RABBITMQ_URL`: URL de conexión a RabbitMQ
-- `JWT_SECRET`: Secreto para JWT
-- `JWT_EXPIRES_IN`: Tiempo de expiración del token
+- `NODE_ENV`: Environment (development, production, test)
+- `PORT`: Server port (default: 3000)
+- `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`: PostgreSQL configuration
+- `REDIS_URL`: Redis connection URL
+- `RABBITMQ_URL`: RabbitMQ connection URL
+- `JWT_SECRET`: Secret for JWT
+- `JWT_EXPIRES_IN`: Token expiration time
 
-Las variables se configuran en el archivo `.env` del backend.
+Variables are configured in the backend `.env` file.
 
 ## API Endpoints
 
@@ -139,26 +139,26 @@ Las variables se configuran en el archivo `.env` del backend.
 GET /health
 ```
 
-Retorna el estado del servicio.
+Returns the service status.
 
-### Autenticación
+### Authentication
 
-Los endpoints de autenticación estarán disponibles en `/api/v1/auth/` cuando se implementen.
+Authentication endpoints are available at `/api/v1/auth/`.
 
-### Microservicios
+### Microservices
 
-Cada microservicio expondrá sus endpoints bajo `/api/v1/{service-name}/`.
+Each microservice exposes its endpoints under `/api/v1/{service-name}/`.
 
-## Desarrollo
+## Development
 
-### Agregar un Nuevo Microservicio
+### Adding a New Microservice
 
-1. Crea un nuevo directorio en `src/services/`
-2. Implementa la lógica del servicio
-3. Registra las rutas en `src/api-gateway/`
-4. Agrega tests en `tests/`
+1. Create a new directory in `src/services/`
+2. Implement the service logic
+3. Register the routes in `src/routes/` and `src/app.js`
+4. Add tests in `tests/`
 
-### Estructura de un Microservicio
+### Microservice Structure
 
 ```javascript
 // src/services/example-service/index.js
@@ -166,31 +166,31 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-  // Lógica del servicio
+  // Service logic
 });
 
 module.exports = router;
 ```
 
-### Repositorios
+### Repositories
 
-Los repositorios en `src/repositories/` proporcionan una capa de abstracción sobre la base de datos.
+Repositories in `src/repositories/` provide an abstraction layer over the database.
 
-### Modelos
+### Models
 
-Los modelos en `src/models/` definen la estructura de datos.
+Models in `src/models/` define the data structure.
 
 ## Testing
 
-Los tests están organizados en `tests/` y usan Jest y Supertest.
+Tests are organized in `tests/` and use Jest and Supertest.
 
-### Ejecutar Tests
+### Running Tests
 
 ```bash
 npm test
 ```
 
-### Estructura de Tests
+### Test Structure
 
 ```javascript
 // tests/services/example-service.test.js
@@ -206,9 +206,9 @@ describe('Example Service', () => {
 });
 ```
 
-## Migraciones
+## Migrations
 
-Las migraciones de base de datos están en `migrations/`. Usa el script de migración:
+Database migrations are in `migrations/`. Use the migration script:
 
 ```bash
 npm run migrate
@@ -216,37 +216,37 @@ npm run migrate
 
 ## Docker
 
-### Dockerfile de Desarrollo
+### Development Dockerfile
 
-Un `Dockerfile.dev` está disponible en `docker/` para desarrollo con hot-reload.
+A `Dockerfile.dev` is available in `docker/` for development with hot-reload.
 
-### Dockerfile de Producción
+### Production Dockerfile
 
-Un `Dockerfile` de producción puede ser creado según necesidades.
+A production Dockerfile can be created as needed.
 
 ## Troubleshooting
 
-### Error de conexión a PostgreSQL
+### PostgreSQL connection error
 
-- Verifica que PostgreSQL esté corriendo
-- Verifica las credenciales en `.env`
-- Verifica que el puerto no esté en uso
+- Verify PostgreSQL is running
+- Verify credentials in `.env`
+- Verify the port is not in use
 
-### Error de conexión a Redis
+### Redis connection error
 
-- Verifica que Redis esté corriendo
-- Verifica la URL en `.env`
+- Verify Redis is running
+- Verify the URL in `.env`
 
-### Error de conexión a RabbitMQ
+### RabbitMQ connection error
 
-- Verifica que RabbitMQ esté corriendo
-- Verifica la URL en `.env`
-- Accede a la UI de gestión en http://localhost:15672
+- Verify RabbitMQ is running
+- Verify the URL in `.env`
+- Access the management UI at http://localhost:15672
 
-## Licencia
+## License
 
 ISC
 
-## Autores
+## Authors
 
 BBP Team - Software Engineering 2 Project

@@ -26,6 +26,16 @@ const getUserByUsername = async (username) => {
     return res.rows[0];
 };
 
+const getUserByEmail = async (email) => {
+    const sql = `
+    SELECT *
+    FROM users
+    WHERE email = $1
+  `;
+    const res = await query(sql, [email]);
+    return res.rows[0];
+};
+
 const getUserById = async (id) => {
     const sql = `
     SELECT *
@@ -45,6 +55,7 @@ const getAllUsers = async () => {
 module.exports = {
     createUser,
     getUserByUsername,
+    getUserByEmail,
     getUserById,
     getAllUsers
 };

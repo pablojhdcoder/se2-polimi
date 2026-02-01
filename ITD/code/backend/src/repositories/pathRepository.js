@@ -33,9 +33,19 @@ const getPathById = async (id) => {
   return res.rows[0];
 };
 
-const getAllPaths = async () => {
-  const sql = `SELECT * FROM paths`;
-  const res = await query(sql);
+const getAllPaths = async (options = {}) => {
+  const { search, limit = 100, offset = 0 } = options;
+  let sql = 'SELECT * FROM paths';
+  const params = [];
+
+  if (search && typeof search === 'string' && search.trim()) {
+    sql += ' WHERE path_name ILIKE $1';
+    params.push(`%${search.trim()}%`);
+  }
+  sql += ' ORDER BY path_name LIMIT $' + (params.length + 1) + ' OFFSET $' + (params.length + 2);
+  params.push(limit, offset);
+
+  const res = await query(sql, params);
   return res.rows;
 };
 

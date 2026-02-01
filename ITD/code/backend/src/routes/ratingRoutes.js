@@ -3,6 +3,8 @@ const router = express.Router();
 const ratingController = require('../controllers/ratingController');
 const { authenticateToken } = require('../utils/authMiddleware');
 
+router.get('/', ratingController.getRatings);
+router.get('/:id', ratingController.getRatingById);
 router.post('/', authenticateToken, ratingController.addRating);
 router.delete('/:id', authenticateToken, ratingController.removeRating);
 

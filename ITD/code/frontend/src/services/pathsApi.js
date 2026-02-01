@@ -95,8 +95,7 @@ export async function searchPaths(params = {}) {
 }
 
 /**
- * Gets paths near a location (F5, UC6 - "nearby").
- * Backend may expose GET /paths/nearby?lat=&lng= or similar; adjust when available.
+ * Gets paths near a location (F5, UC6 - "nearby"). Backend stub returns [] until geo search is implemented.
  * @param {number} lat - Latitude
  * @param {number} lng - Longitude
  * @param {Object} params - Optional { radius?, limit? }
@@ -110,8 +109,7 @@ export async function getNearbyPaths(lat, lng, params = {}) {
 }
 
 /**
- * Requests paths between two points (F5, UC6 - "between two points").
- * Backend may expose GET /paths/related?origin=&destination= or similar; adjust when available.
+ * Requests paths between two points (F5, UC6). Backend stub returns [] until route search is implemented.
  * @param {{ lat: number, lng: number }|string} origin - Origin point or address
  * @param {{ lat: number, lng: number }|string} destination - Destination point or address
  * @param {Object} params - Optional extra params

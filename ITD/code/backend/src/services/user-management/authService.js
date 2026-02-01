@@ -9,53 +9,65 @@ const SALT_ROUNDS = 10;
 const TOKEN_EXPIRY = 3600 * 24; // 24 hours in seconds
 
 /**
- * Handles user registration
- * @param {Object} userData - User details (username, password, fullName, email, etc.)
+ * Handles user registration. Accepts email, password, name (frontend contract).
+ * Username is derived from email for DB uniqueness.
+ * @param {Object} userData - { email, password, name? } or legacy { username, password, fullName, email, ... }
  */
 const register = async (userData) => {
-    const { username, password, fullName, email, phoneNumber, profilePicture } = userData;
+    const email = userData.email || userData.username;
+    const password = userData.password;
+    const name = userData.name ?? userData.fullName ?? email ?? '';
+    const username = email; // use email as username (both unique in schema)
+    const fullName = name || email;
+    const { phoneNumber, profilePicture } = userData;
 
-    // Check if user already exists
-    const existingUser = await userRepository.getUserByUsername(username);
-    if (existingUser) {
+    if (!email || !password) {
+        throw new Error('Email and password are required');
+    }
+
+    const existingByEmail = await userRepository.getUserByEmail(email);
+    if (existingByEmail) {
+        throw new Error('Email already registered');
+    }
+
+    const existingByUsername = await userRepository.getUserByUsername(username);
+    if (existingByUsername) {
         throw new Error('Username already taken');
     }
 
-    // Hash password
     const passwordHash = await bcrypt.hash(password, SALT_ROUNDS);
 
-    // Create user object
     const newUser = {
         id: crypto.randomUUID(),
         username,
         passwordHash,
         fullName,
         email,
-        phoneNumber,
-        profilePicture
+        phoneNumber: phoneNumber || null,
+        profilePicture: profilePicture || null
     };
 
     await userRepository.createUser(newUser);
 
-    // Send welcome email (async)
     if (emailService && typeof emailService.sendWelcomeEmail === 'function') {
         emailService.sendWelcomeEmail(email, fullName).catch(err =>
             console.error('[AuthService] Welcome email failed:', err)
         );
     }
 
-    // Remove passwordHash from return object
     const { passwordHash: _, ...userWithoutPassword } = newUser;
     return userWithoutPassword;
 };
 
 /**
- * Handles user login and session creation in Redis
- * @param {string} username 
- * @param {string} password 
+ * Handles user login. Accepts email or username (frontend sends email).
+ * @param {string} emailOrUsername - Email or username
+ * @param {string} password
  */
-const login = async (username, password) => {
-    const user = await userRepository.getUserByUsername(username);
+const login = async (emailOrUsername, password) => {
+    const user =
+        (await userRepository.getUserByEmail(emailOrUsername)) ||
+        (await userRepository.getUserByUsername(emailOrUsername));
     if (!user) {
         throw new Error('Invalid credentials');
     }

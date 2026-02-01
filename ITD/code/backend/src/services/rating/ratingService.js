@@ -3,6 +3,27 @@ const pathService = require('../path-management/pathService');
 const crypto = require('crypto');
 
 /**
+ * List ratings, optionally filtered by pathId (for GET /reviews?pathId= and GET /ratings?pathId=).
+ * @param {Object} params - { pathId?: string }
+ * @returns {Promise<Array>}
+ */
+const getRatings = async (params = {}) => {
+    if (params.pathId) {
+        return ratingRepository.getRatingsByPathId(params.pathId);
+    }
+    return ratingRepository.getAllRatings(params.limit || 100);
+};
+
+/**
+ * Get a single rating by id (for GET /reviews/:id and GET /ratings/:id).
+ * @param {string} id
+ * @returns {Promise<Object|null>}
+ */
+const getRatingById = async (id) => {
+    return ratingRepository.getRatingById(id);
+};
+
+/**
  * Adds a rating to a path and updates path's average rating.
  * @param {Object} ratingData Data for the new rating
  * @returns {Promise<Object>} Created rating
@@ -39,6 +60,8 @@ const removeRating = async (ratingId) => {
 };
 
 module.exports = {
+    getRatings,
+    getRatingById,
     addRating,
     removeRating
 };

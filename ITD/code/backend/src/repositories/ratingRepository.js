@@ -37,6 +37,27 @@ const getRatingByUserAndPath = async (userId, pathId) => {
   return res.rows[0];
 };
 
+const getRatingById = async (id) => {
+  const sql = `
+    SELECT *
+    FROM ratings
+    WHERE id = $1
+  `;
+  const res = await query(sql, [id]);
+  return res.rows[0];
+};
+
+const getAllRatings = async (limit = 100) => {
+  const sql = `
+    SELECT *
+    FROM ratings
+    ORDER BY id
+    LIMIT $1
+  `;
+  const res = await query(sql, [limit]);
+  return res.rows;
+};
+
 const deleteRating = async (id) => {
   const sql = `
     DELETE FROM ratings
@@ -61,6 +82,8 @@ module.exports = {
   createRating,
   getRatingsByPathId,
   getRatingByUserAndPath,
+  getRatingById,
+  getAllRatings,
   deleteRating,
   getAverageRatingForPath
 };

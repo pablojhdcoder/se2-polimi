@@ -43,10 +43,11 @@ const updatePathStats = async (pathId) => {
 };
 
 /**
- * Get all paths
+ * Get all paths, optionally filtered by search (path_name) and difficulty.
+ * @param {Object} params - { search?: string, difficulty?: string, limit?: number, offset?: number }
  */
-const getAllPaths = async () => {
-    return await pathRepository.getAllPaths();
+const getAllPaths = async (params = {}) => {
+    return await pathRepository.getAllPaths(params);
 };
 
 /**

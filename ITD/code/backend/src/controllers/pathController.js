@@ -24,11 +24,16 @@ const createPath = async (req, res, next) => {
 };
 
 /**
- * Handle getting all paths
+ * Handle getting all paths. Query: search (path name), difficulty, limit, offset.
  */
 const getPaths = async (req, res, next) => {
     try {
-        const paths = await pathService.getAllPaths();
+        const { search, limit, offset } = req.query;
+        const paths = await pathService.getAllPaths({
+            search,
+            limit: limit ? parseInt(limit, 10) : 100,
+            offset: offset ? parseInt(offset, 10) : 0
+        });
         res.status(200).json(paths);
     } catch (error) {
         next(error);
@@ -93,10 +98,34 @@ const unsavePath = async (req, res, next) => {
     }
 };
 
+/**
+ * Stub: paths near a location. Returns empty array until geo search is implemented.
+ */
+const getNearbyPaths = async (req, res, next) => {
+    try {
+        res.status(200).json([]);
+    } catch (error) {
+        next(error);
+    }
+};
+
+/**
+ * Stub: paths between two points. Returns empty array until route search is implemented.
+ */
+const getRelatedPaths = async (req, res, next) => {
+    try {
+        res.status(200).json([]);
+    } catch (error) {
+        next(error);
+    }
+};
+
 module.exports = {
     createPath,
     getPaths,
     getPathById,
+    getNearbyPaths,
+    getRelatedPaths,
     savePath,
     unsavePath
 };

@@ -1,106 +1,106 @@
-# Best Bike Paths (BBP) - Proyecto Completo
+# Best Bike Paths (BBP) - Full Project
 
-Sistema de recomendación de rutas en bicicleta basado en microservicios con aplicación móvil React Native.
+Bike route recommendation system based on microservices with a React Native mobile app.
 
-## Descripción del Proyecto
+## Project Description
 
-Best Bike Paths es una aplicación que permite a los usuarios:
-- Registrar y compartir rutas en bicicleta
-- Buscar las mejores rutas según diferentes criterios
-- Registrar viajes personales con detección automática
-- Calificar y revisar rutas
-- Detectar obstáculos durante el viaje
-- Obtener recomendaciones basadas en datos de sensores y calificaciones de usuarios
+Best Bike Paths is an application that allows users to:
+- Register and share bike routes
+- Search for the best routes according to different criteria
+- Record personal trips with automatic detection
+- Rate and review routes
+- Detect obstacles during the trip
+- Get recommendations based on sensor data and user ratings
 
-## Arquitectura
+## Architecture
 
-El proyecto sigue una arquitectura de microservicios:
+The project follows a microservices architecture:
 
-- **Backend**: Express.js con múltiples microservicios
-- **Frontend**: React Native (Expo) para iOS y Android
-- **Base de Datos**: PostgreSQL
+- **Backend**: Express.js with multiple microservices
+- **Frontend**: React Native (Expo) for iOS and Android
+- **Database**: PostgreSQL
 - **Cache**: Redis
 - **Message Queue**: RabbitMQ
 
-## Requisitos Previos
+## Prerequisites
 
-Antes de comenzar, asegúrate de tener instalado:
+Before you begin, ensure you have installed:
 
 - **Node.js** >= 18.0.0
 - **npm** >= 9.0.0
-- **Docker** y **Docker Compose**
+- **Docker** and **Docker Compose**
 - **Git**
 
-Para desarrollo móvil:
-- **Expo CLI** (se instala automáticamente con npm)
-- **Xcode** (para iOS, solo en macOS)
-- **Android Studio** (para Android)
+For mobile development:
+- **Expo CLI** (installed automatically with npm)
+- **Xcode** (for iOS, macOS only)
+- **Android Studio** (for Android)
 
-## Instalación
+## Installation
 
-### Opción 1: Script Automático (Recomendado)
+### Option 1: Automatic Script (Recommended)
 
-Ejecuta el script de setup:
+Run the setup script:
 
 ```powershell
 .\setup.ps1
 ```
 
-Este script:
-1. Verifica las instalaciones necesarias
-2. Comprueba que existan los archivos `.env` (backend y frontend ya configurados)
-3. Instala dependencias del backend y frontend
-4. Inicia los servicios Docker
+This script:
+1. Verifies required installations
+2. Checks that `.env` files exist (backend and frontend are pre-configured)
+3. Installs backend and frontend dependencies
+4. Starts Docker services
 
-### Opción 2: Instalación Manual
+### Option 2: Manual Installation
 
-#### 1. Variables de Entorno
+#### 1. Environment Variables
 
-Los archivos `.env` del backend y del frontend están ya configurados en el proyecto. Si necesitas modificarlos, edita `backend\.env` y `frontend\.env` con tus configuraciones.
+The backend and frontend `.env` files are already configured in the project. If you need to change them, edit `backend\.env` and `frontend\.env` with your settings.
 
-#### 2. Iniciar Servicios Docker
+#### 2. Start Docker Services
 
 ```powershell
 docker-compose up -d
 ```
 
-Esto iniciará:
-- PostgreSQL en el puerto 5432
-- Redis en el puerto 6379
-- RabbitMQ en el puerto 5672 (Management UI en 15672)
+This will start:
+- PostgreSQL on port 5432
+- Redis on port 6379
+- RabbitMQ on port 5672 (Management UI on 15672)
 
-#### 3. Instalar Dependencias del Backend
+#### 3. Install Backend Dependencies
 
 ```powershell
 cd backend
 npm install
 ```
 
-#### 4. Instalar Dependencias del Frontend
+#### 4. Install Frontend Dependencies
 
 ```powershell
 cd frontend
 npm install
 ```
 
-## Comandos Útiles
+## Useful Commands
 
 ### Docker
 
 ```powershell
-# Iniciar servicios
+# Start services
 docker-compose up -d
 
-# Ver logs
+# View logs
 docker-compose logs -f
 
-# Detener servicios
+# Stop services
 docker-compose down
 
-# Detener y eliminar volúmenes
+# Stop and remove volumes
 docker-compose down -v
 
-# Desarrollo con hot-reload
+# Development with hot-reload
 docker-compose -f docker-compose.dev.yml up
 ```
 
@@ -109,10 +109,10 @@ docker-compose -f docker-compose.dev.yml up
 ```powershell
 cd backend
 
-# Desarrollo
+# Development
 npm run dev
 
-# Producción
+# Production
 npm start
 
 # Tests
@@ -120,7 +120,7 @@ npm test
 npm run test:watch
 npm run test:coverage
 
-# Migraciones
+# Migrations
 npm run migrate
 ```
 
@@ -129,13 +129,13 @@ npm run migrate
 ```powershell
 cd frontend
 
-# Iniciar Expo
+# Start Expo
 npm start
 
 # Android
 npm run android
 
-# iOS (solo macOS)
+# iOS (macOS only)
 npm run ios
 
 # Tests
@@ -143,13 +143,13 @@ npm test
 npm run test:watch
 ```
 
-## Estructura del Proyecto
+## Project Structure
 
 ```
 code/
-├── backend/                    # Backend con Express.js
+├── backend/                    # Backend with Express.js
 │   ├── src/
-│   │   ├── services/           # Microservicios
+│   │   ├── services/           # Microservices
 │   │   │   ├── user-management/
 │   │   │   ├── trip-management/
 │   │   │   ├── path-management/
@@ -158,56 +158,56 @@ code/
 │   │   │   ├── sensor-processing/
 │   │   │   └── information-merging/
 │   │   ├── api-gateway/        # API Gateway
-│   │   ├── repositories/       # Repositorios para DB
-│   │   ├── models/            # Modelos de datos
-│   │   ├── utils/             # Utilidades
-│   │   ├── config/            # Configuración
-│   │   └── app.js             # Aplicación principal
-│   ├── tests/                 # Tests de integración
-│   ├── migrations/            # Migraciones de DB
-│   └── docker/                # Dockerfiles específicos
+│   │   ├── repositories/       # DB repositories
+│   │   ├── models/             # Data models
+│   │   ├── utils/              # Utilities
+│   │   ├── config/             # Configuration
+│   │   └── app.js              # Main application
+│   ├── tests/                  # Integration tests
+│   ├── migrations/             # DB migrations
+│   └── docker/                 # Service-specific Dockerfiles
 │
 ├── frontend/                   # React Native app
 │   ├── src/
-│   │   ├── components/        # Componentes UI
-│   │   ├── screens/           # Pantallas
-│   │   ├── services/          # Servicios API
-│   │   ├── utils/             # Utilidades
-│   │   ├── navigation/        # Navegación
-│   │   ├── storage/           # Local storage
-│   │   └── sensors/           # Sensor Manager
+│   │   ├── components/         # UI components
+│   │   ├── pages/             # Screens
+│   │   ├── services/          # API services
+│   │   ├── utils/             # Utilities
+│   │   ├── navigation/       # Navigation
+│   │   ├── storage/          # Local storage
+│   │   └── sensors/          # Sensor Manager
 │   └── App.js
 │
-├── docker-compose.yml         # Servicios: PostgreSQL, Redis, RabbitMQ
-├── docker-compose.dev.yml     # Desarrollo con hot-reload
-└── setup.ps1                  # Script de setup inicial
+├── docker-compose.yml         # Services: PostgreSQL, Redis, RabbitMQ
+├── docker-compose.dev.yml     # Development with hot-reload
+└── setup.ps1                  # Initial setup script
 ```
 
-## Servicios y Puertos
+## Services and Ports
 
-| Servicio | Puerto | Descripción |
-|----------|--------|-------------|
-| Backend API | 3000 | API REST principal |
-| PostgreSQL | 5432 | Base de datos |
+| Service | Port | Description |
+|---------|------|-------------|
+| Backend API | 3000 | Main REST API |
+| PostgreSQL | 5432 | Database |
 | Redis | 6379 | Cache |
 | RabbitMQ | 5672 | Message queue |
-| RabbitMQ Management | 15672 | UI de gestión (usuario: guest, password: guest) |
+| RabbitMQ Management | 15672 | Management UI (user: guest, password: guest) |
 
-## Desarrollo
+## Development
 
 ### Backend
 
-El backend está estructurado en microservicios. Cada servicio tiene su propia lógica de negocio y se comunica a través del API Gateway.
+The backend is structured in microservices. Each service has its own business logic and communicates through the API Gateway.
 
 ### Frontend
 
-La aplicación móvil usa React Native con Expo. El SensorManager gestiona el acceso a GPS, acelerómetro y giroscopio.
+The mobile app uses React Native with Expo. The SensorManager handles access to GPS, accelerometer and gyroscope.
 
 ## Testing
 
 ### Backend
 
-Los tests usan Jest y Supertest:
+Tests use Jest and Supertest:
 
 ```powershell
 cd backend
@@ -216,24 +216,24 @@ npm test
 
 ### Frontend
 
-Los tests usan Jest y React Native Testing Library:
+Tests use Jest and React Native Testing Library:
 
 ```powershell
 cd frontend
 npm test
 ```
 
-## Contribución
+## Contributing
 
-1. Crea una rama para tu feature
-2. Realiza tus cambios
-3. Asegúrate de que los tests pasen
-4. Crea un Pull Request
+1. Create a branch for your feature
+2. Make your changes
+3. Ensure tests pass
+4. Create a Pull Request
 
-## Licencia
+## License
 
 ISC
 
-## Autores
+## Authors
 
 BBP Team - Software Engineering 2 Project

@@ -1,6 +1,35 @@
 const ratingService = require('../services/rating/ratingService');
 
 /**
+ * List ratings (GET /ratings or GET /reviews). Optional query: pathId.
+ */
+const getRatings = async (req, res, next) => {
+    try {
+        const { pathId } = req.query;
+        const list = await ratingService.getRatings({ pathId });
+        res.status(200).json(Array.isArray(list) ? list : []);
+    } catch (error) {
+        next(error);
+    }
+};
+
+/**
+ * Get a single rating by id (GET /ratings/:id or GET /reviews/:id).
+ */
+const getRatingById = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const rating = await ratingService.getRatingById(id);
+        if (!rating) {
+            return res.status(404).json({ error: 'Rating not found' });
+        }
+        res.status(200).json(rating);
+    } catch (error) {
+        next(error);
+    }
+};
+
+/**
  * Handle rating creation
  */
 const addRating = async (req, res, next) => {
@@ -38,6 +67,8 @@ const removeRating = async (req, res, next) => {
 };
 
 module.exports = {
+    getRatings,
+    getRatingById,
     addRating,
     removeRating
 };

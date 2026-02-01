@@ -14,7 +14,7 @@
 
 ---
 
-## 2. Screens (`src/screens/`)
+## 2. Screens (`src/pages/`)
 
 | Screen | Description |
 |--------|-------------|

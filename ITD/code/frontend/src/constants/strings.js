@@ -55,6 +55,7 @@ export const STRINGS = {
   LOADING_PATHS: 'Loading paths…',
   NO_PATHS: 'No paths',
   NO_PATHS_CREATE_OR_SEARCH: 'No paths. Create one or search.',
+  SHOWING_CACHED_PATHS: 'Showing cached paths.',
   LOADING_PATH: 'Loading path…',
   PATH_NOT_SPECIFIED: 'Path not specified',
   RETRY: 'Retry',

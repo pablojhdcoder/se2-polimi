@@ -18,12 +18,16 @@ const register = async (req, res, next) => {
 };
 
 /**
- * Handle user login
+ * Handle user login. Accepts email or username (frontend sends email).
  */
 const login = async (req, res, next) => {
     try {
-        const { username, password } = req.body;
-        const result = await authService.login(username, password);
+        const { email, username, password } = req.body;
+        const identifier = email ?? username;
+        if (!identifier || !password) {
+            return res.status(400).json({ error: 'Email/username and password are required.' });
+        }
+        const result = await authService.login(identifier, password);
         res.status(200).json({
             message: 'Login successful',
             ...result
