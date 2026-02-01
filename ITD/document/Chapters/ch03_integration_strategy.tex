@@ -1,0 +1,102 @@
+\section{Integration Strategy}
+\label{sec:integration_strategy}
+
+This chapter details the strategy adopted for integrating the various components of the Best Bike Paths system, along with the supporting tools and environment.
+
+\subsection{Integration Approach}
+\label{subsec:integration_approach}
+
+The integration testing strategy for the Best Bike Paths system follows a \textbf{Bottom-Up approach}, as defined in the Design Document. This approach ensures that foundational components are tested and validated before higher-level components are integrated.
+
+The Bottom-Up strategy provides several advantages:
+\begin{itemize}
+    \item Early validation of core data and service layers
+    \item Easier debugging by isolating issues at lower levels first
+    \item Support for parallel development across different components
+    \item Reduced integration effort by ensuring stable dependencies
+\end{itemize}
+
+\subsection{Integration Levels}
+\label{subsec:integration_levels}
+
+The integration process is organized into the following levels:
+
+\subsubsection{Level 1: Data Layer Integration}
+Integration of database components, repositories, and data access layers (PostgreSQL, Redis, Migrations).
+
+\subsubsection{Level 2: Service Layer Integration}
+Integration of individual microservices (User, Trip, Path, etc.) with the data layer and with each other via internal APIs and message queues.
+
+\subsubsection{Level 3: API Gateway Integration}
+Integration of the API Gateway with all backend services, handling routing, authentication, and validation.
+
+\subsubsection{Level 4: External Services Integration}
+Integration with third-party services (Weather API, Map Service, Email Service) using mocks and fallbacks.
+
+\subsubsection{Level 5: Client Integration}
+Integration of the mobile application components (UI, API Client, Sensors) with the backend services.
+
+\subsubsection{Level 6: End-to-End Integration}
+Complete system integration testing covering critical and advanced use case scenarios.
+
+\subsection{Integration Order}
+\label{subsec:integration_order}
+
+The integration order aligns with the implementation phases:
+\begin{enumerate}
+    \item \textbf{Phase 0:} Project foundations (repository, schema).
+    \item \textbf{Phase 1:} Core services (User, Trip, Path, Rating).
+    \item \textbf{Phase 2:} API Gateway and API stabilization.
+    \item \textbf{Phase 3:} Client flows and discovery (Search, Maps).
+    \item \textbf{Phase 4:} Automated detection and sensor processing.
+    \item \textbf{Phase 5:} Information merging.
+\end{enumerate}
+
+\subsection{Testing Tools}
+\label{subsec:testing_tools}
+
+The project uses a comprehensive set of testing tools:
+
+\subsubsection{Backend}
+\begin{itemize}
+    \item \textbf{Jest:} Primary test framework.
+    \item \textbf{Supertest:} HTTP assertion library for API testing.
+    \item \textbf{Docker:} For provisioning test databases (PostgreSQL, Redis).
+\end{itemize}
+
+\subsubsection{Frontend}
+\begin{itemize}
+    \item \textbf{Jest:} Unit and integration testing.
+    \item \textbf{React Native Testing Library:} Component rendering and user interaction simulation.
+    \item \textbf{Expo Go:} Device emulation and manual testing.
+\end{itemize}
+
+\subsection{Environment Setup}
+\label{subsec:environment_setup}
+
+The integration environment is containerized using Docker Compose:
+\begin{itemize}
+    \item \textbf{Infrastructure:} \texttt{docker-compose.yml} defines PostgreSQL, Redis, and RabbitMQ services.
+    \item \textbf{Development/Test:} \texttt{docker-compose.dev.yml} adds the backend service with hot-reload and connects it to the infrastructure.
+    \item \textbf{Configuration:} Environment variables control database connections, API keys (mocked in tests), and feature flags.
+\end{itemize}
+
+\subsection{Test Data Management}
+\label{subsec:test_data_management}
+
+Test data is managed to ensure reproducibility:
+\begin{itemize}
+    \item \textbf{Fixtures:} JSON/JS files define static test data (users, paths).
+    \item \textbf{Seeding:} Scripts populate the test database before runs.
+    \item \textbf{Cleanup:} Database transactions are rolled back or tables truncated between tests.
+\end{itemize}
+
+\subsection{Continuous Integration}
+\label{subsec:ci}
+
+A CI pipeline automates the integration process:
+\begin{itemize}
+    \item \textbf{Build:} Installs dependencies and verifies compilation.
+    \item \textbf{Test:} Spins up Docker containers and executes the full test suite.
+    \item \textbf{Reporting:} Generates coverage reports and build status notifications.
+\end{itemize}

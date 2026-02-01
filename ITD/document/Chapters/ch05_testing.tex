@@ -1,0 +1,103 @@
+\section{Testing Procedure}
+\label{sec:testing_procedure}
+
+The testing verification process follows the pyramid strategy described in the Design Document (DD), ensuring that individual components are verified in isolation before validating their interactions and complete user journeys.
+
+\subsection{Testing Levels}
+\begin{itemize}
+    \item \textbf{Unit Tests:} Validate business logic in isolation using mocks for all dependencies.
+    \item \textbf{Integration Tests:} Verify interactions between layers (Service $\to$ Repository $\to$ DB) and between services.
+    \item \textbf{End-to-End Tests:} Validate full user flows from the mobile client to the database.
+\end{itemize}
+
+\section{Integration Test Cases}
+\label{sec:integration_test_cases}
+
+This section details the integration test cases designed to validate the system components and their interactions.
+
+\subsection{Data Layer Test Cases}
+\begin{table}[ht]
+\centering
+\begin{tabular}{|p{3.2cm}|p{3.8cm}|p{3.2cm}|p{4.8cm}|}
+\hline
+\textbf{Functionality} & \textbf{Test Description} & \textbf{Input/Conditions} & \textbf{Expected Outcome} \\
+\hline
+Schema Validation & Verify tables and constraints & Fresh Migration & Schema matches DD; PK/FK exist \\ \hline
+Repository CRUD & Create, Read, Update, Delete & Valid Entity & Entity persisted and retrievable \\ \hline
+Transaction & Rollback on failure & Error during insert & No partial data committed \\ \hline
+Redis Cache & Cache hit/miss logic & Key request & Returns value or fetches from DB \\ \hline
+\end{tabular}
+\caption{Data Layer Integration Tests}
+\end{table}
+
+\subsection{Service Layer Test Cases}
+\begin{table}[ht]
+\centering
+\begin{tabular}{|p{3.2cm}|p{3.8cm}|p{3.2cm}|p{4.8cm}|}
+\hline
+\textbf{Functionality} & \textbf{Test Description} & \textbf{Input/Conditions} & \textbf{Expected Outcome} \\
+\hline
+User Registration & Register new user & Valid Payload & 201 Created; User in DB \\ \hline
+User Login & Authenticate user & Valid/Invalid Creds & 200 (Token) or 401 (Error) \\ \hline
+Trip Creation & Record manual trip & Valid Trip Data & 201 Created; Trip persisted \\ \hline
+Path Creation & Insert new path & Valid Segments & 201 Created; Path in DB \\ \hline
+\end{tabular}
+\caption{Service Layer Integration Tests}
+\end{table}
+
+\subsection{API Gateway Test Cases}
+\begin{table}[ht]
+\centering
+\begin{tabular}{|p{3.2cm}|p{3.8cm}|p{3.2cm}|p{4.8cm}|}
+\hline
+\textbf{Functionality} & \textbf{Test Description} & \textbf{Input/Conditions} & \textbf{Expected Outcome} \\
+\hline
+Routing & Route to correct service & GET /paths & Request reaches Path Svc \\ \hline
+Authentication & Block unauthorized & No Token & 401 Unauthorized \\ \hline
+Validation & Reject invalid body & Malformed JSON & 400 Bad Request \\ \hline
+\end{tabular}
+\caption{API Gateway Integration Tests}
+\end{table}
+
+\subsection{External Services Test Cases}
+\begin{table}[ht]
+\centering
+\begin{tabular}{|p{3.2cm}|p{3.8cm}|p{3.2cm}|p{4.8cm}|}
+\hline
+\textbf{Functionality} & \textbf{Test Description} & \textbf{Input/Conditions} & \textbf{Expected Outcome} \\
+\hline
+Weather API & Fetch weather & Valid Coords & Returns mocked weather data \\ \hline
+Map API & Fetch tiles & Valid Bounds & Returns mocked tile data \\ \hline
+Email Service & Send verification & Valid Email & Returns success (mocked) \\ \hline
+\end{tabular}
+\caption{External Services Integration Tests}
+\end{table}
+
+\subsection{Client Integration Test Cases}
+\begin{table}[ht]
+\centering
+\begin{tabular}{|p{3.2cm}|p{3.8cm}|p{3.2cm}|p{4.8cm}|}
+\hline
+\textbf{Functionality} & \textbf{Test Description} & \textbf{Input/Conditions} & \textbf{Expected Outcome} \\
+\hline
+Login Flow & UI triggers Login API & User Input & Token stored; Nav to Home \\ \hline
+Sensor Manager & GPS updates & Permission Granted & Location updates received \\ \hline
+Trip Detection & Detect start/stop & Simulated Motion & Trip events triggered \\ \hline
+\end{tabular}
+\caption{Client Integration Tests}
+\end{table}
+
+\subsection{End-to-End Test Cases}
+\begin{table}[ht]
+\centering
+\begin{tabular}{|p{3.2cm}|p{3.8cm}|p{3.2cm}|p{4.8cm}|}
+\hline
+\textbf{Functionality} & \textbf{Test Description} & \textbf{Input/Conditions} & \textbf{Expected Outcome} \\
+\hline
+UC1: Register & E2E Registration & New User & Account created; DB updated \\ \hline
+UC2: Login & E2E Login & Registered User & Auth Token Issued \\ \hline
+UC3: Insert Path & Manual Path Entry & Auth User & Path draft in DB \\ \hline
+UC6: Search & Search Paths & Search Filter & List of Paths Returned \\ \hline
+\end{tabular}
+\caption{End-to-End Integration Tests (Critical Use Cases)}
+\end{table}

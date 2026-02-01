@@ -1,0 +1,81 @@
+\section{System Implementation}
+\label{sec:system_implementation}
+
+This chapter provides an overview of the implemented system, including the functional requirements addressed in this release, the adopted infrastructure and programming languages, and the organization of the source code.
+
+\subsection{Implemented Requirements}
+\label{subsec:implemented_requirements}
+
+The implementation focuses on the core functional requirements defined in the Design Document (DD), prioritizing the "Phase 0" and "Phase 1" goals to establish a viable prototype. Below is a summary of the implemented requirements.
+
+\subsubsection{User Management (F1)}
+\begin{itemize}
+    \item \textbf{Registration (F1.1):} Users can create accounts using a valid email and password.
+    \item \textbf{Login (F1.2):} Secure authentication using JWT tokens and bcrypt password hashing.
+    \item \textbf{Profile Management (F1.3):} Users can view and simple update their profile information.
+\end{itemize}
+
+\subsubsection{Trip Management (F2)}
+\begin{itemize}
+    \item \textbf{Manual Trip Recording (F2.1):} Users can start and stop a trip recording manually.
+    \item \textbf{Trip Statistics (F2.5):} The system calculates distance and duration for recorded trips.
+    \item \textbf{Trip History (F2.7):} Users can retrieve their past trips.
+\end{itemize}
+
+\subsubsection{Path Management (F3)}
+\begin{itemize}
+    \item \textbf{Path Insertion (F3.1):} Users can insert new paths with geospatial data (coordinates) and metadata (name, status).
+    \item \textbf{Path Search (F5.1 - F5.2):} Basic search functionality to find paths near a location or within a region.
+\end{itemize}
+
+\subsubsection{Automated Detection (F4)}
+\begin{itemize}
+    \item \textbf{Sensor Data Acquisition:} The mobile app collects data from GPS, Accelerometer, and Gyroscope (F4.1), which is sent to the backend for processing.
+    \item \textbf{Obstacle Detection (F4.3):} Basic server-side logic to identify potential anomalies (potholes) from sensor streams.
+\end{itemize}
+
+\subsubsection{Exclusions}
+Requirements related to **Social Features (F7)** were excluded from this release to focus on the core functionality of data collection and path management. The "Bottom-Up" strategy prioritized establishing robust data layers before implementing higher-level social interactions.
+
+\subsection{Implemented Infrastructure}
+\label{subsec:implemented_infrastructure}
+To support the system's functional requirements and ensure scalability, the following infrastructure components have been implemented:
+\begin{itemize}
+    \item \textbf{PostgreSQL:} Serves as the primary relational database management system, storing persistent data such as user profiles, trip histories, and path metadata. PostGIS is enabled for spatial indexing.
+    \item \textbf{Redis:} Utilized as a high-performance in-memory caching layer, specifically for managing active user sessions and real-time trip data to reduce database load.
+    \item \textbf{RabbitMQ:} Implemented as a message broker to handle asynchronous communication between services, decoupling heavy processing tasks (like path statistics calculation) from the main request flow.
+\end{itemize}
+
+\subsection{Programming Languages}
+\label{subsec:programming_languages}
+The implementation leverages a unified language stack to streamline development:
+\begin{itemize}
+    \item \textbf{Backend:} Developed in \textbf{Node.js} (JavaScript), utilizing Express.js for the REST API and standard libraries for service integrations.
+    \item \textbf{Frontend (Mobile):} Built with \textbf{React Native} (JavaScript) using the Expo framework, allowing for a cross-platform mobile application that interacts with the backend services.
+\end{itemize}
+
+\subsection{Source Code Structure}
+\label{subsec:source_code_structure}
+
+The project uses a **Monorepo** structure. This organization was chosen to keep backend and frontend code synchronized, share configuration (linting, prettier), and simplify dependency management.
+
+\textbf{Directory Structure:}
+\begin{itemize}
+    \item \textbf{\texttt{code/backend/}}: Contains the server-side Node.js application.
+    \begin{itemize}
+        \item \texttt{src/controllers/}: Handles HTTP requests and response formatting.
+        \item \texttt{src/services/}: Contains the business logic for Users, Trips, and Paths.
+        \item \texttt{src/repositories/}: Encapsulates raw Database/SQL queries.
+        \item \texttt{migrations/}: SQL scripts to create and update database schema.
+    \end{itemize}
+
+    \item \textbf{\texttt{code/frontend/}}: Contains the React Native mobile application.
+    \begin{itemize}
+        \item \texttt{src/pages/}: React components representing full application screens.
+        \item \texttt{src/components/}: Reusable UI elements (Buttons, Cards).
+        \item \texttt{src/services/}: API clients for backend communication.
+        \item \texttt{src/sensors/}: Modules interfacing with device hardware (GPS, Gyroscope).
+    \end{itemize}
+
+    \item \textbf{\texttt{code/docker-compose.yml}}: Describes the infrastructure services (Postgres, Redis, RabbitMQ) required to run the system locally.
+\end{itemize}

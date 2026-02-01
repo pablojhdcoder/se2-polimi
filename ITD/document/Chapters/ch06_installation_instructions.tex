@@ -1,0 +1,70 @@
+\section{Installation Instructions}
+\label{sec:installation_instructions}
+
+\subsection{Prerequisites}
+\begin{itemize}
+    \item \textbf{Node.js} (v18 or higher)
+    \item \textbf{Docker Desktop} (for running database and infrastructure)
+    \item \textbf{Expo Go} app on a mobile device (for testing the frontend)
+\end{itemize}
+
+\subsection{Backend Setup}
+Follow these steps to set up and run the backend services:
+
+\begin{enumerate}
+    \item \textbf{Navigate to the backend directory:} \\
+    Open your terminal and change to the backend code directory.
+    \begin{verbatim}
+cd code/backend
+    \end{verbatim}
+
+    \item \textbf{Install dependencies:} \\
+    Install the necessary Node.js packages defined in \texttt{package.json}.
+    \begin{verbatim}
+npm install
+    \end{verbatim}
+
+    \item \textbf{Start infrastructure:} \\
+    Use Docker Compose to start the necessary services (PostgreSQL, Redis, RabbitMQ) in detached mode.
+    \begin{verbatim}
+docker-compose up -d
+    \end{verbatim}
+
+    \item \textbf{Run database migrations:} \\
+    Apply the database schema migrations to the PostgreSQL instance.
+    \begin{verbatim}
+npm run migrate
+    \end{verbatim}
+
+    \item \textbf{Start the backend server:} \\
+    Start the Express server in development mode. The server will listen on port 3000.
+    \begin{verbatim}
+npm run dev
+    \end{verbatim}
+\end{enumerate}
+
+\subsection{Frontend Setup}
+Follow these steps to set up and run the mobile application:
+
+\begin{enumerate}
+    \item \textbf{Navigate to the frontend directory:} \\
+    Open your terminal and change to the frontend code directory.
+    \begin{verbatim}
+cd code/frontend
+    \end{verbatim}
+
+    \item \textbf{Install dependencies:} \\
+    Install the required dependencies for the React Native/Expo project.
+    \begin{verbatim}
+npm install
+    \end{verbatim}
+
+    \item \textbf{Start the Expo server:} \\
+    Launch the Expo development server.
+    \begin{verbatim}
+npx expo start
+    \end{verbatim}
+
+    \item \textbf{Run on device:} \\
+    Use the Expo Go app on your mobile device to scan the QR code displayed in the terminal. This will load the application on your phone.
+\end{enumerate}
