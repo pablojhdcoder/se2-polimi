@@ -4,13 +4,14 @@ const createPath = async (path) => {
   console.log('[PathRepository] Creating path with data:', JSON.stringify(path, null, 2));
   const isPublished = path.isPublished !== false;
   const sql = `
-    INSERT INTO paths (id, path_name, start_x, start_y, end_x, end_y, length, user_rating, status, posted_by_username, route_data, is_published)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+    INSERT INTO paths (id, path_name, start_x, start_y, end_x, end_y, length, user_rating, status, posted_by_username, route_data, is_published,
+      temperature, wind_speed, wind_degree, wind_gust, visibility, rain, clouds, duration_minutes)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20)
     RETURNING *
   `;
   const res = await query(sql, [
     path.id,
-    path.pathName || path.name, // Try both
+    path.pathName || path.name,
     path.startX,
     path.startY,
     path.endX,
@@ -20,7 +21,15 @@ const createPath = async (path) => {
     path.status || 'optimal',
     path.postedByUsername,
     path.routeData,
-    isPublished
+    isPublished,
+    path.temperature ?? null,
+    path.windSpeed ?? null,
+    path.windDegree ?? null,
+    path.windGust ?? null,
+    path.visibility ?? null,
+    path.rain ?? null,
+    path.clouds ?? null,
+    path.durationMinutes ?? null,
   ]);
   return res.rows[0];
 };
@@ -93,6 +102,17 @@ const updatePathRating = async (id, rating) => {
   return res.rows[0];
 };
 
+const updatePathPublished = async (id, isPublished) => {
+  const sql = `
+    UPDATE paths
+    SET is_published = $1
+    WHERE id = $2
+    RETURNING *
+  `;
+  const res = await query(sql, [isPublished, id]);
+  return res.rows[0];
+};
+
 module.exports = {
   createPath,
   getPathById,
@@ -100,5 +120,6 @@ module.exports = {
   getAllPaths,
   getPathsByUsername,
   updatePathStatus,
-  updatePathRating
+  updatePathRating,
+  updatePathPublished
 };

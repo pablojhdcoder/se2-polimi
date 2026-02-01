@@ -1,10 +1,10 @@
 import { StyleSheet } from 'react-native';
-import { colors, spacing, fontSizes, fontWeights } from '../../styles';
+import { colors, spacing, fontSizes, fontWeights, borderRadius } from '../../styles';
 
 export default StyleSheet.create({
   tripDetail_content: {
     padding: spacing.xl,
-    paddingBottom: 48,
+    paddingBottom: spacing.xxl,
   },
   tripDetail_section: {
     marginBottom: spacing.lg,
@@ -25,7 +25,7 @@ export default StyleSheet.create({
   tripDetail_listItem: {
     padding: spacing.lg,
     marginBottom: spacing.sm,
-    borderRadius: 8,
+    borderRadius: borderRadius.md,
     borderWidth: 1,
     borderColor: colors.border,
   },

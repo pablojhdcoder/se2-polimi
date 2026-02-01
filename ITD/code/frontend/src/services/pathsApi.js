@@ -10,6 +10,18 @@ import { OFFLINE_DATA_KEYS } from '../storage/constants';
  */
 
 const PATHS_BASE = '/paths';
+const WEATHER_BASE = '/weather';
+
+/**
+ * Gets current weather at given coordinates (e.g. path origin). Backend uses OpenWeather API.
+ * @param {number} lat - Latitude
+ * @param {number} lon - Longitude
+ * @returns {Promise<{ temperature, windSpeed, windDegree, windGust, visibility, rain, clouds }>}
+ */
+export async function getWeatherAtOrigin(lat, lon) {
+  const response = await apiClient.get(WEATHER_BASE, { params: { lat, lon } });
+  return response.data;
+}
 
 /**
  * Normalizes a raw path from the backend to the format expected by PathCard.

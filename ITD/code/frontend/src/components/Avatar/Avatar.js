@@ -12,17 +12,18 @@ import styles from './Avatar.styles';
  * Circular avatar: DiceBear SVG when user/seed provided, else initials or "?".
  * @param {function} onPress - Callback when avatar is pressed
  * @param {number} size - Width and height in pixels (default 36)
- * @param {object} user - User object { id, email, name } for seed and initials
+ * @param {object} user - User object { id, email, name?, full_name? } for seed and initials
  * @param {string} seed - Optional explicit seed (overrides user-derived seed)
  */
 export default function Avatar({ onPress, size = 36, user, seed: seedProp }) {
+  const displayName = user?.full_name ?? user?.name;
   const seed = useMemo(
-    () => seedProp || (user && createUserSeed(user.id, user.email, user.name)),
-    [seedProp, user]
+    () => seedProp || (user && createUserSeed(user.id, user.email, displayName)),
+    [seedProp, user, displayName]
   );
   const initials = useMemo(
-    () => getInitials(user?.name, user?.email),
-    [user]
+    () => getInitials(displayName, user?.email),
+    [user, displayName]
   );
   const svgXml = useMemo(
     () => (seed ? generateUserAvatar(seed) : null),

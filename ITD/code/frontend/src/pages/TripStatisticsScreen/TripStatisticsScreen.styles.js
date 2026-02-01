@@ -1,26 +1,34 @@
 import { StyleSheet } from 'react-native';
-import { colors, spacing, fontSizes, fontWeights } from '../../styles';
+import { colors, spacing, fontSizes, fontWeights, borderRadius, shadows } from '../../styles';
 
 export default StyleSheet.create({
-  tripStatisticsScreen_content: { padding: spacing.xl, paddingBottom: 48 },
+  tripStatisticsScreen_content: {
+    padding: spacing.xl,
+    paddingBottom: spacing.xxl,
+  },
   tripStatisticsScreen_title: {
     fontSize: fontSizes.headline,
     fontWeight: fontWeights.bold,
     color: colors.primary,
     marginBottom: spacing.lg,
   },
-  tripStatisticsScreen_card: { padding: spacing.xl, marginBottom: spacing.md },
+  tripStatisticsScreen_card: {
+    padding: spacing.xl,
+    marginBottom: spacing.md,
+  },
   tripStatisticsScreen_statLabel: {
     fontSize: fontSizes.body,
     color: colors.textSecondary,
     marginBottom: spacing.xs,
   },
   tripStatisticsScreen_statValue: {
-    fontSize: 28,
+    fontSize: fontSizes.display ?? 28,
     fontWeight: fontWeights.bold,
     color: colors.primary,
   },
-  tripStatisticsScreen_button: { marginTop: spacing.lg },
+  tripStatisticsScreen_button: {
+    marginTop: spacing.lg,
+  },
   tripStatisticsScreen_sectionTitle: {
     fontSize: fontSizes.medium,
     fontWeight: fontWeights.bold,
@@ -37,9 +45,10 @@ export default StyleSheet.create({
     padding: spacing.lg,
     marginBottom: spacing.sm,
     backgroundColor: colors.background,
-    borderRadius: 8,
+    borderRadius: borderRadius.md,
     borderWidth: 1,
     borderColor: colors.border,
+    ...shadows.cardLight,
   },
   tripStatisticsScreen_listItemDate: {
     fontSize: fontSizes.body,

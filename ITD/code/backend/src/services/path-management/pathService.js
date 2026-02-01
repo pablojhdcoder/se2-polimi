@@ -1,9 +1,10 @@
 const pathRepository = require('../../repositories/pathRepository');
 const ratingRepository = require('../../repositories/ratingRepository');
+const weatherService = require('../external/weatherService');
 const crypto = require('crypto');
 
 /**
- * Adds a new path to the system.
+ * Adds a new path to the system. Fetches weather at origin (start coords) and stores it.
  * @param {Object} pathData Data for the new path
  * @returns {Promise<Object>} Created path
  */
@@ -19,8 +20,41 @@ const addPath = async (pathData) => {
         endX: pathData.endX ?? null,
         endY: pathData.endY ?? null,
         routeData: pathData.routeData ?? null,
-        isPublished: pathData.isPublished !== false && pathData.publish !== false
+        isPublished: pathData.isPublished !== false && pathData.publish !== false,
+        durationMinutes: pathData.durationMinutes != null ? parseInt(pathData.durationMinutes, 10) : null
     };
+    if (path.durationMinutes != null && Number.isNaN(path.durationMinutes)) {
+        path.durationMinutes = null;
+    }
+
+    const hasWeatherFromFrontend = pathData.temperature != null || pathData.windSpeed != null;
+    if (hasWeatherFromFrontend) {
+        path.temperature = pathData.temperature != null ? Math.round(Number(pathData.temperature)) : null;
+        path.windSpeed = pathData.windSpeed != null ? Math.round(Number(pathData.windSpeed)) : null;
+        path.windDegree = pathData.windDegree != null ? Math.round(Number(pathData.windDegree)) : null;
+        path.windGust = pathData.windGust != null ? Number(pathData.windGust) : null;
+        path.visibility = pathData.visibility != null ? Math.round(Number(pathData.visibility)) : null;
+        path.rain = pathData.rain != null ? Number(pathData.rain) : null;
+        path.clouds = pathData.clouds != null ? Math.round(Number(pathData.clouds)) : null;
+    } else {
+        const startX = path.startX != null ? Number(path.startX) : NaN;
+        const startY = path.startY != null ? Number(path.startY) : NaN;
+        if (!Number.isNaN(startX) && !Number.isNaN(startY)) {
+            try {
+                const weather = await weatherService.getCurrentWeather(startY, startX);
+                path.temperature = weather.temperature != null ? Math.round(weather.temperature) : null;
+                path.windSpeed = weather.windSpeed != null ? Math.round(weather.windSpeed) : null;
+                path.windDegree = weather.windDegree != null ? Math.round(weather.windDegree) : null;
+                path.windGust = weather.windGust != null ? Number(weather.windGust) : null;
+                path.visibility = weather.visibility != null ? Math.round(weather.visibility) : null;
+                path.rain = weather.rain != null ? Number(weather.rain) : null;
+                path.clouds = weather.clouds != null ? Math.round(weather.clouds) : null;
+            } catch (err) {
+                console.warn('[PathService] Weather fetch failed, path created without weather:', err.message);
+            }
+        }
+    }
+
     return await pathRepository.createPath(path);
 };
 
@@ -71,10 +105,21 @@ const getPathsByUsername = async (username) => {
     return await pathRepository.getPathsByUsername(username);
 };
 
+/**
+ * Update path published flag (owner only; enforced in controller).
+ * @param {string} pathId Path ID
+ * @param {boolean} isPublished
+ * @returns {Promise<Object|null>} Updated path or null
+ */
+const updatePathPublished = async (pathId, isPublished) => {
+    return await pathRepository.updatePathPublished(pathId, isPublished);
+};
+
 module.exports = {
     addPath,
     updatePathStats,
     getAllPaths,
     getPathById,
-    getPathsByUsername
+    getPathsByUsername,
+    updatePathPublished
 };

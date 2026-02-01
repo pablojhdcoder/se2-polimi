@@ -16,7 +16,7 @@ import styles from './TripStatisticsScreen.styles';
 function formatTripDate(ts) {
   if (ts == null) return '—';
   try {
-    const d = new Date(typeof ts === 'number' ? ts : parseInt(ts, 10));
+    const d = typeof ts === 'number' || typeof ts === 'string' ? new Date(ts) : new Date(Number(ts));
     return isNaN(d.getTime()) ? '—' : d.toLocaleDateString();
   } catch {
     return '—';
@@ -57,11 +57,11 @@ export default function TripStatisticsScreen({ navigation }) {
 
   const totalTrips = trips.length;
   const totalPoints = trips.reduce((acc, t) => acc + (t.track?.length ?? 0), 0);
-  const totalDuration = trips.reduce((acc, t) => {
-    if (t.startTime && t.endTime) return acc + (t.endTime - t.startTime);
+  const totalDurationMin = trips.reduce((acc, t) => {
+    if (t.startTime && t.endTime) return acc + Math.round((t.endTime - t.startTime) / 60000);
+    if (t.tripLength != null) return acc + Number(t.tripLength);
     return acc;
   }, 0);
-  const totalDurationMin = Math.round(totalDuration / 60000);
 
   const goToPaths = () => {
     navigation.navigate('PathList');
@@ -97,8 +97,8 @@ export default function TripStatisticsScreen({ navigation }) {
         <Text style={styles.tripStatisticsScreen_emptyText}>{STRINGS.NO_TRIPS_YET}</Text>
       ) : (
         trips.map((trip, index) => {
-          const dateStr = formatTripDate(trip.startTime ?? trip.start_time);
-          const points = trip.track?.length ?? 0;
+          const dateStr = formatTripDate(trip.startTime ?? trip.start_time ?? trip.trip_date);
+          const points = trip.track?.length ?? (trip.recorded_route?.coordinates?.length ?? 0);
           return (
             <TouchableOpacity
               key={trip.id ?? trip._id ?? index}

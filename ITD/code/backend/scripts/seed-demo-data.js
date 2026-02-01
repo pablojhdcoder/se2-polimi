@@ -13,7 +13,6 @@ const crypto = require('crypto');
 const userRepository = require('../src/repositories/userRepository');
 const pathRepository = require('../src/repositories/pathRepository');
 const ratingRepository = require('../src/repositories/ratingRepository');
-const tripRepository = require('../src/repositories/tripRepository');
 const savedPathRepository = require('../src/repositories/savedPathRepository');
 const { query } = require('../src/pool');
 
@@ -137,40 +136,6 @@ async function ensureRatings(users, paths) {
   return count;
 }
 
-async function ensureTrips(users, paths) {
-  const baseDate = new Date();
-  baseDate.setDate(baseDate.getDate() - 14);
-  let count = 0;
-  for (let i = 0; i < 6; i++) {
-    const user = users[i % users.length];
-    const pathRow = paths[i % paths.length];
-    const tripDate = new Date(baseDate);
-    tripDate.setDate(tripDate.getDate() + i * 2);
-    await tripRepository.createTrip({
-      id: crypto.randomUUID(),
-      userId: user.id || user.user_id,
-      pathId: pathRow.id,
-      tripDate: tripDate.toISOString(),
-      tripLength: 100 + i * 50,
-      personalRating: 3 + (i % 3),
-      temperature: 18 + (i % 10),
-      windSpeed: 5,
-      windDegree: 180,
-      windGust: null,
-      visibility: 10000,
-      rain: 0,
-      clouds: 20,
-      recordedRoute: {
-        type: 'LineString',
-        coordinates: [[9.19, 45.464], [9.192, 45.465], [9.195, 45.466]],
-      },
-    });
-    count++;
-  }
-  console.log('  Creados', count, 'viajes');
-  return count;
-}
-
 async function ensureSavedPaths(users, paths) {
   const pathNames = paths.slice(0, 4).map((p) => p.path_name);
   let count = 0;
@@ -235,9 +200,6 @@ async function run() {
   console.log('Creando valoraciones (con comentarios)...');
   const numRatings = await ensureRatings(users, paths);
 
-  console.log('Creando viajes...');
-  const numTrips = await ensureTrips(users, paths);
-
   console.log('Creando favoritos (saved_paths)...');
   const numSaved = await ensureSavedPaths(users, paths);
 
@@ -245,8 +207,8 @@ async function run() {
   console.log('Usuarios demo:', users.length);
   console.log('Rutas:', paths.length);
   console.log('Valoraciones:', numRatings);
-  console.log('Viajes:', numTrips);
   console.log('Favoritos:', numSaved);
+  console.log('Viajes: no se crean de ejemplo (solo los grabados por los usuarios).');
   console.log('\nCredenciales de prueba:');
   DEMO_USERS.forEach((u) => console.log('  ', u.email, '/', DEMO_PASSWORD));
   console.log('\nListo. Puedes iniciar sesión en la app con cualquiera de los usuarios anteriores.');

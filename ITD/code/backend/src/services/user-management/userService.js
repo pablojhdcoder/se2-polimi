@@ -20,16 +20,28 @@ const userService = {
     /**
      * Updates a user's profile.
      * @param {string} userId
-     * @param {Object} updateData - Fields to update
-     * @returns {Promise<Object>} Updated user profile
+     * @param {Object} updateData - Fields to update (full_name, email, phone_number, profile_picture)
+     * @returns {Promise<Object>} Updated user profile (without password)
      */
     updateUserProfile: async (userId, updateData) => {
         if (!userId) throw new Error('User ID is required');
-        // This assumes update functionality exists in repository or needs to be orchestrated
-        // For now, we'll just mock the orchestration
-        // const updatedUser = await userRepository.updateUser(userId, updateData);
-        // return updatedUser;
-        throw new Error('Not implemented');
+        const allowed = ['full_name', 'email', 'phone_number', 'profile_picture'];
+        const fields = {};
+        for (const key of allowed) {
+            if (Object.prototype.hasOwnProperty.call(updateData, key)) {
+                fields[key] = updateData[key];
+            }
+        }
+        if (fields.email) {
+            const existing = await userRepository.getUserByEmail(fields.email);
+            if (existing && existing.id !== userId) {
+                throw new Error('Email already registered');
+            }
+        }
+        const updatedUser = await userRepository.updateUser(userId, fields);
+        if (!updatedUser) return null;
+        const { password_hash: _, ...profile } = updatedUser;
+        return profile;
     }
 };
 

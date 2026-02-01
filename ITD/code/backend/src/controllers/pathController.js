@@ -155,12 +155,37 @@ const getMyPaths = async (req, res, next) => {
     }
 };
 
+/**
+ * PATCH path (owner only). Supports { publish: boolean } to set is_published.
+ */
+const patchPath = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const path = await pathService.getPathById(id);
+        if (!path) {
+            return res.status(404).json({ error: 'Path not found' });
+        }
+        if (path.posted_by_username !== req.user.username) {
+            return res.status(403).json({ error: 'Only the path owner can update it' });
+        }
+        const publish = req.body.publish ?? req.body.isPublished;
+        if (typeof publish !== 'boolean') {
+            return res.status(400).json({ error: 'Body must include publish (boolean)' });
+        }
+        const updated = await pathService.updatePathPublished(id, publish);
+        res.status(200).json(updated);
+    } catch (error) {
+        next(error);
+    }
+};
+
 module.exports = {
     createPath,
     getPaths,
     getPathById,
     getSavedPaths,
     getMyPaths,
+    patchPath,
     getNearbyPaths,
     getRelatedPaths,
     savePath,

@@ -1,7 +1,6 @@
 const tripService = require('../../src/services/trip-management/tripService');
 const weatherService = require('../../src/services/external/weatherService');
 const tripRepository = require('../../src/repositories/tripRepository');
-const rabbitmq = require('../../src/config/rabbitmq');
 
 // Mock dependencies
 jest.mock('../../src/repositories/tripRepository');
@@ -12,7 +11,6 @@ jest.mock('../../src/services/external/weatherService');
 jest.mock('../../src/services/external/emailService', () => ({
     sendTripSummary: jest.fn().mockResolvedValue(undefined)
 }));
-jest.mock('../../src/config/rabbitmq');
 jest.mock('../../src/config/redis', () => ({
     connectRedis: jest.fn().mockResolvedValue(undefined),
     redisClient: {
@@ -61,20 +59,20 @@ describe('TripService Integration Tests', () => {
     });
 
     describe('updateTripTrack', () => {
-        it('should send a message to RabbitMQ only when isFinal is true', async () => {
+        it('should call updateTripRoute when isFinal is true', async () => {
             const tripId = 'trip-123';
             const intermediateRoute = { metadata: { isFinal: false }, coordinates: [] };
             const finalRoute = { metadata: { isFinal: true }, coordinates: [] };
 
             tripRepository.updateTripRoute.mockResolvedValue({ id: tripId, path_id: 'path-xyz' });
 
-            // 1. Partial update
+            // 1. Partial update (no finalization)
             await tripService.updateTripTrack(tripId, intermediateRoute);
-            expect(rabbitmq.sendToQueue).not.toHaveBeenCalled();
+            expect(tripRepository.updateTripRoute).not.toHaveBeenCalled();
 
-            // 2. Final update
+            // 2. Final update (flush to DB)
             await tripService.updateTripTrack(tripId, finalRoute);
-            expect(rabbitmq.sendToQueue).toHaveBeenCalledWith('path_stats_update', { pathId: 'path-xyz' });
+            expect(tripRepository.updateTripRoute).toHaveBeenCalled();
         });
     });
 });
