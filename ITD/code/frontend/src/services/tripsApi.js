@@ -84,7 +84,7 @@ export async function getTrips() {
     apiClient.get(`${TRIPS_BASE}/me`)
   );
   const raw = response.data;
-  const list = Array.isArray(raw) ? raw : raw?.data ?? raw?.trips ?? [];
+  const list = raw?.data ?? (Array.isArray(raw) ? raw : raw?.trips ?? []);
   const normalized = list.map(normalizeTrip).filter(Boolean);
   return { data: normalized };
 }

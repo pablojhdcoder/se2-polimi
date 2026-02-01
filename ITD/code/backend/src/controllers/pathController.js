@@ -25,13 +25,14 @@ const createPath = async (req, res, next) => {
 };
 
 /**
- * Handle getting all paths. Query: search (path name), difficulty, limit, offset.
+ * Handle getting all paths. Query: search (path name or place), searchByPlace, limit, offset.
  */
 const getPaths = async (req, res, next) => {
     try {
-        const { search, limit, offset } = req.query;
+        const { search, searchByPlace, limit, offset } = req.query;
         const paths = await pathService.getAllPaths({
             search,
+            searchByPlace: searchByPlace === 'true' || searchByPlace === '1',
             limit: limit ? parseInt(limit, 10) : 100,
             offset: offset ? parseInt(offset, 10) : 0
         });
@@ -129,13 +130,26 @@ const getNearbyPaths = async (req, res, next) => {
 };
 
 /**
- * Paths between two points (origin/destination). Returns all paths for demo;
- * later can filter by origin/destination (e.g. geo or address).
+ * Paths between two points (origin/destination). Filters by origin_place / destination_place when provided.
  */
 const getRelatedPaths = async (req, res, next) => {
     try {
-        const { origin, destination } = req.query;
-        const paths = await pathService.getAllPaths({ limit: 20, offset: 0 });
+        let { origin, destination } = req.query;
+        if (typeof origin === 'string') {
+            try { origin = JSON.parse(origin); } catch (_) { /* use as-is */ }
+        }
+        if (typeof destination === 'string') {
+            try { destination = JSON.parse(destination); } catch (_) { /* use as-is */ }
+        }
+        const hasPlaceFilter = (origin && String(origin).trim()) || (destination && String(destination).trim());
+        const paths = hasPlaceFilter
+            ? await pathService.getPathsByOriginDestination({
+                origin: origin ? String(origin).trim() : undefined,
+                destination: destination ? String(destination).trim() : undefined,
+                limit: 20,
+                offset: 0
+            })
+            : await pathService.getAllPaths({ limit: 20, offset: 0 });
         res.status(200).json(paths);
     } catch (error) {
         next(error);

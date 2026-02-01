@@ -69,39 +69,26 @@ async function runTest() {
         }, authHeader);
         console.log('   [OK] Chunk 1 cached in Redis');
 
-        // 6. Send Track Chunk 2 + Pothole (Redis Cache)
-        console.log('6. Sending GPS Chunk 2 + Pothole Trigger (Redis)...');
+        // 6. Send Track Chunk 2 (Redis Cache)
+        console.log('6. Sending GPS Chunk 2 (Redis)...');
         await axios.patch(`${API_BASE}/trips/${tripId}/route`, {
             coordinates: [
                 { lat: 45.4644, lon: 9.1902 }
-            ],
-            potholes: [
-                { x: 45.46445, y: 9.19025, severity: 2 }
             ]
         }, authHeader);
-        console.log('   [OK] Chunk 2 + Pothole cached in Redis');
+        console.log('   [OK] Chunk 2 cached in Redis');
 
         // 7. Finalize Trip (Flush to Postgres)
         console.log('7. Finalizing trip (Flushing to Postgres)...');
-        const finalRes = await axios.patch(`${API_BASE}/trips/${tripId}/route`, {
+        await axios.patch(`${API_BASE}/trips/${tripId}/route`, {
             metadata: { isFinal: true },
             tripLength: 150
         }, authHeader);
         console.log('   [OK] Trip finalized in database');
 
-        // 8. Confirm Pothole
-        console.log('\n8. Confirming detected pothole...');
-        // The trigger is in the recorded_route.pothole_detections array at index 0
-        const confirmRes = await axios.post(`${API_BASE}/potholes/confirm`, {
-            tripId: tripId,
-            selectedIndices: [0]
-        }, authHeader);
-        console.log(`   [OK] Pothole confirmed, ID: ${confirmRes.data.potholes[0].id}`);
-
         console.log('\n✅ FULL INTEGRATION TEST COMPLETED SUCCESSFULLY!');
-        console.log('   - Postgres: Path, User, Trip, and Confirmed Pothole records verified via flow.');
+        console.log('   - Postgres: Path, User, and Trip records verified via flow.');
         console.log('   - Redis: Cache usage for chunks verified via final flush.');
-        console.log('   - RabbitMQ: Stats update triggered (check server logs for "Stats updated").');
 
     } catch (error) {
         console.error('\n❌ TEST FAILED:');

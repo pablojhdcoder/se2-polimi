@@ -6,6 +6,7 @@
 
 import React, { useState, useCallback } from 'react';
 import { Text, ScrollView, RefreshControl, TouchableOpacity } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import { Card, ErrorMessage, Button, Loading } from '../../components';
 import { getTrips } from '../../services/tripsApi';
 import { getOfflineData } from '../../storage';
@@ -33,7 +34,7 @@ export default function TripStatisticsScreen({ navigation }) {
     try {
       setError(null);
       const result = await getTrips();
-      const list = Array.isArray(result) ? result : result?.data ?? result?.trips ?? [];
+      const list = result?.data ?? [];
       setTrips(list);
     } catch (err) {
       const offline = await getOfflineData();
@@ -46,9 +47,11 @@ export default function TripStatisticsScreen({ navigation }) {
     }
   }, []);
 
-  React.useEffect(() => {
-    loadTrips();
-  }, [loadTrips]);
+  useFocusEffect(
+    useCallback(() => {
+      loadTrips();
+    }, [loadTrips])
+  );
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -93,31 +96,27 @@ export default function TripStatisticsScreen({ navigation }) {
       </Card>
 
       <Text style={styles.tripStatisticsScreen_sectionTitle}>{STRINGS.PAST_TRIPS}</Text>
-      {trips.length === 0 ? (
-        <Text style={styles.tripStatisticsScreen_emptyText}>{STRINGS.NO_TRIPS_YET}</Text>
-      ) : (
-        trips.map((trip, index) => {
-          const dateStr = formatTripDate(trip.startTime ?? trip.start_time ?? trip.trip_date);
-          const points = trip.track?.length ?? (trip.recorded_route?.coordinates?.length ?? 0);
-          return (
-            <TouchableOpacity
-              key={trip.id ?? trip._id ?? index}
-              style={styles.tripStatisticsScreen_listItem}
-              onPress={() => navigation.navigate('TripDetail', { trip })}
-              activeOpacity={0.7}
-            >
-              <Text style={styles.tripStatisticsScreen_listItemDate}>{dateStr}</Text>
-              <Text style={styles.tripStatisticsScreen_listItemPoints}>
-                {points} {STRINGS.TRIP_POINTS.toLowerCase()}
-              </Text>
-            </TouchableOpacity>
-          );
-        })
-      )}
+      {trips.map((trip, index) => {
+        const dateStr = formatTripDate(trip.startTime ?? trip.start_time ?? trip.trip_date);
+        const points = trip.track?.length ?? (trip.recorded_route?.coordinates?.length ?? 0);
+        return (
+          <TouchableOpacity
+            key={trip.id ?? trip._id ?? index}
+            style={styles.tripStatisticsScreen_listItem}
+            onPress={() => navigation.navigate('TripDetail', { trip })}
+            activeOpacity={0.7}
+          >
+            <Text style={styles.tripStatisticsScreen_listItemDate}>{dateStr}</Text>
+            <Text style={styles.tripStatisticsScreen_listItemPoints}>
+              {points} {STRINGS.TRIP_POINTS.toLowerCase()}
+            </Text>
+          </TouchableOpacity>
+        );
+      })}
 
       <Button
         title={STRINGS.PATHS}
-        variant="outline"
+        variant="primary"
         onPress={goToPaths}
         style={styles.tripStatisticsScreen_button}
       />

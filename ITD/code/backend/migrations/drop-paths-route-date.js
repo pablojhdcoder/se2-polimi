@@ -1,6 +1,6 @@
 /**
- * Migration: add route_date to paths table (date when the route was performed).
- * Run once if DB already exists: node migrations/add-paths-route-date.js
+ * Migration: drop route_date from paths table (column was never used by the app).
+ * Run once if DB already has route_date: node migrations/drop-paths-route-date.js
  */
 require('dotenv').config({ path: require('path').resolve(__dirname, '../.env') });
 const { Pool } = require('pg');
@@ -18,9 +18,9 @@ async function run() {
   try {
     await client.query(`
       ALTER TABLE paths
-      ADD COLUMN IF NOT EXISTS route_date DATE;
+      DROP COLUMN IF EXISTS route_date;
     `);
-    console.log('Migration applied: paths.route_date added.');
+    console.log('Migration applied: paths.route_date dropped.');
   } catch (err) {
     console.error('Migration error:', err.message);
     process.exit(1);

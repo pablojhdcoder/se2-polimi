@@ -96,6 +96,7 @@ export default function PathSearchScreen({ navigation }) {
   const [isCached, setIsCached] = useState(false);
   const [placeSuggestions, setPlaceSuggestions] = useState([]);
   const [suggestionTarget, setSuggestionTarget] = useState(null);
+  const [searchByPlaceNext, setSearchByPlaceNext] = useState(false);
   const [placeSuggestionsLoading, setPlaceSuggestionsLoading] = useState(false);
   const [locationLoadingTarget, setLocationLoadingTarget] = useState(null);
   const [displayedCount, setDisplayedCount] = useState(3);
@@ -202,10 +203,14 @@ export default function PathSearchScreen({ navigation }) {
         setPaths(list.map(normalizePathForDisplay).filter(Boolean));
         setIsCached(true);
       } else {
-        const result = await searchPaths({ search: query.trim() || undefined });
+        const result = await searchPaths({
+          search: query.trim() || undefined,
+          searchBy: searchByPlaceNext ? 'place' : undefined
+        });
         const raw = Array.isArray(result) ? result : (result?.data ?? result?.paths ?? []);
         setPaths(raw.map(normalizePathForDisplay).filter(Boolean));
       }
+      setSearchByPlaceNext(false);
     } catch (err) {
       if (!isOnline) {
         const cached = await getCachedPaths();
@@ -216,10 +221,11 @@ export default function PathSearchScreen({ navigation }) {
         setError(err.message || STRINGS.ERROR_SEARCH);
         setPaths([]);
       }
+      setSearchByPlaceNext(false);
     } finally {
       setLoading(false);
     }
-  }, [query, isOnline]);
+  }, [query, isOnline, searchByPlaceNext]);
 
   const handlePathPress = useCallback(
     (path) => {
@@ -232,7 +238,10 @@ export default function PathSearchScreen({ navigation }) {
     const placeName = feature.place_name || feature.text || '';
     if (suggestionTarget === 'origin') setOrigin(placeName);
     else if (suggestionTarget === 'destination') setDestination(placeName);
-    else setQuery(placeName);
+    else {
+      setQuery(placeName);
+      setSearchByPlaceNext(true);
+    }
     setPlaceSuggestions([]);
     setSuggestionTarget(null);
   }, [suggestionTarget]);
@@ -487,7 +496,7 @@ export default function PathSearchScreen({ navigation }) {
                 placeholder={STRINGS.SEARCH_PLACEHOLDER}
                 placeholderTextColor={colors.textSecondary}
                 value={query}
-                onChangeText={(text) => { setQuery(text); fetchPlaceSuggestions(text, 'keyword'); }}
+                onChangeText={(text) => { setQuery(text); setSearchByPlaceNext(false); fetchPlaceSuggestions(text, 'keyword'); }}
                 onSubmitEditing={doSearch}
                 returnKeyType="search"
               />

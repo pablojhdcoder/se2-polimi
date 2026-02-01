@@ -1,7 +1,9 @@
+/**
+ * Migration: add origin_place and destination_place to paths table (for search by place).
+ * Run once if DB already exists: node migrations/add-paths-origin-destination-place.js
+ */
 require('dotenv').config({ path: require('path').resolve(__dirname, '../.env') });
 const { Pool } = require('pg');
-const fs = require('fs');
-const path = require('path');
 
 const pool = new Pool({
   host: process.env.DB_HOST || 'localhost',
@@ -12,15 +14,17 @@ const pool = new Pool({
 });
 
 async function run() {
-  const schemaPath = path.join(__dirname, '../src/config/schema.sql');
-  const sql = fs.readFileSync(schemaPath, 'utf8');
-
   const client = await pool.connect();
   try {
-    await client.query(sql);
-    console.log('Schema aplicado correctamente.');
+    await client.query(`
+      ALTER TABLE paths ADD COLUMN IF NOT EXISTS origin_place TEXT;
+    `);
+    await client.query(`
+      ALTER TABLE paths ADD COLUMN IF NOT EXISTS destination_place TEXT;
+    `);
+    console.log('Migration applied: paths.origin_place and paths.destination_place added.');
   } catch (err) {
-    console.error('Error aplicando schema:', err.message);
+    console.error('Migration error:', err.message);
     process.exit(1);
   } finally {
     client.release();

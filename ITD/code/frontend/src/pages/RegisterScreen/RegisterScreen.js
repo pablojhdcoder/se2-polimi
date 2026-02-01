@@ -29,6 +29,10 @@ export default function RegisterScreen({ navigation }) {
 
   const handleRegister = async () => {
     setError('');
+    if (!name.trim()) {
+      setError(STRINGS.NAME_REQUIRED);
+      return;
+    }
     if (!email.trim() || !password) {
       setError(STRINGS.INTRODUCE_EMAIL_PASSWORD);
       return;
@@ -43,7 +47,7 @@ export default function RegisterScreen({ navigation }) {
         api.post('/auth/register', {
           email: email.trim(),
           password,
-          name: name.trim() || undefined,
+          name: name.trim(),
         })
       );
       const response = await requestWithRetry(() =>
@@ -90,7 +94,7 @@ export default function RegisterScreen({ navigation }) {
           <Text style={styles.registerScreen_title}>{STRINGS.REGISTER}</Text>
           <ErrorMessage message={error} />
           <Input
-            label={STRINGS.NAME_OPTIONAL}
+            label={STRINGS.NAME}
             value={name}
             onChangeText={setName}
             placeholder={STRINGS.YOUR_NAME}

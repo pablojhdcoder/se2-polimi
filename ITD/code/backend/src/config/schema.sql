@@ -1,4 +1,3 @@
-DROP TABLE IF EXISTS potholes CASCADE;
 DROP TABLE IF EXISTS trips CASCADE;
 DROP TABLE IF EXISTS ratings CASCADE;
 DROP TABLE IF EXISTS saved_paths CASCADE;
@@ -43,6 +42,8 @@ CREATE TABLE paths (
 
     posted_by_username VARCHAR(50) NOT NULL,
     is_published BOOLEAN NOT NULL DEFAULT true,
+    origin_place TEXT,
+    destination_place TEXT,
 
     CONSTRAINT fk_path_user
         FOREIGN KEY (posted_by_username)
@@ -117,22 +118,6 @@ CREATE TABLE trips (
         ON DELETE CASCADE,
 
     CONSTRAINT fk_trip_path
-        FOREIGN KEY (path_id) REFERENCES paths(id)
-        ON DELETE CASCADE
-);
-
-CREATE TABLE potholes (
-    id UUID PRIMARY KEY,
-    path_id UUID NOT NULL,
-
-    location_x DOUBLE PRECISION NOT NULL,
-    location_y DOUBLE PRECISION NOT NULL,
-
-    detected_date TIMESTAMP NOT NULL,
-    size INTEGER NOT NULL,
-    status VARCHAR(20) DEFAULT 'confirmed',
-
-    CONSTRAINT fk_pothole_path
         FOREIGN KEY (path_id) REFERENCES paths(id)
         ON DELETE CASCADE
 );

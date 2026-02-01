@@ -9,18 +9,21 @@ const SALT_ROUNDS = 10;
 const TOKEN_EXPIRY = 3600 * 24; // 24 hours in seconds
 
 /**
- * Handles user registration. Accepts email, password, name (frontend contract).
+ * Handles user registration. Accepts email, password, name (required).
  * Username is derived from email for DB uniqueness.
- * @param {Object} userData - { email, password, name? } or legacy { username, password, fullName, email, ... }
+ * @param {Object} userData - { email, password, name } or legacy { username, password, fullName, email, ... }
  */
 const register = async (userData) => {
     const email = userData.email || userData.username;
     const password = userData.password;
-    const name = userData.name ?? userData.fullName ?? email ?? '';
+    const name = (userData.name ?? userData.fullName ?? '').trim();
     const username = email; // use email as username (both unique in schema)
-    const fullName = name || email;
+    const fullName = name;
     const { phoneNumber, profilePicture } = userData;
 
+    if (!name) {
+        throw new Error('Name is required');
+    }
     if (!email || !password) {
         throw new Error('Email and password are required');
     }

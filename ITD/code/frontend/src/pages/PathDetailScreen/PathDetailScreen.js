@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useMemo, useEffect } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, ActivityIndicator, TextInput } from 'react-native';
 import { getPathById, getCachedPathById, updatePath, normalizePathForDisplay } from '../../services/pathsApi';
-import { getReviewsByPathId } from '../../services/reviewsApi';
+import { getReviewsByPathId, createReview } from '../../services/reviewsApi';
 import MapService from '../../services/map/MapService';
 import { useNetworkStatus } from '../../contexts/NetworkStatusContext';
 import { useAuth } from '../../navigation/useAuth';
@@ -9,18 +9,6 @@ import { MapboxMap, Button } from '../../components';
 import { layoutStyles } from '../../styles';
 import { STRINGS } from '../../constants/strings';
 import styles from './PathDetailScreen.styles';
-
-const STATUS_LABELS = {
-  optimal: STRINGS.STATUS_OPTIMAL,
-  under_maintenance: STRINGS.STATUS_UNDER_MAINTENANCE,
-  path_closed: STRINGS.STATUS_PATH_CLOSED,
-  requires_maintenance: STRINGS.STATUS_REQUIRES_MAINTENANCE,
-  unsafe: STRINGS.STATUS_UNSAFE,
-};
-
-function getStatusLabel(status) {
-  return status ? (STATUS_LABELS[status] || status) : null;
-}
 
 /** Returns true if the string looks like "lng, lat" coordinates. */
 function isCoordLike(s) {
@@ -51,6 +39,25 @@ export default function PathDetailScreen({ route, navigation }) {
   const [reviews, setReviews] = useState([]);
   const [reviewsLoading, setReviewsLoading] = useState(false);
   const [reviewsError, setReviewsError] = useState(null);
+  const [showReviewForm, setShowReviewForm] = useState(false);
+  const [reviewPoints, setReviewPoints] = useState(5);
+  const [reviewOpinion, setReviewOpinion] = useState('');
+  const [submitReviewLoading, setSubmitReviewLoading] = useState(false);
+  const [submitReviewError, setSubmitReviewError] = useState(null);
+
+  const loadReviews = useCallback(async () => {
+    const id = pathId || path?.id;
+    if (!id) return;
+    setReviewsError(null);
+    try {
+      const data = await getReviewsByPathId(id);
+      const list = Array.isArray(data) ? data : data?.data ?? data?.reviews ?? [];
+      setReviews(list);
+    } catch (err) {
+      setReviewsError(err?.message || STRINGS.ERROR_LOADING_REVIEWS);
+      setReviews([]);
+    }
+  }, [pathId, path?.id]);
 
   const loadPath = useCallback(async () => {
     if (!pathId) {
@@ -162,6 +169,30 @@ export default function PathDetailScreen({ route, navigation }) {
     }
   }, [pathId, path?.id, path?.is_published, publishActionLoading]);
 
+  const handleSubmitReview = useCallback(async () => {
+    const id = pathId || path?.id;
+    if (!id || submitReviewLoading) return;
+    setSubmitReviewError(null);
+    setSubmitReviewLoading(true);
+    try {
+      await createReview({
+        pathId: id,
+        points: reviewPoints,
+        opinion: reviewOpinion.trim() || undefined,
+      });
+      await loadReviews();
+      await loadPath();
+      setShowReviewForm(false);
+      setReviewOpinion('');
+      setReviewPoints(5);
+    } catch (err) {
+      const msg = err?.response?.data?.error || err?.message || STRINGS.ERROR_SUBMITTING_REVIEW;
+      setSubmitReviewError(msg);
+    } finally {
+      setSubmitReviewLoading(false);
+    }
+  }, [pathId, path?.id, submitReviewLoading, reviewPoints, reviewOpinion, loadReviews, loadPath]);
+
   if (!pathId && !initialPath) {
     return (
       <View style={styles.pathDetailScreen_centered}>
@@ -198,14 +229,6 @@ export default function PathDetailScreen({ route, navigation }) {
   const distance = p.distance ?? p.length;
   const isOwner = user?.username && (p.posted_by_username || p.postedByUsername) === user.username;
   const isPublished = p.is_published !== false;
-  const statusLabel = getStatusLabel(p.status);
-  const routeDataPoints = useMemo(() => {
-    const rd = p.route_data;
-    if (!rd) return 0;
-    if (rd.coordinates && Array.isArray(rd.coordinates)) return rd.coordinates.length;
-    if (rd.type === 'LineString' && rd.coordinates) return rd.coordinates.length;
-    return 0;
-  }, [p.route_data]);
 
   const routeGeoJSON = useMemo(() => {
     const rd = p.route_data;
@@ -243,6 +266,14 @@ export default function PathDetailScreen({ route, navigation }) {
   const hasMap = mapMarkers.length > 0 || routeGeoJSON;
   const postedBy = p.posted_by_username || p.postedByUsername || null;
 
+  const pathRating = p.user_rating != null ? Number(p.user_rating) : (p.userRating != null ? Number(p.userRating) : null);
+  const reviewsAvg = reviews.length > 0
+    ? Math.round(reviews.reduce((acc, r) => acc + (Number(r.points ?? r.rating ?? 0) || 0), 0) / reviews.length)
+    : null;
+  const displayedRating = (pathRating != null && pathRating > 0) ? pathRating : reviewsAvg;
+
+  const userAlreadyReviewed = user?.id != null && reviews.some((r) => String(r.userId) === String(user.id));
+
   return (
     <ScrollView style={layoutStyles.screenContainer} contentContainerStyle={styles.pathDetailScreen_content}>
       {isCached ? (
@@ -257,23 +288,25 @@ export default function PathDetailScreen({ route, navigation }) {
       ) : null}
 
       <View style={styles.pathDetailScreen_header}>
-        <Text style={styles.pathDetailScreen_title} numberOfLines={2}>{name}</Text>
-        <View style={styles.pathDetailScreen_byline}>
-          {postedBy ? (
-            <Text style={styles.pathDetailScreen_bylineText}>
-              {STRINGS.ADDED_BY} <Text style={styles.pathDetailScreen_bylineUser}>{postedBy}</Text>
-            </Text>
-          ) : null}
-          <View style={styles.pathDetailScreen_badges}>
-            <View style={[styles.pathDetailScreen_badge, isPublished ? styles.pathDetailScreen_badgePublished : styles.pathDetailScreen_badgeDraft]}>
-              <Text style={isPublished ? styles.pathDetailScreen_badgeText : styles.pathDetailScreen_badgeTextDraft}>{isPublished ? STRINGS.PUBLISHED : STRINGS.DRAFT}</Text>
-            </View>
-            {statusLabel ? (
-              <View style={styles.pathDetailScreen_badgeNeutral}>
-                <Text style={styles.pathDetailScreen_badgeTextNeutral}>{statusLabel}</Text>
-              </View>
+        <View style={styles.pathDetailScreen_headerLeft}>
+          <Text style={styles.pathDetailScreen_title} numberOfLines={2}>{name}</Text>
+          <View style={styles.pathDetailScreen_byline}>
+            {postedBy ? (
+              <Text style={styles.pathDetailScreen_bylineText}>
+                {STRINGS.ADDED_BY} <Text style={styles.pathDetailScreen_bylineUser}>{postedBy}</Text>
+              </Text>
             ) : null}
+            <View style={styles.pathDetailScreen_badges}>
+              <View style={[styles.pathDetailScreen_badge, isPublished ? styles.pathDetailScreen_badgePublished : styles.pathDetailScreen_badgeDraft]}>
+                <Text style={isPublished ? styles.pathDetailScreen_badgeText : styles.pathDetailScreen_badgeTextDraft}>{isPublished ? STRINGS.PUBLISHED : STRINGS.DRAFT}</Text>
+              </View>
+            </View>
           </View>
+        </View>
+        <View style={styles.pathDetailScreen_headerRating}>
+          <Text style={styles.pathDetailScreen_headerRatingText}>
+            ★ {displayedRating != null ? displayedRating : '—'}
+          </Text>
         </View>
       </View>
 
@@ -311,22 +344,33 @@ export default function PathDetailScreen({ route, navigation }) {
       ) : null}
 
       <View style={styles.pathDetailScreen_card}>
-        {(distance != null || p.difficulty || p.duration_minutes != null || p.durationMinutes != null) ? (
-          <View style={styles.pathDetailScreen_statsRow}>
-            {distance != null ? <Text style={styles.pathDetailScreen_stat}>{distance} km</Text> : null}
-            {p.difficulty ? <Text style={styles.pathDetailScreen_stat}>{p.difficulty}</Text> : null}
-            {p.user_rating != null ? <Text style={styles.pathDetailScreen_stat}>{STRINGS.USER_RATING} {p.user_rating}</Text> : null}
-            {routeDataPoints > 0 ? <Text style={styles.pathDetailScreen_stat}>{routeDataPoints} pts</Text> : null}
-            {(p.duration_minutes != null || p.durationMinutes != null) ? (
-              <Text style={styles.pathDetailScreen_stat}>
-                {STRINGS.ROUTE_DURATION}: {(p.duration_minutes ?? p.durationMinutes)} min
-              </Text>
-            ) : null}
-          </View>
-        ) : null}
-        {p.description ? (
-          <Text style={styles.pathDetailScreen_description}>{p.description}</Text>
-        ) : null}
+        <View style={styles.pathDetailScreen_routeRow}>
+          <Text style={styles.pathDetailScreen_routeLabel}>{STRINGS.DISTANCE}</Text>
+          <Text style={styles.pathDetailScreen_routeValue}>
+            {distance != null ? `${distance} km` : '—'}
+          </Text>
+        </View>
+        <View style={styles.pathDetailScreen_routeDivider} />
+        <View style={styles.pathDetailScreen_routeRow}>
+          <Text style={styles.pathDetailScreen_routeLabel}>{STRINGS.DIFFICULTY}</Text>
+          <Text style={styles.pathDetailScreen_routeValue}>
+            {String(p.difficulty ?? '').trim() || '—'}
+          </Text>
+        </View>
+        <View style={styles.pathDetailScreen_routeDivider} />
+        <View style={styles.pathDetailScreen_routeRow}>
+          <Text style={styles.pathDetailScreen_routeLabel}>{STRINGS.ROUTE_DURATION}</Text>
+          <Text style={styles.pathDetailScreen_routeValue}>
+            {(p.duration_minutes ?? p.durationMinutes) != null ? `${p.duration_minutes ?? p.durationMinutes} min` : '—'}
+          </Text>
+        </View>
+        <View style={styles.pathDetailScreen_routeDivider} />
+        <View style={styles.pathDetailScreen_routeRow}>
+          <Text style={styles.pathDetailScreen_routeLabel}>{STRINGS.DESCRIPTION}</Text>
+          <Text style={[styles.pathDetailScreen_routeValue, styles.pathDetailScreen_descriptionBlock]}>
+            {(p.description ?? '').trim() || '—'}
+          </Text>
+        </View>
       </View>
 
       {hasWeatherData(p) ? (
@@ -369,37 +413,129 @@ export default function PathDetailScreen({ route, navigation }) {
         </View>
       ) : null}
 
-      <View style={styles.pathDetailScreen_reviewsSection}>
-        <Text style={styles.pathDetailScreen_reviewsTitle}>{STRINGS.REVIEWS}</Text>
+      <View style={styles.pathDetailScreen_card}>
+        <Text style={styles.pathDetailScreen_weatherTitle}>{STRINGS.REVIEWS}</Text>
         {reviewsLoading ? (
-          <Text style={styles.pathDetailScreen_reviewsLoading}>{STRINGS.LOADING_REVIEWS}</Text>
+          <View style={styles.pathDetailScreen_placeLoading}>
+            <ActivityIndicator size="small" />
+            <Text style={styles.pathDetailScreen_placeLoadingText}>{STRINGS.LOADING_REVIEWS}</Text>
+          </View>
         ) : reviewsError ? (
-          <Text style={styles.pathDetailScreen_reviewsError}>{reviewsError}</Text>
+          <View style={styles.pathDetailScreen_routeRow}>
+            <Text style={[styles.pathDetailScreen_routeValue, styles.pathDetailScreen_reviewsErrorText]}>{reviewsError}</Text>
+          </View>
         ) : reviews.length === 0 ? (
-          <Text style={styles.pathDetailScreen_reviewsEmpty}>{STRINGS.NO_REVIEWS_YET}</Text>
+          <>
+            <View style={styles.pathDetailScreen_routeRow}>
+              <Text style={styles.pathDetailScreen_routeLabel}>{STRINGS.USER}</Text>
+              <Text style={styles.pathDetailScreen_routeValue}>{STRINGS.DEFAULT_REVIEW_AUTHOR} · ★ 5</Text>
+            </View>
+            <View style={styles.pathDetailScreen_routeRow}>
+              <Text style={styles.pathDetailScreen_routeLabel}>{STRINGS.COMMENT}</Text>
+              <Text style={[styles.pathDetailScreen_routeValue, styles.pathDetailScreen_descriptionBlock]}>{STRINGS.DEFAULT_REVIEW_TEXT}</Text>
+            </View>
+          </>
         ) : (
-          reviews.map((item) => (
+          reviews.map((item, index) => (
             <TouchableOpacity
               key={String(item.id)}
-              style={styles.pathDetailScreen_reviewCard}
+              activeOpacity={0.7}
               onPress={() => {
                 const root = navigation.getParent?.()?.getParent?.();
                 if (root) root.navigate('ReviewDetail', { reviewId: item.id, review: item });
                 else navigation.navigate('ReviewDetail', { reviewId: item.id, review: item });
               }}
-              activeOpacity={0.7}
             >
-              <Text style={styles.pathDetailScreen_reviewMeta}>
-                {item.userName ?? item.user_name ?? STRINGS.USER}
-                {item.points != null || item.rating != null ? ` · ★ ${item.points ?? item.rating}` : ''}
-              </Text>
-              <Text style={styles.pathDetailScreen_reviewText} numberOfLines={2}>
-                {item.opinion ?? item.comment ?? item.text ?? '—'}
-              </Text>
+              {index > 0 ? <View style={styles.pathDetailScreen_routeDivider} /> : null}
+              <View style={styles.pathDetailScreen_routeRow}>
+                <Text style={styles.pathDetailScreen_routeLabel}>{STRINGS.USER}</Text>
+                <Text style={styles.pathDetailScreen_routeValue}>
+                  {item.userName ?? item.user_name ?? STRINGS.USER}
+                  {item.points != null || item.rating != null ? ` · ★ ${item.points ?? item.rating}` : ''}
+                </Text>
+              </View>
+              <View style={styles.pathDetailScreen_routeRow}>
+                <Text style={styles.pathDetailScreen_routeLabel}>{STRINGS.COMMENT}</Text>
+                <Text style={[styles.pathDetailScreen_routeValue, styles.pathDetailScreen_descriptionBlock]} numberOfLines={4}>
+                  {item.opinion ?? item.comment ?? item.text ?? '—'}
+                </Text>
+              </View>
             </TouchableOpacity>
           ))
         )}
       </View>
+
+      {user && !isOwner && !userAlreadyReviewed ? (
+        <View style={styles.pathDetailScreen_card}>
+          {!showReviewForm ? (
+            <Button
+              title={STRINGS.WRITE_REVIEW}
+              variant="outline"
+              onPress={() => setShowReviewForm(true)}
+              style={styles.pathDetailScreen_actionButton}
+            />
+          ) : (
+            <>
+              <Text style={styles.pathDetailScreen_routeLabel}>{STRINGS.YOUR_RATING}</Text>
+              <View style={styles.pathDetailScreen_starRow}>
+                {[1, 2, 3, 4, 5].map((n) => (
+                  <TouchableOpacity
+                    key={n}
+                    onPress={() => setReviewPoints(n)}
+                    style={styles.pathDetailScreen_starWrap}
+                    activeOpacity={0.7}
+                  >
+                    <Text style={styles.pathDetailScreen_star}>{reviewPoints >= n ? '★' : '☆'}</Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+              <Text style={[styles.pathDetailScreen_routeLabel, { marginTop: 8 }]}>{STRINGS.YOUR_COMMENT}</Text>
+              <TextInput
+                style={styles.pathDetailScreen_reviewInput}
+                value={reviewOpinion}
+                onChangeText={setReviewOpinion}
+                placeholder={STRINGS.YOUR_COMMENT}
+                placeholderTextColor="#999"
+                multiline
+                numberOfLines={3}
+              />
+              {submitReviewError ? (
+                <Text style={styles.pathDetailScreen_reviewFormError}>{submitReviewError}</Text>
+              ) : null}
+              <View style={styles.pathDetailScreen_reviewFormActions}>
+                <Button
+                  title={STRINGS.CANCEL}
+                  variant="outline"
+                  onPress={() => {
+                    setShowReviewForm(false);
+                    setSubmitReviewError(null);
+                    setReviewOpinion('');
+                    setReviewPoints(5);
+                  }}
+                  disabled={submitReviewLoading}
+                  style={styles.pathDetailScreen_reviewFormBtn}
+                />
+                <Button
+                  title={STRINGS.SUBMIT_REVIEW}
+                  onPress={handleSubmitReview}
+                  disabled={submitReviewLoading}
+                  style={styles.pathDetailScreen_reviewFormBtn}
+                />
+              </View>
+            </>
+          )}
+        </View>
+      ) : null}
+      {user == null && !isOwner ? (
+        <View style={styles.pathDetailScreen_card}>
+          <Text style={styles.pathDetailScreen_message}>{STRINGS.LOG_IN_TO_REVIEW}</Text>
+        </View>
+      ) : null}
+      {user && !isOwner && userAlreadyReviewed ? (
+        <View style={styles.pathDetailScreen_card}>
+          <Text style={styles.pathDetailScreen_message}>{STRINGS.YOU_ALREADY_REVIEWED}</Text>
+        </View>
+      ) : null}
 
       {isOwner ? (
         <View style={styles.pathDetailScreen_actions}>

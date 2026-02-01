@@ -1,5 +1,6 @@
 const pathRepository = require('../../repositories/pathRepository');
 const ratingRepository = require('../../repositories/ratingRepository');
+const userRepository = require('../../repositories/userRepository');
 const weatherService = require('../external/weatherService');
 const crypto = require('crypto');
 
@@ -21,7 +22,9 @@ const addPath = async (pathData) => {
         endY: pathData.endY ?? null,
         routeData: pathData.routeData ?? null,
         isPublished: pathData.isPublished !== false && pathData.publish !== false,
-        durationMinutes: pathData.durationMinutes != null ? parseInt(pathData.durationMinutes, 10) : null
+        durationMinutes: pathData.durationMinutes != null ? parseInt(pathData.durationMinutes, 10) : null,
+        originPlace: pathData.startPoint != null && String(pathData.startPoint).trim() ? String(pathData.startPoint).trim() : null,
+        destinationPlace: pathData.endPoint != null && String(pathData.endPoint).trim() ? String(pathData.endPoint).trim() : null
     };
     if (path.durationMinutes != null && Number.isNaN(path.durationMinutes)) {
         path.durationMinutes = null;
@@ -55,7 +58,26 @@ const addPath = async (pathData) => {
         }
     }
 
-    return await pathRepository.createPath(path);
+    const createdPath = await pathRepository.createPath(path);
+    const creator = await userRepository.getUserByUsername(path.postedByUsername);
+    if (creator && createdPath && createdPath.id) {
+        try {
+            await ratingRepository.createRating({
+                id: crypto.randomUUID(),
+                userId: creator.id,
+                pathId: createdPath.id,
+                points: 5,
+                opinion: 'great path',
+                reportedStatus: 'optimal'
+            });
+        } catch (err) {
+            console.warn('[PathService] Default rating creation failed:', err.message);
+        }
+        await pathRepository.updatePathRating(createdPath.id, 5);
+        const pathWithRating = await pathRepository.getPathById(createdPath.id);
+        return pathWithRating || createdPath;
+    }
+    return createdPath;
 };
 
 /**
@@ -76,19 +98,24 @@ const updatePathStats = async (pathId) => {
     // Update the path with new rating
     const updatedPath = await pathRepository.updatePathRating(pathId, roundedRating);
 
-    // NOTE: Further complex logic like trend analysis or 
-    // "pothole density" could be added here by querying potholeRepository
-
     console.log(`[PathService] Stats updated for path ${pathId}: Rating=${roundedRating}`);
     return updatedPath;
 };
 
 /**
- * Get all paths, optionally filtered by search (path_name) and difficulty.
- * @param {Object} params - { search?: string, difficulty?: string, limit?: number, offset?: number }
+ * Get all paths, optionally filtered by search (path_name or origin/destination place) and difficulty.
+ * @param {Object} params - { search?: string, searchByPlace?: boolean, limit?: number, offset?: number }
  */
 const getAllPaths = async (params = {}) => {
     return await pathRepository.getAllPaths(params);
+};
+
+/**
+ * Get published paths filtered by origin and/or destination place names.
+ * @param {Object} params - { origin?: string, destination?: string, limit?: number, offset?: number }
+ */
+const getPathsByOriginDestination = async (params = {}) => {
+    return await pathRepository.getPathsByOriginDestination(params);
 };
 
 /**
@@ -119,6 +146,7 @@ module.exports = {
     addPath,
     updatePathStats,
     getAllPaths,
+    getPathsByOriginDestination,
     getPathById,
     getPathsByUsername,
     updatePathPublished

@@ -14,6 +14,11 @@ const register = async (req, res, next) => {
             user
         });
     } catch (error) {
+        const msg = error.message || '';
+        if (msg === 'Name is required' || msg === 'Email and password are required' ||
+            msg === 'Email already registered' || msg === 'Username already taken') {
+            return res.status(400).json({ error: msg });
+        }
         next(error);
     }
 };

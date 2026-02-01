@@ -30,16 +30,11 @@ export default StyleSheet.create({
     marginTop: spacing.lg,
   },
   tripStatisticsScreen_sectionTitle: {
-    fontSize: fontSizes.medium,
+    fontSize: fontSizes.headline,
     fontWeight: fontWeights.bold,
-    color: colors.text,
+    color: colors.primary,
     marginTop: spacing.md,
     marginBottom: spacing.sm,
-  },
-  tripStatisticsScreen_emptyText: {
-    fontSize: fontSizes.body,
-    color: colors.textSecondary,
-    marginBottom: spacing.md,
   },
   tripStatisticsScreen_listItem: {
     padding: spacing.lg,

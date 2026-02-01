@@ -115,12 +115,15 @@ export async function updatePath(id, body) {
 /**
  * Search paths by text and filters.
  * On success writes to OFFLINE_DATA for offline use.
- * @param {Object} params - { search?, difficulty?, minDistance?, maxDistance?, limit? }
+ * @param {Object} params - { search?, searchBy?: 'place', difficulty?, minDistance?, maxDistance?, limit? }
  * @returns {Promise<{ data: Array }>}
  */
 export async function searchPaths(params = {}) {
+  const { searchBy, ...rest } = params;
+  const queryParams = { ...rest };
+  if (searchBy === 'place') queryParams.searchByPlace = 'true';
   const response = await requestWithRetry(() =>
-    apiClient.get(PATHS_BASE, { params })
+    apiClient.get(PATHS_BASE, { params: queryParams })
   );
   const data = response.data;
   try {

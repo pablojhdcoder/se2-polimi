@@ -36,7 +36,22 @@ export default StyleSheet.create({
     marginBottom: spacing.xs,
   },
   pathDetailScreen_header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
     marginBottom: spacing.lg,
+  },
+  pathDetailScreen_headerLeft: {
+    flex: 1,
+  },
+  pathDetailScreen_headerRating: {
+    marginLeft: spacing.md,
+    justifyContent: 'center',
+  },
+  pathDetailScreen_headerRatingText: {
+    fontSize: fontSizes.medium,
+    fontWeight: fontWeights.semibold,
+    color: colors.text,
   },
   pathDetailScreen_byline: {
     flexDirection: 'row',
@@ -159,6 +174,10 @@ export default StyleSheet.create({
     lineHeight: 22,
     marginTop: spacing.xs,
   },
+  pathDetailScreen_descriptionBlock: {
+    lineHeight: 22,
+    flex: 1,
+  },
   pathDetailScreen_actions: { marginTop: spacing.lg, gap: spacing.md },
   pathDetailScreen_actionButton: { marginBottom: spacing.sm },
   pathDetailScreen_cachedBanner: {
@@ -193,43 +212,44 @@ export default StyleSheet.create({
     color: colors.text,
     flex: 1,
   },
-  pathDetailScreen_reviewsSection: {
-    marginBottom: spacing.xl,
-  },
-  pathDetailScreen_reviewsTitle: {
-    fontSize: fontSizes.medium,
-    fontWeight: fontWeights.semibold,
-    color: colors.text,
-    marginBottom: spacing.md,
-  },
-  pathDetailScreen_reviewsLoading: {
-    fontSize: fontSizes.body,
-    color: colors.textSecondary,
-    marginBottom: spacing.sm,
-  },
-  pathDetailScreen_reviewsError: {
-    fontSize: fontSizes.body,
+  pathDetailScreen_reviewsErrorText: {
     color: colors.error,
-    marginBottom: spacing.sm,
   },
-  pathDetailScreen_reviewsEmpty: {
-    fontSize: fontSizes.body,
-    color: colors.textSecondary,
-    marginBottom: spacing.sm,
+  pathDetailScreen_starRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.xs,
+    marginTop: spacing.xs,
   },
-  pathDetailScreen_reviewCard: {
-    backgroundColor: colors.backgroundSecondary ?? '#f8f8f8',
-    padding: spacing.md,
+  pathDetailScreen_starWrap: {
+    padding: spacing.xs,
+  },
+  pathDetailScreen_star: {
+    fontSize: 28,
+    color: colors.ratings ?? colors.primary,
+  },
+  pathDetailScreen_reviewInput: {
+    borderWidth: 1,
+    borderColor: colors.border ?? '#e0e0e0',
     borderRadius: 8,
-    marginBottom: spacing.sm,
-  },
-  pathDetailScreen_reviewMeta: {
-    fontSize: fontSizes.small ?? 13,
-    color: colors.textSecondary,
-    marginBottom: spacing.xs,
-  },
-  pathDetailScreen_reviewText: {
-    fontSize: fontSizes.body,
+    padding: spacing.md,
+    fontSize: 16,
     color: colors.text,
+    minHeight: 80,
+    textAlignVertical: 'top',
+    marginTop: spacing.xs,
+  },
+  pathDetailScreen_reviewFormError: {
+    color: colors.error,
+    fontSize: 14,
+    marginTop: spacing.sm,
+  },
+  pathDetailScreen_reviewFormActions: {
+    flexDirection: 'row',
+    gap: spacing.md,
+    marginTop: spacing.lg,
+  },
+  pathDetailScreen_reviewFormBtn: {
+    flex: 1,
   },
 });

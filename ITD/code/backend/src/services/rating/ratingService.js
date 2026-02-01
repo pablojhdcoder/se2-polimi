@@ -27,14 +27,21 @@ const getRatingById = async (id) => {
 
 /**
  * Adds a rating to a path and updates path's average rating.
+ * Accepts pathId, points (or rating), opinion (or comment), reportedStatus.
  * @param {Object} ratingData Data for the new rating
  * @returns {Promise<Object>} Created rating
  */
 const addRating = async (ratingData) => {
     const ratingId = crypto.randomUUID();
+    const pointsRaw = ratingData.points ?? ratingData.rating ?? 5;
+    const points = Math.min(5, Math.max(1, parseInt(pointsRaw, 10) || 5));
+    const opinion = ratingData.opinion ?? ratingData.comment ?? null;
     const rating = {
         id: ratingId,
-        ...ratingData,
+        userId: ratingData.userId,
+        pathId: ratingData.pathId,
+        points,
+        opinion: opinion != null ? String(opinion) : null,
         reportedStatus: ratingData.reportedStatus || 'optimal'
     };
 

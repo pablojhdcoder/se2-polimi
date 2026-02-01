@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo, useRef } from 'react';
 import {
   View,
   Text,
@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
-  Alert,
   FlatList,
   ActivityIndicator,
   Switch,
@@ -49,6 +48,9 @@ export default function PathCreateManualScreen({ navigation }) {
   const [weatherLoading, setWeatherLoading] = useState(false);
   const [weatherError, setWeatherError] = useState(null);
   const [durationMinutes, setDurationMinutes] = useState('');
+  const [successBanner, setSuccessBanner] = useState(false);
+  const [createdPath, setCreatedPath] = useState(null);
+  const scrollRef = useRef(null);
 
   const handleAddWeather = useCallback(async () => {
     if (!startCoords) return;
@@ -260,24 +262,10 @@ export default function PathCreateManualScreen({ navigation }) {
       const result = await createPath(body);
       const created = result?.path ?? result?.data ?? result;
       setSubmitting(false);
-      Alert.alert(
-        STRINGS.PATH_CREATED,
-        STRINGS.PATH_CREATED_MESSAGE,
-        [
-          {
-            text: STRINGS.VIEW_DETAIL,
-            onPress: () =>
-              navigation.replace('PathDetail', {
-                pathId: created?.id,
-                path: created,
-              }),
-          },
-          {
-            text: STRINGS.BACK_TO_LIST,
-            onPress: () => navigation.replace('PathList'),
-          },
-        ]
-      );
+      setCreatedPath(created);
+      setSuccessBanner(true);
+      setError(null);
+      setTimeout(() => scrollRef.current?.scrollToEnd?.({ animated: true }), 100);
     } catch (err) {
       setSubmitting(false);
       setError(err.response?.data?.message || err.message || STRINGS.ERROR_CREATING_PATH);
@@ -300,6 +288,7 @@ export default function PathCreateManualScreen({ navigation }) {
         />
       </View>
       <ScrollView
+        ref={scrollRef}
         style={styles.pathCreateManualScreen_scroll}
         contentContainerStyle={styles.pathCreateManualScreen_content}
         keyboardShouldPersistTaps="handled"
@@ -558,6 +547,37 @@ export default function PathCreateManualScreen({ navigation }) {
         >
           <Text style={styles.pathCreateManualScreen_cancelText}>{STRINGS.CANCEL}</Text>
         </TouchableOpacity>
+
+        {successBanner ? (
+          <View style={styles.pathCreateManualScreen_successBanner}>
+            <Text style={styles.pathCreateManualScreen_successText}>
+              {STRINGS.PATH_CREATED_MESSAGE}
+            </Text>
+            <View style={styles.pathCreateManualScreen_successActions}>
+              <TouchableOpacity
+                style={styles.pathCreateManualScreen_successButton}
+                onPress={() =>
+                  navigation.replace('PathDetail', {
+                    pathId: createdPath?.id,
+                    path: createdPath,
+                  })
+                }
+              >
+                <Text style={styles.pathCreateManualScreen_successButtonText}>
+                  {STRINGS.VIEW_DETAIL}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.pathCreateManualScreen_successButton, styles.pathCreateManualScreen_successButtonSecondary]}
+                onPress={() => navigation.replace('PathList')}
+              >
+                <Text style={styles.pathCreateManualScreen_successButtonTextSecondary}>
+                  {STRINGS.BACK_TO_LIST}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        ) : null}
       </ScrollView>
     </KeyboardAvoidingView>
   );

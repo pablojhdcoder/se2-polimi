@@ -1,5 +1,4 @@
 const tripRepository = require('../../repositories/tripRepository');
-const potholeRepository = require('../../repositories/potholeRepository');
 const userRepository = require('../../repositories/userRepository');
 const weatherService = require('../external/weatherService');
 const emailService = require('../external/emailService');
@@ -80,23 +79,15 @@ const updateTripTrack = async (tripId, routeData = {}) => {
         await redisClient.rPush(`trip:${tripId}:coords`, JSON.stringify(routeData.coordinates));
     }
 
-    if (routeData && routeData.potholes && routeData.potholes.length > 0) {
-        await redisClient.rPush(`trip:${tripId}:potholes`, JSON.stringify(routeData.potholes));
-    }
-
     if (routeData && routeData.metadata && routeData.metadata.isFinal) {
         console.log(`[TripService] Finalizing trip ${tripId}. Flushing Redis to Postgres...`);
 
         const allCoordsRaw = await redisClient.lRange(`trip:${tripId}:coords`, 0, -1);
         const allCoords = allCoordsRaw.map(chunk => JSON.parse(chunk)).flat();
 
-        const allPotholesRaw = await redisClient.lRange(`trip:${tripId}:potholes`, 0, -1);
-        const allPotholes = allPotholesRaw.map(chunk => JSON.parse(chunk)).flat();
-
         const finalRouteData = {
             ...routeData,
-            coordinates: allCoords,
-            pothole_detections: allPotholes // Keeping them in the JSONB as "pending"
+            coordinates: allCoords
         };
 
         const updatedTrip = await tripRepository.updateTripRoute(tripId, finalRouteData);
@@ -114,7 +105,7 @@ const updateTripTrack = async (tripId, routeData = {}) => {
         }
 
         // Cleanup Redis
-        await redisClient.del([`trip:${tripId}:coords`, `trip:${tripId}:potholes`, `trip:${tripId}:active`]);
+        await redisClient.del([`trip:${tripId}:coords`, `trip:${tripId}:active`]);
 
         return updatedTrip;
     }
@@ -122,46 +113,9 @@ const updateTripTrack = async (tripId, routeData = {}) => {
     return { status: 'cached', tripId };
 };
 
-/**
- * Confirms selected pothole triggers from a trip and promotes them to the global potholes table.
- * @param {string} tripId 
- * @param {Array} selectedPotholeIndices - Indices of the triggers in recorded_route.pothole_detections
- */
-const confirmPotholes = async (tripId, selectedPotholeIndices) => {
-    const trip = await tripRepository.getTripById(tripId);
-    if (!trip || !trip.recorded_route || !trip.recorded_route.pothole_detections) {
-        throw new Error('Trip or pothole triggers not found');
-    }
-    if (!trip.path_id) {
-        throw new Error('Trip has no path; potholes cannot be confirmed');
-    }
-
-    const triggers = trip.recorded_route.pothole_detections;
-    const confirmed = [];
-
-    for (const index of selectedPotholeIndices) {
-        const p = triggers[index];
-        if (p) {
-            const newPothole = await potholeRepository.createPothole({
-                id: crypto.randomUUID(),
-                pathId: trip.path_id,
-                locationX: p.x,
-                locationY: p.y,
-                detectedDate: new Date(),
-                size: p.severity || 1,
-                status: 'confirmed'
-            });
-            confirmed.push(newPothole);
-        }
-    }
-
-    return confirmed;
-};
-
 module.exports = {
     automaticTripStart,
     manualTripStart,
     updateTripTrack,
-    confirmPotholes,
     trip_record
 };
