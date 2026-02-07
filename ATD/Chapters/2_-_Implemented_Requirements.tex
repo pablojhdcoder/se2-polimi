@@ -1,6 +1,6 @@
 \section{Overview}
 \label{sec:overview}
-We followed the installation instructions from the \textbf{Backend README} and \textbf{App README} in the Errigo-Gholami-Ianosel repository. The BBP backend is implemented in Node.js with TypeScript, Express, PostgreSQL (via Prisma), and Redis. The mobile application uses Expo and React Native. We performed dependency installation, Prisma client generation, and executed the automated test suites. The backend test suite ran successfully; the app test runner reported no tests found on the evaluation environment (Windows), as documented below.
+We followed the installation instructions from the \textbf{Backend README} and \textbf{App README} in the Errigo-Gholami-Ianosel repository. The BBP backend is implemented in Node.js with TypeScript, Express, PostgreSQL (via Prisma), and Redis. The mobile application uses Expo and React Native. We performed dependency installation, database and runtime setup as documented in the Backend README, Prisma client generation and migrations, and executed the automated test suites. The backend test suite ran successfully; the app test runner reported no tests found on the evaluation environment (Windows).
 
 \section{Prerequisites}
 \label{sec:prerequisites}
@@ -51,16 +51,27 @@ npm install
 \section{Backend Installation}
 \label{sec:backend_installation}
 
-\subsection{Prisma Client Generation}
+\subsection{Database and runtime setup}
+\label{subsec:database_setup}
+Following the Backend README (Database \& Prisma, First-time Setup), we ran the backend with a \textbf{local PostgreSQL} database as follows:
+\begin{enumerate}
+    \item Created a PostgreSQL database (e.g. \texttt{bbp}) either via the system installation or via Docker: \texttt{docker run -d -e POSTGRES\_USER=bbp -e POSTGRES\_PASSWORD=bbp -e POSTGRES\_DB=bbp -p 5432:5432 postgres:16-alpine}.
+    \item Created a \texttt{.env} file in \texttt{IT/CODE/BACKEND} with \texttt{DATABASE\_URL="postgresql://bbp:bbp@localhost:5432/bbp"} (or equivalent), \texttt{JWT\_SECRET} and \texttt{JWT\_REFRESH\_SECRET} set to long random strings, and \texttt{REDIS\_HOST=localhost} when using a local Redis instance.
+    \item Ran \texttt{npx prisma migrate deploy} to apply all migrations in \texttt{prisma/migrations} and create the schema in the database.
+    \item Ran \texttt{npx prisma generate --schema=prisma/schema.prisma} to generate the Prisma client.
+\end{enumerate}
+After this, \texttt{npm run dev} could start the API successfully and \texttt{curl -i http://localhost:3000/health} returned 200 OK.
+
+\subsection{Prisma Client Generation (for tests without a real database)}
 \begin{itemize}
-    \item The backend uses Prisma with a configuration file \texttt{prisma.config.ts} that reads \texttt{DATABASE\_URL} from the environment. Even for \texttt{prisma generate}, this variable must be set.
-    \item We set a placeholder \texttt{DATABASE\_URL} and ran:
+    \item For running only the test suite (no server), the backend uses Prisma with \texttt{prisma.config.ts}, which reads \texttt{DATABASE\_URL} from the environment. Even for \texttt{prisma generate}, this variable must be set.
+    \item We set a placeholder \texttt{DATABASE\_URL} (e.g. \texttt{postgresql://user:pass@localhost:5432/bbp}) and ran:
 \end{itemize}
 \begin{verbatim}
 npx prisma generate --schema=prisma/schema.prisma
 \end{verbatim}
 \begin{itemize}
-    \item Prisma Client and the JSON types generator completed successfully.
+    \item Prisma Client and the JSON types generator completed successfully. The tests use mocks and do not require a real database.
 \end{itemize}
 
 \subsection{Backend Test Execution}
@@ -87,15 +98,20 @@ npx jest
 \section{Problems Encountered and Documentation Incoherences}
 \label{sec:problems_encountered}
 \begin{itemize}
-    \item \textbf{Prisma requires \texttt{DATABASE\_URL} for \texttt{prisma generate}:} The backend README states that Prisma is used for schema and migrations; it does not explicitly mention that \texttt{DATABASE\_URL} must be set before running \texttt{prisma generate} when using \texttt{prisma.config.ts}. Setting a placeholder URL allowed generation and tests to proceed.
-    \item \textbf{Backend \texttt{npm test} on Windows:} The test script uses \texttt{NODE\_OPTIONS='--localstorage-file=./jest-storage' jest}, which is not valid in Windows cmd; we ran \texttt{npx jest} with \texttt{NODE\_OPTIONS} set in the shell instead.
-    \item \textbf{App Jest \texttt{testMatch} on Windows:} No tests were discovered by Jest in the app project on Windows; the brace pattern in \texttt{testMatch} may behave differently on this platform. This is an environment-specific issue rather than a documentation error.
+    \item \textbf{JWT secrets not documented as required:} The \texttt{.env} example in the README shows \texttt{JWT\_SECRET=} and \texttt{JWT\_REFRESH\_SECRET=} empty. The backend requires non-empty values to start. The README does not state that these must be set (e.g. minimum length or format).
+    \item \textbf{Redis for local run:} The example uses \texttt{REDIS\_HOST=redis} (Docker service name). For running the backend on the host (not in Docker), the README does not indicate setting \texttt{REDIS\_HOST=localhost} or how to start Redis locally (e.g. Docker or system install).
+    \item \textbf{Order of operations:} It is not explicit that a working \texttt{DATABASE\_URL} and applied migrations are required \emph{before} \texttt{npm run dev}, and that the server will fail to start without a valid database connection.
+    \item \textbf{Prisma requires \texttt{DATABASE\_URL} for \texttt{prisma generate}:} When using \texttt{prisma.config.ts}, \texttt{DATABASE\_URL} must be set even for \texttt{prisma generate}. The README does not state this; we used a placeholder URL for test runs.
+    \item \textbf{Backend \texttt{npm test} on Windows:} The test script uses \texttt{NODE\_OPTIONS='--localstorage-file=./jest-storage' jest}, which is not valid in Windows cmd. We ran \texttt{npx jest} with \texttt{NODE\_OPTIONS} set in the shell instead.
+    \item \textbf{App Jest \texttt{testMatch} on Windows:} No tests were discovered by Jest in the app project on Windows; the \texttt{testMatch} pattern with braces may behave differently on this platform. This is an environment-specific issue; the app README does not mention it.
+    \item \textbf{Console error ``Maximum update depth exceeded'' (Create path, emulator):} When testing the ``Create path'' flow in manual draw mode (drawing the route on the map by tapping or dragging), the app displayed a red console error: ``Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render.'' The call stack pointed to \texttt{handlePanDrag} in \texttt{IT/CODE/APP/src/app/(main)/create-path.tsx}. The cause is the combination of \texttt{onPanDrag} on the MapView (which calls \texttt{setDrawnRoute} on each drag event) and a \texttt{useEffect} that depends on \texttt{drawnRoute} and triggers further state updates (e.g. snapping); under rapid pan/drag in the emulator this can exceed React's maximum update depth. \textbf{Impact:} the Create path screen can become unusable when drawing by dragging. \textbf{Workaround:} use taps on the map to add points instead of long drags, or test on a physical device. See ``Errors encountered during manual testing'' in \texttt{HOW\_TO\_TEST\_MANUALLY.md} for full details.
 \end{itemize}
 
 \section{Observations}
 \label{sec:observations}
 \begin{itemize}
-    \item The backend README is clear and well-structured (directory walkthrough, prerequisites, env vars, first-time setup, testing, troubleshooting).
+    \item The backend README is well-structured (directory walkthrough, prerequisites, env vars, database and Prisma setup, first-time setup, testing, troubleshooting).
     \item The backend test suite is substantial (unit and integration tests) and ran successfully without a real database, indicating good use of mocks and test design.
-    \item The app README explains Expo, env vars, and first-time setup clearly; the test configuration issue we encountered is likely environment-specific.
+    \item The app README explains Expo, env vars, and first-time setup clearly; the app project root (\texttt{IT/CODE/APP/src}) and the need for at least one API URL are stated. The test configuration issue we encountered on Windows is likely environment-specific.
+    \item This ATD documents the full installation and database setup steps we followed so that the procedure is recorded for future evaluators and for the tested team's reference.
 \end{itemize}
