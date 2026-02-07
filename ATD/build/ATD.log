@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.3)  7 FEB 2026 18:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.3)  7 FEB 2026 19:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1192,6 +1192,10 @@ LaTeX Font Info:    Trying to load font information for U+psy on input line 64.
 (C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\upsy.fd
 File: upsy.fd 2001/06/04 font definitions for U/psy.
 ))
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
+\Urlmuskip=\muskip18
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
 (C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref.sty
 Package: hyperref 2025-07-12 v7.01o Hypertext links for LaTeX
 
@@ -1261,11 +1265,6 @@ Package hyperref Info: Backreferencing OFF on input line 4215.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4462.
 \c@Hy@tempcnt=\count369
-
-(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
-\Urlmuskip=\muskip18
-Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
-)
 LaTeX Info: Redefining \url on input line 4801.
 \XeTeXLinkMargin=\dimen324
 
@@ -1419,24 +1418,24 @@ File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 Jose\ATD\build\ATD.aux)
 \openout1 = `ATD.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 96.
-LaTeX Font Info:    ... okay on input line 96.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 96.
-LaTeX Font Info:    ... okay on input line 96.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 96.
-LaTeX Font Info:    ... okay on input line 96.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 96.
-LaTeX Font Info:    ... okay on input line 96.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 96.
-LaTeX Font Info:    ... okay on input line 96.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 96.
-LaTeX Font Info:    ... okay on input line 96.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 96.
-LaTeX Font Info:    ... okay on input line 96.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 96.
-LaTeX Font Info:    ... okay on input line 96.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 96.
-LaTeX Font Info:    ... okay on input line 96.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 97.
+LaTeX Font Info:    ... okay on input line 97.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 97.
+LaTeX Font Info:    ... okay on input line 97.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 97.
+LaTeX Font Info:    ... okay on input line 97.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 97.
+LaTeX Font Info:    ... okay on input line 97.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 97.
+LaTeX Font Info:    ... okay on input line 97.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 97.
+LaTeX Font Info:    ... okay on input line 97.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 97.
+LaTeX Font Info:    ... okay on input line 97.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 97.
+LaTeX Font Info:    ... okay on input line 97.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 97.
+LaTeX Font Info:    ... okay on input line 97.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1508,7 +1507,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 fg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring ON on input line 96.
+Package hyperref Info: Link coloring ON on input line 97.
 
 (C:\Users\pablo\Desktop\Informatica\3\Polimi\SoftwareEngineering2\Project\Pablo
 Jose\ATD\build\ATD.out)
@@ -1535,45 +1534,45 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 <./Images/PolimiLogo.png, id=162, 405.515pt x 125.46875pt>
 File: ./Images/PolimiLogo.png Graphic file (type png)
 <use ./Images/PolimiLogo.png>
-Package pdftex.def Info: ./Images/PolimiLogo.png  used on input line 108.
+Package pdftex.def Info: ./Images/PolimiLogo.png  used on input line 109.
 (pdftex.def)             Requested size: 302.73503pt x 93.67055pt.
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
-08.
+09.
 
 (C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
-08.
+09.
 
 (C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-108.
+109.
 
 (C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/lm\omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-108.
+109.
 
 (C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/lm\omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 108.
+(Font)              <12> on input line 109.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 108.
+(Font)              <8> on input line 109.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 108.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 108
+(Font)              <6> on input line 109.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 109
 .
 
 (C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 108
+LaTeX Font Info:    Trying to load font information for U+msb on input line 109
 .
 
 (C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
@@ -1587,7 +1586,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 o/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc} <./Images/PolimiL
 ogo.png>]
 (C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd)
-Overfull \hbox (23.99998pt too wide) in alignment at lines 108--108
+Overfull \hbox (23.99998pt too wide) in alignment at lines 109--109
 [][] 
  []
 
@@ -1651,7 +1650,7 @@ l.64 \end{itemize}
 ]
 Chapter 2.
 (Chapters/2_-_Implemented_Requirements.tex
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 9
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 3
 .
 
 (C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
@@ -1663,10 +1662,9 @@ ocker Com-pose (op-tional), Prisma
  []
 
 
-Overfull \hbox (73.30823pt too wide) in paragraph at lines 10--11
+Overfull \hbox (70.04424pt too wide) in paragraph at lines 10--11
 \T1/lmr/m/n/12 cal de-vice). En-vi-ron-ment vari-ables \T1/lmtt/m/n/12 EXPO_PUB
-LIC_PROD_API_URL \T1/lmr/m/n/12 or \T1/lmtt/m/n/12 EXPO_PUBLIC_DEVEL_API_URL\T1
-/lmr/m/n/12 ,
+LIC_PROD_API_URL \T1/lmr/m/n/12 or \T1/lmtt/m/n/12 EXPO_PUBLIC_DEVEL_API_URL
  []
 
 [5
@@ -1678,81 +1676,95 @@ Overfull \hbox (137.29642pt too wide) in paragraph at lines 59--60
 resql://bbp:bbp@localhost:5432/bbp"
  []
 
-
+[6]
 Overfull \hbox (10.66907pt too wide) in paragraph at lines 61--62
 []\T1/lmr/m/n/12 Ran \T1/lmtt/m/n/12 npx prisma generate --schema=prisma/schema
 .prisma \T1/lmr/m/n/12 to gen-er-ate the Prisma
  []
 
-[6]
+
 Overfull \hbox (0.28378pt too wide) in paragraph at lines 63--64
 \T1/lmr/m/n/12 Thereafter, \T1/lmtt/m/n/12 npm run dev \T1/lmr/m/n/12 started t
 he API and \T1/lmtt/m/n/12 curl -i http://localhost:3000/health
  []
 
 
-Overfull \hbox (87.6236pt too wide) in paragraph at lines 65--66
-\T1/lmr/m/n/12 Ac-cel-er-ate. The shipped \T1/lmtt/m/n/12 prisma-client.ts \T1/
-lmr/m/n/12 only sup-ported an Ac-cel-er-ate URL (\T1/lmtt/m/n/12 prisma+postgre
-s://\T1/lmr/m/n/12 ...).
+Underfull \hbox (badness 1173) in paragraph at lines 66--67
+\T1/lmr/m/n/12 ing Prisma Ac-cel-er-ate. The shipped \T1/lmtt/m/n/12 prisma-cli
+ent.ts \T1/lmr/m/n/12 only sup-ported an Ac-
  []
 
 
-Overfull \hbox (7.88112pt too wide) in paragraph at lines 81--81
+Overfull \hbox (7.88112pt too wide) in paragraph at lines 83--83
 []  \T1/lmtt/m/n/12 : new PrismaClient({ adapter: new PrismaPg({ connectionStri
 ng: url }) });[] 
  []
 
 
-Overfull \hbox (10.75893pt too wide) in paragraph at lines 85--85
+Overfull \hbox (10.75893pt too wide) in paragraph at lines 87--87
 |[]\T1/lmr/bx/n/14.4 Prisma Client Gen-er-a-tion (for tests with-out a real dat
 abase)| 
  []
 
 
-Overfull \hbox (35.7009pt too wide) in paragraph at lines 87--88
+Overfull \hbox (35.7009pt too wide) in paragraph at lines 89--90
 []\T1/lmr/m/n/12 To run only the test suite (no server), the back-end re-lies o
 n Prisma with \T1/lmtt/m/n/12 prisma.config.ts\T1/lmr/m/n/12 ,
  []
 
-
-Overfull \hbox (31.62892pt too wide) in paragraph at lines 88--89
+[7]
+Overfull \hbox (31.62892pt too wide) in paragraph at lines 90--91
 []\T1/lmr/m/n/12 With a place-holder \T1/lmtt/m/n/12 DATABASE_URL \T1/lmr/m/n/1
 2 (e.g. \T1/lmtt/m/n/12 postgresql://user:pass@localhost:5432/bbp\T1/lmr/m/n/12
  )
  []
 
-[7]
-Overfull \hbox (290.7792pt too wide) in paragraph at lines 115--116
-[]\T1/lmr/bx/n/12 Outcome: \T1/lmr/m/n/12 Jest re-ported ``No tests found''. Th
-e con-fig uses \T1/lmtt/m/n/12 testMatch: ["<rootDir>/tests/{unit,integration}/
-**/*.test.ts?(x)"]\T1/lmr/m/n/12 ;
+
+Overfull \hbox (86.65727pt too wide) in paragraph at lines 116--117
+\T1/lmr/m/n/12 dows, the orig-i-nal \T1/lmtt/m/n/12 testMatch \T1/lmr/m/n/12 pa
+t-tern with braces (\T1/lmtt/m/n/12 tests/{unit,integration}/**/*.test.ts?(x)\T
+1/lmr/m/n/12 )
  []
 
-[8]
-LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 132.
 
-Overfull \hbox (34.2327pt too wide) in paragraph at lines 132--133
+Overfull \hbox (101.72292pt too wide) in paragraph at lines 116--117
+\T1/lmtt/m/n/12 <rootDir>/tests/unit/**/*.test.ts?(x) \T1/lmr/m/n/12 and \T1/lm
+tt/m/n/12 <rootDir>/tests/integration/**/*.test.ts?(x)\T1/lmr/m/n/12 ,
+ []
+
+
+Overfull \hbox (75.29515pt too wide) in paragraph at lines 117--118
+\T1/lmr/m/n/12 The sin-gle fail-ure is in \T1/lmtt/m/n/12 tests/integration/pat
+hs/searchResultsSheet.integration.test.tsx
+ []
+
+[8{C:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.en
+c}]
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 134.
+
+Overfull \hbox (34.2327pt too wide) in paragraph at lines 134--135
 []\T1/lmr/bx/n/12 Prisma re-quires \T1/lmtt/b/n/12 DATABASE_URL \T1/lmr/bx/n/12
  for \T1/lmtt/b/n/12 prisma generate\T1/lmr/bx/n/12 : \T1/lmr/m/n/12 When us-in
 g \T1/lmtt/m/n/12 prisma.config.ts\T1/lmr/m/n/12 ,
  []
 
 
-Overfull \hbox (155.82065pt too wide) in paragraph at lines 133--134
+Overfull \hbox (155.82065pt too wide) in paragraph at lines 135--136
 []\T1/lmr/bx/n/12 Backend \T1/lmtt/b/n/12 npm test \T1/lmr/bx/n/12 on Win-dows:
  \T1/lmr/m/n/12 The test script uses \T1/lmtt/m/n/12 NODE_OPTIONS='--localstora
 ge-file=./jest-storage'
  []
 
 [9]
-Overfull \hbox (29.44872pt too wide) in paragraph at lines 137--138
+Overfull \hbox (29.44872pt too wide) in paragraph at lines 139--140
 \T1/lmr/m/n/12 snap-ping some-times fails with \T1/lmtt/m/n/12 WARN Failed to s
 nap segment [AxiosError: Request
  []
 
-) [10]
+[10]) [11] [12
+
+]
 Chapter 3.
 (Chapters/3_-_Design_Choices.tex
 Underfull \hbox (badness 10000) in paragraph at lines 18--18
@@ -1849,8 +1861,7 @@ Underfull \hbox (badness 1953) in paragraph at lines 28--28
 \T1/lmr/m/n/12 gout, to-ken han-
  []
 
-[11
-
+[13
 
 ]
 Underfull \hbox (badness 2707) in paragraph at lines 43--43
@@ -1952,7 +1963,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 59--59
 []|\T1/lmr/m/n/12 Trip in-te-gra-tion
  []
 
-[12]
+[14]
 Underfull \hbox (badness 10000) in paragraph at lines 74--74
 []|\T1/lmr/bx/n/12 Test De-scrip-
  []
@@ -2017,7 +2028,7 @@ Underfull \hbox (badness 1888) in paragraph at lines 80--80
 \T1/lmr/m/n/12 (time-outs, er-rors)
  []
 
-[13]
+[15]
 Underfull \hbox (badness 10000) in paragraph at lines 95--95
 []|\T1/lmr/bx/n/12 Test De-scrip-
  []
@@ -2107,7 +2118,7 @@ Overfull \hbox (3.39342pt too wide) in paragraph at lines 93--104
  [][] 
  []
 
-[14]
+[16]
 Underfull \hbox (badness 2707) in paragraph at lines 116--116
 []|\T1/lmr/bx/n/12 Test De-scrip-
  []
@@ -2227,7 +2238,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 128--128
 []|\T1/lmr/m/n/12 Visibility up-
  []
 
-[15]
+[17]
 Underfull \hbox (badness 10000) in paragraph at lines 143--143
 []|\T1/lmr/bx/n/12 Test De-scrip-
  []
@@ -2307,7 +2318,7 @@ Underfull \hbox (badness 1184) in paragraph at lines 151--151
 \T1/lmr/m/n/12 tests (search, de-
  []
 
-[16]
+[18]
 Underfull \hbox (badness 10000) in paragraph at lines 166--166
 []|\T1/lmr/bx/n/12 Test De-scrip-
  []
@@ -2417,7 +2428,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 191--191
 []|\T1/lmr/m/n/12 App UI; app
  []
 
-[17]
+[19]
 Overfull \hbox (3.92902pt too wide) in paragraph at lines 203--204
 []\T1/lmr/bx/n/12 Unit: \T1/lmr/m/n/12 auth.manager, er-ror.handler, fetch, geo
 , geocod-ing.service, jwt, path.manager,
@@ -2448,14 +2459,14 @@ postgresql:// \T1/lmr/m/n/12 URL (via \T1/lmtt/m/n/12 @prisma/adapter-pg\T1/lmr
 /m/n/12 ),
  []
 
-[18]
+[20]
 Overfull \hbox (18.53075pt too wide) in paragraph at lines 227--228
 []\T1/lmr/bx/n/12 Backend \T1/lmtt/b/n/12 npm test \T1/lmr/bx/n/12 script: \T1/
 lmr/m/n/12 A cross-platform way to set \T1/lmtt/m/n/12 NODE_OPTIONS \T1/lmr/m/n
 /12 (e.g. \T1/lmtt/m/n/12 cross-env
  []
 
-) [19] [20
+) [21] [22
 
 ]
 Chapter 4.
@@ -2464,9 +2475,9 @@ Underfull \hbox (badness 2134) in paragraph at lines 15--15
 []|\T1/lmr/m/n/12 Pablo Jesús Her-rero
  []
 
-) [21
+) [23
 
-] [22
+] [24
 
 ]
 Chapter 5.
@@ -2476,9 +2487,9 @@ Overfull \hbox (29.01918pt too wide) in paragraph at lines 5--6
 A3IA/Errigo-Gholami-Ianosel[][]. 
  []
 
-) [23
+) [25
 
-] [24
+] [26
 
 ]
 (C:\Users\pablo\Desktop\Informatica\3\Polimi\SoftwareEngineering2\Project\Pablo
@@ -2486,9 +2497,9 @@ Jose\ATD\build\ATD.lot)
 \tf@lot=\write6
 \openout6 = `ATD.lot'.
 
- [25
+ [27
 
-] [26
+] [28
 
 ]
 
@@ -2510,25 +2521,26 @@ Package rerunfilecheck Info: File `ATD.out' has not changed.
 (rerunfilecheck)             Checksum: 15422D8F28BABEBECA7AD347985A2872;7126.
  ) 
 Here is how much of TeX's memory you used:
- 31208 strings out of 467871
- 584030 string characters out of 5418376
+ 31213 strings out of 467871
+ 584119 string characters out of 5418376
  988353 words of memory out of 5000000
- 59368 multiletter control sequences out of 15000+600000
+ 59370 multiletter control sequences out of 15000+600000
  693431 words of font info for 85 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,12n,94p,1263b,615s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,12n,94p,1263b,611s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pf
 b><C:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb
 ><C:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb>
 <C:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C
 :/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C
+:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C
 :/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtk10.pfb><C
 :/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb><C
 :/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/urw/zapfding/uzdr.pfb>
 Output written on C:\Users\pablo\Desktop\Informatica\3\Polimi\SoftwareEngineeri
-ng2\Project\PabloJose\ATD\build\ATD.pdf (30 pages, 301498 bytes).
+ng2\Project\PabloJose\ATD\build\ATD.pdf (32 pages, 308238 bytes).
 PDF statistics:
- 453 PDF objects out of 1000 (max. 8388607)
- 100 named destinations out of 1000 (max. 500000)
+ 469 PDF objects out of 1000 (max. 8388607)
+ 102 named destinations out of 1000 (max. 500000)
  330 words of extra memory for PDF output out of 10000 (max. 10000000)
 
