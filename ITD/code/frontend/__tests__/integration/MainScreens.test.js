@@ -13,7 +13,7 @@ const mockNavigate = jest.fn();
 const mockGoBack = jest.fn();
 jest.mock('../../src/services/pathsApi', () => ({
     getPaths: jest.fn().mockResolvedValue([]),
-    getPathById: jest.fn(),
+    getPathById: jest.fn().mockResolvedValue({ id: '1', name: 'Greenway', distance: 10 }),
     searchPaths: jest.fn().mockResolvedValue([]),
     createPath: jest.fn(),
     getCachedPaths: jest.fn().mockResolvedValue([]),

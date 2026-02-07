@@ -12,19 +12,28 @@ import PathDetailScreen from '../../src/pages/PathDetailScreen/PathDetailScreen'
 // --- Mocks ---
 jest.mock('../../src/services/api', () => ({
     __esModule: true,
-    default: { post: jest.fn(), request: jest.fn() },
+    default: {
+        post: jest.fn().mockResolvedValue({ data: {} }),
+        get: jest.fn().mockResolvedValue({ data: [] }),
+        request: jest.fn().mockResolvedValue({ data: {} }),
+        interceptors: { request: { use: jest.fn() }, response: { use: jest.fn() } }
+    },
     setNetworkStatusCallbacks: jest.fn(),
 }));
+
 jest.mock('../../src/storage', () => ({
     setSession: jest.fn(() => Promise.resolve()),
     getToken: jest.fn(() => Promise.resolve(null)),
     getUser: jest.fn(() => Promise.resolve(null)),
     getSyncQueue: jest.fn(() => Promise.resolve([])),
+    clearSession: jest.fn(() => Promise.resolve()),
 }));
+
 jest.mock('../../src/services/pathsApi', () => ({
     getPaths: jest.fn().mockResolvedValue([]),
     normalizePathForDisplay: (p) => p,
 }));
+
 jest.mock('../../src/services/syncQueueProcessor', () => ({
     processSyncQueue: jest.fn(() => Promise.resolve()),
 }));
@@ -49,31 +58,28 @@ function AppFlowWrapper() {
 }
 
 describe('App Level Flows', () => {
+    beforeEach(() => {
+        jest.clearAllMocks();
+    });
+
     it('Authentication Flow: can navigate from Home to Login and back', async () => {
-        const { getByText } = render(<AppFlowWrapper />);
-        fireEvent.press(getByText('Log in'));
-        expect(getByText('Enter')).toBeTruthy();
-        fireEvent.press(getByText('Back'));
+        const { getByText, queryByText } = render(<AppFlowWrapper />);
+
+        // Check Home
         expect(getByText('Best Bike Paths')).toBeTruthy();
+
+        // Navigate to Login
+        fireEvent.press(getByText('Log in'));
+        await waitFor(() => expect(getByText('Enter')).toBeTruthy());
+
+        // Back to Home
+        fireEvent.press(getByText('Back'));
+        await waitFor(() => expect(getByText('Best Bike Paths')).toBeTruthy());
     });
 
-    it('Path Browsing Flow: can navigate from List to Detail', async () => {
-        const pathsApi = require('../../src/services/pathsApi');
-        pathsApi.getPaths.mockResolvedValue([{ id: 'p1', name: 'Scenic Route' }]);
-
-        // We can't easily logout in this simplified wrapper test without more setup,
-        // so we'll just assume we're testing the navigation logic.
+    it('Sync/Offline Integration: provides context without crashing', async () => {
+        // Basic render test for the complex provider tree
         const { getByText } = render(<AppFlowWrapper />);
-
-        // In a real app we'd navigate to PathList from somewhere else,
-        // but here we can just verify the navigation container works.
-    });
-
-    it('Sync/Offline Integration: displays pending items in header (context check)', async () => {
-        const storage = require('../../src/storage');
-        storage.getSyncQueue.mockResolvedValue([{ id: '1' }]);
-
-        // This is more of an integration test for the provider logic.
-        // Full E2E would check the banner visibility in the root View.
+        expect(getByText('Best Bike Paths')).toBeTruthy();
     });
 });
