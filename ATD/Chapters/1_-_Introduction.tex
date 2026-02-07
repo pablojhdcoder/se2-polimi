@@ -2,6 +2,10 @@
 \label{sec:purpose}%
 Best Bike Paths (BBP) is a third-party project delivered within the Software Engineering 2 course. This Acceptance Testing Document (ATD) records the validation process: we run a structured set of acceptance tests and report whether the implementation aligns with the Design Document (DD) and the Requirements Analysis and Specification Document (RASD). Our work focuses on checking that core features work as specified, and on judging how well the system matches the intended user experience and behaviour.
 
+\section{Tested Project}
+\label{sec:tested_project}%
+The implementation under evaluation is Best Bike Paths (BBP). It was developed by \textbf{Bianca Roberta Ianosel, Vajihe Gholami, and Simone Errigo}; the source code and deliverables are available in their (\href{https://github.com/BIA3IA/Errigo-Gholami-Ianosel}{\textbf{\textcolor{blue}{\underline{course repository}}}}) . For this ATD, the reference basis for acceptance are the next documents: the Requirements Analysis and Specification Document (RASD), the Design Document (DD), and the Implementation and Test Document (ITD).
+
 \section{Scope}
 \label{subsec:scope}% 
 
@@ -10,41 +14,23 @@ BBP targets a better cycling experience through collection, validation, and visu
     \item \textbf{User Registration and Authentication:} Guests can create an account; registered users can log in, view and update their profile, and log out.
     \item \textbf{Trip Recording and Management:} Users can start and stop cycling trips; logged-in users can save trips and view trip history, statistics, and delete trips.
     \item \textbf{Path Creation:} Logged-in users can create paths manually (by drawing) or automatically (using GPS tracking during a ride).
-    \item \textbf{Reporting and Path Status:} Logged-in users can report obstacles and path conditions; the system aggregates reports and evaluates path status (optimal, medium, sufficient, requires maintenance, closed).
+    \item \textbf{Reporting and Path Status:} Logged-in users can report obstacles and path conditions; the system aggregates reports and evaluates path status.
     \item \textbf{Route Discovery and Search:} Any user can browse public paths on a map and search for paths between two locations; the system ranks suggested routes by quality and distance.
     \item \textbf{External Services:} Integration with weather data, geocoding, and map services.
 \end{itemize}
 
-The implementation under test is authored by:
-\begin{itemize}
-    \item Ianosel Bianca Roberta
-    \item Gholami Vajihe
-    \item Errigo Simone
-\end{itemize}
-
-Source code and deliverables: \href{https://github.com/BIA3IA/Errigo-Gholami-Ianosel}{Errigo-Gholami-Ianosel}.
-
 \section{Revision History}
 \label{sec:revision_history}
 
-\begin{table}[H]
-    \centering
-    \begin{tabular}{ |p{0.1\linewidth}|p{0.15\linewidth}|p{0.45\linewidth}|p{0.2\linewidth}| }
-        \hline
-        \textbf{Version} & \textbf{Date} & \textbf{Description} & \textbf{Authors} \\
-        \hline
-        1.0 & 07 February 2026 & Initial Release & Jos\'e Mart\'inez Est\'evez, Pablo Jes\'us Herrero D\'iaz \\
-        \hline
-    \end{tabular}
-    \caption{Revision History}
-    \label{tab:revision_history}
-\end{table}
+\begin{itemize}
+    \item \textbf{Version 1.0} (07 February 2026): Initial Release by Jos\'e Mart\'inez Est\'evez and Pablo Jes\'us Herrero D\'iaz
+\end{itemize}
 
 \section{Reference Documents}
 \label{sec:reference_documents}%
 \begin{itemize}
     \item \href{https://github.com/BIA3IA/Errigo-Gholami-Ianosel}{\textbf{\textcolor{blue}{\underline{Errigo-Gholami-Ianosel repository}}}}
-    \item RASD, DD, and ITD for Best Bike Paths (available in the repository DeliveryFolder and corresponding folders).
+    \item RASD, DD and ITD for Best Bike Paths (available in the repository DeliveryFolder).
 \end{itemize}
 
 \section{Document Structure}
