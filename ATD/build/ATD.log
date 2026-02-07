@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.3)  7 FEB 2026 20:27
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.3)  7 FEB 2026 21:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1710,23 +1710,23 @@ hs/searchResultsSheet.integration.test.tsx
 [6{C:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.en
 c}]
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 136.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 130.
 
-Overfull \hbox (34.2327pt too wide) in paragraph at lines 136--137
+Overfull \hbox (34.2327pt too wide) in paragraph at lines 130--131
 []\T1/lmr/bx/n/12 Prisma re-quires \T1/lmtt/b/n/12 DATABASE_URL \T1/lmr/bx/n/12
  for \T1/lmtt/b/n/12 prisma generate\T1/lmr/bx/n/12 : \T1/lmr/m/n/12 When us-in
 g \T1/lmtt/m/n/12 prisma.config.ts\T1/lmr/m/n/12 ,
  []
 
-[7]
-Overfull \hbox (155.82065pt too wide) in paragraph at lines 137--138
+
+Overfull \hbox (155.82065pt too wide) in paragraph at lines 131--132
 []\T1/lmr/bx/n/12 Backend \T1/lmtt/b/n/12 npm test \T1/lmr/bx/n/12 on Win-dows:
  \T1/lmr/m/n/12 The test script uses \T1/lmtt/m/n/12 NODE_OPTIONS='--localstora
 ge-file=./jest-storage'
  []
 
-
-Overfull \hbox (29.44872pt too wide) in paragraph at lines 141--142
+[7]
+Overfull \hbox (29.44872pt too wide) in paragraph at lines 135--136
 \T1/lmr/m/n/12 snap-ping some-times fails with \T1/lmtt/m/n/12 WARN Failed to s
 nap segment [AxiosError: Request
  []
@@ -2398,53 +2398,52 @@ Underfull \hbox (badness 10000) in paragraph at lines 191--191
  []
 
 [17]
-Overfull \hbox (3.92902pt too wide) in paragraph at lines 203--204
+Overfull \hbox (3.92902pt too wide) in paragraph at lines 212--213
 []\T1/lmr/bx/n/12 Unit: \T1/lmr/m/n/12 auth.manager, er-ror.handler, fetch, geo
 , geocod-ing.service, jwt, path.manager,
  []
 
 
-Overfull \hbox (32.96863pt too wide) in paragraph at lines 203--204
+Overfull \hbox (32.96863pt too wide) in paragraph at lines 212--213
 \T1/lmr/m/n/12 re-port.manager, snap-ping.service, stat.manager, trip.manager, 
 trip.weather, user.manager,
  []
 
-
-Overfull \hbox (24.43924pt too wide) in paragraph at lines 213--214
+[18]
+Overfull \hbox (24.43924pt too wide) in paragraph at lines 222--223
 []\T1/lmr/m/n/12 Snapping (OSRM) and geocod-ing (Nom-i-na-tim) are ex-er-cised 
 by back-end unit/integration
  []
 
 
-Overfull \hbox (62.83392pt too wide) in paragraph at lines 219--220
+Overfull \hbox (62.83392pt too wide) in paragraph at lines 228--229
 []\T1/lmr/bx/n/12 Prisma: sup-port both Post-greSQL URL and Ac-cel-er-ate: \T1/
 lmr/m/n/12 The de-fault \T1/lmtt/m/n/12 prisma-client.ts
  []
 
 
-Overfull \hbox (42.20313pt too wide) in paragraph at lines 219--220
+Overfull \hbox (42.20313pt too wide) in paragraph at lines 228--229
 \T1/lmr/m/n/12 could sup-port both Ac-cel-er-ate and a di-rect \T1/lmtt/m/n/12 
 postgresql:// \T1/lmr/m/n/12 URL (via \T1/lmtt/m/n/12 @prisma/adapter-pg\T1/lmr
 /m/n/12 ),
  []
 
-[18]
-Overfull \hbox (18.53075pt too wide) in paragraph at lines 227--228
+[19]
+Overfull \hbox (18.53075pt too wide) in paragraph at lines 236--237
 []\T1/lmr/bx/n/12 Backend \T1/lmtt/b/n/12 npm test \T1/lmr/bx/n/12 script: \T1/
 lmr/m/n/12 A cross-platform way to set \T1/lmtt/m/n/12 NODE_OPTIONS \T1/lmr/m/n
 /12 (e.g. \T1/lmtt/m/n/12 cross-env
  []
 
-) [19] [20
-
-]
+) [20]
 Chapter 4.
 (Chapters/4_-_Overall_Project_Conclusion.tex [21
+
 
 ]) [22]
 Chapter 5.
 (Chapters/5_-_Effort_Spent.tex
-Underfull \hbox (badness 2134) in paragraph at lines 15--15
+Underfull \hbox (badness 2134) in paragraph at lines 16--16
 []|\T1/lmr/m/n/12 Pablo Jesús Her-rero
  []
 
@@ -2491,11 +2490,11 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2025-11-06>
  ***********
 Package rerunfilecheck Info: File `ATD.out' has not changed.
-(rerunfilecheck)             Checksum: E86139F7DE9D143F0AC83117714FDA01;8781.
+(rerunfilecheck)             Checksum: 0503F59ADA0D01C5D7CEF7FCAD07D025;8782.
  ) 
 Here is how much of TeX's memory you used:
- 31254 strings out of 467871
- 585275 string characters out of 5418376
+ 31257 strings out of 467871
+ 585298 string characters out of 5418376
  988353 words of memory out of 5000000
  59399 multiletter control sequences out of 15000+600000
  693431 words of font info for 85 fonts, out of 8000000 for 9000
@@ -2511,9 +2510,9 @@ b><C:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb
 :/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb><C
 :/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/urw/zapfding/uzdr.pfb>
 Output written on C:\Users\pablo\Desktop\Informatica\3\Polimi\SoftwareEngineeri
-ng2\Project\PabloJose\ATD\build\ATD.pdf (32 pages, 325490 bytes).
+ng2\Project\PabloJose\ATD\build\ATD.pdf (32 pages, 327273 bytes).
 PDF statistics:
- 525 PDF objects out of 1000 (max. 8388607)
- 113 named destinations out of 1000 (max. 500000)
+ 533 PDF objects out of 1000 (max. 8388607)
+ 116 named destinations out of 1000 (max. 500000)
  410 words of extra memory for PDF output out of 10000 (max. 10000000)
 

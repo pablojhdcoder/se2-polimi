@@ -24,9 +24,8 @@
 \contentsline {subsection}{\numberline {2.4.3}Backend Test Execution}{6}{subsection.2.4.3}%
 \contentsline {section}{\numberline {2.5}Frontend (App) Installation}{6}{section.2.5}%
 \contentsline {subsection}{\numberline {2.5.1}App Test Execution}{6}{subsection.2.5.1}%
-\contentsline {subsection}{\numberline {2.5.2}Manual testing of path and trip recording}{7}{subsection.2.5.2}%
 \contentsline {section}{\numberline {2.6}Issues and Documentation Gaps}{7}{section.2.6}%
-\contentsline {section}{\numberline {2.7}Observations}{9}{section.2.7}%
+\contentsline {section}{\numberline {2.7}Observations}{8}{section.2.7}%
 \contentsline {chapter}{\numberline {3}Acceptance Test Cases}{11}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Acceptance Test Cases}{11}{section.3.1}%
 \contentsline {subsection}{\numberline {3.1.1}User Registration and Authentication (R1--R5)}{12}{subsection.3.1.1}%
@@ -37,8 +36,9 @@
 \contentsline {subsection}{\numberline {3.1.6}Path Aggregation and Status (R31--R34)}{17}{subsection.3.1.6}%
 \contentsline {subsection}{\numberline {3.1.7}Route Discovery and Search (R35--R38)}{17}{subsection.3.1.7}%
 \contentsline {subsection}{\numberline {3.1.8}Navigation and Alerts (R39--R40)}{18}{subsection.3.1.8}%
-\contentsline {subsection}{\numberline {3.1.9}Backend Unit and Integration Test Summary}{18}{subsection.3.1.9}%
-\contentsline {section}{\numberline {3.2}Additional Notes}{18}{section.3.2}%
+\contentsline {subsection}{\numberline {3.1.9}Manual Testing of Path and Trip Recording}{18}{subsection.3.1.9}%
+\contentsline {subsection}{\numberline {3.1.10}Backend Unit and Integration Test Summary}{18}{subsection.3.1.10}%
+\contentsline {section}{\numberline {3.2}Additional Notes}{19}{section.3.2}%
 \contentsline {section}{\numberline {3.3}Areas for Improvement}{19}{section.3.3}%
 \contentsline {chapter}{\numberline {4}Overall Project Conclusion}{21}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Smoothness of the Process}{21}{section.4.1}%

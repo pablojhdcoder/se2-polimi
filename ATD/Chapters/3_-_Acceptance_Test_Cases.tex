@@ -195,6 +195,15 @@ Requirements for \textbf{Best Bike Paths (BBP)} are drawn from the RASD and grou
     \label{tab:navigation_requirements}
 \end{table}
 
+\subsection{Manual Testing of Path and Trip Recording}
+\label{subsec:manual_path_trip_results}
+We exercised automated path recording by walking around our residence. \textbf{Behaviour was very good overall}, with two exceptions:
+\begin{itemize}
+    \item \textbf{Keyboard in path description:} The keyboard cannot be dismissed while writing the path description unless the user taps the Manual/Automatic mode button. The fix is straightforward (e.g.\ dismiss keyboard on tap outside or provide an explicit dismiss control).
+    \item \textbf{Trip recorded over the path regardless of route:} When recording a trip, even if the user does not follow the path route, the trip is still recorded as if it were on the path. This may be intentional (e.g.\ snapping to the path) or a bug; we report it as observed behaviour for the team's consideration.
+\end{itemize}
+These observations are reflected in ``Areas for Improvement'' (Chapter~\ref{ch:acceptance_test_cases}).
+
 \subsection{Backend Unit and Integration Test Summary}
 \label{subsec:backend_test_summary}
 
