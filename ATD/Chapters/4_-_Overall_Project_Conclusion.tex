@@ -1,0 +1,21 @@
+\section{Smoothness of the Process}
+\label{sec:conclusion_smoothness}%
+Overall, the installation and validation of the BBP system went smoothly. The READMEs provided clear steps for bringing up the backend and the mobile app; dependency installation completed without errors, and the automated test suites ran successfully after minor environment adjustments (e.g.\ Jest \texttt{testMatch} on Windows, \texttt{NODE\_OPTIONS} in the shell). The stack---Node.js, Express, Prisma, PostgreSQL, Redis on the backend and Expo/React Native on the frontend---is well documented and made it straightforward to locate configuration and troubleshoot issues. Prisma in particular proved helpful for understanding the data model and debugging. Manual testing of path creation and trip recording also went well: the app responded as expected in most flows, and the integration with maps, geocoding, and weather gave a polished feel.
+
+\section{Errors and Issues Encountered}
+\label{sec:conclusion_errors}%
+We did encounter a number of issues, which are detailed in Section~\ref{sec:problems_encountered} (Issues and Documentation Gaps). In summary:
+\begin{itemize}
+    \item \textbf{Documentation gaps:} JWT secrets and \texttt{DATABASE\_URL} requirements were not fully spelled out; the need for Redis and a valid database before \texttt{npm run dev} could be stated more explicitly.
+    \item \textbf{Platform-specific behaviour:} The backend test script and the app \texttt{testMatch} pattern required workarounds on Windows; one app test failed due to Jest cache permissions (\texttt{EPERM}) on Windows rather than an application defect.
+    \item \textbf{Runtime issues:} Manual testing revealed the keyboard-dismissal problem when editing path descriptions, the ``Maximum update depth exceeded'' error when drawing paths by dragging in the emulator, and occasional snapping (OSRM) 500 errors during path creation. The behaviour where a trip is recorded as on the path even when the user deviates may be intentional or a bug.
+\end{itemize}
+None of these blocked acceptance: they either had simple workarounds, were environment-specific, or pointed to refinements rather than fundamental failures.
+
+\section{Assessment of the Product}
+\label{sec:conclusion_assessment}%
+Despite the issues above, the BBP implementation comes across as a \textbf{professional and functional product}. The backend offers a coherent API, a solid test suite (unit and integration), and a clear separation of concerns (auth, paths, trips, reports, statistics). The mobile app provides a modern, responsive interface for searching paths, creating paths (manual and automatic), recording trips, and viewing history and statistics. External integrations (weather, geocoding, map rendering, snapping) work in the evaluated scenarios and improve the user experience. The fact that core features work end-to-end---registration, login, path search, path creation, trip recording, and reporting---and that automated tests pass (with the noted exception) indicates a mature development process and good alignment with the RASD and DD.
+
+\section{Conclusion}
+\label{sec:conclusion_final}%
+Taking into account the limited time and resources typical of a course project, the Errigo-Gholami-Ianosel team has delivered a system that is \textbf{fit for acceptance}. Except for the documented errors and gaps, the application behaves correctly, looks professional, and matches the intended functionality described in the reference documents. The issues we found are mostly minor, platform-related, or documentation-related; they do not undermine the conclusion that BBP is a good product that meets the main goals of the project. We recommend addressing the documentation and Windows-specific points for future evaluators and for production-like deployments, and we consider the implementation suitable for acceptance within the scope of this ATD.

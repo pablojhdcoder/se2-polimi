@@ -42,4 +42,8 @@
 \contentsline {chapter}{\numberline {4}Effort Spent}{21}{chapter.4}%
 \contentsline {chapter}{\numberline {5}References}{23}{chapter.5}%
 \contentsline {section}{\numberline {5.1}References}{23}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Use of Generative AI Tools}{23}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Tools Used}{23}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Example Prompts}{24}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Verification and Refinement}{24}{subsection.5.2.3}%
 \contentsline {chapter}{List of Tables}{25}{chapter*.22}%
