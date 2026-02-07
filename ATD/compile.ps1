@@ -57,6 +57,19 @@ if (Test-Path "ATD.pdf") {
     Write-Host "========================================" -ForegroundColor Green
     Write-Host "Compilation successful! ATD.pdf generated." -ForegroundColor Green
     Write-Host "========================================" -ForegroundColor Green
+    Write-Host ""
+
+    $pdfSize = (Get-Item "ATD.pdf").Length / 1KB
+    Write-Host "PDF size: $([math]::Round($pdfSize, 2)) KB" -ForegroundColor Cyan
+    Write-Host ""
+
+    Start-Sleep -Seconds 1
+
+    $open = Read-Host "Do you want to open the PDF? (Y/N)"
+    if ($open -eq "Y" -or $open -eq "y" -or $open -eq "S" -or $open -eq "s") {
+        $pdfPath = (Resolve-Path "ATD.pdf").Path
+        Start-Process $pdfPath
+    }
 } else {
     Write-Host "ERROR: Could not generate PDF. Check build\ATD.log" -ForegroundColor Red
 }

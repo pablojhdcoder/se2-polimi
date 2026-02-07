@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.3)  7 FEB 2026 13:26
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.3)  7 FEB 2026 18:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1532,7 +1532,7 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 ))
 \c@lstlisting=\count401
-<./Images/PolimiLogo.png, id=158, 405.515pt x 125.46875pt>
+<./Images/PolimiLogo.png, id=162, 405.515pt x 125.46875pt>
 File: ./Images/PolimiLogo.png Graphic file (type png)
 <use ./Images/PolimiLogo.png>
 Package pdftex.def Info: ./Images/PolimiLogo.png  used on input line 108.
@@ -1609,8 +1609,8 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.16 \end{itemize}
-                   [1
+l.20     \item I
+                anosel Bianca Roberta [1
 
 
 
@@ -1645,19 +1645,15 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.61 \subsection*{Acceptance Test Cases}
-                                         [2]) [3] [4
+l.64 \end{itemize}
+                   [2]) [3] [4
 
 ]
 Chapter 2.
 (Chapters/2_-_Implemented_Requirements.tex
-Overfull \hbox (22.27936pt too wide) in paragraph at lines 3--4
-[]\T1/lmr/m/n/12 We fol-lowed the in-stal-la-tion in-struc-tions from the \T1/l
-mr/bx/n/12 Back-end README \T1/lmr/m/n/12 and \T1/lmr/bx/n/12 App README
- []
-
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 9
 .
+
 (C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -1675,78 +1671,90 @@ LIC_PROD_API_URL \T1/lmr/m/n/12 or \T1/lmtt/m/n/12 EXPO_PUBLIC_DEVEL_API_URL\T1
 
 [5
 
-] [6]
-Overfull \hbox (137.29642pt too wide) in paragraph at lines 67--68
+]
+Overfull \hbox (137.29642pt too wide) in paragraph at lines 59--60
 []\T1/lmr/m/n/12 Created a \T1/lmtt/m/n/12 .env \T1/lmr/m/n/12 file in \T1/lmtt
 /m/n/12 IT/CODE/BACKEND \T1/lmr/m/n/12 with \T1/lmtt/m/n/12 DATABASE_URL="postg
 resql://bbp:bbp@localhost:5432/bbp"
  []
 
 
-Overfull \hbox (10.66907pt too wide) in paragraph at lines 69--70
+Overfull \hbox (10.66907pt too wide) in paragraph at lines 61--62
 []\T1/lmr/m/n/12 Ran \T1/lmtt/m/n/12 npx prisma generate --schema=prisma/schema
 .prisma \T1/lmr/m/n/12 to gen-er-ate the Prisma
  []
 
-
-Overfull \hbox (74.63136pt too wide) in paragraph at lines 71--72
-\T1/lmr/m/n/12 After this, \T1/lmtt/m/n/12 npm run dev \T1/lmr/m/n/12 could sta
-rt the API suc-cess-fully and \T1/lmtt/m/n/12 curl -i http://localhost:3000/hea
-lth
+[6]
+Overfull \hbox (0.28378pt too wide) in paragraph at lines 63--64
+\T1/lmr/m/n/12 Thereafter, \T1/lmtt/m/n/12 npm run dev \T1/lmr/m/n/12 started t
+he API and \T1/lmtt/m/n/12 curl -i http://localhost:3000/health
  []
 
 
-Overfull \hbox (10.75893pt too wide) in paragraph at lines 73--73
+Overfull \hbox (87.6236pt too wide) in paragraph at lines 65--66
+\T1/lmr/m/n/12 Ac-cel-er-ate. The shipped \T1/lmtt/m/n/12 prisma-client.ts \T1/
+lmr/m/n/12 only sup-ported an Ac-cel-er-ate URL (\T1/lmtt/m/n/12 prisma+postgre
+s://\T1/lmr/m/n/12 ...).
+ []
+
+
+Overfull \hbox (7.88112pt too wide) in paragraph at lines 81--81
+[]  \T1/lmtt/m/n/12 : new PrismaClient({ adapter: new PrismaPg({ connectionStri
+ng: url }) });[] 
+ []
+
+
+Overfull \hbox (10.75893pt too wide) in paragraph at lines 85--85
 |[]\T1/lmr/bx/n/14.4 Prisma Client Gen-er-a-tion (for tests with-out a real dat
 abase)| 
  []
 
 
-Overfull \hbox (41.47652pt too wide) in paragraph at lines 75--76
-[]\T1/lmr/m/n/12 For run-ning only the test suite (no server), the back-end use
-s Prisma with \T1/lmtt/m/n/12 prisma.config.ts\T1/lmr/m/n/12 ,
+Overfull \hbox (35.7009pt too wide) in paragraph at lines 87--88
+[]\T1/lmr/m/n/12 To run only the test suite (no server), the back-end re-lies o
+n Prisma with \T1/lmtt/m/n/12 prisma.config.ts\T1/lmr/m/n/12 ,
  []
 
 
-Overfull \hbox (40.7234pt too wide) in paragraph at lines 76--77
-[]\T1/lmr/m/n/12 We set a place-holder \T1/lmtt/m/n/12 DATABASE_URL \T1/lmr/m/n
-/12 (e.g. \T1/lmtt/m/n/12 postgresql://user:pass@localhost:5432/bbp\T1/lmr/m/n/
-12 )
+Overfull \hbox (31.62892pt too wide) in paragraph at lines 88--89
+[]\T1/lmr/m/n/12 With a place-holder \T1/lmtt/m/n/12 DATABASE_URL \T1/lmr/m/n/1
+2 (e.g. \T1/lmtt/m/n/12 postgresql://user:pass@localhost:5432/bbp\T1/lmr/m/n/12
+ )
  []
 
 [7]
-Overfull \hbox (275.78519pt too wide) in paragraph at lines 103--104
-[]\T1/lmr/bx/n/12 Result: \T1/lmr/m/n/12 Jest re-ported ``No tests found''. The
- con-fig uses \T1/lmtt/m/n/12 testMatch: ["<rootDir>/tests/{unit,integration}/*
-*/*.test.ts?(x)"]\T1/lmr/m/n/12 .
+Overfull \hbox (290.7792pt too wide) in paragraph at lines 115--116
+[]\T1/lmr/bx/n/12 Outcome: \T1/lmr/m/n/12 Jest re-ported ``No tests found''. Th
+e con-fig uses \T1/lmtt/m/n/12 testMatch: ["<rootDir>/tests/{unit,integration}/
+**/*.test.ts?(x)"]\T1/lmr/m/n/12 ;
  []
 
 [8]
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 113.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 132.
 
-Overfull \hbox (34.2327pt too wide) in paragraph at lines 113--114
+Overfull \hbox (34.2327pt too wide) in paragraph at lines 132--133
 []\T1/lmr/bx/n/12 Prisma re-quires \T1/lmtt/b/n/12 DATABASE_URL \T1/lmr/bx/n/12
  for \T1/lmtt/b/n/12 prisma generate\T1/lmr/bx/n/12 : \T1/lmr/m/n/12 When us-in
 g \T1/lmtt/m/n/12 prisma.config.ts\T1/lmr/m/n/12 ,
  []
 
 
-Overfull \hbox (155.82065pt too wide) in paragraph at lines 114--115
+Overfull \hbox (155.82065pt too wide) in paragraph at lines 133--134
 []\T1/lmr/bx/n/12 Backend \T1/lmtt/b/n/12 npm test \T1/lmr/bx/n/12 on Win-dows:
  \T1/lmr/m/n/12 The test script uses \T1/lmtt/m/n/12 NODE_OPTIONS='--localstora
 ge-file=./jest-storage'
  []
 
-[9]) [10]
-Chapter 3.
-(Chapters/3_-_Design_Choices.tex
-Overfull \hbox (0.24576pt too wide) in paragraph at lines 6--7
-[]\T1/lmr/bx/n/12 Backend test sum-mary: \T1/lmr/m/n/12 24 test suites passed (
-2 skipped), 248 tests passed (11 skipped).
+[9]
+Overfull \hbox (29.44872pt too wide) in paragraph at lines 137--138
+\T1/lmr/m/n/12 snap-ping some-times fails with \T1/lmtt/m/n/12 WARN Failed to s
+nap segment [AxiosError: Request
  []
 
-
+) [10]
+Chapter 3.
+(Chapters/3_-_Design_Choices.tex
 Underfull \hbox (badness 10000) in paragraph at lines 18--18
 []|\T1/lmr/bx/n/12 Test De-scrip-
  []
@@ -2422,22 +2430,29 @@ trip.weather, user.manager,
  []
 
 
-Overfull \hbox (16.54077pt too wide) in paragraph at lines 213--214
-[]\T1/lmr/m/n/12 Snapping (OSRM) and geocod-ing (Nom-i-na-tim) are cov-ered by 
-back-end unit/integration
+Overfull \hbox (24.43924pt too wide) in paragraph at lines 213--214
+[]\T1/lmr/m/n/12 Snapping (OSRM) and geocod-ing (Nom-i-na-tim) are ex-er-cised 
+by back-end unit/integration
+ []
+
+
+Overfull \hbox (62.83392pt too wide) in paragraph at lines 219--220
+[]\T1/lmr/bx/n/12 Prisma: sup-port both Post-greSQL URL and Ac-cel-er-ate: \T1/
+lmr/m/n/12 The de-fault \T1/lmtt/m/n/12 prisma-client.ts
+ []
+
+
+Overfull \hbox (42.20313pt too wide) in paragraph at lines 219--220
+\T1/lmr/m/n/12 could sup-port both Ac-cel-er-ate and a di-rect \T1/lmtt/m/n/12 
+postgresql:// \T1/lmr/m/n/12 URL (via \T1/lmtt/m/n/12 @prisma/adapter-pg\T1/lmr
+/m/n/12 ),
  []
 
 [18]
-Overfull \hbox (0.13084pt too wide) in paragraph at lines 220--221
-[]\T1/lmr/bx/n/12 JWT and Re-dis in README: \T1/lmr/m/n/12 State that \T1/lmtt/
-m/n/12 JWT_SECRET \T1/lmr/m/n/12 and \T1/lmtt/m/n/12 JWT_REFRESH_SECRET
- []
-
-
-Overfull \hbox (5.79042pt too wide) in paragraph at lines 224--225
-\T1/lmr/m/n/12 on Win-dows so that \T1/lmtt/m/n/12 npm test \T1/lmr/m/n/12 dis-
-cov-ers tests in \T1/lmtt/m/n/12 tests/unit \T1/lmr/m/n/12 and \T1/lmtt/m/n/12 
-tests/integration
+Overfull \hbox (18.53075pt too wide) in paragraph at lines 227--228
+[]\T1/lmr/bx/n/12 Backend \T1/lmtt/b/n/12 npm test \T1/lmr/bx/n/12 script: \T1/
+lmr/m/n/12 A cross-platform way to set \T1/lmtt/m/n/12 NODE_OPTIONS \T1/lmr/m/n
+/12 (e.g. \T1/lmtt/m/n/12 cross-env
  []
 
 ) [19] [20
@@ -2492,16 +2507,16 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2025-11-06>
  ***********
 Package rerunfilecheck Info: File `ATD.out' has not changed.
-(rerunfilecheck)             Checksum: 680334615E469AE20F5463116E2E97DD;7140.
+(rerunfilecheck)             Checksum: 15422D8F28BABEBECA7AD347985A2872;7126.
  ) 
 Here is how much of TeX's memory you used:
- 31203 strings out of 467871
- 583910 string characters out of 5418376
+ 31208 strings out of 467871
+ 584030 string characters out of 5418376
  988353 words of memory out of 5000000
- 59364 multiletter control sequences out of 15000+600000
+ 59368 multiletter control sequences out of 15000+600000
  693431 words of font info for 85 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,12n,94p,1194b,615s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,12n,94p,1263b,615s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pf
 b><C:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb
 ><C:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb>
@@ -2511,9 +2526,9 @@ b><C:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb
 :/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb><C
 :/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/urw/zapfding/uzdr.pfb>
 Output written on C:\Users\pablo\Desktop\Informatica\3\Polimi\SoftwareEngineeri
-ng2\Project\PabloJose\ATD\build\ATD.pdf (30 pages, 297539 bytes).
+ng2\Project\PabloJose\ATD\build\ATD.pdf (30 pages, 301498 bytes).
 PDF statistics:
- 447 PDF objects out of 1000 (max. 8388607)
- 99 named destinations out of 1000 (max. 500000)
- 322 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 453 PDF objects out of 1000 (max. 8388607)
+ 100 named destinations out of 1000 (max. 500000)
+ 330 words of extra memory for PDF output out of 10000 (max. 10000000)
 

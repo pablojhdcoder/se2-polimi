@@ -1,11 +1,11 @@
 \section{Acceptance Test Cases}
 \label{sec:acceptance_test_cases}
 
-The \textbf{Best Bike Paths (BBP)} requirements are taken from the RASD and grouped by functionality. For each requirement we report the test description, expected outcome, actual outcome, and status. Where backend automated tests were executed, we report their results; where only the mobile app could verify the requirement, we note that the app test suite did not run on the evaluation environment (Windows) due to Jest \texttt{testMatch} matching zero files.
+Requirements for \textbf{Best Bike Paths (BBP)} are drawn from the RASD and grouped by feature. Each row below gives the test description, expected outcome, actual outcome, and status. When we ran backend automated tests, we report their outcome; when verification depends on the mobile app only, we mark N/R because the app test suite did not discover any tests on our Windows evaluation environment (Jest \texttt{testMatch} matched no files).
 
-\textbf{Backend test summary:} 24 test suites passed (2 skipped), 248 tests passed (11 skipped). Integration tests covered auth, paths, trips, reports, stats, user, weather, geocoding, Redis, and snapping.
+\textbf{Backend summary:} 24 suites passed (2 skipped), 248 tests passed (11 skipped). Coverage includes auth, paths, trips, reports, stats, user, weather, geocoding, Redis, and snapping.
 
-\textbf{Status legend:} \ding{51} Pass = verified by executed tests; N/R = Not run on evaluation environment (app tests did not discover files on Windows).
+\textbf{Status:} \ding{51} Pass = confirmed by tests we ran; N/R = not run on our environment (app tests did not discover files on Windows).
 
 \subsection{User Registration and Authentication (R1--R5)}
 \label{subsec:auth_tests}
@@ -198,27 +198,32 @@ The \textbf{Best Bike Paths (BBP)} requirements are taken from the RASD and grou
 \subsection{Backend Unit and Integration Test Summary}
 \label{subsec:backend_test_summary}
 
-The following backend test suites were executed successfully (all passed unless skipped):
+The backend suites below were run successfully (all passed except where skipped):
 \begin{itemize}
     \item \textbf{Unit:} auth.manager, error.handler, fetch, geo, geocoding.service, jwt, path.manager, report.manager, snapping.service, stat.manager, trip.manager, trip.weather, user.manager, utils, validator, weather.service.
     \item \textbf{Integration:} auth, path, redis, report, stat, trip, user, weather.service, geocoding.service, snapping.service (some integration tests skipped by default).
 \end{itemize}
-Overall: 248 tests passed, 11 skipped; 24 suites passed, 2 skipped.
+Totals: 248 tests passed, 11 skipped; 24 suites passed, 2 skipped.
 
 \section{Additional Notes}
 \label{sec:additional_notes}
 \begin{itemize}
-    \item The backend is well covered by unit and integration tests; requirements that are implemented server-side are verified by these tests.
-    \item N/R (Not Run) applies to behaviours that depend on the mobile app UI or app-side logic (e.g. cycling detection, navigation, in-app alerts). The app test suite did not discover any tests on the evaluation environment (Windows) due to the Jest \texttt{testMatch} pattern; running the app tests on Linux or macOS would allow full acceptance coverage for R8--R11, R14--R15, R22--R23, R39, R40.
-    \item Snapping (OSRM) and geocoding (Nominatim) are covered by backend unit/integration tests; live external services can be enabled with \texttt{RUN\_LIVE\_TESTS=1} for additional validation.
+    \item Server-side behaviour is well covered by unit and integration tests; requirements implemented in the backend are validated by these runs.
+    \item N/R (Not Run) is used for behaviour that depends on the app UI or client logic (e.g.\ cycling detection, navigation, in-app alerts). The app suite did not discover tests on our Windows setup because of the Jest \texttt{testMatch} pattern; executing the app tests on Linux or macOS would give full acceptance coverage for R8--R11, R14--R15, R22--R23, R39, R40.
+    \item Snapping (OSRM) and geocoding (Nominatim) are exercised by backend unit/integration tests; \texttt{RUN\_LIVE\_TESTS=1} can be used to validate against live external services.
 \end{itemize}
 
 \section{Areas for Improvement}
 \label{sec:areas_for_improvement}
 \begin{itemize}
-    \item \textbf{JWT and Redis in README:} State that \texttt{JWT\_SECRET} and \texttt{JWT\_REFRESH\_SECRET} must be set to non-empty values. For local development without Docker, document that \texttt{REDIS\_HOST=localhost} and how to run Redis (e.g. Docker or system install).
-    \item \textbf{Order of operations:} Make explicit in the README that a valid \texttt{DATABASE\_URL} and applied migrations are required before \texttt{npm run dev}.
-    \item \textbf{Prisma \texttt{DATABASE\_URL}:} State that \texttt{DATABASE\_URL} must be set (e.g. to a placeholder) before running \texttt{prisma generate} when using \texttt{prisma.config.ts}.
-    \item \textbf{Backend \texttt{npm test} script:} Use a cross-platform way to set \texttt{NODE\_OPTIONS} (e.g. \texttt{cross-env} or a small script) so that \texttt{npm test} works on Windows as well as Unix.
-    \item \textbf{App test runner on Windows:} Make the Jest \texttt{testMatch} (or equivalent) robust on Windows so that \texttt{npm test} discovers tests in \texttt{tests/unit} and \texttt{tests/integration} without platform-specific workarounds.
+    \item \textbf{Prisma: support both PostgreSQL URL and Accelerate:} The default \texttt{prisma-client.ts} could support both Accelerate and a direct \texttt{postgresql://} URL (via \texttt{@prisma/adapter-pg}), enabling local runs without Prisma Accelerate. A possible implementation is in Section~\ref{subsec:database_setup}, Chapter~2.
+    \item \textbf{JWT and Redis in README:} The README should state that \texttt{JWT\_SECRET} and \texttt{JWT\_REFRESH\_SECRET} must be non-empty. For local runs without Docker, it should document \texttt{REDIS\_HOST=localhost} and how to start Redis (Docker or system install).
+    \item \textbf{Order of operations:} The README could spell out that a valid \texttt{DATABASE\_URL} and applied migrations are needed before \texttt{npm run dev}.
+    \item \textbf{Prisma \texttt{DATABASE\_URL}:} With \texttt{prisma.config.ts}, \texttt{DATABASE\_URL} must be set (e.g.\ a placeholder) before \texttt{prisma generate}; this could be mentioned in the README.
+    \item \textbf{Manual path constraints:} Manual path creation could enforce or warn when paths cross buildings or invalid areas (e.g.\ validate or snap to road/cycle network).
+    \item \textbf{Snapping 500 errors:} On OSRM 500, the app logs \texttt{Failed to snap segment}. Clearer user feedback and a retry or fallback (e.g.\ keep unsnapped segment) would let path creation continue.
+    \item \textbf{Keyboard in path description:} The path description keyboard could be dismissible without tapping the Manual/Automatic button (e.g.\ tap-outside or a dismiss control).
+    \item \textbf{Trip recording vs.\ path route:} When the user does not follow the path route, the trip is still recorded over the path. If that is intentional (snapping), it could be documented; otherwise consider storing the actual route or warning the user.
+    \item \textbf{Backend \texttt{npm test} script:} A cross-platform way to set \texttt{NODE\_OPTIONS} (e.g.\ \texttt{cross-env} or a small script) would make \texttt{npm test} work on Windows and Unix.
+    \item \textbf{App test runner on Windows:} The Jest \texttt{testMatch} (or equivalent) could be adjusted so that \texttt{npm test} discovers tests in \texttt{tests/unit} and \texttt{tests/integration} on Windows.
 \end{itemize}

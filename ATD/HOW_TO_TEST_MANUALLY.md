@@ -312,6 +312,17 @@ Document here any runtime or console errors seen while running the app or backen
 | **Workaround** | Prefer **taps** on the map to add points instead of long drags, or test the "Create path" flow on a **physical device** where pan/drag behaviour may not trigger the loop. |
 | **For the ATD** | Report as a problem encountered during testing; suggest as improvement to stabilise state updates in the Create path screen (e.g. throttle/debounce `handlePanDrag` or avoid triggering the snapping effect on every drag update). |
 
+## Snapping error: Failed to snap segment (500)
+
+| Field | Description |
+|-------|-------------|
+| **When** | While adding a path manually (Create path), when the app sends a segment to the backend for snapping (e.g. OSRM). |
+| **Where** | Mobile app (Create path screen); backend snapping service returns HTTP 500. |
+| **Message** | `WARN  Failed to snap segment [AxiosError: Request failed with status code 500]` |
+| **Cause** | The backend snapping service (or upstream OSRM) returns 500 for some segment requests. The app continues but the segment is not snapped. |
+| **Impact** | Path creation can still complete; the affected segment may remain unsnapped or use a fallback. |
+| **For the ATD** | Report under Problems Encountered; suggest as improvement to handle 500 gracefully (user feedback, retry, or use unsnapped segment). |
+
 ---
 
 # What’s missing in the Errigo-Gholami-Ianosel documentation
