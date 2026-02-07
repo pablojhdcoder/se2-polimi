@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.3)  7 FEB 2026 21:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.3)  7 FEB 2026 21:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1712,28 +1712,19 @@ c}]
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
 (Font)              Font shape `T1/lmtt/b/n' tried instead on input line 130.
 
-Overfull \hbox (34.2327pt too wide) in paragraph at lines 130--131
-[]\T1/lmr/bx/n/12 Prisma re-quires \T1/lmtt/b/n/12 DATABASE_URL \T1/lmr/bx/n/12
- for \T1/lmtt/b/n/12 prisma generate\T1/lmr/bx/n/12 : \T1/lmr/m/n/12 When us-in
-g \T1/lmtt/m/n/12 prisma.config.ts\T1/lmr/m/n/12 ,
- []
-
-
-Overfull \hbox (155.82065pt too wide) in paragraph at lines 131--132
+Overfull \hbox (155.82065pt too wide) in paragraph at lines 130--131
 []\T1/lmr/bx/n/12 Backend \T1/lmtt/b/n/12 npm test \T1/lmr/bx/n/12 on Win-dows:
  \T1/lmr/m/n/12 The test script uses \T1/lmtt/m/n/12 NODE_OPTIONS='--localstora
 ge-file=./jest-storage'
  []
 
 [7]
-Overfull \hbox (29.44872pt too wide) in paragraph at lines 135--136
+Overfull \hbox (29.44872pt too wide) in paragraph at lines 134--135
 \T1/lmr/m/n/12 snap-ping some-times fails with \T1/lmtt/m/n/12 WARN Failed to s
 nap segment [AxiosError: Request
  []
 
-[8]) [9] [10
-
-]
+) [8]
 Chapter 3.
 (Chapters/3_-_Acceptance_Test_Cases.tex
 Underfull \hbox (badness 10000) in paragraph at lines 18--18
@@ -1830,7 +1821,8 @@ Underfull \hbox (badness 1953) in paragraph at lines 28--28
 \T1/lmr/m/n/12 gout, to-ken han-
  []
 
-[11
+[9
+
 
 ]
 Underfull \hbox (badness 2707) in paragraph at lines 43--43
@@ -1932,7 +1924,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 59--59
 []|\T1/lmr/m/n/12 Trip in-te-gra-tion
  []
 
-[12]
+[10]
 Underfull \hbox (badness 10000) in paragraph at lines 74--74
 []|\T1/lmr/bx/n/12 Test De-scrip-
  []
@@ -1997,7 +1989,7 @@ Underfull \hbox (badness 1888) in paragraph at lines 80--80
 \T1/lmr/m/n/12 (time-outs, er-rors)
  []
 
-[13]
+[11]
 Underfull \hbox (badness 10000) in paragraph at lines 95--95
 []|\T1/lmr/bx/n/12 Test De-scrip-
  []
@@ -2087,7 +2079,7 @@ Overfull \hbox (3.39342pt too wide) in paragraph at lines 93--104
  [][] 
  []
 
-[14]
+[12]
 Underfull \hbox (badness 2707) in paragraph at lines 116--116
 []|\T1/lmr/bx/n/12 Test De-scrip-
  []
@@ -2207,7 +2199,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 128--128
 []|\T1/lmr/m/n/12 Visibility up-
  []
 
-[15]
+[13]
 Underfull \hbox (badness 10000) in paragraph at lines 143--143
 []|\T1/lmr/bx/n/12 Test De-scrip-
  []
@@ -2287,7 +2279,7 @@ Underfull \hbox (badness 1184) in paragraph at lines 151--151
 \T1/lmr/m/n/12 tests (search, de-
  []
 
-[16]
+[14]
 Underfull \hbox (badness 10000) in paragraph at lines 166--166
 []|\T1/lmr/bx/n/12 Test De-scrip-
  []
@@ -2397,7 +2389,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 191--191
 []|\T1/lmr/m/n/12 App UI; app
  []
 
-[17]
+[15]
 Overfull \hbox (3.92902pt too wide) in paragraph at lines 212--213
 []\T1/lmr/bx/n/12 Unit: \T1/lmr/m/n/12 auth.manager, er-ror.handler, fetch, geo
 , geocod-ing.service, jwt, path.manager,
@@ -2409,7 +2401,7 @@ Overfull \hbox (32.96863pt too wide) in paragraph at lines 212--213
 trip.weather, user.manager,
  []
 
-[18]
+[16]
 Overfull \hbox (24.43924pt too wide) in paragraph at lines 222--223
 []\T1/lmr/m/n/12 Snapping (OSRM) and geocod-ing (Nom-i-na-tim) are ex-er-cised 
 by back-end unit/integration
@@ -2428,29 +2420,29 @@ postgresql:// \T1/lmr/m/n/12 URL (via \T1/lmtt/m/n/12 @prisma/adapter-pg\T1/lmr
 /m/n/12 ),
  []
 
-[19]
+[17]
 Overfull \hbox (18.53075pt too wide) in paragraph at lines 236--237
 []\T1/lmr/bx/n/12 Backend \T1/lmtt/b/n/12 npm test \T1/lmr/bx/n/12 script: \T1/
 lmr/m/n/12 A cross-platform way to set \T1/lmtt/m/n/12 NODE_OPTIONS \T1/lmr/m/n
 /12 (e.g. \T1/lmtt/m/n/12 cross-env
  []
 
-) [20]
+) [18]
 Chapter 4.
-(Chapters/4_-_Overall_Project_Conclusion.tex [21
+(Chapters/4_-_Overall_Project_Conclusion.tex [19
 
 
-]) [22]
+]) [20]
 Chapter 5.
 (Chapters/5_-_Effort_Spent.tex
 Underfull \hbox (badness 2134) in paragraph at lines 16--16
 []|\T1/lmr/m/n/12 Pablo Jesús Her-rero
  []
 
-) [23
+) [21
 
 
-] [24
+] [22
 
 ]
 Chapter 6.
@@ -2460,18 +2452,18 @@ Overfull \hbox (29.01918pt too wide) in paragraph at lines 5--6
 A3IA/Errigo-Gholami-Ianosel[][]. 
  []
 
-[25
+[23
 
-]) [26]
+]) [24]
 (C:\Users\pablo\Desktop\Informatica\3\Polimi\SoftwareEngineering2\Project\Pablo
 Jose\ATD\build\ATD.lot)
 \tf@lot=\write6
 \openout6 = `ATD.lot'.
 
- [27
+ [25
 
 
-] [28
+] [26
 
 ]
 
@@ -2493,8 +2485,8 @@ Package rerunfilecheck Info: File `ATD.out' has not changed.
 (rerunfilecheck)             Checksum: 0503F59ADA0D01C5D7CEF7FCAD07D025;8782.
  ) 
 Here is how much of TeX's memory you used:
- 31257 strings out of 467871
- 585298 string characters out of 5418376
+ 31255 strings out of 467871
+ 585284 string characters out of 5418376
  988353 words of memory out of 5000000
  59399 multiletter control sequences out of 15000+600000
  693431 words of font info for 85 fonts, out of 8000000 for 9000
@@ -2510,9 +2502,9 @@ b><C:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb
 :/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb><C
 :/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/urw/zapfding/uzdr.pfb>
 Output written on C:\Users\pablo\Desktop\Informatica\3\Polimi\SoftwareEngineeri
-ng2\Project\PabloJose\ATD\build\ATD.pdf (32 pages, 327273 bytes).
+ng2\Project\PabloJose\ATD\build\ATD.pdf (30 pages, 322361 bytes).
 PDF statistics:
- 533 PDF objects out of 1000 (max. 8388607)
- 116 named destinations out of 1000 (max. 500000)
+ 521 PDF objects out of 1000 (max. 8388607)
+ 114 named destinations out of 1000 (max. 500000)
  410 words of extra memory for PDF output out of 10000 (max. 10000000)
 
