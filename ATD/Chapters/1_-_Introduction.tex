@@ -1,0 +1,66 @@
+\section{Purpose}
+\label{sec:purpose}%
+The Best Bike Paths (BBP) platform was developed by another team as part of the Software Engineering 2 course, and this Acceptance Testing Document (ATD) aims to verify and systematically test its implementation. This document ensures that the project meets the requirements specified in the Design Document (DD) and the Requirements Analysis and Specification Document (RASD). The main goals of the testing process are to verify essential features, identify discrepancies, and assess how well the system satisfies user requirements and expected behaviour.
+
+\section{Scope}
+\label{subsec:scope}%
+
+The Best Bike Paths (BBP) system is designed to improve the cycling experience by collecting, validating, and visualising information about bicycle paths. The platform includes the following key functionalities:
+\begin{itemize}
+    \item \textbf{User Registration and Authentication:} Guests can create an account; registered users can log in, view and update their profile, and log out.
+    \item \textbf{Trip Recording and Management:} Users can start and stop cycling trips; logged-in users can save trips and view trip history, statistics, and delete trips.
+    \item \textbf{Path Creation:} Logged-in users can create paths manually (by drawing) or automatically (using GPS tracking during a ride).
+    \item \textbf{Reporting and Path Status:} Logged-in users can report obstacles and path conditions; the system aggregates reports and evaluates path status (optimal, medium, sufficient, requires maintenance, closed).
+    \item \textbf{Route Discovery and Search:} Any user can browse public paths on a map and search for paths between two locations; the system ranks suggested routes by quality and distance.
+    \item \textbf{External Services:} Integration with weather data, geocoding, and map services.
+\end{itemize}
+
+The BBP project under test was developed by:
+\begin{itemize}
+    \item Ianosel Bianca Roberta
+    \item Gholami Vajihe
+    \item Errigo Simone
+\end{itemize}
+
+The GitHub repository for the project can be found here: \href{https://github.com/BIA3IA/Errigo-Gholami-Ianosel}{Errigo-Gholami-Ianosel}.
+
+\section{Revision History}
+\label{sec:revision_history}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{ |p{0.1\linewidth}|p{0.15\linewidth}|p{0.45\linewidth}|p{0.2\linewidth}| }
+        \hline
+        \textbf{Version} & \textbf{Date} & \textbf{Description} & \textbf{Authors} \\
+        \hline
+        1.0 & 07 February 2026 & Initial Release & Jos\'e Mart\'inez Est\'evez, Pablo Jes\'us Herrero D\'iaz \\
+        \hline
+    \end{tabular}
+    \caption{Revision History}
+    \label{tab:revision_history}
+\end{table}
+
+\section{Reference Documents}
+\label{sec:reference_documents}%
+\begin{itemize}
+    \item Reference to previous year student projects for structuring the document (JhaBhatiaSharma/ATD).
+    \item \href{https://github.com/BIA3IA/Errigo-Gholami-Ianosel}{\textbf{\textcolor{blue}{\underline{Errigo-Gholami-Ianosel repository}}}}
+    \item RASD, DD, and ITD of the Best Bike Paths project (as provided in the repository DeliveryFolder and respective folders).
+\end{itemize}
+
+\section{Document Structure}
+\label{sec:document_structure}%
+This document is structured as follows:
+
+\subsection*{Implemented Requirements (Installation)}
+\begin{itemize}
+    \item Describes the steps followed to install and run the BBP backend and mobile application.
+    \item Highlights any issues encountered, inconsistencies, or missing documentation.
+\end{itemize}
+
+\subsection*{Acceptance Test Cases}
+\begin{itemize}
+    \item Describes the test cases executed against the system.
+    \item Maps tests to system requirements and goals as outlined in the RASD, DD, and ITD.
+    \item Documents observed results, including any failures and potential fixes.
+\end{itemize}

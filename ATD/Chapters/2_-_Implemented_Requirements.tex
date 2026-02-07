@@ -1,0 +1,101 @@
+\section{Overview}
+\label{sec:overview}
+We followed the installation instructions from the \textbf{Backend README} and \textbf{App README} in the Errigo-Gholami-Ianosel repository. The BBP backend is implemented in Node.js with TypeScript, Express, PostgreSQL (via Prisma), and Redis. The mobile application uses Expo and React Native. We performed dependency installation, Prisma client generation, and executed the automated test suites. The backend test suite ran successfully; the app test runner reported no tests found on the evaluation environment (Windows), as documented below.
+
+\section{Prerequisites}
+\label{sec:prerequisites}
+The READMEs specify the following prerequisites:
+\begin{itemize}
+    \item \textbf{Backend:} Node.js, npm, PostgreSQL, Docker \& Docker Compose (optional), Prisma CLI (optional). The backend uses Prisma Accelerate for database access in production; the \texttt{DATABASE\_URL} environment variable is required even for \texttt{prisma generate}.
+    \item \textbf{App:} Node.js (LTS recommended), npm, Expo CLI (optional), Expo Go (for physical device). Environment variables \texttt{EXPO\_PUBLIC\_PROD\_API\_URL} or \texttt{EXPO\_PUBLIC\_DEVEL\_API\_URL}, and optionally Google Maps API keys, must be set in \texttt{.env} in the app root.
+\end{itemize}
+
+\section{Dependency Installation}
+\label{sec:dependency_installation}
+
+\subsection{Backend Dependencies}
+\label{subsec:backend_deps}
+We installed backend dependencies as follows.
+
+\subsubsection{Node.js and npm}
+\begin{itemize}
+    \item Node.js and npm were already available on the evaluation machine. The backend requires them for installing packages and running the server and tests.
+\end{itemize}
+
+\subsubsection{Installed Backend Packages}
+\begin{itemize}
+    \item From the project root \texttt{IT/CODE/BACKEND}, we ran:
+\end{itemize}
+\begin{verbatim}
+npm install
+\end{verbatim}
+\begin{itemize}
+    \item Installation completed successfully (573 packages added). No errors were reported; deprecation warnings for \texttt{inflight} and \texttt{glob} were observed.
+\end{itemize}
+
+\subsection{App Dependencies}
+\label{subsec:app_deps}
+We installed the mobile application dependencies as follows.
+
+\subsubsection{Installed App Packages}
+\begin{itemize}
+    \item From the application root \texttt{IT/CODE/APP/src}, we ran:
+\end{itemize}
+\begin{verbatim}
+npm install
+\end{verbatim}
+\begin{itemize}
+    \item Installation completed successfully (957 packages added). Deprecation warnings were observed for several transitive dependencies; the application dependencies installed without errors.
+\end{itemize}
+
+\section{Backend Installation}
+\label{sec:backend_installation}
+
+\subsection{Prisma Client Generation}
+\begin{itemize}
+    \item The backend uses Prisma with a configuration file \texttt{prisma.config.ts} that reads \texttt{DATABASE\_URL} from the environment. Even for \texttt{prisma generate}, this variable must be set.
+    \item We set a placeholder \texttt{DATABASE\_URL} and ran:
+\end{itemize}
+\begin{verbatim}
+npx prisma generate --schema=prisma/schema.prisma
+\end{verbatim}
+\begin{itemize}
+    \item Prisma Client and the JSON types generator completed successfully.
+\end{itemize}
+
+\subsection{Backend Test Execution}
+\begin{itemize}
+    \item The package script \texttt{npm test} runs Jest; on Windows the script uses Unix-style \texttt{NODE\_OPTIONS}, which is not interpreted correctly by the default shell. We ran the test suite directly with:
+\end{itemize}
+\begin{verbatim}
+npx jest
+\end{verbatim}
+\begin{itemize}
+    \item with \texttt{NODE\_OPTIONS} and \texttt{DATABASE\_URL} set in the environment.
+    \item \textbf{Result:} 24 test suites passed, 2 skipped; 248 tests passed, 11 skipped. Total time approximately 25 seconds. One worker process was force-exited after the run (likely due to open handles or timers); this did not affect the reported test results.
+\end{itemize}
+
+\section{Frontend (App) Installation}
+\label{sec:frontend_installation}
+
+\subsection{App Test Execution}
+\begin{itemize}
+    \item From \texttt{IT/CODE/APP/src} we ran \texttt{npm test} (Jest with \texttt{jest.config.js}).
+    \item \textbf{Result:} Jest reported ``No tests found''. The config uses \texttt{testMatch: ["<rootDir>/tests/\{unit,integration\}/**/*.test.ts?(x)"]}. On the evaluation environment (Windows), this pattern matched zero files, while the \texttt{tests/unit} and \texttt{tests/integration} directories do contain multiple \texttt{*.test.ts} and \texttt{*.test.tsx} files. We did not modify the repository to fix the test runner; manual or alternative test execution (e.g. on Linux/macOS) would be required to run the app test suite in this environment.
+\end{itemize}
+
+\section{Problems Encountered and Documentation Incoherences}
+\label{sec:problems_encountered}
+\begin{itemize}
+    \item \textbf{Prisma requires \texttt{DATABASE\_URL} for \texttt{prisma generate}:} The backend README states that Prisma is used for schema and migrations; it does not explicitly mention that \texttt{DATABASE\_URL} must be set before running \texttt{prisma generate} when using \texttt{prisma.config.ts}. Setting a placeholder URL allowed generation and tests to proceed.
+    \item \textbf{Backend \texttt{npm test} on Windows:} The test script uses \texttt{NODE\_OPTIONS='--localstorage-file=./jest-storage' jest}, which is not valid in Windows cmd; we ran \texttt{npx jest} with \texttt{NODE\_OPTIONS} set in the shell instead.
+    \item \textbf{App Jest \texttt{testMatch} on Windows:} No tests were discovered by Jest in the app project on Windows; the brace pattern in \texttt{testMatch} may behave differently on this platform. This is an environment-specific issue rather than a documentation error.
+\end{itemize}
+
+\section{Observations}
+\label{sec:observations}
+\begin{itemize}
+    \item The backend README is clear and well-structured (directory walkthrough, prerequisites, env vars, first-time setup, testing, troubleshooting).
+    \item The backend test suite is substantial (unit and integration tests) and ran successfully without a real database, indicating good use of mocks and test design.
+    \item The app README explains Expo, env vars, and first-time setup clearly; the test configuration issue we encountered is likely environment-specific.
+\end{itemize}

@@ -1,0 +1,144 @@
+\documentclass{ConfigurationFiles/Politecnico_Di_Milano}
+
+% CONFIGURATIONS
+\usepackage{parskip}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{setspace}
+\usepackage{emptypage}
+\usepackage{multicol}
+\setlength\columnsep{15pt}
+\setlength\parindent{0pt}
+\raggedbottom
+\usepackage{multirow}
+\usepackage{enumitem}
+
+% PACKAGES FOR TITLES
+\usepackage{titlesec}
+\titlespacing{\section}{0pt}{3.3ex}{2ex}
+\titlespacing{\subsection}{0pt}{3.3ex}{1.65ex}
+\titlespacing{\subsubsection}{0pt}{3.3ex}{1ex}
+\usepackage{color}
+
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{lmodern}
+\usepackage{float}
+
+% PACKAGES FOR LANGUAGE AND FONT
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[11pt]{moresize}
+
+% PACKAGES FOR IMAGES
+\usepackage{graphicx}
+\usepackage{transparent}
+\usepackage{eso-pic}
+\usepackage{subfig}
+\usepackage{tikz}
+\usetikzlibrary{}
+\graphicspath{{./Images/}}
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage{xcolor}
+\usepackage{float}
+
+% STANDARD MATH PACKAGES
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{bm}
+\usepackage{fix-cm}
+
+% PACKAGES FOR TABLES
+\usepackage{tabularx}
+\usepackage{colortbl}
+
+% PACKAGES FOR ALGORITHMS
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\usepackage{pifont}
+
+% PACKAGES FOR REFERENCES & BIBLIOGRAPHY
+\usepackage[
+    colorlinks=true,
+    linkcolor=black,
+    anchorcolor=black,
+    citecolor=black,
+    filecolor=black,
+    menucolor=black,
+    runcolor=black,
+    urlcolor=black
+]{hyperref}
+\usepackage{cleveref}
+\usepackage[square, numbers, sort&compress]{natbib}
+\bibliographystyle{abbrvnat}
+
+% OTHER PACKAGES
+\usepackage{pdfpages}
+\usepackage{afterpage}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\input{ConfigurationFiles/alloy.sty}
+\fancyhf{}
+
+\input{ConfigurationFiles/config}
+
+% Define bluepoli color (Politecnico di Milano blue)
+\definecolor{bluepoli}{rgb}{0.0, 0.25, 0.45}
+
+%----------------------------------------------------------------------------
+%	BEGIN OF DOCUMENT
+%----------------------------------------------------------------------------
+
+\begin{document}
+    \pagestyle{empty}
+    \frontmatter
+
+    \puttitle{
+        title=Acceptance Testing Document,
+        name1=Jos\'e Mart\'inez Est\'evez,
+        name2=Pablo Jes\'us Herrero D\'iaz,
+        deliverable=ATD,
+        version=1.0,
+        date=07-February-2026,
+        downloadpage=\href{https://github.com/BIA3IA/Errigo-Gholami-Ianosel}{Errigo-Gholami-Ianosel (Best Bike Paths)},
+    }
+
+    \thispagestyle{empty}
+    \startpreamble
+    \setcounter{page}{1}
+
+    \tableofcontents
+    \thispagestyle{empty}
+    \cleardoublepage
+
+    \addtocontents{toc}{\vspace{1em}}
+    \mainmatter
+
+    \chapter{Introduction}
+    \label{ch:introduction}
+    \input{Chapters/1_-_Introduction}
+
+    \chapter{Implemented Requirements}
+    \label{ch:implemented_requirements}
+    \input{Chapters/2_-_Implemented_Requirements}
+
+    \chapter{Acceptance Test Cases}
+    \label{ch:acceptance_test_cases}
+    \input{Chapters/3_-_Design_Choices}
+
+    \chapter{Effort Spent}
+    \label{ch:effort_spent}
+    \input{Chapters/8._-_Effort_Spent}
+
+    \chapter{References}
+    \label{ch:references}
+    \input{Chapters/7_-_References}
+
+    \listoftables
+    \cleardoublepage
+
+\end{document}

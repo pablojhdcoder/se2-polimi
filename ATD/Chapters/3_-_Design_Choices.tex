@@ -1,0 +1,222 @@
+\section{Acceptance Test Cases}
+\label{sec:acceptance_test_cases}
+
+The \textbf{Best Bike Paths (BBP)} requirements are taken from the RASD and grouped by functionality. For each requirement we report the test description, expected outcome, actual outcome, and status. Where backend automated tests were executed, we report their results; where only the mobile app could verify the requirement, we note that the app test suite did not run on the evaluation environment (Windows) due to Jest \texttt{testMatch} matching zero files.
+
+\textbf{Backend test summary:} 24 test suites passed (2 skipped), 248 tests passed (11 skipped). Integration tests covered auth, paths, trips, reports, stats, user, weather, geocoding, Redis, and snapping.
+
+\textbf{Status legend:} \ding{51} Pass = verified by executed tests; N/R = Not run on evaluation environment (app tests did not discover files on Windows).
+
+\subsection{User Registration and Authentication (R1--R5)}
+\label{subsec:auth_tests}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|c|p{3.2cm}|p{3.2cm}|p{3.4cm}|c|}
+        \hline
+        \textbf{Req.} & \textbf{Test Description} & \textbf{Expected Outcome} & \textbf{Actual Outcome} & \textbf{Status} \\
+        \hline
+        R1 & Allow guests to create an account. & Registration succeeds with valid data. & Backend auth integration and unit tests (signup, validation) passed. & \ding{51} Pass \\
+        \hline
+        R2 & Allow registered users to log in. & Login with valid credentials succeeds. & Auth integration and unit tests (login, tokens) passed. & \ding{51} Pass \\
+        \hline
+        R3 & Allow logged-in users to view profile. & Profile data is returned. & User integration and unit tests passed. & \ding{51} Pass \\
+        \hline
+        R4 & Allow logged-in users to update profile. & Profile updates are persisted. & User integration tests passed. & \ding{51} Pass \\
+        \hline
+        R5 & Allow logged-in users to log out. & Session ends; refresh token invalidated. & Auth unit tests (logout, token handling) passed. & \ding{51} Pass \\
+        \hline
+    \end{tabular}
+    \caption{User Registration and Authentication Test Cases}
+    \label{tab:auth_requirements}
+\end{table}
+
+\subsection{Trip Recording and Management (R6--R20)}
+\label{subsec:trip_tests}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|c|p{3cm}|p{3cm}|p{3.6cm}|c|}
+        \hline
+        \textbf{Req.} & \textbf{Test Description} & \textbf{Expected Outcome} & \textbf{Actual Outcome} & \textbf{Status} \\
+        \hline
+        R6--R7 & Guest start/stop trip; no storage. & Guest trip not persisted. & Backend trip logic covered by unit/integration tests. & \ding{51} Pass \\
+        \hline
+        R8--R11 & Start at path origin; auto-detect; thresholds. & Behaviour as per RASD. & App-only; app tests not run on evaluation env. & -- N/R \\
+        \hline
+        R12--R13 & Logged-in user start/stop and save trip. & Trip saved and listed. & Trip integration and unit tests passed. & \ding{51} Pass \\
+        \hline
+        R14--R15 & GPS and sensor data collection. & Data collected when applicable. & App-only; app tests not run. & -- N/R \\
+        \hline
+        R16 & List recorded trips. & Trips returned for user. & Trip integration tests passed. & \ding{51} Pass \\
+        \hline
+        R17--R18 & Overall and per-trip statistics. & Stats computed and returned. & Stat integration and unit tests passed. & \ding{51} Pass \\
+        \hline
+        R19 & Route and obstacles for a trip. & Trip detail includes route and reports. & Trip/report integration tests passed. & \ding{51} Pass \\
+        \hline
+        R20 & Delete recorded trip. & Trip deleted. & Trip integration tests passed. & \ding{51} Pass \\
+        \hline
+    \end{tabular}
+    \caption{Trip Recording and Management Test Cases}
+    \label{tab:trip_requirements}
+\end{table}
+
+\subsection{Trip Data Enrichment and External Services (R21, R41--R42)}
+\label{subsec:external_services_tests}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|c|p{3.2cm}|p{3.2cm}|p{3.4cm}|c|}
+        \hline
+        \textbf{Req.} & \textbf{Test Description} & \textbf{Expected Outcome} & \textbf{Actual Outcome} & \textbf{Status} \\
+        \hline
+        R21 & Weather data for trip time/location. & Weather service returns data. & Weather service unit and integration tests passed. & \ding{51} Pass \\
+        \hline
+        R41 & Geocoding: addresses to coordinates. & Geocoding service returns coordinates. & Geocoding service unit and integration tests passed. & \ding{51} Pass \\
+        \hline
+        R42 & Graceful handling of service unavailability. & Timeouts/errors handled. & Weather and snapping unit tests (timeouts, errors) passed. & \ding{51} Pass \\
+        \hline
+    \end{tabular}
+    \caption{Trip Enrichment and External Services Test Cases}
+    \label{tab:external_requirements}
+\end{table}
+
+\subsection{Automatic Data Processing (R22--R24)}
+\label{subsec:automatic_detection_tests}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|c|p{3.2cm}|p{3.2cm}|p{3.4cm}|c|}
+        \hline
+        \textbf{Req.} & \textbf{Test Description} & \textbf{Expected Outcome} & \textbf{Actual Outcome} & \textbf{Status} \\
+        \hline
+        R22 & Detect cycling from speed/acceleration. & Detection logic works. & Implemented in app; app tests not run. & -- N/R \\
+        \hline
+        R23 & Detect irregularities (e.g. potholes) from sensors. & Anomalies detected when automatic mode on. & App-side; app tests not run. & -- N/R \\
+        \hline
+        R24 & Present detected path/obstacles for confirmation. & User can confirm/reject before publish. & Backend path/report flows covered; UI in app not run. & \ding{51} Pass (backend) \\
+        \hline
+    \end{tabular}
+    \caption{Automatic Data Processing Test Cases}
+    \label{tab:automatic_requirements}
+\end{table}
+
+\subsection{Path Information Management (R25--R30)}
+\label{subsec:path_management_tests}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|c|p{3cm}|p{3cm}|p{3.6cm}|c|}
+        \hline
+        \textbf{Req.} & \textbf{Test Description} & \textbf{Expected Outcome} & \textbf{Actual Outcome} & \textbf{Status} \\
+        \hline
+        R25 & Manually create path by drawing segments. & Path created and stored. & Path integration and unit tests (create manual) passed. & \ding{51} Pass \\
+        \hline
+        R26 & Manually report obstacles on path during trip. & Report created and linked to segment. & Report integration and unit tests passed. & \ding{51} Pass \\
+        \hline
+        R27 & Confirm or reject obstacles reported by others. & Confirm/reject recorded. & Report logic covered in backend tests. & \ding{51} Pass \\
+        \hline
+        R28 & Create path in automatic mode (GPS). & Path created from tracked route. & Path unit tests (automatic mode) passed. & \ding{51} Pass \\
+        \hline
+        R29 & Delete user's created paths. & Path removed. & Path integration tests passed. & \ding{51} Pass \\
+        \hline
+        R30 & Set path visibility (public/private). & Visibility updated. & Path unit tests (visibility) passed. & \ding{51} Pass \\
+        \hline
+    \end{tabular}
+    \caption{Path Information Management Test Cases}
+    \label{tab:path_requirements}
+\end{table}
+
+\subsection{Path Aggregation and Status (R31--R34)}
+\label{subsec:path_aggregation_tests}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|c|p{3.2cm}|p{3.2cm}|p{3.4cm}|c|}
+        \hline
+        \textbf{Req.} & \textbf{Test Description} & \textbf{Expected Outcome} & \textbf{Actual Outcome} & \textbf{Status} \\
+        \hline
+        R31 & Aggregate reports for same segment. & Multiple reports combined. & Report integration tests passed. & \ding{51} Pass \\
+        \hline
+        R32 & Evaluate segment reliability (confirmations, freshness). & Reliability/status logic correct. & Report and path logic in backend tests. & \ding{51} Pass \\
+        \hline
+        R33 & Path status (optimal--closed). & Status computed and returned. & Path/report integration tests passed. & \ding{51} Pass \\
+        \hline
+        R34 & Any user views path status and latest reports. & Detail and reports returned. & Path integration tests (search, detail) passed. & \ding{51} Pass \\
+        \hline
+    \end{tabular}
+    \caption{Path Aggregation and Status Test Cases}
+    \label{tab:aggregation_requirements}
+\end{table}
+
+\subsection{Route Discovery and Search (R35--R38)}
+\label{subsec:search_tests}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|c|p{3.2cm}|p{3.2cm}|p{3.4cm}|c|}
+        \hline
+        \textbf{Req.} & \textbf{Test Description} & \textbf{Expected Outcome} & \textbf{Actual Outcome} & \textbf{Status} \\
+        \hline
+        R35 & Browse public paths on map. & Public paths returned. & Path integration (list, visibility) passed. & \ding{51} Pass \\
+        \hline
+        R36 & Search paths between two locations. & Search by origin/destination works. & Path integration and geocoding tests passed. & \ding{51} Pass \\
+        \hline
+        R37--R38 & Compute and rank suggested routes. & Routes by quality/distance. & Path search and snapping tests passed. & \ding{51} Pass \\
+        \hline
+    \end{tabular}
+    \caption{Route Discovery and Search Test Cases}
+    \label{tab:search_requirements}
+\end{table}
+
+\subsection{Navigation and Alerts (R39--R40)}
+\label{subsec:navigation_alerts_tests}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|c|p{3.5cm}|p{3.2cm}|p{3.1cm}|c|}
+        \hline
+        \textbf{Req.} & \textbf{Test Description} & \textbf{Expected Outcome} & \textbf{Actual Outcome} & \textbf{Status} \\
+        \hline
+        R39 & Display user GPS position during navigation. & Map shows current position. & App UI; app tests not run. & -- N/R \\
+        \hline
+        R40 & Pop-ups for nearby obstacles/closed segments. & Alerts shown during active trip. & App UI; app tests not run. & -- N/R \\
+        \hline
+    \end{tabular}
+    \caption{Navigation and Alerts Test Cases}
+    \label{tab:navigation_requirements}
+\end{table}
+
+\subsection{Backend Unit and Integration Test Summary}
+\label{subsec:backend_test_summary}
+
+The following backend test suites were executed successfully (all passed unless skipped):
+\begin{itemize}
+    \item \textbf{Unit:} auth.manager, error.handler, fetch, geo, geocoding.service, jwt, path.manager, report.manager, snapping.service, stat.manager, trip.manager, trip.weather, user.manager, utils, validator, weather.service.
+    \item \textbf{Integration:} auth, path, redis, report, stat, trip, user, weather.service, geocoding.service, snapping.service (some integration tests skipped by default).
+\end{itemize}
+Overall: 248 tests passed, 11 skipped; 24 suites passed, 2 skipped.
+
+\section{Additional Notes}
+\label{sec:additional_notes}
+\begin{itemize}
+    \item The backend is well covered by unit and integration tests; requirements that are implemented server-side are verified by these tests.
+    \item N/R (Not Run) applies to behaviours that depend on the mobile app UI or app-side logic (e.g. cycling detection, navigation, in-app alerts). The app test suite did not discover any tests on the evaluation environment (Windows) due to the Jest \texttt{testMatch} pattern; running the app tests on Linux or macOS would allow full acceptance coverage for R8--R11, R14--R15, R22--R23, R39, R40.
+    \item Snapping (OSRM) and geocoding (Nominatim) are covered by backend unit/integration tests; live external services can be enabled with \texttt{RUN\_LIVE\_TESTS=1} for additional validation.
+\end{itemize}
+
+\section{Areas for Improvement}
+\label{sec:areas_for_improvement}
+\begin{itemize}
+    \item \textbf{App test runner on Windows:} Make the Jest \texttt{testMatch} (or equivalent) robust on Windows so that \texttt{npm test} discovers tests in \texttt{tests/unit} and \texttt{tests/integration} without platform-specific workarounds.
+    \item \textbf{Backend \texttt{npm test} script:} Use a cross-platform way to set \texttt{NODE\_OPTIONS} (e.g. \texttt{cross-env} or a small script) so that \texttt{npm test} works on Windows as well as Unix.
+    \item \textbf{Documentation:} In the backend README, state explicitly that \texttt{DATABASE\_URL} must be set (e.g. to a placeholder) before running \texttt{prisma generate} when using \texttt{prisma.config.ts}.
+\end{itemize}
