@@ -178,3 +178,110 @@ Por tanto: el fallo **no** es que el test espere `"selected-Beta"` y la app no l
 | Otros tests que también usan componentes con ScrollView o React Native a veces pasan | La EPERM puede ser intermitente o afectar solo a ciertos archivos de caché cuando se accede en un orden concreto. |
 
 En resumen: **el log que indica fallo** es la línea `FAIL ... searchResultsSheet.integration.test.tsx` y el bloque `● ... › selection highlight renders for selected result`; la **razón técnica** es el **Cause: jest: failed to read cache file ... EPERM**, que se interpreta como fallo de entorno (Windows/caché/permisos), no como bug en la aplicación.
+
+---
+
+## 5. Interpretación del párrafo del ATD (lenguaje sencillo)
+
+El texto del ATD dice algo así:
+
+> *35 test suites passed, 1 failed; 211 tests passed, 1 failed (run time ∼47 s). The single failure is in tests/integration/paths/searchResultsSheet.integration.test.tsx (case "selection highlight renders for selected result"). The failure is due to EPERM: operation not permitted when Jest reads its transform cache under %TEMP%\jest on Windows—i.e. an environment/permissions issue, not an application bug. We therefore consider the app test suite to have run successfully for acceptance purposes; the remaining failure should be rechecked on Linux/macOS or with a clean Jest cache.*
+
+**Qué significa en pocas palabras:**
+
+| Parte del texto | Significado |
+|-----------------|-------------|
+| **35 suites passed, 1 failed** | De 36 grupos de tests (suites), 35 se ejecutaron bien y **uno** falló. |
+| **211 tests passed, 1 failed** | De 212 pruebas individuales, 211 pasaron y **una** falló (la que está dentro de la suite que falla). |
+| **run time ∼47 s** | Toda la suite de la app tardó unos 47 segundos. |
+| **The single failure is in ... searchResultsSheet.integration.test.tsx** | El único fallo está en ese archivo de test (hoja de resultados de búsqueda). |
+| **case "selection highlight renders for selected result"** | El caso concreto que falla es el que comprueba que se muestra el highlight en el resultado seleccionado. |
+| **EPERM: operation not permitted when Jest reads its transform cache under %TEMP%\jest on Windows** | En Windows, Jest no pudo **leer** un archivo de su **caché** (en la carpeta temporal); el sistema devolvió “operación no permitida” (permisos o archivo bloqueado). |
+| **environment/permissions issue, not an application bug** | El fallo es del **entorno** (Windows, permisos, caché), no de un error en el código de Best Bike Paths. |
+| **We therefore consider the app test suite to have run successfully for acceptance purposes** | Por eso, para el **ATD** se considera que la suite de tests de la app **sí se ejecutó correctamente** en términos de aceptación; el único fallo no invalida la aceptación. |
+| **the remaining failure should be rechecked on Linux/macOS or with a clean Jest cache** | Ese único fallo conviene **volver a ejecutarlo** en otro sistema (Linux/macOS) o tras limpiar la caché de Jest (`npx jest --clearCache`) para confirmar que no es un bug de la app. |
+
+---
+
+## 6. Salida de error por consola (texto completo)
+
+A continuación se reproduce la salida que Jest mostró por consola para el test fallido (tal como aparece al ejecutar `npm run test` en `IT/CODE/APP/src`):
+
+```
+FAIL tests/integration/paths/searchResultsSheet.integration.test.tsx (31.703 s)
+  ● search results sheet guest messaging › selection highlight renders for selected result
+
+    There was an error during concurrent rendering but React was able to recover by instead synchronously rendering the entire root.
+
+      59 |         ]
+      60 |
+    > 61 |         const { getByText, queryByText } = render(
+         |                                                  ^
+      62 |             <SearchResultsSheet
+      63 |                 visible
+      64 |                 results={results}
+      65 |                 selectedResultId="p2"
+      66 |             />
+      67 |         )
+      68 |
+      69 |         expect(getByText("selected-Beta")).toBeTruthy()
+      70 |         expect(queryByText("selected-Alpha")).toBeNull()
+      71 |     })
+
+      at throwException (node_modules/react-test-renderer/cjs/react-test-renderer.development.js:5669:9)
+      at throwAndUnwindWorkLoop (node_modules/react-test-renderer/cjs/react-test-renderer.development.js:11048:11)
+      at renderRootSync (node_modules/react-test-renderer/cjs/react-test-renderer.development.js:10794:19)
+      at performWorkOnRoot (node_modules/react-test-renderer/cjs/react-test-renderer.development.js:2094:7)
+      at flushActQueue (node_modules/react/cjs/react.development.js:5669:34)
+      at Object.<anonymous>.process.env.NODE_ENV.exports.act (node_modules/react/cjs/react.development.js:859:10)
+      at actImplementation (node_modules/@testing-library/react-native/src/act.ts:30:25)
+      at renderWithAct (node_modules/@testing-library/react-native/src/render-act.ts:13:11)
+      at renderInternal (node_modules/@testing-library/react-native/src/render.tsx:69:33)
+      at renderInternal (node_modules/@testing-library/react-native/src/render.tsx:44:10)
+      at Object.<anonymous> (tests/integration/paths/searchResultsSheet.integration.test.tsx:61:50)
+
+    Cause:
+    jest: failed to read cache file: C:/Users/pablo/AppData/Local/Temp/jest/jest-transform-cache-0a0feb887b0263ed4bf0492b5a14fb76-79ef2876fae7ca75eedb2aa53dc48338/a7/PlatformColorValueTypesios_a724d7c872629aede89125aac2a3367a
+    Failure message: EPERM: operation not permitted, open 'C:\Users\pablo\AppData\Local\Temp\jest\jest-transform-cache-0a0feb887b0263ed4bf0492b5a14fb76-79ef2876fae7ca75eedb2aa53dc48338\a7\PlatformColorValueTypesios_a724d7c872629aede89125aac2a3367a'
+
+      111 |         </View>
+      112 |       ) : (
+    > 113 |         <ScrollView
+          |          ^
+      114 |           style={[styles.list, { maxHeight }]}
+      115 |           contentContainerStyle={styles.listContent}
+      116 |           showsVerticalScrollIndicator={false}
+      ...
+
+      at readCacheFile (node_modules/@jest/transform/build/ScriptTransformer.js:941:21)
+      at readCodeCacheFile (node_modules/@jest/transform/build/ScriptTransformer.js:885:19)
+      at ScriptTransformer.transformSource (node_modules/@jest/transform/build/ScriptTransformer.js:528:39)
+      at ScriptTransformer._transformAndBuildScript (node_modules/@jest/transform/build/ScriptTransformer.js:674:40)
+      at ScriptTransformer.transform (node_modules/@jest/transform/build/ScriptTransformer.js:726:19)
+      at Object.require (node_modules/react-native/Libraries/Animated/nodes/AnimatedColor.js:21:1)
+      at Object.require (node_modules/react-native/Libraries/Animated/animations/SpringAnimation.js:17:1)
+      at Object.require (node_modules/react-native/Libraries/Animated/AnimatedImplementation.js:25:1)
+      at Object.require (node_modules/react-native/Libraries/Components/ScrollView/ScrollView.js:34:1)
+      at requireActual (node_modules/react-native/jest/mockComponent.js:34:12)
+      at Object.mockComponent (node_modules/react-native/jest/mocks/ScrollView.js:29:23)
+      at requireActual (node_modules/react-native/jest/mock.js:32:44)
+      at Object.require [as ScrollView] (node_modules/react-native/index.js:101:12)
+      at ScrollView (components/paths/SearchResultsSheet.tsx:113:10)
+```
+
+Y al final de toda la ejecución, el resumen:
+
+```
+Summary of all failing tests
+FAIL tests/integration/paths/searchResultsSheet.integration.test.tsx (31.703 s)
+  ● search results sheet guest messaging › selection highlight renders for selected result
+    ... (mismo error y Cause que arriba) ...
+
+Test Suites: 1 failed, 35 passed, 36 total
+Tests:       1 failed, 211 passed, 212 total
+Snapshots:   0 total
+Time:        46.756 s
+Ran all test suites.
+```
+
+La línea que identifica el **motivo real** del fallo es la del **Cause:** con la ruta de la caché y el mensaje **EPERM: operation not permitted, open '...'**.

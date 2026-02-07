@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.3)  7 FEB 2026 19:44
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.3)  7 FEB 2026 20:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1531,7 +1531,7 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 ))
 \c@lstlisting=\count401
-<./Images/PolimiLogo.png, id=182, 405.515pt x 125.46875pt>
+<./Images/PolimiLogo.png, id=202, 405.515pt x 125.46875pt>
 File: ./Images/PolimiLogo.png Graphic file (type png)
 <use ./Images/PolimiLogo.png>
 Package pdftex.def Info: ./Images/PolimiLogo.png  used on input line 109.
@@ -1635,12 +1635,6 @@ Overfull \hbox (3.7896pt too wide) in paragraph at lines 9--10
 ocker Com-pose (op-tional), Prisma
  []
 
-
-Overfull \hbox (70.04424pt too wide) in paragraph at lines 10--11
-\T1/lmr/m/n/12 cal de-vice). En-vi-ron-ment vari-ables \T1/lmtt/m/n/12 EXPO_PUB
-LIC_PROD_API_URL \T1/lmr/m/n/12 or \T1/lmtt/m/n/12 EXPO_PUBLIC_DEVEL_API_URL
- []
-
 [3
 
 
@@ -1670,45 +1664,45 @@ ent.ts \T1/lmr/m/n/12 only sup-ported an Ac-
  []
 
 
-Overfull \hbox (7.88112pt too wide) in paragraph at lines 83--83
+Overfull \hbox (7.88112pt too wide) in paragraph at lines 85--85
 []  \T1/lmtt/m/n/12 : new PrismaClient({ adapter: new PrismaPg({ connectionStri
 ng: url }) });[] 
  []
 
 
-Overfull \hbox (10.75893pt too wide) in paragraph at lines 87--87
+Overfull \hbox (10.75893pt too wide) in paragraph at lines 89--89
 |[]\T1/lmr/bx/n/14.4 Prisma Client Gen-er-a-tion (for tests with-out a real dat
 abase)| 
  []
 
 
-Overfull \hbox (35.7009pt too wide) in paragraph at lines 89--90
+Overfull \hbox (35.7009pt too wide) in paragraph at lines 91--92
 []\T1/lmr/m/n/12 To run only the test suite (no server), the back-end re-lies o
 n Prisma with \T1/lmtt/m/n/12 prisma.config.ts\T1/lmr/m/n/12 ,
  []
 
 [5]
-Overfull \hbox (31.62892pt too wide) in paragraph at lines 90--91
+Overfull \hbox (31.62892pt too wide) in paragraph at lines 92--93
 []\T1/lmr/m/n/12 With a place-holder \T1/lmtt/m/n/12 DATABASE_URL \T1/lmr/m/n/1
 2 (e.g. \T1/lmtt/m/n/12 postgresql://user:pass@localhost:5432/bbp\T1/lmr/m/n/12
  )
  []
 
 
-Overfull \hbox (86.65727pt too wide) in paragraph at lines 116--117
+Overfull \hbox (86.65727pt too wide) in paragraph at lines 118--119
 \T1/lmr/m/n/12 dows, the orig-i-nal \T1/lmtt/m/n/12 testMatch \T1/lmr/m/n/12 pa
 t-tern with braces (\T1/lmtt/m/n/12 tests/{unit,integration}/**/*.test.ts?(x)\T
 1/lmr/m/n/12 )
  []
 
 
-Overfull \hbox (101.72292pt too wide) in paragraph at lines 116--117
+Overfull \hbox (101.72292pt too wide) in paragraph at lines 118--119
 \T1/lmtt/m/n/12 <rootDir>/tests/unit/**/*.test.ts?(x) \T1/lmr/m/n/12 and \T1/lm
 tt/m/n/12 <rootDir>/tests/integration/**/*.test.ts?(x)\T1/lmr/m/n/12 ,
  []
 
 
-Overfull \hbox (75.29515pt too wide) in paragraph at lines 117--118
+Overfull \hbox (75.29515pt too wide) in paragraph at lines 119--120
 \T1/lmr/m/n/12 The sin-gle fail-ure is in \T1/lmtt/m/n/12 tests/integration/pat
 hs/searchResultsSheet.integration.test.tsx
  []
@@ -1716,23 +1710,23 @@ hs/searchResultsSheet.integration.test.tsx
 [6{C:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.en
 c}]
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 134.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 136.
 
-Overfull \hbox (34.2327pt too wide) in paragraph at lines 134--135
+Overfull \hbox (34.2327pt too wide) in paragraph at lines 136--137
 []\T1/lmr/bx/n/12 Prisma re-quires \T1/lmtt/b/n/12 DATABASE_URL \T1/lmr/bx/n/12
  for \T1/lmtt/b/n/12 prisma generate\T1/lmr/bx/n/12 : \T1/lmr/m/n/12 When us-in
 g \T1/lmtt/m/n/12 prisma.config.ts\T1/lmr/m/n/12 ,
  []
 
-
-Overfull \hbox (155.82065pt too wide) in paragraph at lines 135--136
+[7]
+Overfull \hbox (155.82065pt too wide) in paragraph at lines 137--138
 []\T1/lmr/bx/n/12 Backend \T1/lmtt/b/n/12 npm test \T1/lmr/bx/n/12 on Win-dows:
  \T1/lmr/m/n/12 The test script uses \T1/lmtt/m/n/12 NODE_OPTIONS='--localstora
 ge-file=./jest-storage'
  []
 
-[7]
-Overfull \hbox (29.44872pt too wide) in paragraph at lines 139--140
+
+Overfull \hbox (29.44872pt too wide) in paragraph at lines 141--142
 \T1/lmr/m/n/12 snap-ping some-times fails with \T1/lmtt/m/n/12 WARN Failed to s
 nap segment [AxiosError: Request
  []
@@ -1741,7 +1735,7 @@ nap segment [AxiosError: Request
 
 ]
 Chapter 3.
-(Chapters/3_-_Design_Choices.tex
+(Chapters/3_-_Acceptance_Test_Cases.tex
 Underfull \hbox (badness 10000) in paragraph at lines 18--18
 []|\T1/lmr/bx/n/12 Test De-scrip-
  []
@@ -2445,35 +2439,40 @@ lmr/m/n/12 A cross-platform way to set \T1/lmtt/m/n/12 NODE_OPTIONS \T1/lmr/m/n
 
 ]
 Chapter 4.
-(Chapters/8._-_Effort_Spent.tex
+(Chapters/4_-_Overall_Project_Conclusion.tex [21
+
+]) [22]
+Chapter 5.
+(Chapters/5_-_Effort_Spent.tex
 Underfull \hbox (badness 2134) in paragraph at lines 15--15
 []|\T1/lmr/m/n/12 Pablo Jesús Her-rero
  []
 
-) [21
+) [23
 
-] [22
+
+] [24
 
 ]
-Chapter 5.
-(Chapters/7_-_References.tex
+Chapter 6.
+(Chapters/6_-_References.tex
 Overfull \hbox (29.01918pt too wide) in paragraph at lines 5--6
 []\T1/lmr/m/n/12 Errigo-Gholami-Ianosel repos-i-tory: [][]https://github.com/BI
 A3IA/Errigo-Gholami-Ianosel[][]. 
  []
 
-[23
+[25
 
-]) [24]
+]) [26]
 (C:\Users\pablo\Desktop\Informatica\3\Polimi\SoftwareEngineering2\Project\Pablo
 Jose\ATD\build\ATD.lot)
 \tf@lot=\write6
 \openout6 = `ATD.lot'.
 
- [25
+ [27
 
 
-] [26
+] [28
 
 ]
 
@@ -2492,16 +2491,16 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2025-11-06>
  ***********
 Package rerunfilecheck Info: File `ATD.out' has not changed.
-(rerunfilecheck)             Checksum: 7BFE4AD9694B3F82D10236395E176A8C;7909.
+(rerunfilecheck)             Checksum: E86139F7DE9D143F0AC83117714FDA01;8781.
  ) 
 Here is how much of TeX's memory you used:
- 31222 strings out of 467871
- 584268 string characters out of 5418376
+ 31254 strings out of 467871
+ 585275 string characters out of 5418376
  988353 words of memory out of 5000000
- 59377 multiletter control sequences out of 15000+600000
+ 59399 multiletter control sequences out of 15000+600000
  693431 words of font info for 85 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,12n,94p,1263b,611s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,12n,94p,1318b,611s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pf
 b><C:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb
 ><C:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb>
@@ -2512,9 +2511,9 @@ b><C:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb
 :/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb><C
 :/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/urw/zapfding/uzdr.pfb>
 Output written on C:\Users\pablo\Desktop\Informatica\3\Polimi\SoftwareEngineeri
-ng2\Project\PabloJose\ATD\build\ATD.pdf (30 pages, 315809 bytes).
+ng2\Project\PabloJose\ATD\build\ATD.pdf (32 pages, 325490 bytes).
 PDF statistics:
- 484 PDF objects out of 1000 (max. 8388607)
- 104 named destinations out of 1000 (max. 500000)
- 370 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 525 PDF objects out of 1000 (max. 8388607)
+ 113 named destinations out of 1000 (max. 500000)
+ 410 words of extra memory for PDF output out of 10000 (max. 10000000)
 

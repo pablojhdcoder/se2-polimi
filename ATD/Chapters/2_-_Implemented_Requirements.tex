@@ -1,13 +1,13 @@
 \section{Overview}
 \label{sec:overview}
-Our installation and test run used the \textbf{Backend README} and \textbf{App README} in the Errigo-Gholami-Ianosel repository as the primary guides. The backend stack is Node.js with TypeScript, Express, PostgreSQL (Prisma), and Redis; the mobile app is built with Expo and React Native. We carried out dependency installation, database and runtime configuration (as in the Backend README), Prisma client generation and migrations, and ran the automated test suites. The backend tests completed successfully (24 suites passed, 248 tests passed). After a small workaround to the app Jest \texttt{testMatch} on Windows, the app test suite ran: 35 suites passed, 1 failed due to an environment issue (Jest cache EPERM on Windows); 211 tests passed, 1 failed. See Section~\ref{sec:frontend_installation} for details. Some installation steps required extra effort, but Prisma proved a solid choice for database access and debugging.
+Our installation and test run used the \href{https://github.com/BIA3IA/Errigo-Gholami-Ianosel/blob/main/IT/CODE/BACKEND/README.md}{\textbf{\textcolor{blue}{\underline{Backend README}}}} and \href{https://github.com/BIA3IA/Errigo-Gholami-Ianosel/blob/main/IT/CODE/APP/README.md}{\textbf{\textcolor{blue}{\underline{App README}}}} in the Errigo-Gholami-Ianosel repository as the primary guides. The backend stack is Node.js with TypeScript, Express, PostgreSQL (Prisma), and Redis; the mobile app is built with Expo and React Native. We carried out dependency installation, database and runtime configuration (as in the Backend README), Prisma client generation and migrations, and ran the automated test suites. The backend tests completed successfully (24 suites passed, 248 tests passed). After a small workaround to the app Jest \texttt{testMatch} on Windows, the app test suite ran: 35 suites passed, 1 failed due to an environment issue (Jest cache EPERM on Windows); 211 tests passed, 1 failed. See Section~\ref{sec:frontend_installation} for details. Some installation steps required extra effort, but Prisma proved a solid choice for database access and debugging.
 
 \section{Prerequisites}
 \label{sec:prerequisites}
 According to the READMEs, the following are required:
 \begin{itemize}
-    \item \textbf{Backend:} Node.js, npm, PostgreSQL, Docker \& Docker Compose (optional), Prisma CLI (optional). The backend uses Prisma Accelerate for database access in production. The \texttt{DATABASE\_URL} environment variable is required even for \texttt{prisma generate}.
-    \item \textbf{App:} Node.js (LTS recommended), npm, Expo CLI (optional), Expo Go (for physical device). Environment variables \texttt{EXPO\_PUBLIC\_PROD\_API\_URL} or \texttt{EXPO\_PUBLIC\_DEVEL\_API\_URL} must be set in \texttt{.env} in the app root; optionally set Google Maps API keys there as well.
+    \item \textbf{Backend:} Node.js, npm, PostgreSQL, Docker \& Docker Compose (optional), Prisma CLI (optional). The backend uses Prisma Accelerate for faster query execution and because it provides a managed database access. The \texttt{DATABASE\_URL} environment variable is required even for \texttt{prisma generate}.
+    \item \textbf{App:} Node.js, npm, Expo CLI (optional), Expo Go (for physical device). Environment variables \texttt{EXPO\_PUBLIC\_PROD\_API\_URL} or \texttt{EXPO\_PUBLIC\_DEVEL\_API\_URL} must be set in \texttt{.env} in the app root; Google Maps API keys are also required there for the app to function (map display, geocoding, etc.).
 \end{itemize}
 
 \section{Dependency Installation}
@@ -63,7 +63,9 @@ Using the Backend README (Database \& Prisma, First-time Setup), we brought up t
 Thereafter, \texttt{npm run dev} started the API and \texttt{curl -i http://localhost:3000/health} returned 200 OK.
 
 \begin{sloppypar}
-For local development we preferred a standard \texttt{postgresql://} URL without using Prisma Accelerate. The shipped \texttt{prisma-client.ts} only supported an Accelerate URL (\texttt{prisma+postgres://}\ldots). We added a small change in \path|IT/CODE/BACKEND/src/utils/prisma-client.ts| to support both: if \texttt{DATABASE\_URL} begins with \texttt{prisma://} or \texttt{prisma+postgres://}, the client uses \texttt{accelerateUrl}; otherwise it uses \texttt{@prisma/adapter-pg} with the connection string. We suggest shipping this dual support so that evaluators and developers can run the backend locally without Prisma Accelerate. The patch is:
+For local development we preferred a standard \texttt{postgresql://} URL without using Prisma Accelerate. The shipped \texttt{prisma-client.ts} only supported an Accelerate URL (\texttt{prisma+postgres://}\ldots). We added a small change in \path|IT/CODE/BACKEND/src/utils/prisma-client.ts| to support both: if \texttt{DATABASE\_URL} begins with \texttt{prisma://} or \texttt{prisma+postgres://}, the client uses \texttt{accelerateUrl}; otherwise it uses \texttt{@prisma/adapter-pg} with the connection string. We suggest shipping this dual support so that evaluators and developers can run the backend locally without Prisma Accelerate. 
+\subsubsection{The patch is:}
+
 \end{sloppypar}
 
 \begin{verbatim}
@@ -105,7 +107,7 @@ npx jest
 \end{verbatim}
 \begin{itemize}
     \item with \texttt{NODE\_OPTIONS} and \texttt{DATABASE\_URL} set in the environment.
-    \item \textbf{Outcome:} 24 suites passed, 2 skipped; 248 tests passed, 11 skipped (run time $\sim$41\,s). One worker was force-exited after the run (likely open handles or timers), without affecting the reported results. See \texttt{TEST\_RUN\_RESULTS.md} for the full log and suite list.
+    \item \textbf{Outcome:} 24 suites passed, 2 skipped; 248 tests passed, 11 skipped (run time $\sim$41\,s). One worker was force-exited after the run, without affecting the reported results.
 \end{itemize}
 
 \section{Frontend (App) Installation}
