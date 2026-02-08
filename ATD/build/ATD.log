@@ -1,17 +1,17 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.1.31)  8 FEB 2026 13:49
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.3)  8 FEB 2026 14:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **./ATD.tex
 (ATD.tex
 LaTeX2e <2025-11-01>
-L3 programming layer <2025-12-24>
+L3 programming layer <2025-11-06>
 (ConfigurationFiles/Politecnico_Di_Milano.cls
 Document Class: ConfigurationFiles/Politecnico_Di_Milano 2025/12/23 Politecnico
  SE2 submission
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/base\book.cls
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/base\book.cls
 Document Class: book 2025/01/22 v1.4n Standard LaTeX document class
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/base\bk12.clo
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/base\bk12.clo
 File: bk12.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
 )
 \c@part=\count275
@@ -27,16 +27,17 @@ File: bk12.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
 \belowcaptionskip=\skip50
 \bibindent=\dimen148
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
+
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
 Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
 \KV@toks@=\toks17
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
 Package: iftex 2024/12/12 v1.0g TeX engine tests
 ))
 \Gm@cnth=\count284
@@ -52,12 +53,11 @@ Package: iftex 2024/12/12 v1.0g TeX engine tests
 \Gm@layoutvoffset=\dimen156
 \Gm@dimlist=\toks18
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg
-))
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg))
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
 Package: caption 2023/08/05 v3.6o Customizing captions (AR)
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
 Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
 \caption@tempdima=\dimen157
 \captionmargin=\dimen158
@@ -71,21 +71,19 @@ Package caption Info: Standard document class detected.
 )
 \c@caption@flags=\count287
 \c@continuedfloat=\count288
-) (C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.sty
+)
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.sty
 Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cf
-g
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package xcolor Info: Driver file: pdftex.def on input line 274.
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.d
-ef
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
 File: pdftex.def 2025/09/29 v1.2d Graphics/color driver for pdftex
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.lt
-x)
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.ltx)
 Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
 Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1353.
 Package xcolor Info: Model `RGB' extended on input line 1365.
@@ -95,8 +93,7 @@ Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1369.
 Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1370.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
-)
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/fancyhdr\fancyhdr.sty
+) (C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/fancyhdr\fancyhdr.sty
 Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
 
 \f@nch@headwidth=\skip51
@@ -114,10 +111,10 @@ Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
 \f@nch@widthC=\skip63
 \f@nch@widthR=\skip64
 \@temptokenb=\toks19
-) (C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/tools\tabularx.sty
+) (C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/tools\tabularx.sty
 Package: tabularx 2023/12/11 v2.12a `tabularx' package (DPC)
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
 Package: array 2025/09/25 v2.6n Tabular extension package (FMi)
 \col@sep=\dimen165
 \ar@mcellbox=\box53
@@ -135,38 +132,32 @@ Package: array 2025/09/25 v2.6n Tabular extension package (FMi)
 \TX@cols=\count289
 \TX@ftn=\toks21
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/xkeyval\xkeyval.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/xkeyval\xkeyval.sty
 Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/xkeyval\xkeyval.tex
-
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/xkeyval\xkvutils.te
-x
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/xkeyval\xkeyval.tex
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/xkeyval\xkvutils.tex
 \XKV@toks=\toks22
 \XKV@tempa@toks=\toks23
 )
 \XKV@depth=\count290
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
-)))
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/parskip\parskip.sty
+))) (C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/parskip\parskip.sty
 Package: parskip 2021-03-14 v2.0h non-zero parskip adjustments
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.s
-ty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.sty
 Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
-
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty
 Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.s
-ty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.sty
 Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
 ))
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty
 Package: etoolbox 2025/10/02 v2.5m e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count291
-))
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\booktabs.sty
+)) (C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\booktabs.st
+y
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \heavyrulewidth=\dimen172
 \lightrulewidth=\dimen173
@@ -185,16 +176,13 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \@thisruleclass=\count294
 \@lastruleclass=\count295
 \@thisrulewidth=\dimen184
-)
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/setspace\setspace.sty
+) (C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/setspace\setspace.sty
 Package: setspace 2022/12/04 v6.7b set line spacing
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/emptypage\emptypage.s
-ty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/emptypage\emptypage.sty
 Package: emptypage 2010/05/30 v1.2 Suppress page numbers and headings on empty 
 pages
-)
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/tools\multicol.sty
+) (C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/tools\multicol.sty
 Package: multicol 2025/10/21 v2.0b multicolumn formatting (FMi)
 \c@tracingmulticols=\count296
 \mult@box=\box55
@@ -265,14 +253,14 @@ Package: multicol 2025/10/21 v2.0b multicolumn formatting (FMi)
 \mc@col@check@num=\count305
 \g__mc_curr_col_int=\count306
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/multirow\multirow.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/multirow\multirow.sty
 Package: multirow 2024/11/12 v2.9 Span multiple rows of a table
 \multirow@colwidth=\skip69
 \multirow@cntb=\count307
 \multirow@dima=\skip70
 \bigstrutjot=\dimen194
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/enumitem\enumitem.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/enumitem\enumitem.sty
 Package: enumitem 2025/02/06 v3.11 Customized lists
 \labelindent=\skip71
 \enit@outerparindent=\dimen195
@@ -281,7 +269,7 @@ Package: enumitem 2025/02/06 v3.11 Customized lists
 \enit@count@id=\count308
 \enitdp@description=\count309
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/titlesec\titlesec.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/titlesec\titlesec.sty
 Package: titlesec 2025/01/04 v2.17 Sectioning titles
 \ttl@box=\box102
 \beforetitleunit=\skip72
@@ -292,7 +280,8 @@ Package: titlesec 2025/01/04 v2.17 Sectioning titles
 \titlewidth=\dimen198
 \titlewidthlast=\dimen199
 \titlewidthfirst=\dimen256
-) (C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/tools\longtable.sty
+)
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/tools\longtable.sty
 Package: longtable 2025-10-13 v4.24 Multi-page Table package (DPC)
 \LTleft=\skip74
 \LTright=\skip75
@@ -310,7 +299,8 @@ Package: longtable 2025-10-13 v4.24 Multi-page Table package (DPC)
 \c@LT@tables=\count313
 \c@LT@chunks=\count314
 \LT@p@ftn=\toks26
-) (C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/lm\lmodern.sty
+)
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/lm\lmodern.sty
 Package: lmodern 2015/05/01 v1.6.1 Latin Modern Fonts
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
@@ -345,7 +335,7 @@ LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count315
 \float@exts=\toks27
@@ -353,47 +343,48 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@float@everytoks=\toks28
 \@floatcapt=\box109
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.sty
-Package: babel 2025/12/11 v25.17 The multilingual framework for LuaLaTeX, pdfLa
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.sty
+Package: babel 2025/11/09 v25.15 The multilingual framework for LuaLaTeX, pdfLa
 TeX and XeLaTeX
 \babel@savecnt=\count316
 LaTeX Encoding Info:    Redeclaring text command \ij (encoding OT1) on input li
-ne 2068.
+ne 2050.
 LaTeX Encoding Info:    Redeclaring text command \IJ (encoding OT1) on input li
-ne 2070.
+ne 2052.
 LaTeX Encoding Info:    Redeclaring text command \ij (encoding T1) on input lin
-e 2072.
+e 2054.
 LaTeX Encoding Info:    Redeclaring text command \IJ (encoding T1) on input lin
-e 2073.
+e 2055.
 LaTeX Encoding Info:    Ignoring declaration for text command \ij (encoding ?) 
-on input line 2074.
+on input line 2056.
 LaTeX Encoding Info:    Ignoring declaration for text command \IJ (encoding ?) 
-on input line 2076.
+on input line 2058.
 LaTeX Encoding Info:    Ignoring declaration for text command \SS (encoding ?) 
-on input line 2101.
+on input line 2083.
 \U@D=\dimen258
 \l@unhyphenated=\language79
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/babel\txtbabel.def)
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/babel\txtbabel.def)
 \bbl@readstream=\read2
 \bbl@dirlevel=\count317
 Package babel Info: Configuration files are deprecated, as
 (babel)             they can break document portability.
-(babel)             Reported on input line 4196.
+(babel)             Reported on input line 4175.
+
 *************************************
 * Local config file bblopts.cfg used
 *
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/arabi\bblopts.cfg
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/arabi\bblopts.cfg
 File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of
  babel
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/babel/locale/en\bab
-el-english.tex)
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/babel/locale/en\babel
+-english.tex)
 Package babel Info: Importing font and identification data for english
-(babel)             from babel-en.ini. Reported on input line 4320.
+(babel)             from babel-en.ini. Reported on input line 4298.
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/babel-english\english
-.ldf
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/babel-english\english.l
+df
 Language: english 2017/06/06 v3.3r English support from the babel system
 Package babel Info: Hyphen rules for 'canadian' set to \l@english
 (babel)             (\language0). Reported on input line 102.
@@ -401,33 +392,32 @@ Package babel Info: Hyphen rules for 'australian' set to \l@ukenglish
 (babel)             (\language73). Reported on input line 105.
 Package babel Info: Hyphen rules for 'newzealand' set to \l@ukenglish
 (babel)             (\language73). Reported on input line 108.
-))
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.sty
+)) (C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.sty
 Package: inputenc 2024/02/08 v1.3d Input encoding file
 \inpenc@prehook=\toks29
 \inpenc@posthook=\toks30
-)
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.sty
+) (C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.sty
 Package: fontenc 2025/07/18 v2.1d Standard LaTeX package
 LaTeX Font Info:    Trying to load font information for T1+lmr on input line 11
 6.
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmr.fd
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmr.fd
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ))
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/moresize\moresize.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/moresize\moresize.sty
 Package: moresize 1999/07/26 v1.9 (more font sizes)
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
 Package: graphicx 2024/12/31 v1.2e Enhanced LaTeX Graphics (DPC,SPQR)
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
 Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
+
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
 Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics
-.cfg
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.c
+fg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 106.
@@ -435,23 +425,24 @@ Package graphics Info: Driver file: pdftex.def on input line 106.
 \Gin@req@height=\dimen259
 \Gin@req@width=\dimen260
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/transparent\transpare
-nt.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/transparent\transparent
+.sty
 Package: transparent 2025-06-23 v1.6 Transparency with color stacks
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/transparent\transpare
-nt-nometadata.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/transparent\transparent
+-nometadata.sty
 Package: transparent-nometadata 2025-06-23 v1.6 Transparency via pdfTeX's color
  stack (HO)
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/auxhook\auxhook.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/auxhook\auxhook.sty
 Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
-))) (C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/eso-pic\eso-pic.s
-ty
-Package: eso-pic 2025/12/10 v3.0d eso-pic (RN)
+)))
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/eso-pic\eso-pic.sty
+Package: eso-pic 2023/05/03 v3.0c eso-pic (RN)
 \ESO@tempdima=\dimen261
 \ESO@tempdimb=\dimen262
-) (C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/subfig\subfig.sty
+)
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/subfig\subfig.sty
 Package: subfig 2005/06/28 ver: 1.3 subfig package
 \c@KVtest=\count318
 \sf@farskip=\skip78
@@ -467,45 +458,43 @@ Package: subfig 2005/06/28 ver: 1.3 subfig package
 \sf@top=\skip81
 \sf@bottom=\skip82
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/pgf/frontendlayer\tik
-z.sty
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\pgf.st
-y
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgfrcs.
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/pgf/frontendlayer\tikz.
 sty
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfut
-il-common.tex
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\pgf.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgfrcs.st
+y
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfutil
+-common.tex
 \pgfutil@everybye=\toks31
 \pgfutil@tempdima=\dimen264
 \pgfutil@tempdimb=\dimen265
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfut
-il-latex.def
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfutil
+-latex.def
 \pgfutil@abb=\box110
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfrc
-s.code.tex
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf\pgf.revision.te
-x)
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfrcs.
+code.tex
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf\pgf.revision.tex)
 Package: pgfrcs 2025-08-29 v3.1.11a (3.1.11a)
 ))
 Package: pgf 2025-08-29 v3.1.11a (3.1.11a)
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\pgfcor
-e.sty
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/pgf/systemlayer\pgfsy
-s.sty
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgf
-sys.code.tex
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\pgfcore.
+sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/pgf/systemlayer\pgfsys.
+sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsy
+s.code.tex
 Package: pgfsys 2025-08-29 v3.1.11a (3.1.11a)
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfke
-ys.code.tex
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfkeys
+.code.tex
 \pgfkeys@pathtoks=\toks32
 \pgfkeys@temptoks=\toks33
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfke
-yslibraryfiltered.code.tex
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfkeys
+libraryfiltered.code.tex
 \pgfkeys@tmptoks=\toks34
 ))
 \pgf@x=\dimen266
@@ -529,40 +518,40 @@ yslibraryfiltered.code.tex
 \t@pgf@tokc=\toks37
 \pgf@sys@id@count=\count329
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgf
-.cfg
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgf.c
+fg
 File: pgf.cfg 2025-08-29 v3.1.11a (3.1.11a)
 )
 Driver file for pgf: pgfsys-pdftex.def
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgf
-sys-pdftex.def
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsy
+s-pdftex.def
 File: pgfsys-pdftex.def 2025-08-29 v3.1.11a (3.1.11a)
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgf
-sys-common-pdf.def
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsy
+s-common-pdf.def
 File: pgfsys-common-pdf.def 2025-08-29 v3.1.11a (3.1.11a)
 )))
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgf
-syssoftpath.code.tex
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsy
+ssoftpath.code.tex
 File: pgfsyssoftpath.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \pgfsyssoftpath@smallbuffer@items=\count330
 \pgfsyssoftpath@bigbuffer@items=\count331
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgf
-sysprotocol.code.tex
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsy
+sprotocol.code.tex
 File: pgfsysprotocol.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 ))
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfc
-ore.code.tex
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
+e.code.tex
 Package: pgfcore 2025-08-29 v3.1.11a (3.1.11a)
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmath.co
-de.tex
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathuti
-l.code.tex)
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathpar
-ser.code.tex
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmath.code
+.tex
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathutil.
+code.tex)
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathparse
+r.code.tex
 \pgfmath@dimen=\dimen276
 \pgfmath@count=\count332
 \pgfmath@box=\box111
@@ -570,34 +559,34 @@ ser.code.tex
 \pgfmath@stack@operand=\toks39
 \pgfmath@stack@operation=\toks40
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfun
-ctions.code.tex)
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfun
-ctions.basic.code.tex)
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfun
-ctions.trigonometric.code.tex)
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfun
-ctions.random.code.tex)
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfun
-ctions.comparison.code.tex)
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfun
-ctions.base.code.tex)
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfun
-ctions.round.code.tex)
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfun
-ctions.misc.code.tex)
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfun
-ctions.integerarithmetics.code.tex)
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathcal
-c.code.tex)
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathflo
-at.code.tex
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunct
+ions.code.tex)
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunct
+ions.basic.code.tex)
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunct
+ions.trigonometric.code.tex)
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunct
+ions.random.code.tex)
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunct
+ions.comparison.code.tex)
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunct
+ions.base.code.tex)
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunct
+ions.round.code.tex)
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunct
+ions.misc.code.tex)
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunct
+ions.integerarithmetics.code.tex)
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathcalc.
+code.tex)
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfloat
+.code.tex
 \c@pgfmathroundto@lastzeros=\count333
 ))
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfint.cod
-e.tex)
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfc
-orepoints.code.tex
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfint.code.
+tex)
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
+epoints.code.tex
 File: pgfcorepoints.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \pgf@picminx=\dimen277
 \pgf@picmaxx=\dimen278
@@ -614,129 +603,129 @@ File: pgfcorepoints.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \pgf@zx=\dimen289
 \pgf@zy=\dimen290
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfc
-orepathconstruct.code.tex
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
+epathconstruct.code.tex
 File: pgfcorepathconstruct.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \pgf@path@lastx=\dimen291
 \pgf@path@lasty=\dimen292
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfc
-orepathusage.code.tex
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
+epathusage.code.tex
 File: pgfcorepathusage.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \pgf@shorten@end@additional=\dimen293
 \pgf@shorten@start@additional=\dimen294
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfc
-orescopes.code.tex
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
+escopes.code.tex
 File: pgfcorescopes.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \pgfpic=\box112
 \pgf@hbox=\box113
 \pgf@layerbox@main=\box114
 \pgf@picture@serial@count=\count334
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfc
-oregraphicstate.code.tex
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
+egraphicstate.code.tex
 File: pgfcoregraphicstate.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \pgflinewidth=\dimen295
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfc
-oretransformations.code.tex
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
+etransformations.code.tex
 File: pgfcoretransformations.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \pgf@pt@x=\dimen296
 \pgf@pt@y=\dimen297
 \pgf@pt@temp=\dimen298
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfc
-orequick.code.tex
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
+equick.code.tex
 File: pgfcorequick.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfc
-oreobjects.code.tex
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
+eobjects.code.tex
 File: pgfcoreobjects.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfc
-orepathprocessing.code.tex
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
+epathprocessing.code.tex
 File: pgfcorepathprocessing.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfc
-orearrows.code.tex
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
+earrows.code.tex
 File: pgfcorearrows.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \pgfarrowsep=\dimen299
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfc
-oreshade.code.tex
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
+eshade.code.tex
 File: pgfcoreshade.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \pgf@max=\dimen300
 \pgf@sys@shading@range@num=\count335
 \pgf@shadingcount=\count336
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfc
-oreimage.code.tex
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
+eimage.code.tex
 File: pgfcoreimage.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfc
-oreexternal.code.tex
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
+eexternal.code.tex
 File: pgfcoreexternal.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \pgfexternal@startupbox=\box115
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfc
-orelayers.code.tex
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
+elayers.code.tex
 File: pgfcorelayers.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfc
-oretransparency.code.tex
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
+etransparency.code.tex
 File: pgfcoretransparency.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfc
-orepatterns.code.tex
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
+epatterns.code.tex
 File: pgfcorepatterns.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfc
-orerdf.code.tex
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcor
+erdf.code.tex
 File: pgfcorerdf.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 )))
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmodu
-leshapes.code.tex
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmodule
+shapes.code.tex
 File: pgfmoduleshapes.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \pgfnodeparttextbox=\box116
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmodu
-leplot.code.tex
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmodule
+plot.code.tex
 File: pgfmoduleplot.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\pgf
-comp-version-0-65.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\pgfco
+mp-version-0-65.sty
 Package: pgfcomp-version-0-65 2025-08-29 v3.1.11a (3.1.11a)
 \pgf@nodesepstart=\dimen301
 \pgf@nodesepend=\dimen302
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\pgf
-comp-version-1-18.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\pgfco
+mp-version-1-18.sty
 Package: pgfcomp-version-1-18 2025-08-29 v3.1.11a (3.1.11a)
 ))
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgffor.
-sty
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgfkeys
-.sty
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfke
-ys.code.tex))
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/pgf/math\pgfmath.sty
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmath.co
-de.tex))
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgffo
-r.code.tex
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgffor.st
+y
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgfkeys.s
+ty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfkeys
+.code.tex))
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/pgf/math\pgfmath.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmath.code
+.tex))
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgffor.
+code.tex
 Package: pgffor 2025-08-29 v3.1.11a (3.1.11a)
 \pgffor@iter=\dimen303
 \pgffor@skip=\dimen304
 \pgffor@stack=\toks41
 \pgffor@toks=\toks42
 ))
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/t
-ikz\tikz.code.tex
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tik
+z\tikz.code.tex
 Package: tikz 2025-08-29 v3.1.11a (3.1.11a)
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgfli
-braryplothandlers.code.tex
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgflibr
+aryplothandlers.code.tex
 File: pgflibraryplothandlers.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \pgf@plot@mark@count=\count337
 \pgfplotmarksize=\dimen305
@@ -758,8 +747,8 @@ File: pgflibraryplothandlers.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \tikznumberofcurrentchild=\count340
 \tikz@fig@count=\count341
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmodu
-lematrix.code.tex
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmodule
+matrix.code.tex
 File: pgfmodulematrix.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \pgfmatrixcurrentrow=\count342
 \pgfmatrixcurrentcolumn=\count343
@@ -767,11 +756,11 @@ File: pgfmodulematrix.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 )
 \tikz@expandcount=\count345
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/t
-ikz/libraries\tikzlibrarytopaths.code.tex
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tik
+z/libraries\tikzlibrarytopaths.code.tex
 File: tikzlibrarytopaths.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 )))
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/amscls\amsthm.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/amscls\amsthm.sty
 Package: amsthm 2020/05/29 v2.20.6
 \thm@style=\toks43
 \thm@bodyfont=\toks44
@@ -783,63 +772,56 @@ Package: amsthm 2020/05/29 v2.20.6
 \thm@headsep=\skip85
 \dth@everypar=\toks48
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/thmtools\thmtools.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/thmtools\thmtools.sty
 Package: thmtools 2023/05/04 v0.76
 \thmt@toks=\toks49
 \c@thmt@dummyctr=\count346
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/thmtools\thm-patch.st
-y
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/thmtools\thm-patch.sty
 Package: thm-patch 2023/05/04 v0.76
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/thmtools\parseargs.st
-y
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/thmtools\parseargs.sty
 Package: parseargs 2023/05/04 v0.76
 \@parsespec=\toks50
-))
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/thmtools\thm-kv.sty
+)) (C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/thmtools\thm-kv.sty
 Package: thm-kv 2023/05/04 v0.76
 Package thm-kv Info: Theorem names will be uppercased on input line 42.
 Package thm-kv Info: kvsetkeys patch (v1.16 or later) on input line 158.
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/thmtools\thm-autoref.
-sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/thmtools\thm-autoref.st
+y
 Package: thm-autoref 2023/05/04 v0.76
-
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/thmtools\aliasctr.sty
+ (C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/thmtools\aliasctr.sty
 Package: aliasctr 2023/05/04 v0.76
 ))
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/thmtools\thm-listof.s
-ty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/thmtools\thm-listof.sty
 Package: thm-listof 2023/05/04 v0.76
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/thmtools\thm-restate.
-sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/thmtools\thm-restate.st
+y
 Package: thm-restate 2023/05/04 v0.76
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/thmtools\thm-amsthm.s
-ty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/thmtools\thm-amsthm.sty
 Package: thm-amsthm 2023/05/04 v0.76
 \thmt@style@headstyle=\toks51
-))
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
+)) (C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
 Package: amsmath 2025/07/09 v2.17z AMS math features
 \@mathmargin=\skip86
 
 For additional information on amsmath, use the `?' option.
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
 Package: amstext 2024/11/17 v2.01 AMS text
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks52
 \ex@=\dimen314
 ))
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen315
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
 \inf@bad=\count347
@@ -890,17 +872,17 @@ LaTeX Info: Redefining \Relbar on input line 970.
 LaTeX Info: Redefining \[ on input line 2950.
 LaTeX Info: Redefining \] on input line 2951.
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssymb.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
-)) (C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/tools\bm.sty
+)) (C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/tools\bm.sty
 Package: bm 2025/10/21 v1.2g Bold Symbol Support (DPC/FMi)
 \symboldoperators=\mathgroup6
 \symboldletters=\mathgroup7
@@ -910,10 +892,10 @@ Package bm Info: No bold for \U/msa/m/n, using \pmb.
 Package bm Info: No bold for \U/msb/m/n, using \pmb.
 LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 149.
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/base\fix-cm.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/base\fix-cm.sty
 Package: fix-cm 2020/11/24 v1.1t fixes to LaTeX
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/base\ts1enc.def
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/base\ts1enc.def
 File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding TS1 on input line 47.
 LaTeX Encoding Info:    Redeclaring text command \capitalcedilla (encoding TS1)
@@ -1171,24 +1153,24 @@ put line 193.
 LaTeX Encoding Info:    Redeclaring text symbol \textdiv (encoding TS1) on inpu
 t line 194.
 ))
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/colortbl\colortbl.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/colortbl\colortbl.sty
 Package: colortbl 2024/10/29 v1.0k Color table columns (DPC)
 \everycr=\toks57
 \minrowclearance=\skip89
 \rownum=\count359
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/algorithms\algorithm.
-sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/algorithms\algorithm.st
+y
 Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
 nment
- (C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.sty
+ (C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.sty
 Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
 )
 \@float@every@algorithm=\toks58
 \c@algorithm=\count360
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/algorithms\algorithmi
-c.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/algorithms\algorithmic.
+sty
 Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
 \c@ALC@unique=\count361
 \c@ALC@line=\count362
@@ -1196,83 +1178,80 @@ Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
 \c@ALC@depth=\count364
 \ALC@tlm=\skip90
 \algorithmicindent=\skip91
-)
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\pifont.sty
+) (C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\pifont.sty
 Package: pifont 2020/03/25 PSNFSS-v9.3 Pi font support (SPQR) 
 LaTeX Font Info:    Trying to load font information for U+pzd on input line 63.
 
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\upzd.fd
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\upzd.fd
 File: upzd.fd 2001/06/04 font definitions for U/pzd.
 )
 LaTeX Font Info:    Trying to load font information for U+psy on input line 64.
 
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\upsy.fd
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\upsy.fd
 File: upsy.fd 2001/06/04 font definitions for U/psy.
 ))
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
 \Urlmuskip=\muskip18
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref.sty
 Package: hyperref 2025-07-12 v7.01o Hypertext links for LaTeX
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys\kvdefi
-nekeys.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys\kvdefine
+keys.sty
 Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape\pdfescape
-.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape\pdfescape.s
+ty
 Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\pdftexcm
-ds.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\pdftexcmds
+.sty
 Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
 )
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\infwarerr
-.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\infwarerr.s
+ty
 Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
 )
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
 ))
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/hycolor\hycolor.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/hycolor\hycolor.sty
 Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
 Package: nameref 2025-06-21 v2.57 Cross-referencing by name of section
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcount.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcount.sty
 Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestring\gett
-itlestring.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestring\gettit
+lestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count365
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\stringenc
-.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\stringenc.s
+ty
 Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO
 )
 )
 \@linkdim=\dimen323
 \Hy@linkcounter=\count366
 \Hy@pagecounter=\count367
-
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc.def
+ (C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc.def
 File: pd1enc.def 2025-07-12 v7.01o Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
-)
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intcalc.sty
+) (C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
 \Hy@SavedSpaceFactor=\count368
- (C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.def
+ (C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.def
 File: puenc.def 2025-07-12 v7.01o Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
@@ -1288,11 +1267,12 @@ Package hyperref Info: Bookmarks ON on input line 4462.
 \c@Hy@tempcnt=\count369
 LaTeX Info: Redefining \url on input line 4801.
 \XeTeXLinkMargin=\dimen324
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
+
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\bigintca
-lc.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\bigintcalc
+.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 )
 ))
@@ -1312,17 +1292,17 @@ Package hyperref Info: PDF/A mode OFF on input line 6108.
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdftex.def
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdftex.def
 File: hpdftex.def 2025-07-12 v7.01o Hyperref driver for pdfTeX
 \Fld@listcount=\count374
 \c@bookmark@seq@number=\count375
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\rerunf
-ilecheck.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\rerunfil
+echeck.sty
 Package: rerunfilecheck 2025-06-21 v1.11 Rerun checks for auxiliary files (HO)
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/generic/uniquecounter\uniqu
-ecounter.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/generic/uniquecounter\uniquec
+ounter.sty
 Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 )
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
@@ -1330,7 +1310,7 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip92
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/cleveref\cleveref.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/cleveref\cleveref.sty
 Package: cleveref 2018/03/27 v0.21.4 Intelligent cross-referencing
 Package cleveref Info: `hyperref' support loaded on input line 2370.
 LaTeX Info: Redefining \cref on input line 2370.
@@ -1347,16 +1327,17 @@ Package cleveref Info: `amsthm' support loaded on input line 3026.
 Package cleveref Info: `subfig' support loaded on input line 3164.
 )
 ==> First Aid for cleveref.sty applied!
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/natbib\natbib.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/natbib\natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibhang=\skip93
 \bibsep=\skip94
 LaTeX Info: Redefining \cite on input line 694.
 \c@NAT@ctr=\count376
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/pdfpages\pdfpages.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/pdfpages\pdfpages.sty
 Package: pdfpages 2025/07/23 v0.6g Insert pages of external PDF documents (AM)
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/tools\calc.sty
+
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/tools\calc.sty
 Package: calc 2025/03/01 v4.3b Infix arithmetic (KKT,FJ)
 \calc@Acount=\count377
 \calc@Bcount=\count378
@@ -1373,7 +1354,7 @@ LaTeX Info: Redefining \addtolength on input line 87.
 \AM@pageheight=\dimen330
 \AM@fboxrule=\dimen331
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/pdfpages\pppdftex.def
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/pdfpages\pppdftex.def
 File: pppdftex.def 2025/07/23 v0.6g Pdfpages driver for pdfTeX (AM)
 )
 \pdfpages@includegraphics@status=\count380
@@ -1384,14 +1365,13 @@ File: pppdftex.def 2025/07/23 v0.6g Pdfpages driver for pdfTeX (AM)
 \AM@lof@heading=\toks61
 \c@AM@survey=\count382
 \AM@templatesizebox=\box124
-)
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/tools\afterpage.sty
+) (C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/tools\afterpage.sty
 Package: afterpage 2023/07/04 v1.08 After-Page Package (DPC)
 \AP@output=\toks62
 \AP@partial=\box125
 \AP@footins=\box126
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.sty
 \lst@mode=\count383
 \lst@gtempboxa=\box127
 \lst@token=\toks63
@@ -1405,20 +1385,19 @@ Package: afterpage 2023/07/04 v1.08 After-Page Package (DPC)
 \lst@lineno=\count388
 \lst@maxwidth=\dimen335
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstpatch.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstpatch.sty
 File: lstpatch.sty 2025/11/14 1.11b (Carsten Heinz)
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty
 File: lstmisc.sty 2025/11/14 1.11b (Carsten Heinz)
 \c@lstnumber=\count389
 \lst@skipnumbers=\count390
 \lst@framebox=\box128
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.cfg
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.cfg
 File: listings.cfg 2025/11/14 1.11b listings configuration
 ))
 Package: listings 2025/11/14 1.11b (Carsten Heinz)
-
 ==> First Aid for listings.sty no longer applied!
     Expected:
         2024/09/23 1.10c (Carsten Heinz)
@@ -1430,13 +1409,13 @@ Package: listings 2025/11/14 1.11b (Carsten Heinz)
 \c@proposition=\count392
 \c@algsubstate=\count393
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-p
-dftex.def
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
+tex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count394
 )
-(C:\Users\Usuario\Desktop\informatica\Software engeneering 2\SE2Internal\ATD\bu
-ild\ATD.aux)
+(C:\Users\pablo\Desktop\Informatica\3\Polimi\SoftwareEngineering2\Project\Pablo
+Jose\ATD\build\ATD.aux)
 \openout1 = `ATD.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 97.
@@ -1498,14 +1477,13 @@ Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: longtable package is loaded.
-
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/caption\ltcaption.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/caption\ltcaption.sty
 Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
 )
 Package caption Info: End \AtBeginDocument code.
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.
-mkii
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
+ii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count395
 \scratchdimen=\dimen336
@@ -1519,36 +1497,35 @@ mkii
 \makeMPintoPDFobject=\count400
 \everyMPtoPDFconversion=\toks65
 )
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf
--base.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-b
+ase.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 85.
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys
-.cfg
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.c
+fg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 Package hyperref Info: Link coloring ON on input line 97.
 
-(C:\Users\Usuario\Desktop\informatica\Software engeneering 2\SE2Internal\ATD\bu
-ild\ATD.out)
-(C:\Users\Usuario\Desktop\informatica\Software engeneering 2\SE2Internal\ATD\bu
-ild\ATD.out)
+(C:\Users\pablo\Desktop\Informatica\3\Polimi\SoftwareEngineering2\Project\Pablo
+Jose\ATD\build\ATD.out)
+(C:\Users\pablo\Desktop\Informatica\3\Polimi\SoftwareEngineering2\Project\Pablo
+Jose\ATD\build\ATD.out)
 \@outlinefile=\write4
 \openout4 = `ATD.out'.
 
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/pdflscape\pdflscape.s
-ty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/pdflscape\pdflscape.sty
 Package: pdflscape 2022-10-27 v0.13 Display of landscape pages in PDF
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/pdflscape\pdflscape-n
-ometadata.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/pdflscape\pdflscape-nom
+etadata.sty
 Package: pdflscape-nometadata 2022-10-28 v0.13 Display of landscape pages in PD
 F (HO)
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/graphics\lscape.sty
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/graphics\lscape.sty
 Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
@@ -1561,25 +1538,26 @@ Package pdftex.def Info: ./Images/PolimiLogo.png  used on input line 109.
 (pdftex.def)             Requested size: 302.73503pt x 93.67055pt.
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
 09.
- (C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmr.fd
+
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
 09.
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
 109.
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/lm\omslmsy.fd
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/lm\omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
 109.
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/lm\omxlmex.fd
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/lm\omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
@@ -1591,31 +1569,31 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 LaTeX Font Info:    Trying to load font information for U+msa on input line 109
 .
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Trying to load font information for U+msb on input line 109
 .
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 [1
 
 
 
-{C:/Users/Usuario/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/Us
-uario/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc} <./Images/Pol
-imiLogo.png>]
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd)
+{C:/Users/pablo/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/pabl
+o/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc} <./Images/PolimiL
+ogo.png>]
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd)
 Overfull \hbox (23.99998pt too wide) in alignment at lines 109--109
 [][] 
  []
 
-[2{C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc
-}]
-(C:\Users\Usuario\Desktop\informatica\Software engeneering 2\SE2Internal\ATD\bu
-ild\ATD.toc [1
+[2{C:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}]
+
+(C:\Users\pablo\Desktop\Informatica\3\Polimi\SoftwareEngineering2\Project\Pablo
+Jose\ATD\build\ATD.toc [1
 
 
 
@@ -1649,7 +1627,7 @@ Chapter 2.
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 3
 .
 
-(C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 Overfull \hbox (3.7896pt too wide) in paragraph at lines 9--10
@@ -1729,8 +1707,8 @@ Overfull \hbox (75.29515pt too wide) in paragraph at lines 119--120
 hs/searchResultsSheet.integration.test.tsx
  []
 
-[6{C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.
-enc}]
+[6{C:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.en
+c}]
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
 (Font)              Font shape `T1/lmtt/b/n' tried instead on input line 130.
 
@@ -2436,50 +2414,38 @@ Underfull \hbox (badness 10000) in paragraph at lines 220--220
  []
 
 [15]
-Overfull \hbox (24.9058pt too wide) in paragraph at lines 242--243
-\T1/lmtt/m/n/12 WARN Failed to snap segment [AxiosError: Request failed with st
-atus code
- []
-
-
-Overfull \hbox (3.92902pt too wide) in paragraph at lines 251--252
+Overfull \hbox (3.92902pt too wide) in paragraph at lines 250--251
 []\T1/lmr/bx/n/12 Unit: \T1/lmr/m/n/12 auth.manager, er-ror.handler, fetch, geo
 , geocod-ing.service, jwt, path.manager,
  []
 
 
-Overfull \hbox (32.96863pt too wide) in paragraph at lines 251--252
+Overfull \hbox (32.96863pt too wide) in paragraph at lines 250--251
 \T1/lmr/m/n/12 re-port.manager, snap-ping.service, stat.manager, trip.manager, 
 trip.weather, user.manager,
  []
 
 [16]
-Overfull \hbox (24.43924pt too wide) in paragraph at lines 261--262
-[]\T1/lmr/m/n/12 Snapping (OSRM) and geocod-ing (Nom-i-na-tim) are ex-er-cised 
-by back-end unit/integration
- []
-
-
-Overfull \hbox (62.83392pt too wide) in paragraph at lines 267--268
+Overfull \hbox (62.83392pt too wide) in paragraph at lines 265--266
 []\T1/lmr/bx/n/12 Prisma: sup-port both Post-greSQL URL and Ac-cel-er-ate: \T1/
 lmr/m/n/12 The de-fault \T1/lmtt/m/n/12 prisma-client.ts
  []
 
 
-Overfull \hbox (42.20313pt too wide) in paragraph at lines 267--268
+Overfull \hbox (42.20313pt too wide) in paragraph at lines 265--266
 \T1/lmr/m/n/12 could sup-port both Ac-cel-er-ate and a di-rect \T1/lmtt/m/n/12 
 postgresql:// \T1/lmr/m/n/12 URL (via \T1/lmtt/m/n/12 @prisma/adapter-pg\T1/lmr
 /m/n/12 ),
  []
 
-[17]
-Overfull \hbox (18.53075pt too wide) in paragraph at lines 275--276
+
+Overfull \hbox (18.53075pt too wide) in paragraph at lines 272--273
 []\T1/lmr/bx/n/12 Backend \T1/lmtt/b/n/12 npm test \T1/lmr/bx/n/12 script: \T1/
 lmr/m/n/12 A cross-platform way to set \T1/lmtt/m/n/12 NODE_OPTIONS \T1/lmr/m/n
 /12 (e.g. \T1/lmtt/m/n/12 cross-env
  []
 
-) [18]
+[17]) [18]
 Chapter 4.
 (Chapters/4_-_Overall_Project_Conclusion.tex [19
 
@@ -2507,8 +2473,8 @@ A3IA/Errigo-Gholami-Ianosel[][].
 [23
 
 ]) [24]
-(C:\Users\Usuario\Desktop\informatica\Software engeneering 2\SE2Internal\ATD\bu
-ild\ATD.lot)
+(C:\Users\pablo\Desktop\Informatica\3\Polimi\SoftwareEngineering2\Project\Pablo
+Jose\ATD\build\ATD.lot)
 \tf@lot=\write6
 \openout6 = `ATD.lot'.
 
@@ -2527,35 +2493,34 @@ Package caption Warning: Unused \captionsetup[algorithm] on input line 14.
 See the caption package documentation for explanation.
 
 
-(C:\Users\Usuario\Desktop\informatica\Software engeneering 2\SE2Internal\ATD\bu
-ild\ATD.aux)
+(C:\Users\pablo\Desktop\Informatica\3\Polimi\SoftwareEngineering2\Project\Pablo
+Jose\ATD\build\ATD.aux)
  ***********
 LaTeX2e <2025-11-01>
-L3 programming layer <2025-12-24>
+L3 programming layer <2025-11-06>
  ***********
 Package rerunfilecheck Info: File `ATD.out' has not changed.
 (rerunfilecheck)             Checksum: 2F7D38B567EC8EE31A08C9C062F1A93C;8305.
  ) 
 Here is how much of TeX's memory you used:
- 31272 strings out of 467871
- 586269 string characters out of 5417408
- 996455 words of memory out of 5000000
- 59414 multiletter control sequences out of 15000+600000
+ 31266 strings out of 467871
+ 585554 string characters out of 5418376
+ 996353 words of memory out of 5000000
+ 59408 multiletter control sequences out of 15000+600000
  693431 words of font info for 85 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,14n,94p,1318b,630s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.
-pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10
-.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr1
-2.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr
-8.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr
-i12.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/l
-msy10.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm
-/lmtk10.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fonts/type1/public/
-lm/lmtt12.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fonts/type1/urw/z
-apfding/uzdr.pfb>
-Output written on "C:\Users\Usuario\Desktop\informatica\Software engeneering 2\
-SE2Internal\ATD\build\ATD.pdf" (30 pages, 325089 bytes).
+<C:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pf
+b><C:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb
+><C:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb>
+<C:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C
+:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C
+:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C
+:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtk10.pfb><C
+:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb><C
+:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/urw/zapfding/uzdr.pfb>
+Output written on C:\Users\pablo\Desktop\Informatica\3\Polimi\SoftwareEngineeri
+ng2\Project\PabloJose\ATD\build\ATD.pdf (30 pages, 323345 bytes).
 PDF statistics:
  529 PDF objects out of 1000 (max. 8388607)
  116 named destinations out of 1000 (max. 500000)

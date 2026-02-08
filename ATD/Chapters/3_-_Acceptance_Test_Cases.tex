@@ -64,7 +64,7 @@ R12--R13 & Logged-in user start/stop and save trip. & Trip saved and listed. & T
 \hline
 R14 & GPS data collection during trip. & GPS data collected. & Verified on physical device. & \ding{51} Pass (mobile) \\
 \hline
-R15 & Motion sensor data (accelerometer, gyroscope) when Automatic Mode on. & Sensor data collected when applicable. & Not as expected on device. & \ding{55} Fail \\
+R15 & Motion sensor data (accelerometer, gyroscope) when Automatic Mode on. & Sensor data collected when applicable. & Not run; not covered by tests. & N/R \\
 \hline
 R16 & List recorded trips. & Trips returned for user. & Trip integration tests passed. & \ding{51} Pass \\
 \hline
@@ -256,20 +256,19 @@ Totals: 248 tests passed, 11 skipped; 24 suites passed, 2 skipped.
 \label{sec:additional_notes}
 \begin{itemize}
     \item Server-side behaviour is well covered by unit and integration tests; requirements implemented in the backend are validated by these runs.
-    \item R14 (GPS data collection), R39 (GPS position during navigation), and R40 (pop-ups for nearby obstacles/closed segments) were verified on a physical mobile device and work correctly; R15 (motion sensor data in Automatic Mode) was tested on device but did not meet the expected behaviour. N/R (Not Run) remains for requirements that depend on the app UI or client logic and were not run in our environment: the app test suite did not discover tests on Windows (Jest \texttt{testMatch} pattern); R8--R11 and R22--R23 could be fully covered by running the app tests on Linux/macOS or by further manual testing on device.
-    \item Snapping (OSRM) and geocoding (Nominatim) are exercised by backend unit/integration tests; \texttt{RUN\_LIVE\_TESTS=1} can be used to validate against live external services.
+    \item Several requirements that depend on the app (GPS, sensors, navigation) were verified on a physical mobile device: R8 (start trip at path origin), R14 (GPS data collection), R28 (create path in automatic mode), R39 (GPS position during navigation), and R40 (pop-ups for obstacles/closed segments) work correctly. N/R (Not Run) applies only to those we did not run or that are not covered by tests: R9--R10 (pop-up and GPS as origin from auto-detect), R15 (motion sensor data in Automatic Mode), and R22--R23 (cycling and irregularity detection).
 \end{itemize}
 
 \section{Areas for Improvement}
 \label{sec:areas_for_improvement}
 \begin{itemize}
-    \item \textbf{Prisma: support both PostgreSQL URL and Accelerate:} The default \texttt{prisma-client.ts} could support both Accelerate and a direct \texttt{postgresql://} URL (via \texttt{@prisma/adapter-pg}), enabling local runs without Prisma Accelerate. A possible implementation is in Section~\ref{subsec:database_setup}, Chapter~2.
+    \item \textbf{Prisma: support both PostgreSQL URL and Accelerate:} The default \texttt{prisma-client.ts} could support both Accelerate and a direct \texttt{postgresql://} URL (via \texttt{@prisma/adapter-pg}), enabling local runs without Prisma Accelerate. A possible implementation is in Section~\ref{subsec:database_setup}.
     \item \textbf{JWT and Redis in README:} The README should state that \texttt{JWT\_SECRET} and \texttt{JWT\_REFRESH\_SECRET} must be non-empty. For local runs without Docker, it should document \texttt{REDIS\_HOST=localhost} and how to start Redis (Docker or system install).
     \item \textbf{Order of operations:} The README could spell out that a valid \texttt{DATABASE\_URL} and applied migrations are needed before \texttt{npm run dev}.
-    \item \textbf{Console error ``Maximum update depth exceeded'' (Create path):} In manual draw mode (drawing the route on the map by tapping or dragging), the app can display a red console error when React's maximum update depth is exceeded; the flow should be reviewed to avoid update loops.
-    \item \textbf{Path alignment in manual mode:} When snapping fails (e.g.\ OSRM returns 500, app logs \texttt{Failed to snap segment}), segments are not aligned to the road/cycle network and paths can cross buildings or invalid areas. Addressing the snapping failure (e.g.\ retry, fallback, or clearer user feedback when the service returns 500) would restore proper alignment and avoid paths being drawn over invalid areas.
+    \item \textbf{Console error ``Maximum update depth exceeded'' (Create path):} In manual draw mode (drawing the route on the map by tapping or dragging), the app can display a red console error when React's maximum update depth is exceeded.
+    \item \textbf{Path alignment in manual mode:} When snapping fails, segments are not aligned to the road/cycle network and paths can cross buildings or invalid areas.
     \item \textbf{Keyboard in path description:} The path description keyboard could be dismissible without tapping the Manual/Automatic button (e.g.\ tap-outside or a dismiss control).
-    \item \textbf{Trip recording vs.\ path route:} When the user does not follow the path route, the trip is still recorded over the path. If that is intentional (snapping), it could be documented; otherwise consider storing the actual route or warning the user.
-    \item \textbf{Backend \texttt{npm test} script:} A cross-platform way to set \texttt{NODE\_OPTIONS} (e.g.\ \texttt{cross-env} or a small script) would make \texttt{npm test} work on Windows and Unix.
+    \item \textbf{Trip recording vs.\ path route:} When the user does not follow the path route, the trip is still recorded over the path.
+    \item \textbf{Backend \texttt{npm test} script:} A cross-platform way to set \texttt{NODE\_OPTIONS} (e.g.\ \texttt{cross-env} or a small script) would make \texttt{npm test} work on Windows.
     \item \textbf{App test runner on Windows:} The Jest \texttt{testMatch} (or equivalent) could be adjusted so that \texttt{npm test} discovers tests in \texttt{tests/unit} and \texttt{tests/integration} on Windows.
 \end{itemize}

@@ -39,12 +39,12 @@
 \contentsline {subsection}{\numberline {3.1.9}External Services}{15}{subsection.3.1.9}%
 \contentsline {subsection}{\numberline {3.1.10}Manual Testing of Path and Trip Recording}{15}{subsection.3.1.10}%
 \contentsline {subsection}{\numberline {3.1.11}Backend Unit and Integration Test Summary}{16}{subsection.3.1.11}%
-\contentsline {section}{\numberline {3.2}Additional Notes}{17}{section.3.2}%
+\contentsline {section}{\numberline {3.2}Additional Notes}{16}{section.3.2}%
 \contentsline {section}{\numberline {3.3}Areas for Improvement}{17}{section.3.3}%
 \contentsline {chapter}{\numberline {4}Overall Project Conclusion}{19}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Smoothness of the Process}{19}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Errors and Issues Encountered}{19}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Assessment of the Product}{20}{section.4.3}%
+\contentsline {section}{\numberline {4.3}Assessment of the Product}{19}{section.4.3}%
 \contentsline {section}{\numberline {4.4}Conclusion}{20}{section.4.4}%
 \contentsline {chapter}{\numberline {5}Effort Spent}{21}{chapter.5}%
 \contentsline {chapter}{\numberline {6}References}{23}{chapter.6}%
