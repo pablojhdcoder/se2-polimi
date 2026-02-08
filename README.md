@@ -1,142 +1,63 @@
-# Documentos del Proyecto
 
-Este repositorio contiene los documentos LaTeX del proyecto, incluyendo el **RASD** (Requirements Analysis and Specification Document) y el **DD** (Design Document).
 
-## Estructura del Repositorio
+# 🚴 Best Bike Paths - Software Engineering 2 Project
 
-```
-PabloJose/
-├── RASD_Doc/          # Documento RASD (Requirements Analysis and Specification Document)
-│   ├── DocumentoRASD.tex
-│   ├── compile.ps1    # Script de compilación
-│   └── Chapters/      # Capítulos del documento
-│
-└── DD_Doc/            # Documento DD (Design Document)
-    ├── DD.tex
-    ├── compile.ps1    # Script de compilación
-    └── Chapters/      # Capítulos del documento
-```
 
-## Requisitos Previos
+Welcome to the **Best Bike Paths** repository. This project was developed as part of the **Software Engineering 2** course at **Politecnico di Milano** (A.Y. 2025/2026).
 
-Para compilar los documentos, necesitas tener instalado:
+---
 
-- **MiKTeX** o **TeX Live** (distribución de LaTeX)
-  - MiKTeX: https://miktex.org/download
-  - TeX Live: https://www.tug.org/texlive/
+## 👥 The Team
+We are two students dedicated to designing and implementing a robust, scalable, and user-centric platform for the cycling community.
 
-- **PowerShell** (incluido en Windows 10/11)
+*   **José Martínez Estévez**
+*   **Pablo Jesús Herrero Díaz**
 
-## Compilación de los Documentos
+---
 
-### Método 1: Usando los Scripts de Compilación (Recomendado)
+## 🎯 Project Purpose
+**Best Bike Paths** is a comprehensive software system designed to support cyclists in their daily commutes and recreational trips. The platform focuses on:
+- **Path Discovery**: Helping users find the safest and most efficient bike paths.
+- **Trip Tracking**: Real-time tracking of cycling sessions with performance metrics.
+- **Safety**: Integration with live weather APIs and risk assessment for various routes.
+- **Community**: Sharing paths, providing feedback, and building a network of cycling enthusiasts.
 
-Cada documento tiene su propio script de compilación que automatiza el proceso:
+The project follows a rigorous software engineering lifecycle, from requirements gathering and formal specification to architectural design and full-stack implementation with integrated testing.
 
-#### Compilar el Documento RASD
+---
 
-1. Abre PowerShell y navega al directorio del documento:
-   ```powershell
-   cd RASD_Doc
-   ```
+## 📂 Project Structure
+The repository is organized into several key modules, each representing a phase of the development process:
 
-2. Ejecuta el script de compilación:
-   ```powershell
-   .\compile.ps1
-   ```
-
-3. El script:
-   - Verificará que `pdflatex` esté instalado
-   - Compilará el documento en múltiples pasadas (para resolver referencias)
-   - Generará el PDF `DocumentoRASD.pdf` en el directorio raíz
-   - Te preguntará si deseas abrir el PDF automáticamente
-
-#### Compilar el Documento DD
-
-1. Abre PowerShell y navega al directorio del documento:
-   ```powershell
-   cd DD_Doc
-   ```
-
-2. Ejecuta el script de compilación:
-   ```powershell
-   .\compile.ps1
-   ```
-
-3. El script:
-   - Verificará que `pdflatex` esté instalado
-   - Compilará el documento en múltiples pasadas (usando modo borrador para las primeras pasadas, más rápido)
-   - Generará el PDF `DD.pdf` en el directorio raíz
-   - Te preguntará si deseas abrir el PDF automáticamente
-
-### Método 2: Compilación Manual
-
-Si prefieres compilar manualmente, puedes usar `pdflatex` directamente:
-
-#### Para el Documento RASD:
-```powershell
-cd RASD_Doc
-pdflatex -interaction=nonstopmode -synctex=1 -output-directory=build DocumentoRASD.tex
-pdflatex -interaction=nonstopmode -synctex=1 -output-directory=build DocumentoRASD.tex
-pdflatex -interaction=nonstopmode -synctex=1 -output-directory=build DocumentoRASD.tex
+```text
+SE2Internal/
+├── 📂 RASD/             # Requirements Analysis and Specification Document
+├── 📂 DD/               # Design Document
+├── 📂 ITD/              # Integration Testing Document & Implementation
+│   ├── 📝 document/     # LaTeX source for the testing report
+│   └── 💻 code/         # Full-stack implementation (Backend & Frontend)
+│       ├── ⚙️ backend/   # Node.js/Express API
+│       └── 📱 frontend/  # React Native / Mobile Application
+├── 📂 ATD/              # Acceptance Testing Document
+└── 📂 DeliveryFolder/   # Final packaged artifacts for submission
 ```
 
-#### Para el Documento DD:
-```powershell
-cd DD_Doc
-pdflatex -interaction=nonstopmode -draftmode -synctex=1 -output-directory=build DD.tex
-pdflatex -interaction=nonstopmode -draftmode -synctex=1 -output-directory=build DD.tex
-pdflatex -interaction=nonstopmode -synctex=1 -output-directory=build DD.tex
-```
+## 💻 Source Code & Implementation
+The actual implementation of the platform can be found within the `ITD/code` directory. It includes:
+- **Backend**: A robust API built with Node.js and Express, using Redis for caching and RabbitMQ for asynchronous tasks.
+- **Frontend**: A modern mobile interface providing a seamless user experience.
+- **Infrastructure**: Dockerized environment for easy setup and deployment.
 
-**Nota:** Se requieren múltiples pasadas para resolver correctamente las referencias cruzadas, tablas de contenido, y listas de figuras.
+For detailed instructions on running the application locally, please refer to the `README.md` file located inside `ITD/code`.
 
-## Limpieza de Archivos Auxiliares
+---
 
-Ambos directorios incluyen un script `clean.ps1` para eliminar los archivos auxiliares generados durante la compilación:
+## 📜 License
+Copyright © 2025, José Martínez Estévez & Pablo Jesús Herrero Díaz. All rights reserved. Developed for academic purposes at Politecnico di Milano.
+<div align="center">
 
-```powershell
-.\clean.ps1
-```
+![Politecnico di Milano](./RASD/Images/PolimiLogo.png)
 
-Esto eliminará los archivos `.aux`, `.log`, `.out`, `.toc`, etc., pero mantendrá el PDF y los archivos fuente.
 
-## Solución de Problemas
 
-### Error: "pdflatex no está instalado"
-
-- Instala MiKTeX desde https://miktex.org/download
-- Asegúrate de que MiKTeX esté en tu PATH del sistema
-- El script intentará añadir automáticamente MiKTeX al PATH si está instalado en la ubicación predeterminada
-
-### Error: "No se encuentra el archivo [Documento].tex"
-
-- Asegúrate de ejecutar el script desde el directorio correcto
-- Verifica que el archivo `.tex` principal exista en el directorio
-
-### Errores de Compilación LaTeX
-
-- Revisa el archivo de log (`build/[Documento].log`) para ver los errores detallados
-- Asegúrate de que todos los paquetes LaTeX necesarios estén instalados
-- Verifica que todos los archivos de capítulos estén presentes en el directorio `Chapters/`
-
-## Archivos Generados
-
-Durante la compilación, se generan varios archivos auxiliares en el directorio `build/`:
-
-- `[Documento].aux` - Información de referencias cruzadas
-- `[Documento].log` - Log de compilación
-- `[Documento].out` - Información de hipervínculos
-- `[Documento].toc` - Tabla de contenidos
-- `[Documento].lof` - Lista de figuras
-- `[Documento].lot` - Lista de tablas
-- `[Documento].synctex.gz` - Archivo para sincronización con el editor
-
-El PDF final se mueve automáticamente al directorio raíz del documento.
-
-## Notas Adicionales
-
-- Los scripts usan el modo `-draftmode` en las primeras pasadas para acelerar la compilación
-- La última pasada genera el PDF final con todas las referencias resueltas
-- Los archivos auxiliares se mantienen en `build/` para facilitar la depuración
-
+</div>
