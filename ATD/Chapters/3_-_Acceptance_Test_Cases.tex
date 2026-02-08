@@ -230,7 +230,7 @@ R20 & Delete recorded trip. & Trip deleted. & Trip integration tests passed. & \
 \textbf{Testing by walking around our residence (physical device):}
 We exercised automated path recording by walking around our residence. \textbf{Behaviour was very good overall}, with two exceptions:
 \begin{itemize}
-    \item \textbf{Keyboard in path description:} The keyboard cannot be dismissed while writing the path description unless the user taps the Manual/Automatic mode button. The fix is straightforward (e.g.\ dismiss keyboard on tap outside or provide an explicit dismiss control).
+    \item \textbf{Keyboard in path description:} The keyboard cannot be dismissed while writing the path description unless the user taps the Manual/Automatic mode button.
     \item \textbf{Trip recorded over the path regardless of route:} When recording a trip, even if the user does not follow the path route, the trip is still recorded as if it were on the path. This may be intentional (e.g.\ snapping to the path) or a bug; we report it as observed behaviour for the team's consideration.
 \end{itemize}
 
@@ -238,10 +238,9 @@ We exercised automated path recording by walking around our residence. \textbf{B
 When testing the ``Create path'' flow in manual draw mode (drawing the route on the map by tapping or dragging) on the emulator, we observed:
 \begin{itemize}
     \item \textbf{Console error ``Maximum update depth exceeded'':} The app sometimes displayed a red console error when React's maximum update depth is exceeded.
-    \item \textbf{No path constraints:} In manual path creation there are no path constraints; users can add paths through buildings or other invalid areas. Validating drawn paths against road/cycle networks or warning when segments are off-road would improve quality.
-    \item \textbf{Snapping errors:} When adding a path manually, snapping sometimes fails with \texttt{WARN Failed to snap segment [AxiosError: Request failed with status code 500]}. The backend snapping service (e.g.\ OSRM) may return 500 under certain conditions; the app continues but the segment is not snapped.
+    \item \textbf{Path alignment in manual mode:} When adding a path manually, snapping to the road/cycle network sometimes fails with \texttt{WARN Failed to snap segment [AxiosError: Request failed with status code 500]}. Because of this failure, the segment is not snapped and the path can end up crossing buildings or other invalid areas; the user can effectively draw anywhere. The app continues without aligning the drawn segment. Improving the reliability of the snapping service and/or user feedback would avoid this.
 \end{itemize}
-These observations are reflected in ``Areas for Improvement'' (Chapter~\ref{ch:acceptance_test_cases}).
+These observations are reflected in Section~\ref{sec:areas_for_improvement} (Areas for Improvement).
 
 \subsection{Backend Unit and Integration Test Summary}
 \label{subsec:backend_test_summary}
@@ -268,8 +267,7 @@ Totals: 248 tests passed, 11 skipped; 24 suites passed, 2 skipped.
     \item \textbf{JWT and Redis in README:} The README should state that \texttt{JWT\_SECRET} and \texttt{JWT\_REFRESH\_SECRET} must be non-empty. For local runs without Docker, it should document \texttt{REDIS\_HOST=localhost} and how to start Redis (Docker or system install).
     \item \textbf{Order of operations:} The README could spell out that a valid \texttt{DATABASE\_URL} and applied migrations are needed before \texttt{npm run dev}.
     \item \textbf{Console error ``Maximum update depth exceeded'' (Create path):} In manual draw mode (drawing the route on the map by tapping or dragging), the app can display a red console error when React's maximum update depth is exceeded; the flow should be reviewed to avoid update loops.
-    \item \textbf{Manual path constraints:} Manual path creation could enforce or warn when paths cross buildings or invalid areas (e.g.\ validate or snap to road/cycle network).
-    \item \textbf{Snapping 500 errors:} On OSRM 500, the app logs \texttt{Failed to snap segment}. Clearer user feedback and a retry or fallback (e.g.\ keep unsnapped segment) would let path creation continue.
+    \item \textbf{Path alignment in manual mode:} When snapping fails (e.g.\ OSRM returns 500, app logs \texttt{Failed to snap segment}), segments are not aligned to the road/cycle network and paths can cross buildings or invalid areas. Addressing the snapping failure (e.g.\ retry, fallback, or clearer user feedback when the service returns 500) would restore proper alignment and avoid paths being drawn over invalid areas.
     \item \textbf{Keyboard in path description:} The path description keyboard could be dismissible without tapping the Manual/Automatic button (e.g.\ tap-outside or a dismiss control).
     \item \textbf{Trip recording vs.\ path route:} When the user does not follow the path route, the trip is still recorded over the path. If that is intentional (snapping), it could be documented; otherwise consider storing the actual route or warning the user.
     \item \textbf{Backend \texttt{npm test} script:} A cross-platform way to set \texttt{NODE\_OPTIONS} (e.g.\ \texttt{cross-env} or a small script) would make \texttt{npm test} work on Windows and Unix.
