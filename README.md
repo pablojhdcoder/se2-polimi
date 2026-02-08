@@ -58,6 +58,6 @@ Copyright © 2025, José Martínez Estévez & Pablo Jesús Herrero Díaz. All ri
 
 ![Politecnico di Milano](./RASD/Images/PolimiLogo.png)
 
-**Politecnico di Milano (Polimi)**
+
 
 </div>
