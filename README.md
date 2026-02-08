@@ -56,7 +56,7 @@ For detailed instructions on running the application locally, please refer to th
 Copyright © 2025, José Martínez Estévez & Pablo Jesús Herrero Díaz. All rights reserved. Developed for academic purposes at Politecnico di Milano.
 <div align="center">
 
-![Politecnico di Milano](./assets/PolimiLogo.png)
+![Politecnico di Milano](./RASD/Images/PolimiLogo.png)
 
 **Politecnico di Milano (Polimi)**
 
