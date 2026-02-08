@@ -1,4 +1,4 @@
-<img src="RASD/Images/PolimiLogo.png" align="right" width="150" />
+
 
 # 🚴 Best Bike Paths - Software Engineering 2 Project
 
@@ -54,3 +54,10 @@ For detailed instructions on running the application locally, please refer to th
 
 ## 📜 License
 Copyright © 2025, José Martínez Estévez & Pablo Jesús Herrero Díaz. All rights reserved. Developed for academic purposes at Politecnico di Milano.
+<div align="center">
+
+![Politecnico di Milano](./assets/PolimiLogo.png)
+
+**Politecnico di Milano (Polimi)**
+
+</div>
