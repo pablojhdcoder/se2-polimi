@@ -1,13 +1,13 @@
 \section{Acceptance Test Cases}
 \label{sec:acceptance_test_cases}
 
-Requirements for \textbf{Best Bike Paths (BBP)} are drawn from the RASD and grouped by feature. Each row below gives the test description, expected outcome, actual outcome, and status. When we ran backend automated tests, we report their outcome; when verification depends on the mobile app only, we mark N/R because the app test suite did not discover any tests on our Windows evaluation environment (Jest \texttt{testMatch} matched no files).
+Requirements for \textbf{Best Bike Paths (BBP)} are drawn from the RASD of the evaluated project: specifically from the \emph{Functional Requirements} section, subsection \emph{Requirements}. Each row below gives the requirement identifier(s) from that source, the test description, expected outcome, actual outcome, and status. When we ran backend automated tests, we report their outcome. For behaviour that depends on the mobile app (GPS, sensors, navigation), we either mark N/R when it could not be run on our Windows evaluation environment (Jest \texttt{testMatch} matched no app test files), or \emph{Pass (mobile)} when we verified it on a physical mobile device.
 
 \textbf{Backend summary:} 24 suites passed (2 skipped), 248 tests passed (11 skipped). Coverage includes auth, paths, trips, reports, stats, user, weather, geocoding, Redis, and snapping.
 
-\textbf{Status:} \ding{51} Pass = confirmed by tests we ran; N/R = not run on our environment (app tests did not discover files on Windows).
+\textbf{Status:} \ding{51} Pass = confirmed by backend/automated tests; \ding{51} Pass (mobile) = verified on a physical mobile device; N/R = not run on our environment; \ding{55} Fail = test run but expected behaviour not met.
 
-\subsection{User Registration and Authentication (R1--R5)}
+\subsection{User Registration and Authentication}
 \label{subsec:auth_tests}
 
 \begin{table}[H]
@@ -15,76 +15,86 @@ Requirements for \textbf{Best Bike Paths (BBP)} are drawn from the RASD and grou
     \renewcommand{\arraystretch}{1.3}
     \begin{tabular}{|c|p{3.2cm}|p{3.2cm}|p{3.4cm}|c|}
         \hline
-        \textbf{Req.} & \textbf{Test Description} & \textbf{Expected Outcome} & \textbf{Actual Outcome} & \textbf{Status} \\
+        \textbf{Req.} & \textbf{Test Description} & \textbf{Expected Output} & \textbf{Actual Output} & \textbf{Conclusion} \\
         \hline
-        R1 & Allow guests to create an account. & Registration succeeds with valid data. & Backend auth integration and unit tests (signup, validation) passed. & \ding{51} Pass \\
+        R1 & Allow guests to create an account. & Registration succeeds with valid data. & Backend auth integration and unit tests passed. & \ding{51} Pass \\
         \hline
-        R2 & Allow registered users to log in. & Login with valid credentials succeeds. & Auth integration and unit tests (login, tokens) passed. & \ding{51} Pass \\
+        R2 & Allow registered users to log in. & Login with valid credentials succeeds. & Auth integration and unit tests passed. & \ding{51} Pass \\
         \hline
         R3 & Allow logged-in users to view profile. & Profile data is returned. & User integration and unit tests passed. & \ding{51} Pass \\
         \hline
         R4 & Allow logged-in users to update profile. & Profile updates are persisted. & User integration tests passed. & \ding{51} Pass \\
         \hline
-        R5 & Allow logged-in users to log out. & Session ends; refresh token invalidated. & Auth unit tests (logout, token handling) passed. & \ding{51} Pass \\
+        R5 & Allow logged-in users to log out. & Session ends; user must log in again. & Auth unit tests passed. & \ding{51} Pass \\
         \hline
     \end{tabular}
     \caption{User Registration and Authentication Test Cases}
     \label{tab:auth_requirements}
 \end{table}
 
-\subsection{Trip Recording and Management (R6--R20)}
+\subsection{Trip Recording and Management}
 \label{subsec:trip_tests}
 
-\begin{table}[H]
-    \centering
-    \renewcommand{\arraystretch}{1.3}
-    \begin{tabular}{|c|p{3cm}|p{3cm}|p{3.6cm}|c|}
-        \hline
-        \textbf{Req.} & \textbf{Test Description} & \textbf{Expected Outcome} & \textbf{Actual Outcome} & \textbf{Status} \\
-        \hline
-        R6--R7 & Guest start/stop trip; no storage. & Guest trip not persisted. & Backend trip logic covered by unit/integration tests. & \ding{51} Pass \\
-        \hline
-        R8--R11 & Start at path origin; auto-detect; thresholds. & Behaviour as per RASD. & App-only; app tests not run on evaluation env. & -- N/R \\
-        \hline
-        R12--R13 & Logged-in user start/stop and save trip. & Trip saved and listed. & Trip integration and unit tests passed. & \ding{51} Pass \\
-        \hline
-        R14--R15 & GPS and sensor data collection. & Data collected when applicable. & App-only; app tests not run. & -- N/R \\
-        \hline
-        R16 & List recorded trips. & Trips returned for user. & Trip integration tests passed. & \ding{51} Pass \\
-        \hline
-        R17--R18 & Overall and per-trip statistics. & Stats computed and returned. & Stat integration and unit tests passed. & \ding{51} Pass \\
-        \hline
-        R19 & Route and obstacles for a trip. & Trip detail includes route and reports. & Trip/report integration tests passed. & \ding{51} Pass \\
-        \hline
-        R20 & Delete recorded trip. & Trip deleted. & Trip integration tests passed. & \ding{51} Pass \\
-        \hline
-    \end{tabular}
-    \caption{Trip Recording and Management Test Cases}
-    \label{tab:trip_requirements}
-\end{table}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{|c|p{3cm}|p{3cm}|p{3.6cm}|c|}
+\hline
+\textbf{Req.} & \textbf{Test Description} & \textbf{Expected Output} & \textbf{Actual Output} & \textbf{Conclusion} \\
+\hline
+\endfirsthead
 
-\subsection{Trip Data Enrichment and External Services (R21, R41--R42)}
-\label{subsec:external_services_tests}
+\hline
+\textbf{Req.} & \textbf{Test Description} & \textbf{Expected Output} & \textbf{Actual Output} & \textbf{Conclusion} \\
+\hline
+\endhead
+
+\hline
+\endfoot
+
+\endlastfoot
+
+R6--R7 & Guest start/stop trip; no storage. & Guest trip not persisted. & Backend trip logic covered by unit/integration tests. & \ding{51} Pass \\
+\hline
+R8 & Start trip only when GPS at path origin. & Trip starts only at path origin. & Passed on mobile. & \ding{51} Pass (mobile) \\
+\hline
+R9--R10 & Pop-up to start when cycling detected; GPS as origin from auto-detect. & As per RASD. & Not run. & N/R \\
+\hline
+R11 & Auto-stop when user deviates from path. & Trip stops when user leaves path. & When user diverges, system still treats as if on path. & \ding{55} Fail \\
+\hline
+R12--R13 & Logged-in user start/stop and save trip. & Trip saved and listed. & Trip integration and unit tests passed. & \ding{51} Pass \\
+\hline
+R14 & GPS data collection during trip. & GPS data collected. & Verified on physical device. & \ding{51} Pass (mobile) \\
+\hline
+R15 & Motion sensor data (accelerometer, gyroscope) when Automatic Mode on. & Sensor data collected when applicable. & Not as expected on device. & \ding{55} Fail \\
+\hline
+R16 & List recorded trips. & Trips returned for user. & Trip integration tests passed. & \ding{51} Pass \\
+\hline
+R17--R18 & Overall and per-trip statistics. & Stats computed and returned. & Stat integration and unit tests passed. & \ding{51} Pass \\
+\hline
+R19 & Route and obstacles for a trip. & Trip detail includes route and reports. & Trip/report integration tests passed. & \ding{51} Pass \\
+\hline
+R20 & Delete recorded trip. & Trip deleted. & Trip integration tests passed. & \ding{51} Pass \\
+\hline
+\caption{Trip Recording and Management Test Cases} \label{tab:trip_requirements}
+\end{longtable}
+
+\subsection{Trip Data Enrichment}
+\label{subsec:trip_enrichment_tests}
 
 \begin{table}[H]
     \centering
     \renewcommand{\arraystretch}{1.3}
     \begin{tabular}{|c|p{3.2cm}|p{3.2cm}|p{3.4cm}|c|}
         \hline
-        \textbf{Req.} & \textbf{Test Description} & \textbf{Expected Outcome} & \textbf{Actual Outcome} & \textbf{Status} \\
+        \textbf{Req.} & \textbf{Test Description} & \textbf{Expected Output} & \textbf{Actual Output} & \textbf{Conclusion} \\
         \hline
         R21 & Weather data for trip time/location. & Weather service returns data. & Weather service unit and integration tests passed. & \ding{51} Pass \\
         \hline
-        R41 & Geocoding: addresses to coordinates. & Geocoding service returns coordinates. & Geocoding service unit and integration tests passed. & \ding{51} Pass \\
-        \hline
-        R42 & Graceful handling of service unavailability. & Timeouts/errors handled. & Weather and snapping unit tests (timeouts, errors) passed. & \ding{51} Pass \\
-        \hline
     \end{tabular}
-    \caption{Trip Enrichment and External Services Test Cases}
-    \label{tab:external_requirements}
+    \caption{Trip Data Enrichment Test Cases}
+    \label{tab:trip_enrichment_requirements}
 \end{table}
 
-\subsection{Automatic Data Processing (R22--R24)}
+\subsection{Automatic Data Processing}
 \label{subsec:automatic_detection_tests}
 
 \begin{table}[H]
@@ -92,7 +102,7 @@ Requirements for \textbf{Best Bike Paths (BBP)} are drawn from the RASD and grou
     \renewcommand{\arraystretch}{1.3}
     \begin{tabular}{|c|p{3.2cm}|p{3.2cm}|p{3.4cm}|c|}
         \hline
-        \textbf{Req.} & \textbf{Test Description} & \textbf{Expected Outcome} & \textbf{Actual Outcome} & \textbf{Status} \\
+        \textbf{Req.} & \textbf{Test Description} & \textbf{Expected Output} & \textbf{Actual Output} & \textbf{Conclusion} \\
         \hline
         R22 & Detect cycling from speed/acceleration. & Detection logic works. & Implemented in app; app tests not run. & -- N/R \\
         \hline
@@ -105,7 +115,7 @@ Requirements for \textbf{Best Bike Paths (BBP)} are drawn from the RASD and grou
     \label{tab:automatic_requirements}
 \end{table}
 
-\subsection{Path Information Management (R25--R30)}
+\subsection{Path Information Management}
 \label{subsec:path_management_tests}
 
 \begin{table}[H]
@@ -113,26 +123,26 @@ Requirements for \textbf{Best Bike Paths (BBP)} are drawn from the RASD and grou
     \renewcommand{\arraystretch}{1.3}
     \begin{tabular}{|c|p{3cm}|p{3cm}|p{3.6cm}|c|}
         \hline
-        \textbf{Req.} & \textbf{Test Description} & \textbf{Expected Outcome} & \textbf{Actual Outcome} & \textbf{Status} \\
+        \textbf{Req.} & \textbf{Test Description} & \textbf{Expected Output} & \textbf{Actual Output} & \textbf{Conclusion} \\
         \hline
-        R25 & Manually create path by drawing segments. & Path created and stored. & Path integration and unit tests (create manual) passed. & \ding{51} Pass \\
+        R25 & Manually create path by drawing segments. & Path created and stored. & Path integration and unit tests passed. & \ding{51} Pass \\
         \hline
         R26 & Manually report obstacles on path during trip. & Report created and linked to segment. & Report integration and unit tests passed. & \ding{51} Pass \\
         \hline
         R27 & Confirm or reject obstacles reported by others. & Confirm/reject recorded. & Report logic covered in backend tests. & \ding{51} Pass \\
         \hline
-        R28 & Create path in automatic mode (GPS). & Path created from tracked route. & Path unit tests (automatic mode) passed. & \ding{51} Pass \\
+        R28 & Create path in automatic mode (GPS). & Path created from tracked route. & Path unit tests passed; verified on physical device. & \ding{51} Pass \\
         \hline
         R29 & Delete user's created paths. & Path removed. & Path integration tests passed. & \ding{51} Pass \\
         \hline
-        R30 & Set path visibility (public/private). & Visibility updated. & Path unit tests (visibility) passed. & \ding{51} Pass \\
+        R30 & Set path visibility (public/private). & Visibility updated. & Path unit tests passed. & \ding{51} Pass \\
         \hline
     \end{tabular}
     \caption{Path Information Management Test Cases}
     \label{tab:path_requirements}
 \end{table}
 
-\subsection{Path Aggregation and Status (R31--R34)}
+\subsection{Path Aggregation and Status}
 \label{subsec:path_aggregation_tests}
 
 \begin{table}[H]
@@ -140,7 +150,7 @@ Requirements for \textbf{Best Bike Paths (BBP)} are drawn from the RASD and grou
     \renewcommand{\arraystretch}{1.3}
     \begin{tabular}{|c|p{3.2cm}|p{3.2cm}|p{3.4cm}|c|}
         \hline
-        \textbf{Req.} & \textbf{Test Description} & \textbf{Expected Outcome} & \textbf{Actual Outcome} & \textbf{Status} \\
+        \textbf{Req.} & \textbf{Test Description} & \textbf{Expected Output} & \textbf{Actual Output} & \textbf{Conclusion} \\
         \hline
         R31 & Aggregate reports for same segment. & Multiple reports combined. & Report integration tests passed. & \ding{51} Pass \\
         \hline
@@ -148,14 +158,14 @@ Requirements for \textbf{Best Bike Paths (BBP)} are drawn from the RASD and grou
         \hline
         R33 & Path status (optimal--closed). & Status computed and returned. & Path/report integration tests passed. & \ding{51} Pass \\
         \hline
-        R34 & Any user views path status and latest reports. & Detail and reports returned. & Path integration tests (search, detail) passed. & \ding{51} Pass \\
+        R34 & Any user views path status and latest reports. & Detail and reports returned. & Path integration tests passed. & \ding{51} Pass \\
         \hline
     \end{tabular}
     \caption{Path Aggregation and Status Test Cases}
     \label{tab:aggregation_requirements}
 \end{table}
 
-\subsection{Route Discovery and Search (R35--R38)}
+\subsection{Route Discovery and Search}
 \label{subsec:search_tests}
 
 \begin{table}[H]
@@ -163,9 +173,9 @@ Requirements for \textbf{Best Bike Paths (BBP)} are drawn from the RASD and grou
     \renewcommand{\arraystretch}{1.3}
     \begin{tabular}{|c|p{3.2cm}|p{3.2cm}|p{3.4cm}|c|}
         \hline
-        \textbf{Req.} & \textbf{Test Description} & \textbf{Expected Outcome} & \textbf{Actual Outcome} & \textbf{Status} \\
+        \textbf{Req.} & \textbf{Test Description} & \textbf{Expected Output} & \textbf{Actual Output} & \textbf{Conclusion} \\
         \hline
-        R35 & Browse public paths on map. & Public paths returned. & Path integration (list, visibility) passed. & \ding{51} Pass \\
+        R35 & Browse public paths on map. & Public paths returned. & Path integration passed. & \ding{51} Pass \\
         \hline
         R36 & Search paths between two locations. & Search by origin/destination works. & Path integration and geocoding tests passed. & \ding{51} Pass \\
         \hline
@@ -176,7 +186,7 @@ Requirements for \textbf{Best Bike Paths (BBP)} are drawn from the RASD and grou
     \label{tab:search_requirements}
 \end{table}
 
-\subsection{Navigation and Alerts (R39--R40)}
+\subsection{Navigation and Alerts}
 \label{subsec:navigation_alerts_tests}
 
 \begin{table}[H]
@@ -184,23 +194,52 @@ Requirements for \textbf{Best Bike Paths (BBP)} are drawn from the RASD and grou
     \renewcommand{\arraystretch}{1.3}
     \begin{tabular}{|c|p{3.5cm}|p{3.2cm}|p{3.1cm}|c|}
         \hline
-        \textbf{Req.} & \textbf{Test Description} & \textbf{Expected Outcome} & \textbf{Actual Outcome} & \textbf{Status} \\
+        \textbf{Req.} & \textbf{Test Description} & \textbf{Expected Output} & \textbf{Actual Output} & \textbf{Conclusion} \\
         \hline
-        R39 & Display user GPS position during navigation. & Map shows current position. & App UI; app tests not run. & -- N/R \\
+        R39 & Display user GPS position during navigation. & Map shows current position. & Verified on physical device: GPS position displayed correctly on map during navigation. & \ding{51} Pass (mobile) \\
         \hline
-        R40 & Pop-ups for nearby obstacles/closed segments. & Alerts shown during active trip. & App UI; app tests not run. & -- N/R \\
+        R40 & Pop-ups for nearby obstacles/closed segments. & Alerts shown during active trip. & Verified on physical device: pop-ups shown correctly during active trip. & \ding{51} Pass (mobile) \\
         \hline
     \end{tabular}
     \caption{Navigation and Alerts Test Cases}
     \label{tab:navigation_requirements}
 \end{table}
 
+\subsection{External Services}
+\label{subsec:external_services_tests}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|c|p{3.2cm}|p{3.2cm}|p{3.4cm}|c|}
+        \hline
+        \textbf{Req.} & \textbf{Test Description} & \textbf{Expected Output} & \textbf{Actual Output} & \textbf{Conclusion} \\
+        \hline
+        R41 & Geocoding: addresses to coordinates. & Geocoding service returns coordinates. & Geocoding service unit and integration tests passed. & \ding{51} Pass \\
+        \hline
+        R42 & Graceful handling of service unavailability. & Timeouts/errors handled. & Weather and snapping unit tests passed. & \ding{51} Pass \\
+        \hline
+    \end{tabular}
+    \caption{External Services Test Cases}
+    \label{tab:external_requirements}
+\end{table}
+
 \subsection{Manual Testing of Path and Trip Recording}
 \label{subsec:manual_path_trip_results}
+
+\textbf{Testing by walking around our residence (physical device):}
 We exercised automated path recording by walking around our residence. \textbf{Behaviour was very good overall}, with two exceptions:
 \begin{itemize}
     \item \textbf{Keyboard in path description:} The keyboard cannot be dismissed while writing the path description unless the user taps the Manual/Automatic mode button. The fix is straightforward (e.g.\ dismiss keyboard on tap outside or provide an explicit dismiss control).
     \item \textbf{Trip recorded over the path regardless of route:} When recording a trip, even if the user does not follow the path route, the trip is still recorded as if it were on the path. This may be intentional (e.g.\ snapping to the path) or a bug; we report it as observed behaviour for the team's consideration.
+\end{itemize}
+
+\textbf{Testing on the emulator (Create path, manual draw mode):}
+When testing the ``Create path'' flow in manual draw mode (drawing the route on the map by tapping or dragging) on the emulator, we observed:
+\begin{itemize}
+    \item \textbf{Console error ``Maximum update depth exceeded'':} The app sometimes displayed a red console error when React's maximum update depth is exceeded.
+    \item \textbf{No path constraints:} In manual path creation there are no path constraints; users can add paths through buildings or other invalid areas. Validating drawn paths against road/cycle networks or warning when segments are off-road would improve quality.
+    \item \textbf{Snapping errors:} When adding a path manually, snapping sometimes fails with \texttt{WARN Failed to snap segment [AxiosError: Request failed with status code 500]}. The backend snapping service (e.g.\ OSRM) may return 500 under certain conditions; the app continues but the segment is not snapped.
 \end{itemize}
 These observations are reflected in ``Areas for Improvement'' (Chapter~\ref{ch:acceptance_test_cases}).
 
@@ -218,7 +257,7 @@ Totals: 248 tests passed, 11 skipped; 24 suites passed, 2 skipped.
 \label{sec:additional_notes}
 \begin{itemize}
     \item Server-side behaviour is well covered by unit and integration tests; requirements implemented in the backend are validated by these runs.
-    \item N/R (Not Run) is used for behaviour that depends on the app UI or client logic (e.g.\ cycling detection, navigation, in-app alerts). The app suite did not discover tests on our Windows setup because of the Jest \texttt{testMatch} pattern; executing the app tests on Linux or macOS would give full acceptance coverage for R8--R11, R14--R15, R22--R23, R39, R40.
+    \item R14 (GPS data collection), R39 (GPS position during navigation), and R40 (pop-ups for nearby obstacles/closed segments) were verified on a physical mobile device and work correctly; R15 (motion sensor data in Automatic Mode) was tested on device but did not meet the expected behaviour. N/R (Not Run) remains for requirements that depend on the app UI or client logic and were not run in our environment: the app test suite did not discover tests on Windows (Jest \texttt{testMatch} pattern); R8--R11 and R22--R23 could be fully covered by running the app tests on Linux/macOS or by further manual testing on device.
     \item Snapping (OSRM) and geocoding (Nominatim) are exercised by backend unit/integration tests; \texttt{RUN\_LIVE\_TESTS=1} can be used to validate against live external services.
 \end{itemize}
 
@@ -228,7 +267,7 @@ Totals: 248 tests passed, 11 skipped; 24 suites passed, 2 skipped.
     \item \textbf{Prisma: support both PostgreSQL URL and Accelerate:} The default \texttt{prisma-client.ts} could support both Accelerate and a direct \texttt{postgresql://} URL (via \texttt{@prisma/adapter-pg}), enabling local runs without Prisma Accelerate. A possible implementation is in Section~\ref{subsec:database_setup}, Chapter~2.
     \item \textbf{JWT and Redis in README:} The README should state that \texttt{JWT\_SECRET} and \texttt{JWT\_REFRESH\_SECRET} must be non-empty. For local runs without Docker, it should document \texttt{REDIS\_HOST=localhost} and how to start Redis (Docker or system install).
     \item \textbf{Order of operations:} The README could spell out that a valid \texttt{DATABASE\_URL} and applied migrations are needed before \texttt{npm run dev}.
-    \item \textbf{Prisma \texttt{DATABASE\_URL}:} With \texttt{prisma.config.ts}, \texttt{DATABASE\_URL} must be set (e.g.\ a placeholder) before \texttt{prisma generate}; this could be mentioned in the README.
+    \item \textbf{Console error ``Maximum update depth exceeded'' (Create path):} In manual draw mode (drawing the route on the map by tapping or dragging), the app can display a red console error when React's maximum update depth is exceeded; the flow should be reviewed to avoid update loops.
     \item \textbf{Manual path constraints:} Manual path creation could enforce or warn when paths cross buildings or invalid areas (e.g.\ validate or snap to road/cycle network).
     \item \textbf{Snapping 500 errors:} On OSRM 500, the app logs \texttt{Failed to snap segment}. Clearer user feedback and a retry or fallback (e.g.\ keep unsnapped segment) would let path creation continue.
     \item \textbf{Keyboard in path description:} The path description keyboard could be dismissible without tapping the Manual/Automatic button (e.g.\ tap-outside or a dismiss control).

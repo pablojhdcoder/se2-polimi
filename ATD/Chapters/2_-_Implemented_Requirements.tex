@@ -129,9 +129,6 @@ Manual testing of path and trip recording (acceptance-style checks) is reported 
     \item \textbf{Order of operations:} It is not explicit that a working \texttt{DATABASE\_URL} and applied migrations are required \emph{before} \texttt{npm run dev}, and that the server will fail to start without a valid database connection.
     \item \textbf{Backend \texttt{npm test} on Windows:} The test script uses \texttt{NODE\_OPTIONS='--localstorage-file=./jest-storage'}\ \texttt{jest}, which is not valid in Windows cmd. We ran \texttt{npx jest} with \texttt{NODE\_OPTIONS} set in the shell instead.
     \item \textbf{App Jest \texttt{testMatch} on Windows:} The default \texttt{testMatch} pattern with braces (\texttt{\{unit,integration\}}) matched no files on Windows. We worked around it by using two separate patterns (without braces) in \texttt{jest.config.js}; the app README does not mention this platform-specific behaviour.
-    \item \textbf{Console error ``Maximum update depth exceeded'' (Create path, emulator):} When testing the ``Create path'' flow in manual draw mode (drawing the route on the map by tapping or dragging), the app displayed a red console error. This happens when React's maximum update depth is exceeded.
-    \item \textbf{Manual mode path constraints:} In manual path creation, there are no path constraints; users can add paths through buildings or other invalid areas. Consider validating drawn paths against road/cycle networks or at least warning when segments are off-road.
-    \item \textbf{Snapping errors in manual path addition:} When adding a path manually, snapping sometimes fails with \texttt{WARN Failed to snap segment [AxiosError: Request failed with status code 500]}. The backend snapping service (e.g. OSRM) may return 500 under certain conditions; the app continues but the segment is not snapped.
 \end{itemize}
 
 \section{Observations}
@@ -141,5 +138,4 @@ Manual testing of path and trip recording (acceptance-style checks) is reported 
     \item The backend test suite is large (unit and integration) and passed without a real database, which reflects solid use of mocks and test design.
     \item The app README covers Expo, env vars, and first-time setup; it states the app root (\texttt{IT/CODE/APP/src}) and that at least one API URL is needed. The Windows test-discovery issue is likely specific to that environment.
     \item This ATD records the full installation and database procedure we used, for future evaluators and for the development team.
-    \item Manual path creation is effective for drawing routes; automated recording (on foot/in vehicle) behaved very well aside from the keyboard and trip-over-path behaviour.
 \end{itemize}
