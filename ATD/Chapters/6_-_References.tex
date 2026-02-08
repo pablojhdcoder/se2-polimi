@@ -1,40 +1,58 @@
 \section{References}
 \label{sec:references}%
-\begin{itemize}
-    \item Software Engineering 2 course materials, A.Y. 2025--2026.
-    \item Errigo-Gholami-Ianosel repository: \href{https://github.com/BIA3IA/Errigo-Gholami-Ianosel}{https://github.com/BIA3IA/Errigo-Gholami-Ianosel}.
-    \item BBP Backend README: \texttt{IT/CODE/BACKEND/README.md}.
-    \item BBP App README: \texttt{IT/CODE/APP/README.md}.
-    \item RASD, DD, and ITD of the Best Bike Paths project in the DeliveryFolder of the Errigo-Gholami-Ianosel repository.
-    \item Node.js documentation: \href{https://nodejs.org/en/docs/}{https://nodejs.org/en/docs/}.
-    \item Prisma documentation: \href{https://www.prisma.io/docs}{https://www.prisma.io/docs}.
-    \item Expo documentation: \href{https://docs.expo.dev}{https://docs.expo.dev}.
-    \item Jest: \href{https://jestjs.io/docs/getting-started}{https://jestjs.io/docs/getting-started}.
-\end{itemize}
 
-\section{Use of Generative AI Tools}
-\label{sec:ai_tools}%
-Generative AI was used as a support tool during the preparation of this ATD, in a similar way to other software (editors, LaTeX, version control). It did not produce the document autonomously; we used it for specific tasks such as structuring acceptance test coverage, interpreting test results, and refining the wording of sections.
+The following references were consulted and used during the preparation of this Acceptance Testing Document:
 
-\subsection{Tools Used}
-\begin{itemize}
-    \item General-purpose large-language model assistants (e.g.\ ChatGPT, Claude, Gemini) for text drafting, clarification of technical concepts, and suggestions on structure and phrasing.
-\end{itemize}
+\begin{enumerate}
+    \item \textbf{Software Engineering 2 course materials}, Academic Year 2025--2026.
+    \item \textbf{Errigo-Gholami-Ianosel repository} -- \href{https://github.com/BIA3IA/Errigo-Gholami-Ianosel}{https://github.com/BIA3IA/Errigo-Gholami-Ianosel}.
+    \item \textbf{BBP Backend README} -- \texttt{IT/CODE/BACKEND/README.md} in the evaluated project repository.
+    \item \textbf{BBP App README} -- \texttt{IT/CODE/APP/README.md} in the evaluated project repository.
+    \item \textbf{RASD, DD, and ITD} of the Best Bike Paths project, in the DeliveryFolder of the Errigo-Gholami-Ianosel repository.
+    \item \textbf{Prisma documentation} -- \href{https://www.prisma.io/docs}{https://www.prisma.io/docs}.
+\end{enumerate}
 
-\subsection{Example Prompts}
+\section{Used Tools}
+\label{sec:used_tools}%
+
+The following tools and technologies were used during the installation, testing, and evaluation of the BBP system:
+
+\begin{enumerate}
+    \item \textbf{GitHub} -- Version control and collaborative development platform for managing the project repository.
+    \item \textbf{\LaTeX{}} -- Document preparation system used for writing and formatting this document, with Overleaf and Neovim as editing environments.
+    \item \textbf{Visual Studio Code} -- Code editor used for writing and editing \LaTeX{} files and other project documentation.
+    \item \textbf{Node.js} -- Runtime environment used to run the backend server and execute the test suites.
+    \item \textbf{Prisma} -- ORM and database toolkit used by the BBP backend for schema, migrations, and data access.
+    \item \textbf{Expo} -- Framework and toolchain used by the BBP mobile app for development and building.
+    \item \textbf{Jest} -- Testing framework used for backend and app unit and integration tests.
+\end{enumerate}
+
+\subsection{Use of Generative AI Tools}
+\label{subsec:ai_tools}%
+
+Generative AI was used as a support tool during the preparation of this ATD. It did not produce the document autonomously; we used it for specific tasks such as structuring acceptance test coverage, interpreting test results, and refining the wording of sections.
+
+\subsubsection*{Tools Used}
+
+General-purpose large-language model assistants (e.g.\ ChatGPT, Claude, Gemini) for text drafting, clarification of technical concepts, and suggestions on structure and phrasing.
+
+\subsubsection*{Inputs and Outputs}
+
 The following types of prompts are representative of how AI was used:
-\begin{itemize}
-    \item \textbf{Understanding test outcomes:} ``In the Jest output, several tests are marked as \texttt{skipped}. Why does it skip them and how can i prevent it?''
-    \item \textbf{Improving wording:} ``This paragraph is too long and repeats ideas. Suggest a shorter, clearer version that keeps the same technical meaning: [excerpt].''
-\end{itemize}
 
-\noindent\textit{Note:} Other queries were used (e.g.\ LaTeX formatting, explaining error messages); the ones above illustrate the main use cases. All AI-generated text was reviewed and edited by the authors before inclusion.
+\begin{enumerate}
+    \item \textbf{Query:} ``In the Jest output, several tests are marked as \texttt{skipped}. Why does it skip them and how can I prevent it?''
+    
+    \textbf{Output:} The tool explained common reasons for Jest skips and how to interpret the log.
+    
+    \item \textbf{Query:} ``This paragraph is too long and repeats ideas. Suggest a shorter, clearer version that keeps the same technical meaning: [paragraph].''
+    
+    \textbf{Output:} The tool suggested a shorter, clearer version that was reviewed and edited by the authors before inclusion.
+\end{enumerate}
 
-\subsection{Verification and Refinement}
-All outputs were checked as follows:
-\begin{itemize}
-    \item \textbf{Accuracy:} Suggestions were compared with the RASD, DD, ITD, and with the actual test runs and installation steps performed.
-    \item \textbf{Consistency:} Wording and structure were aligned with the rest of the document and with the course deliverables' style.
-    \item \textbf{Responsibility:} The authors take full responsibility for all content in this document. The generative AI tool was used solely as a support tool for clarification, text improvement, and structural guidance. All final conten, was created, verified, and approved by the authors, who are fully capable of explaining and defending every aspect of the work presented in this document.
-\end{itemize}
+\vspace{0.3cm}
+\textit{Note:} Other queries were used (e.g.\ LaTeX formatting, explaining error messages); the ones above illustrate the main use cases. All AI-generated text was reviewed and edited by the authors before inclusion.
 
+\subsubsection*{Responsibility Statement}
+
+The authors take full responsibility for all content in this document. The generative AI tool was used solely as a support tool for clarification, text improvement, and structural guidance. All final content was created, verified, and approved by the authors, who are fully capable of explaining and defending every aspect of the work presented in this document.

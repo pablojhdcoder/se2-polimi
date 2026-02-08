@@ -20,7 +20,7 @@
 \contentsline {section}{\numberline {2.4}Backend Installation}{4}{section.2.4}%
 \contentsline {subsection}{\numberline {2.4.1}Database and runtime setup}{4}{subsection.2.4.1}%
 \contentsline {subsubsection}{The patch is:}{5}{subsubsection*.9}%
-\contentsline {subsection}{\numberline {2.4.2}Prisma Client Generation (for tests without a real database)}{6}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.2}Prisma Client Generation (for tests without a real database)}{5}{subsection.2.4.2}%
 \contentsline {subsection}{\numberline {2.4.3}Backend Test Execution}{6}{subsection.2.4.3}%
 \contentsline {section}{\numberline {2.5}Frontend (App) Installation}{6}{section.2.5}%
 \contentsline {subsection}{\numberline {2.5.1}App Test Execution}{6}{subsection.2.5.1}%
@@ -49,8 +49,6 @@
 \contentsline {chapter}{\numberline {5}Effort Spent}{21}{chapter.5}%
 \contentsline {chapter}{\numberline {6}References}{23}{chapter.6}%
 \contentsline {section}{\numberline {6.1}References}{23}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Use of Generative AI Tools}{23}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}Tools Used}{23}{subsection.6.2.1}%
-\contentsline {subsection}{\numberline {6.2.2}Example Prompts}{24}{subsection.6.2.2}%
-\contentsline {subsection}{\numberline {6.2.3}Verification and Refinement}{24}{subsection.6.2.3}%
-\contentsline {chapter}{List of Tables}{25}{chapter*.24}%
+\contentsline {section}{\numberline {6.2}Used Tools}{23}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Use of Generative AI Tools}{24}{subsection.6.2.1}%
+\contentsline {chapter}{List of Tables}{27}{chapter*.24}%

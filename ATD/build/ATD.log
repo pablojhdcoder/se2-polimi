@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.3)  8 FEB 2026 14:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.3)  8 FEB 2026 15:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -300,41 +300,6 @@ Package: longtable 2025-10-13 v4.24 Multi-page Table package (DPC)
 \c@LT@chunks=\count314
 \LT@p@ftn=\toks26
 )
-(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/lm\lmodern.sty
-Package: lmodern 2015/05/01 v1.6.1 Latin Modern Fonts
-LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
-LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
-(Font)                  OML/cmm/m/it --> OML/lmm/m/it on input line 23.
-LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
-(Font)                  OMS/cmsy/m/n --> OMS/lmsy/m/n on input line 24.
-LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
-(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 25.
-LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 26.
-LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
-(Font)                  OML/cmm/b/it --> OML/lmm/b/it on input line 27.
-LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
-(Font)                  OMS/cmsy/b/n --> OMS/lmsy/b/n on input line 28.
-LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
-(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 29.
-LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 31.
-LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 32.
-LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> OT1/lmr/m/it on input line 33.
-LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 34.
-LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 35.
-LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> OT1/lmss/bx/n on input line 36.
-LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> OT1/lmr/bx/it on input line 37.
-LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
-)
 (C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count315
@@ -398,12 +363,10 @@ Package: inputenc 2024/02/08 v1.3d Input encoding file
 \inpenc@posthook=\toks30
 ) (C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.sty
 Package: fontenc 2025/07/18 v2.1d Standard LaTeX package
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 11
-6.
-
-(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmr.fd
-File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-))
+)
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\times.sty
+Package: times 2020/03/25 PSNFSS-v9.3 (SPQR) 
+)
 (C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/moresize\moresize.sty
 Package: moresize 1999/07/26 v1.9 (more font sizes)
 )
@@ -887,7 +850,7 @@ Package: bm 2025/10/21 v1.2g Bold Symbol Support (DPC/FMi)
 \symboldoperators=\mathgroup6
 \symboldletters=\mathgroup7
 \symboldsymbols=\mathgroup8
-Package bm Info: No bold for \OMX/lmex/m/n, using \pmb.
+Package bm Info: No bold for \OMX/cmex/m/n, using \pmb.
 Package bm Info: No bold for \U/msa/m/n, using \pmb.
 Package bm Info: No bold for \U/msb/m/n, using \pmb.
 LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 149.
@@ -1409,6 +1372,12 @@ Package: listings 2025/11/14 1.11b (Carsten Heinz)
 \c@proposition=\count392
 \c@algsubstate=\count393
 )
+LaTeX Font Info:    Trying to load font information for T1+ptm on input line 97
+.
+
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\t1ptm.fd
+File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
+)
 (C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
 tex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
@@ -1531,41 +1500,11 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 ))
 \c@lstlisting=\count401
-<./Images/PolimiLogo.png, id=206, 405.515pt x 125.46875pt>
+<./Images/PolimiLogo.png, id=198, 405.515pt x 125.46875pt>
 File: ./Images/PolimiLogo.png Graphic file (type png)
 <use ./Images/PolimiLogo.png>
 Package pdftex.def Info: ./Images/PolimiLogo.png  used on input line 109.
 (pdftex.def)             Requested size: 302.73503pt x 93.67055pt.
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
-09.
-
-(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmr.fd
-File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
-09.
-
-(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd
-File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-109.
-
-(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/lm\omslmsy.fd
-File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-109.
-
-(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/lm\omxlmex.fd
-File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 109.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 109.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 109.
 LaTeX Font Info:    Trying to load font information for U+msa on input line 109
 .
 
@@ -1583,15 +1522,14 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 
 {C:/Users/pablo/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/pabl
-o/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc} <./Images/PolimiL
-ogo.png>]
-(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd)
+o/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc} <./Images/PolimiLo
+go.png>]
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1ptm.fd)
 Overfull \hbox (23.99998pt too wide) in alignment at lines 109--109
 [][] 
  []
 
-[2{C:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}]
-
+[2]
 (C:\Users\pablo\Desktop\Informatica\3\Polimi\SoftwareEngineering2\Project\Pablo
 Jose\ATD\build\ATD.toc [1
 
@@ -1624,837 +1562,777 @@ l.126     \chapter{Implemented Requirements}
                                              [2]
 Chapter 2.
 (Chapters/2_-_Implemented_Requirements.tex
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 3
-.
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 3.
 
-(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
-File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+
+(C:\Users\pablo\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\t1pcr.fd
+File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
-Overfull \hbox (3.7896pt too wide) in paragraph at lines 9--10
-[]\T1/lmr/bx/n/12 Backend: \T1/lmr/m/n/12 Node.js, npm, Post-greSQL, Docker & D
-ocker Com-pose (op-tional), Prisma
+Overfull \hbox (12.40407pt too wide) in paragraph at lines 10--11
+\T1/ptm/m/n/12 vari-ables \T1/pcr/m/n/12 EXPO_PUBLIC_PROD_API_URL \T1/ptm/m/n/1
+2 or \T1/pcr/m/n/12 EXPO_PUBLIC_DEVEL_API_URL \T1/ptm/m/n/12 must
  []
 
 [3
 
 
 ]
-Overfull \hbox (137.29642pt too wide) in paragraph at lines 59--60
-[]\T1/lmr/m/n/12 Created a \T1/lmtt/m/n/12 .env \T1/lmr/m/n/12 file in \T1/lmtt
-/m/n/12 IT/CODE/BACKEND \T1/lmr/m/n/12 with \T1/lmtt/m/n/12 DATABASE_URL="postg
-resql://bbp:bbp@localhost:5432/bbp"
+Overfull \hbox (40.82205pt too wide) in paragraph at lines 58--59
+\T1/ptm/m/n/12 Docker: \T1/pcr/m/n/12 docker run -d -e POSTGRES_USER=bbp -e POS
+TGRES_PASSWORD=bbp
+ []
+
+
+Overfull \hbox (204.3446pt too wide) in paragraph at lines 59--60
+[]\T1/ptm/m/n/12 Created a \T1/pcr/m/n/12 .env \T1/ptm/m/n/12 file in \T1/pcr/m
+/n/12 IT/CODE/BACKEND \T1/ptm/m/n/12 with \T1/pcr/m/n/12 DATABASE_URL="postgres
+ql://bbp:bbp@localhost:5432/bbp"
  []
 
 [4]
-Overfull \hbox (10.66907pt too wide) in paragraph at lines 61--62
-[]\T1/lmr/m/n/12 Ran \T1/lmtt/m/n/12 npx prisma generate --schema=prisma/schema
-.prisma \T1/lmr/m/n/12 to gen-er-ate the Prisma
+Overfull \hbox (20.493pt too wide) in paragraph at lines 60--61
+[]\T1/ptm/m/n/12 Ran \T1/pcr/m/n/12 npx prisma migrate deploy \T1/ptm/m/n/12 to
+ ap-ply all mi-gra-tions in \T1/pcr/m/n/12 prisma/migrations
  []
 
 
-Overfull \hbox (0.28378pt too wide) in paragraph at lines 63--64
-\T1/lmr/m/n/12 Thereafter, \T1/lmtt/m/n/12 npm run dev \T1/lmr/m/n/12 started t
-he API and \T1/lmtt/m/n/12 curl -i http://localhost:3000/health
+Overfull \hbox (32.78175pt too wide) in paragraph at lines 63--64
+\T1/ptm/m/n/12 Thereafter, \T1/pcr/m/n/12 npm run dev \T1/ptm/m/n/12 started th
+e API and \T1/pcr/m/n/12 curl -i http://localhost:3000/health
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 66--67
-\T1/lmr/m/n/12 ing Prisma Ac-cel-er-ate. The shipped \T1/lmtt/m/n/12 prisma-cli
-ent.ts \T1/lmr/m/n/12 only sup-ported an Ac-
+Underfull \hbox (badness 1072) in paragraph at lines 66--67
+[]\T1/ptm/m/n/12 For lo-cal de-vel-op-ment we pre-ferred a stan-dard \T1/pcr/m/
+n/12 postgresql:// \T1/ptm/m/n/12 URL with-out us-ing
  []
 
 
-Overfull \hbox (7.88112pt too wide) in paragraph at lines 85--85
-[]  \T1/lmtt/m/n/12 : new PrismaClient({ adapter: new PrismaPg({ connectionStri
-ng: url }) });[] 
+Underfull \hbox (badness 1127) in paragraph at lines 66--67
+\T1/ptm/m/n/12 Prisma Ac-cel-er-ate. The shipped \T1/pcr/m/n/12 prisma-client.t
+s \T1/ptm/m/n/12 only sup-ported an Ac-cel-er-ate
  []
 
 
-Overfull \hbox (10.75893pt too wide) in paragraph at lines 89--89
-|[]\T1/lmr/bx/n/14.4 Prisma Client Gen-er-a-tion (for tests with-out a real dat
-abase)| 
+Overfull \hbox (84.75566pt too wide) in paragraph at lines 85--85
+[]  \T1/pcr/m/n/12 : new PrismaClient({ adapter: new PrismaPg({ connectionStrin
+g: url }) });[] 
  []
 
 
-Overfull \hbox (35.7009pt too wide) in paragraph at lines 91--92
-[]\T1/lmr/m/n/12 To run only the test suite (no server), the back-end re-lies o
-n Prisma with \T1/lmtt/m/n/12 prisma.config.ts\T1/lmr/m/n/12 ,
+Overfull \hbox (27.4156pt too wide) in paragraph at lines 91--92
+[]\T1/ptm/m/n/12 To run only the test suite (no server), the back-end re-lies o
+n Prisma with \T1/pcr/m/n/12 prisma.config.ts\T1/ptm/m/n/12 ,
  []
 
 [5]
-Overfull \hbox (31.62892pt too wide) in paragraph at lines 92--93
-[]\T1/lmr/m/n/12 With a place-holder \T1/lmtt/m/n/12 DATABASE_URL \T1/lmr/m/n/1
-2 (e.g. \T1/lmtt/m/n/12 postgresql://user:pass@localhost:5432/bbp\T1/lmr/m/n/12
- )
+Overfull \hbox (77.27682pt too wide) in paragraph at lines 92--93
+[]\T1/ptm/m/n/12 With a place-holder \T1/pcr/m/n/12 DATABASE_URL \T1/ptm/m/n/12
+ (e.g. \T1/pcr/m/n/12 postgresql://user:pass@localhost:5432/bbp\T1/ptm/m/n/12 )
+
  []
 
 
-Overfull \hbox (86.65727pt too wide) in paragraph at lines 118--119
-\T1/lmr/m/n/12 dows, the orig-i-nal \T1/lmtt/m/n/12 testMatch \T1/lmr/m/n/12 pa
-t-tern with braces (\T1/lmtt/m/n/12 tests/{unit,integration}/**/*.test.ts?(x)\T
-1/lmr/m/n/12 )
+Overfull \hbox (143.74449pt too wide) in paragraph at lines 118--119
+\T1/ptm/m/n/12 Win-dows, the orig-i-nal \T1/pcr/m/n/12 testMatch \T1/ptm/m/n/12
+ pat-tern with braces (\T1/pcr/m/n/12 tests/{unit,integration}/**/*.test.ts?(x)
+\T1/ptm/m/n/12 )
  []
 
 
-Overfull \hbox (101.72292pt too wide) in paragraph at lines 118--119
-\T1/lmtt/m/n/12 <rootDir>/tests/unit/**/*.test.ts?(x) \T1/lmr/m/n/12 and \T1/lm
-tt/m/n/12 <rootDir>/tests/integration/**/*.test.ts?(x)\T1/lmr/m/n/12 ,
+Overfull \hbox (182.21832pt too wide) in paragraph at lines 118--119
+\T1/pcr/m/n/12 <rootDir>/tests/unit/**/*.test.ts?(x) \T1/ptm/m/n/12 and \T1/pcr
+/m/n/12 <rootDir>/tests/integration/**/*.test.ts?(x)\T1/ptm/m/n/12 ,
  []
 
 
-Overfull \hbox (75.29515pt too wide) in paragraph at lines 119--120
-\T1/lmr/m/n/12 The sin-gle fail-ure is in \T1/lmtt/m/n/12 tests/integration/pat
-hs/searchResultsSheet.integration.test.tsx
+Overfull \hbox (114.05724pt too wide) in paragraph at lines 119--120
+\T1/ptm/m/n/12 sin-gle fail-ure is in \T1/pcr/m/n/12 tests/integration/paths/se
+archResultsSheet.integration.test.tsx
  []
 
-[6{C:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.en
-c}]
-LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 130.
+[6]
+Overfull \hbox (188.20433pt too wide) in paragraph at lines 130--131
+[]\T1/ptm/b/n/12 Backend \T1/pcr/b/n/12 npm test \T1/ptm/b/n/12 on Win-dows: \T
+1/ptm/m/n/12 The test script uses \T1/pcr/m/n/12 NODE_OPTIONS='--localstorage-f
+ile=./jest-storage'
+ []
 
-Overfull \hbox (155.82065pt too wide) in paragraph at lines 130--131
-[]\T1/lmr/bx/n/12 Backend \T1/lmtt/b/n/12 npm test \T1/lmr/bx/n/12 on Win-dows:
- \T1/lmr/m/n/12 The test script uses \T1/lmtt/m/n/12 NODE_OPTIONS='--localstora
-ge-file=./jest-storage'
+
+Overfull \hbox (8.9702pt too wide) in paragraph at lines 137--138
+[]\T1/ptm/m/n/12 The back-end README is clear and well or-gan-ised (lay-out, pr
+e-req-ui-sites, env vars, database
  []
 
 [7]) [8]
 Chapter 3.
 (Chapters/3_-_Acceptance_Test_Cases.tex
-Underfull \hbox (badness 10000) in paragraph at lines 18--18
-[]|\T1/lmr/bx/n/12 Test De-scrip-
- []
-
-
-Underfull \hbox (badness 2828) in paragraph at lines 20--20
-[]|\T1/lmr/m/n/12 Allow guests to
+Underfull \hbox (badness 10000) in paragraph at lines 20--20
+[]|\T1/ptm/m/n/12 Allow guests to
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 20--20
-\T1/lmr/m/n/12 cre-ate an ac-
+[]|\T1/ptm/m/n/12 Registration suc-
  []
 
 
-Underfull \hbox (badness 1237) in paragraph at lines 20--20
-\T1/lmr/m/n/12 ceeds with valid
+Underfull \hbox (badness 5105) in paragraph at lines 20--20
+\T1/ptm/m/n/12 ceeds with valid
  []
 
 
-Underfull \hbox (badness 7030) in paragraph at lines 22--22
-[]|\T1/lmr/m/n/12 Allow reg-is-tered
+Underfull \hbox (badness 7047) in paragraph at lines 20--20
+[]|\T1/ptm/m/n/12 Backend auth in-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 22--22
-\T1/lmr/m/n/12 cre-den-tials suc-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 22--22
-[]|\T1/lmr/m/n/12 Auth in-te-gra-tion
+Underfull \hbox (badness 3942) in paragraph at lines 20--20
+\T1/ptm/m/n/12 te-gra-tion and unit
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 22--22
-\T1/lmr/m/n/12 and unit tests
+[]|\T1/ptm/m/n/12 Allow reg-is-tered
+ []
+
+
+Underfull \hbox (badness 3128) in paragraph at lines 22--22
+[]|\T1/ptm/m/n/12 Login with valid
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 22--22
+\T1/ptm/m/n/12 cre-den-tials suc-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 22--22
+[]|\T1/ptm/m/n/12 Auth in-te-gra-tion
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 22--22
+\T1/ptm/m/n/12 and unit tests
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 24--24
-[]|\T1/lmr/m/n/12 Allow logged-in
+[]|\T1/ptm/m/n/12 Allow logged-in
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 24--24
-\T1/lmr/m/n/12 users to view
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 24--24
-[]|\T1/lmr/m/n/12 User in-te-gra-tion
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 24--24
-\T1/lmr/m/n/12 and unit tests
+\T1/ptm/m/n/12 users to view
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 26--26
-[]|\T1/lmr/m/n/12 Allow logged-in
- []
-
-
-Underfull \hbox (badness 2600) in paragraph at lines 26--26
-\T1/lmr/m/n/12 users to up-date
+[]|\T1/ptm/m/n/12 Allow logged-in
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 26--26
-[]|\T1/lmr/m/n/12 Profile up-dates
+\T1/ptm/m/n/12 users to up-date
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 26--26
-[]|\T1/lmr/m/n/12 User in-te-gra-tion
+[]|\T1/ptm/m/n/12 User in-te-gra-tion
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 28--28
-[]|\T1/lmr/m/n/12 Allow logged-in
+[]|\T1/ptm/m/n/12 Allow logged-in
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 28--28
-[]|\T1/lmr/m/n/12 Auth unit tests
+[]|\T1/ptm/m/n/12 Auth unit tests
  []
 
 [9
 
 
 ]
-Underfull \hbox (badness 2707) in paragraph at lines 41--41
-[]|\T1/lmr/bx/n/12 Test De-scrip-
+Underfull \hbox (badness 10000) in paragraph at lines 41--41
+[]|\T1/ptm/b/n/12 Expected Out-
  []
 
 
-Overfull \hbox (9.76067pt too wide) in alignment at lines 39--43
+Overfull \hbox (3.85345pt too wide) in alignment at lines 39--43
  [] [] [] [] [] 
  []
 
 
-Underfull \hbox (badness 2707) in paragraph at lines 46--46
-[]|\T1/lmr/bx/n/12 Test De-scrip-
+Underfull \hbox (badness 10000) in paragraph at lines 46--46
+[]|\T1/ptm/b/n/12 Expected Out-
  []
 
 
-Overfull \hbox (9.76067pt too wide) in alignment at lines 43--48
+Overfull \hbox (3.85345pt too wide) in alignment at lines 43--48
  [] [] [] [] [] 
  []
 
 
-Overfull \hbox (9.76067pt too wide) in alignment at lines 48--51
+Overfull \hbox (3.85345pt too wide) in alignment at lines 48--51
  [] [] [] [] [] 
  []
 
 
-Overfull \hbox (9.76067pt too wide) in alignment at lines 51--53
+Overfull \hbox (3.85345pt too wide) in alignment at lines 51--53
  [] [] [] [] [] 
- []
-
-
-Underfull \hbox (badness 2495) in paragraph at lines 55--55
-[]|\T1/lmr/m/n/12 Guest trip not
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 55--55
-[]|\T1/lmr/m/n/12 Backend trip
+[]|\T1/ptm/m/n/12 Guest start/stop
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 55--55
-\T1/lmr/m/n/12 logic cov-ered by
+[]|\T1/ptm/m/n/12 Guest trip not
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 55--55
-\T1/lmr/m/n/12 unit/integration
+[]|\T1/ptm/m/n/12 Backend trip
  []
 
 
-Underfull \hbox (badness 1983) in paragraph at lines 57--57
-[]|\T1/lmr/m/n/12 Start trip only
+Underfull \hbox (badness 10000) in paragraph at lines 55--55
+\T1/ptm/m/n/12 logic cov-ered by
  []
 
 
-Underfull \hbox (badness 7576) in paragraph at lines 57--57
-\T1/lmr/m/n/12 when GPS at
+Underfull \hbox (badness 10000) in paragraph at lines 57--57
+[]|\T1/ptm/m/n/12 Start trip only
+ []
+
+
+Underfull \hbox (badness 6792) in paragraph at lines 59--59
+[]|\T1/ptm/m/n/12 Pop-up to start
+ []
+
+
+Underfull \hbox (badness 3977) in paragraph at lines 59--59
+\T1/ptm/m/n/12 tected; GPS as
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 59--59
+[]|\T1/ptm/m/n/12 Pop-up shown
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 59--59
+\T1/ptm/m/n/12 when cy-cling
+ []
+
+
+Underfull \hbox (badness 1874) in paragraph at lines 59--59
+\T1/ptm/m/n/12 GPS set as trip
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 59--59
+\T1/ptm/m/n/12 ori-gin when
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 59--59
+\T1/ptm/m/n/12 start-ing from
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 61--61
-\T1/lmr/m/n/12 user de-vi-ates
+[]|\T1/ptm/m/n/12 Auto-stop when
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 61--61
+\T1/ptm/m/n/12 user de-vi-ates
+ []
+
+
+Underfull \hbox (badness 1292) in paragraph at lines 61--61
+[]|\T1/ptm/m/n/12 Trip stops when
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 63--63
-[]|\T1/lmr/m/n/12 Logged-in user
+[]|\T1/ptm/m/n/12 Logged-in user
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 63--63
-\T1/lmr/m/n/12 start/stop and
+\T1/ptm/m/n/12 start/stop and
  []
 
 
-Underfull \hbox (badness 1178) in paragraph at lines 63--63
-[]|\T1/lmr/m/n/12 Trip saved and
+Underfull \hbox (badness 7047) in paragraph at lines 63--63
+[]|\T1/ptm/m/n/12 Trip saved and
  []
 
 
-Underfull \hbox (badness 3375) in paragraph at lines 65--65
-[]|\T1/lmr/m/n/12 GPS data col-
+Underfull \hbox (badness 10000) in paragraph at lines 65--65
+[]|\T1/ptm/m/n/12 GPS data col-
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 67--67
-[]|\T1/lmr/m/n/12 Motion sen-sor
+[]|\T1/ptm/m/n/12 Motion sen-sor
+ []
+
+
+Underfull \hbox (badness 2229) in paragraph at lines 67--67
+\T1/ptm/m/n/12 data (ac-celerom-
+ []
+
+
+Underfull \hbox (badness 5446) in paragraph at lines 67--67
+\T1/ptm/m/n/12 e-ter, gy-ro-scope)
+ []
+
+
+Underfull \hbox (badness 3179) in paragraph at lines 67--67
+\T1/ptm/m/n/12 when Au-to-matic
+ []
+
+
+Underfull \hbox (badness 1112) in paragraph at lines 67--67
+[]|\T1/ptm/m/n/12 Sensor data col-
+ []
+
+
+Underfull \hbox (badness 1769) in paragraph at lines 67--67
+\T1/ptm/m/n/12 lected when ap-
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 69--69
-[]|\T1/lmr/m/n/12 List recorded
+[]|\T1/ptm/m/n/12 List recorded
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 69--69
-[]|\T1/lmr/m/n/12 Trips re-turned
+Underfull \hbox (badness 10000) in paragraph at lines 71--71
+[]|\T1/ptm/m/n/12 Stats com-puted
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 69--69
-[]|\T1/lmr/m/n/12 Trip in-te-gra-tion
+Underfull \hbox (badness 1365) in paragraph at lines 71--71
+[]|\T1/ptm/m/n/12 Stat in-te-gra-tion and
  []
 
 
-Underfull \hbox (badness 1661) in paragraph at lines 71--71
-[]|\T1/lmr/m/n/12 Stats com-puted
+Underfull \hbox (badness 10000) in paragraph at lines 73--73
+[]|\T1/ptm/m/n/12 Trip de-tail in-
  []
 
 
-Underfull \hbox (badness 2478) in paragraph at lines 73--73
-[]|\T1/lmr/m/n/12 Route and ob-
- []
-
-
-Underfull \hbox (badness 3838) in paragraph at lines 73--73
-[]|\T1/lmr/m/n/12 Trip de-tail in-
- []
-
-
-Underfull \hbox (badness 1902) in paragraph at lines 75--75
-[]|\T1/lmr/m/n/12 Delete recorded
+Underfull \hbox (badness 10000) in paragraph at lines 73--73
+[]|\T1/ptm/m/n/12 Trip/report in-te-gra-
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 75--75
-[]|\T1/lmr/m/n/12 Trip in-te-gra-tion
+[]|\T1/ptm/m/n/12 Delete recorded
  []
 
 
-Overfull \hbox (9.76067pt too wide) in alignment at lines 53--78
+Overfull \hbox (3.85345pt too wide) in alignment at lines 53--78
  [] [] [] [] [] 
  []
 
 ignored error: Infinite glue shrinkage found in box being split [10]
-Underfull \hbox (badness 10000) in paragraph at lines 88--88
-[]|\T1/lmr/bx/n/12 Test De-scrip-
+Underfull \hbox (badness 3148) in paragraph at lines 90--90
+[]|\T1/ptm/m/n/12 Weather data for
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 90--90
-[]|\T1/lmr/m/n/12 Weather
+[]|\T1/ptm/m/n/12 Weather ser-vice
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 90--90
-\T1/lmr/m/n/12 data for trip
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 90--90
-[]|\T1/lmr/m/n/12 Weather ser-vice
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 90--90
-[]|\T1/lmr/m/n/12 Weather ser-vice
- []
-
-
-Underfull \hbox (badness 1466) in paragraph at lines 90--90
-\T1/lmr/m/n/12 unit and in-te-gra-
+[]|\T1/ptm/m/n/12 Weather ser-vice
  []
 
 [11]
-Underfull \hbox (badness 10000) in paragraph at lines 105--105
-[]|\T1/lmr/bx/n/12 Test De-scrip-
+Underfull \hbox (badness 10000) in paragraph at lines 107--107
+[]|\T1/ptm/m/n/12 Detect cy-
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 107--107
-[]|\T1/lmr/m/n/12 Detect cy-
+\T1/ptm/m/n/12 cling from
+ []
+
+
+Overfull \hbox (0.58203pt too wide) in paragraph at lines 107--107
+\T1/ptm/m/n/12 speed/acceleration.| 
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 107--107
-\T1/lmr/m/n/12 cling from
- []
-
-
-Overfull \hbox (7.25879pt too wide) in paragraph at lines 107--107
-\T1/lmr/m/n/12 speed/acceleration.| 
+[]|\T1/ptm/m/n/12 Detection logic
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 107--107
-[]|\T1/lmr/m/n/12 Detection logic
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 107--107
-[]|\T1/lmr/m/n/12 Implemented in
- []
-
-
-Underfull \hbox (badness 1874) in paragraph at lines 109--109
-\T1/lmr/m/n/12 ties (e.g. pot-
- []
-
-
-Underfull \hbox (badness 1210) in paragraph at lines 109--109
-\T1/lmr/m/n/12 holes) from sen-
+[]|\T1/ptm/m/n/12 Implemented in
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 109--109
-[]|\T1/lmr/m/n/12 Anomalies de-
+[]|\T1/ptm/m/n/12 Detect ir-reg-u-lar-i-
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 109--109
-\T1/lmr/m/n/12 tected when
- []
-
-
-Underfull \hbox (badness 6348) in paragraph at lines 109--109
-\T1/lmr/m/n/12 au-to-matic mode
+[]|\T1/ptm/m/n/12 Anomalies de-
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 109--109
-[]|\T1/lmr/m/n/12 App-side; app
+\T1/ptm/m/n/12 tected when
  []
 
 
-Underfull \hbox (badness 2376) in paragraph at lines 111--111
-[]|\T1/lmr/m/n/12 Present de-tected
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 111--111
-\T1/lmr/m/n/12 path/obstacles
+Underfull \hbox (badness 10000) in paragraph at lines 109--109
+\T1/ptm/m/n/12 au-to-matic mode
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 111--111
-[]|\T1/lmr/m/n/12 User can con-
+[]|\T1/ptm/m/n/12 Present de-tected
+ []
+
+
+Underfull \hbox (badness 3815) in paragraph at lines 111--111
+\T1/ptm/m/n/12 path/obstacles for
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 111--111
-[]|\T1/lmr/m/n/12 Backend
+[]|\T1/ptm/m/n/12 User can con-
  []
 
 
-Underfull \hbox (badness 3803) in paragraph at lines 111--111
-\T1/lmr/m/n/12 path/report flows
+Underfull \hbox (badness 6961) in paragraph at lines 111--111
+\T1/ptm/m/n/12 firm/reject be-fore
  []
 
 
-Overfull \hbox (3.39342pt too wide) in paragraph at lines 103--114
- [][] 
+Underfull \hbox (badness 10000) in paragraph at lines 111--111
+[]|\T1/ptm/m/n/12 Backend
  []
 
 
-Underfull \hbox (badness 2707) in paragraph at lines 126--126
-[]|\T1/lmr/bx/n/12 Test De-scrip-
+Underfull \hbox (badness 10000) in paragraph at lines 111--111
+\T1/ptm/m/n/12 path/report flows
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 128--128
-[]|\T1/lmr/m/n/12 Path cre-ated
+Underfull \hbox (badness 10000) in paragraph at lines 126--126
+[]|\T1/ptm/b/n/12 Expected Out-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 128--128
-[]|\T1/lmr/m/n/12 Path in-te-gra-tion
+Underfull \hbox (badness 7869) in paragraph at lines 128--128
+[]|\T1/ptm/m/n/12 Manually cre-ate
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 128--128
-\T1/lmr/m/n/12 and unit tests
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 130--130
-\T1/lmr/m/n/12 ob-sta-cles on
+Underfull \hbox (badness 7832) in paragraph at lines 130--130
+[]|\T1/ptm/m/n/12 Manually re-port
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 130--130
-\T1/lmr/m/n/12 path dur-ing
- []
-
-
-Underfull \hbox (badness 8151) in paragraph at lines 130--130
-[]|\T1/lmr/m/n/12 Report cre-ated
+[]|\T1/ptm/m/n/12 Report cre-ated
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 130--130
-\T1/lmr/m/n/12 and linked to
- []
-
-
-Underfull \hbox (badness 4492) in paragraph at lines 130--130
-[]|\T1/lmr/m/n/12 Report in-te-gra-tion
+\T1/ptm/m/n/12 and linked to
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 130--130
-\T1/lmr/m/n/12 and unit tests
- []
-
-
-Underfull \hbox (badness 2591) in paragraph at lines 132--132
-[]|\T1/lmr/m/n/12 Confirm or re-
- []
-
-
-Underfull \hbox (badness 1983) in paragraph at lines 132--132
-\T1/lmr/m/n/12 ported by oth-
+[]|\T1/ptm/m/n/12 Report in-te-gra-tion
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 132--132
-[]|\T1/lmr/m/n/12 Confirm/reject
- []
-
-
-Underfull \hbox (badness 5036) in paragraph at lines 132--132
-[]|\T1/lmr/m/n/12 Report logic cov-
+\T1/ptm/m/n/12 ob-sta-cles re-
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 132--132
-\T1/lmr/m/n/12 ered in back-end
- []
-
-
-Underfull \hbox (badness 1810) in paragraph at lines 134--134
-[]|\T1/lmr/m/n/12 Create path in
+[]|\T1/ptm/m/n/12 Confirm/reject
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 134--134
-[]|\T1/lmr/m/n/12 Path cre-ated
+[]|\T1/ptm/m/n/12 Create path in
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 134--134
-\T1/lmr/m/n/12 from tracked
+\T1/ptm/m/n/12 au-to-matic mode
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 134--134
-[]|\T1/lmr/m/n/12 Path unit tests
+[]|\T1/ptm/m/n/12 Path unit tests
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 136--136
-[]|\T1/lmr/m/n/12 Delete user's
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 136--136
-[]|\T1/lmr/m/n/12 Path in-te-gra-tion
+Underfull \hbox (badness 2205) in paragraph at lines 134--134
+\T1/ptm/m/n/12 passed; ver-i-fied on
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 138--138
-[]|\T1/lmr/m/n/12 Set path vis-
+[]|\T1/ptm/m/n/12 Visibility up-
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 138--138
-\T1/lmr/m/n/12 i-bil-ity (pub-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 138--138
-[]|\T1/lmr/m/n/12 Visibility up-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 138--138
-[]|\T1/lmr/m/n/12 Path unit tests
+[]|\T1/ptm/m/n/12 Path unit tests
  []
 
 [12]
-Underfull \hbox (badness 10000) in paragraph at lines 153--153
-[]|\T1/lmr/bx/n/12 Test De-scrip-
+Underfull \hbox (badness 2119) in paragraph at lines 155--155
+[]|\T1/ptm/m/n/12 Aggregate re-ports
  []
 
 
-Underfull \hbox (badness 5460) in paragraph at lines 155--155
-[]|\T1/lmr/m/n/12 Multiple re-ports
+Underfull \hbox (badness 10000) in paragraph at lines 155--155
+[]|\T1/ptm/m/n/12 Multiple re-ports
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 157--157
-[]|\T1/lmr/m/n/12 Evaluate seg-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 157--157
-\T1/lmr/m/n/12 ment re-li-a-bil-ity
+Underfull \hbox (badness 10000) in paragraph at lines 155--155
+[]|\T1/ptm/m/n/12 Report in-te-gra-tion
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 157--157
-\T1/lmr/m/n/12 (con-fir-ma-tions,
+[]|\T1/ptm/m/n/12 Evaluate seg-
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 157--157
-[]|\T1/lmr/m/n/12 Reliability/status
+\T1/ptm/m/n/12 ment re-li-a-bil-ity
  []
 
 
-Underfull \hbox (badness 2057) in paragraph at lines 157--157
-[]|\T1/lmr/m/n/12 Report and path
+Underfull \hbox (badness 10000) in paragraph at lines 157--157
+\T1/ptm/m/n/12 (con-fir-ma-tions,
  []
 
 
-Underfull \hbox (badness 4713) in paragraph at lines 157--157
-\T1/lmr/m/n/12 logic in back-end
+Underfull \hbox (badness 10000) in paragraph at lines 157--157
+[]|\T1/ptm/m/n/12 Reliability/status
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 157--157
+[]|\T1/ptm/m/n/12 Report and path
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 157--157
+\T1/ptm/m/n/12 logic in back-end
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 159--159
-[]|\T1/lmr/m/n/12 Path sta-tus
+[]|\T1/ptm/m/n/12 Path sta-tus
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 159--159
-[]|\T1/lmr/m/n/12 Path/report in-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 159--159
-\T1/lmr/m/n/12 te-gra-tion tests
- []
-
-
-Underfull \hbox (badness 3861) in paragraph at lines 161--161
-[]|\T1/lmr/m/n/12 Any user views
- []
-
-
-Underfull \hbox (badness 1648) in paragraph at lines 161--161
-\T1/lmr/m/n/12 path sta-tus and
+[]|\T1/ptm/m/n/12 Status com-puted
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 161--161
-[]|\T1/lmr/m/n/12 Detail and re-
+[]|\T1/ptm/m/n/12 Any user views
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 161--161
-[]|\T1/lmr/m/n/12 Path in-te-gra-tion
+\T1/ptm/m/n/12 path sta-tus and
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 161--161
+[]|\T1/ptm/m/n/12 Path in-te-gra-tion
  []
 
 [13]
-Underfull \hbox (badness 10000) in paragraph at lines 176--176
-[]|\T1/lmr/bx/n/12 Test De-scrip-
+Underfull \hbox (badness 10000) in paragraph at lines 178--178
+[]|\T1/ptm/m/n/12 Browse pub-lic
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 178--178
-[]|\T1/lmr/m/n/12 Browse pub-lic
- []
-
-
-Underfull \hbox (badness 1048) in paragraph at lines 178--178
-[]|\T1/lmr/m/n/12 Public paths re-
+[]|\T1/ptm/m/n/12 Public paths re-
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 178--178
-[]|\T1/lmr/m/n/12 Path in-te-gra-tion
+[]|\T1/ptm/m/n/12 Path in-te-gra-tion
  []
 
 
-Underfull \hbox (badness 2261) in paragraph at lines 180--180
-\T1/lmr/m/n/12 tween two lo-ca-
+Underfull \hbox (badness 3460) in paragraph at lines 180--180
+[]|\T1/ptm/m/n/12 Search paths be-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 180--180
-[]|\T1/lmr/m/n/12 Search by ori-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 180--180
-\T1/lmr/m/n/12 gin/destination
+Underfull \hbox (badness 6559) in paragraph at lines 180--180
+\T1/ptm/m/n/12 tween two lo-ca-
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 180--180
-[]|\T1/lmr/m/n/12 Path in-te-gra-tion
+[]|\T1/ptm/m/n/12 Search by ori-
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 180--180
-\T1/lmr/m/n/12 and geocod-ing
+\T1/ptm/m/n/12 gin/destination
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 180--180
+[]|\T1/ptm/m/n/12 Path in-te-gra-tion
+ []
+
+
+Underfull \hbox (badness 7291) in paragraph at lines 182--182
+[]|\T1/ptm/m/n/12 Routes by qual-
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 182--182
-[]|\T1/lmr/m/n/12 Compute and
+[]|\T1/ptm/m/n/12 Path search and
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 182--182
-\T1/lmr/m/n/12 rank sug-gested
+\T1/ptm/m/n/12 snap-ping tests
  []
 
 
-Underfull \hbox (badness 1448) in paragraph at lines 182--182
-[]|\T1/lmr/m/n/12 Routes by qual-
- []
-
-
-Underfull \hbox (badness 4193) in paragraph at lines 182--182
-[]|\T1/lmr/m/n/12 Path search and
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 182--182
-\T1/lmr/m/n/12 snap-ping tests
- []
-
-
-Underfull \hbox (badness 1072) in paragraph at lines 199--199
-[]|\T1/lmr/m/n/12 Display user GPS
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 199--199
-\T1/lmr/m/n/12 po-si-tion dur-ing
- []
-
-
-Underfull \hbox (badness 1648) in paragraph at lines 199--199
-[]|\T1/lmr/m/n/12 Map shows cur-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 199--199
-\T1/lmr/m/n/12 po-si-tion dis-
- []
-
-
-Underfull \hbox (badness 3838) in paragraph at lines 199--199
-\T1/lmr/m/n/12 played cor-rectly
- []
-
-
-Underfull \hbox (badness 3229) in paragraph at lines 199--199
-\T1/lmr/m/n/12 on map dur-ing
+Underfull \hbox (badness 6188) in paragraph at lines 199--199
+[]|\T1/ptm/m/n/12 Display user GPS
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 201--201
-\T1/lmr/m/n/12 ob-sta-cles/closed
+\T1/ptm/m/n/12 ob-sta-cles/closed
  []
 
 
-Underfull \hbox (badness 2443) in paragraph at lines 201--201
-\T1/lmr/m/n/12 ups shown cor-
+Underfull \hbox (badness 7851) in paragraph at lines 201--201
+\T1/ptm/m/n/12 ups shown cor-
+ []
+
+
+Underfull \hbox (badness 1502) in paragraph at lines 201--201
+\T1/ptm/m/n/12 rectly dur-ing ac-
  []
 
 [14]
-Underfull \hbox (badness 10000) in paragraph at lines 216--216
-[]|\T1/lmr/bx/n/12 Test De-scrip-
- []
-
-
-Underfull \hbox (badness 2856) in paragraph at lines 218--218
-[]|\T1/lmr/m/n/12 Geocoding: ad-
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+[]|\T1/ptm/m/n/12 Geocoding:
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 218--218
-[]|\T1/lmr/m/n/12 Geocoding ser-
+\T1/ptm/m/n/12 re-turns co-or-di-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 218--218
-\T1/lmr/m/n/12 vice re-turns
+Underfull \hbox (badness 6125) in paragraph at lines 218--218
+[]|\T1/ptm/m/n/12 Geocoding ser-vice
  []
 
 
-Underfull \hbox (badness 1466) in paragraph at lines 218--218
-\T1/lmr/m/n/12 unit and in-te-gra-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 220--220
-[]|\T1/lmr/m/n/12 Timeouts/errors
+Underfull \hbox (badness 1158) in paragraph at lines 220--220
+[]|\T1/ptm/m/n/12 Graceful han-dling
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 220--220
-\T1/lmr/m/n/12 ping unit tests
+[]|\T1/ptm/m/n/12 Timeouts/errors
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 220--220
+\T1/ptm/m/n/12 ping unit tests
  []
 
 [15]
-Overfull \hbox (3.92902pt too wide) in paragraph at lines 250--251
-[]\T1/lmr/bx/n/12 Unit: \T1/lmr/m/n/12 auth.manager, er-ror.handler, fetch, geo
-, geocod-ing.service, jwt, path.manager,
+Overfull \hbox (12.21133pt too wide) in paragraph at lines 241--242
+[]\T1/ptm/b/n/12 Path align-ment in man-ual mode: \T1/ptm/m/n/12 When adding a 
+path man-u-ally, snap-ping to the road/cycle
  []
 
 
-Overfull \hbox (32.96863pt too wide) in paragraph at lines 250--251
-\T1/lmr/m/n/12 re-port.manager, snap-ping.service, stat.manager, trip.manager, 
-trip.weather, user.manager,
+Overfull \hbox (3.66867pt too wide) in paragraph at lines 241--242
+\T1/ptm/m/n/12 net-work some-times fails with \T1/pcr/m/n/12 WARN Failed to sna
+p segment [AxiosError:
  []
 
 [16]
-Overfull \hbox (62.83392pt too wide) in paragraph at lines 265--266
-[]\T1/lmr/bx/n/12 Prisma: sup-port both Post-greSQL URL and Ac-cel-er-ate: \T1/
-lmr/m/n/12 The de-fault \T1/lmtt/m/n/12 prisma-client.ts
+Overfull \hbox (32.71814pt too wide) in paragraph at lines 265--266
+[]\T1/ptm/b/n/12 Prisma: sup-port both Post-greSQL URL and Ac-cel-er-ate: \T1/p
+tm/m/n/12 The de-fault \T1/pcr/m/n/12 prisma-client.ts
  []
 
 
-Overfull \hbox (42.20313pt too wide) in paragraph at lines 265--266
-\T1/lmr/m/n/12 could sup-port both Ac-cel-er-ate and a di-rect \T1/lmtt/m/n/12 
-postgresql:// \T1/lmr/m/n/12 URL (via \T1/lmtt/m/n/12 @prisma/adapter-pg\T1/lmr
-/m/n/12 ),
+Overfull \hbox (55.06366pt too wide) in paragraph at lines 265--266
+\T1/ptm/m/n/12 could sup-port both Ac-cel-er-ate and a di-rect \T1/pcr/m/n/12 p
+ostgresql:// \T1/ptm/m/n/12 URL (via \T1/pcr/m/n/12 @prisma/adapter-pg\T1/ptm/m
+/n/12 ),
  []
 
 
-Overfull \hbox (18.53075pt too wide) in paragraph at lines 272--273
-[]\T1/lmr/bx/n/12 Backend \T1/lmtt/b/n/12 npm test \T1/lmr/bx/n/12 script: \T1/
-lmr/m/n/12 A cross-platform way to set \T1/lmtt/m/n/12 NODE_OPTIONS \T1/lmr/m/n
-/12 (e.g. \T1/lmtt/m/n/12 cross-env
+Overfull \hbox (27.19865pt too wide) in paragraph at lines 272--273
+[]\T1/ptm/b/n/12 Backend \T1/pcr/b/n/12 npm test \T1/ptm/b/n/12 script: \T1/ptm
+/m/n/12 A cross-platform way to set \T1/pcr/m/n/12 NODE_OPTIONS \T1/ptm/m/n/12 
+(e.g. \T1/pcr/m/n/12 cross-env
  []
 
-[17]) [18]
+) [17] [18
+
+]
 Chapter 4.
-(Chapters/4_-_Overall_Project_Conclusion.tex [19
+(Chapters/4_-_Overall_Project_Conclusion.tex
+Overfull \hbox (1.77066pt too wide) in paragraph at lines 11--12
+\T1/ptm/m/n/12 ex-ceeded'' when draw-ing paths in the em-u-la-tor; oc-ca-sional
+ snap-ping fail-ures; trip recorded
+ []
 
+[19
 
 ]) [20]
 Chapter 5.
 (Chapters/5_-_Effort_Spent.tex
-Underfull \hbox (badness 2134) in paragraph at lines 16--16
-[]|\T1/lmr/m/n/12 Pablo Jesús Her-rero
+Underfull \hbox (badness 10000) in paragraph at lines 16--16
+[]|\T1/ptm/m/n/12 Pablo Jesús Her-rero
+ []
+
+
+Underfull \hbox (badness 1270) in paragraph at lines 18--19
+[]\T1/ptm/m/n/12 Installation and Im-ple-mented Re-quire-
  []
 
 ) [21
@@ -2465,23 +2343,30 @@ Underfull \hbox (badness 2134) in paragraph at lines 16--16
 ]
 Chapter 6.
 (Chapters/6_-_References.tex
-Overfull \hbox (29.01918pt too wide) in paragraph at lines 5--6
-[]\T1/lmr/m/n/12 Errigo-Gholami-Ianosel repos-i-tory: [][]https://github.com/BI
-A3IA/Errigo-Gholami-Ianosel[][]. 
+Overfull \hbox (14.24986pt too wide) in paragraph at lines 8--9
+[]\T1/ptm/b/n/12 Errigo-Gholami-Ianosel repos-i-tory \T1/ptm/m/n/12 -- [][]http
+s://github.com/BIA3IA/Errigo-Gholami-Ianosel[][]. 
+ []
+
+
+Overfull \hbox (2.29895pt too wide) in paragraph at lines 9--10
+[]\T1/ptm/b/n/12 BBP Back-end README \T1/ptm/m/n/12 -- \T1/pcr/m/n/12 IT/CODE/B
+ACKEND/README.md \T1/ptm/m/n/12 in the eval-u-ated project
  []
 
 [23
 
-]) [24]
+]) [24] [25] [26
+
+]
 (C:\Users\pablo\Desktop\Informatica\3\Polimi\SoftwareEngineering2\Project\Pablo
 Jose\ATD\build\ATD.lot)
 \tf@lot=\write6
 \openout6 = `ATD.lot'.
 
- [25
+ [27
 
-
-] [26
+] [28
 
 ]
 
@@ -2500,29 +2385,28 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2025-11-06>
  ***********
 Package rerunfilecheck Info: File `ATD.out' has not changed.
-(rerunfilecheck)             Checksum: 2F7D38B567EC8EE31A08C9C062F1A93C;8305.
+(rerunfilecheck)             Checksum: 33B11292B314DF781117259AAD1CB00B;7962.
  ) 
 Here is how much of TeX's memory you used:
- 31266 strings out of 467871
- 585554 string characters out of 5418376
- 996353 words of memory out of 5000000
- 59408 multiletter control sequences out of 15000+600000
- 693431 words of font info for 85 fonts, out of 8000000 for 9000
+ 31195 strings out of 467871
+ 582585 string characters out of 5418376
+ 996241 words of memory out of 5000000
+ 59329 multiletter control sequences out of 15000+600000
+ 673940 words of font info for 101 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,14n,94p,1318b,630s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pf
-b><C:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb
-><C:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb>
-<C:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C
-:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C
-:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C
-:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtk10.pfb><C
-:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb><C
-:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/urw/zapfding/uzdr.pfb>
+ 84i,14n,94p,1307b,630s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
+cmsy10.pfb><C:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/urw/courie
+r/ucrb8a.pfb><C:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/urw/cour
+ier/ucrr8a.pfb><C:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/urw/ti
+mes/utmb8a.pfb><C:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/urw/ti
+mes/utmr8a.pfb><C:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/urw/ti
+mes/utmri8a.pfb><C:/Users/pablo/AppData/Local/Programs/MiKTeX/fonts/type1/urw/z
+apfding/uzdr.pfb>
 Output written on C:\Users\pablo\Desktop\Informatica\3\Polimi\SoftwareEngineeri
-ng2\Project\PabloJose\ATD\build\ATD.pdf (30 pages, 323345 bytes).
+ng2\Project\PabloJose\ATD\build\ATD.pdf (32 pages, 203307 bytes).
 PDF statistics:
- 529 PDF objects out of 1000 (max. 8388607)
- 116 named destinations out of 1000 (max. 500000)
- 418 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 524 PDF objects out of 1000 (max. 8388607)
+ 131 named destinations out of 1000 (max. 500000)
+ 402 words of extra memory for PDF output out of 10000 (max. 10000000)
 
