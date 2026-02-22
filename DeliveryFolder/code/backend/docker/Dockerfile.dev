@@ -1,0 +1,11 @@
+# Desarrollo: Node con el código montado como volumen
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Instalar dependencias (se monta ./backend en /app, node_modules se preserva con volumen anónimo)
+COPY package*.json ./
+RUN npm ci
+
+# Punto de entrada: nodemon recarga al cambiar código
+CMD ["npm", "run", "dev"]
